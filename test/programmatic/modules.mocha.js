@@ -28,7 +28,7 @@ describe('Modules programmatic testing', function () {
   it.skip('should run post install command', function (done) {
     var fs = require('fs');
     var ec = {};
-    ec.dependencies = new Array();
+    ec.dependencies = [];
     ec.dependencies.push('pm2-server-monit');
     ec.post_install = {};
     ec.post_install['pm2-server-monit'] = 'echo "test passed!"';

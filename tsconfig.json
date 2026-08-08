@@ -11,6 +11,27 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["types/**/*.ts", "lib/**/*.ts", "modules/**/*.ts", "*.ts"],
-  "exclude": ["node_modules", "examples", "test/fixtures"]
+  "include": [
+    "types/**/*.ts",
+    "*.ts",
+    "lib/API/ExtraMgmt/Docker.ts",
+    "lib/API/Modules/flagExt.ts",
+    "lib/API/UX/helpers.ts",
+    "lib/API/UX/pm2-ls-minimal.ts",
+    "lib/completion.ts",
+    "lib/HttpInterface.ts",
+    "lib/ProcessContainerFork.ts",
+    "lib/ProcessContainerForkBun.ts",
+    "lib/ProcessUtils.ts",
+    "lib/tools/Config.ts",
+    "lib/tools/deleteFolderRecursive.ts",
+    "lib/tools/IsAbsolute.ts",
+    "lib/tools/packageRoot.ts",
+    "lib/tools/passwd.ts",
+    "lib/tools/sexec.ts",
+    "lib/tools/which.ts",
+    "lib/TreeKill.ts"
+  ],
+  "exclude": ["node_modules", "examples", "test/fixtures"],
+  "//": "Files that have been through the migration properly. A file joins this list when its types are written, and gains the strict family by doing so. The ones still waiting are in tsconfig.migrating.json."
 }

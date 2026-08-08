@@ -1,0 +1,33 @@
+{
+  "//": "Files renamed to .ts mechanically and not yet gone through. They typecheck with the strict family off, which is the only way a rename can land before the types are written. This list is the remaining work: as a file is worked through, it moves to tsconfig.json's include and gains strict checking. When this list is empty, delete the file.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noImplicitThis": false
+  },
+  "include": ["lib/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "examples",
+    "test",
+    "lib/API/ExtraMgmt/Docker.ts",
+    "lib/API/Modules/flagExt.ts",
+    "lib/API/UX/helpers.ts",
+    "lib/API/UX/pm2-ls-minimal.ts",
+    "lib/completion.ts",
+    "lib/HttpInterface.ts",
+    "lib/ProcessContainerFork.ts",
+    "lib/ProcessContainerForkBun.ts",
+    "lib/ProcessUtils.ts",
+    "lib/tools/Config.ts",
+    "lib/tools/deleteFolderRecursive.ts",
+    "lib/tools/IsAbsolute.ts",
+    "lib/tools/packageRoot.ts",
+    "lib/tools/passwd.ts",
+    "lib/tools/sexec.ts",
+    "lib/tools/which.ts",
+    "lib/TreeKill.ts"
+  ]
+}
