@@ -1439,14 +1439,6 @@
       "count": 8
     }
   },
-  "lib/tools/sexec.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    },
-    "id-length": {
-      "count": 2
-    }
-  },
   "lib/tools/treeify.js": {
     "@typescript-eslint/no-unused-expressions": {
       "count": 2
