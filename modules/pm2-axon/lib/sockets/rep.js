@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -38,10 +37,10 @@ RepSocket.prototype.__proto__ = Socket.prototype;
  * @api private
  */
 
-RepSocket.prototype.onmessage = function(sock){
+RepSocket.prototype.onmessage = function (sock) {
   var self = this;
 
-  return function (buf){
+  return function (buf) {
     var msg = new Message(buf);
     var args = msg.args;
 
@@ -51,7 +50,7 @@ RepSocket.prototype.onmessage = function(sock){
     self.emit.apply(self, args);
 
     function reply() {
-      var fn = function(){};
+      var fn = function () {};
       var args = slice(arguments);
       args[0] = args[0] || null;
 
@@ -61,11 +60,15 @@ RepSocket.prototype.onmessage = function(sock){
       args.push(id);
 
       if (sock.writable) {
-        sock.write(self.pack(args), function(){ fn(true) });
+        sock.write(self.pack(args), function () {
+          fn(true);
+        });
         return true;
       } else {
         debug('peer went away');
-        process.nextTick(function(){ fn(false) });
+        process.nextTick(function () {
+          fn(false);
+        });
         return false;
       }
     }

@@ -1,2 +1,2 @@
-- script : './index.js'
-  name : 'custom-actions'
+- script: './index.js'
+  name: 'custom-actions'

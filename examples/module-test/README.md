@@ -1,4 +1,3 @@
-
 This is a sample module that have been generate via `pm2 module:generate`:
 
 ```

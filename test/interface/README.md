@@ -1,4 +1,3 @@
-
 ## Structure
 
 .
@@ -18,14 +17,10 @@
 ├── remote.mocha.js
 └── scoped_pm2_actions.mocha.js
 
-
 ### Test about pmx.notify not working
 
 - bus.fork.spec.mocha.js
 - bus.spec.mocha.js
-
-
-
 
 - bus.spec.mocha.js: event system sent (wo agent)
 - custom-actions.mocha.js: connect and try custom actions

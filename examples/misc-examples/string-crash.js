@@ -1,4 +1,3 @@
-
 function crash() {
   throw 'crashed';
 }

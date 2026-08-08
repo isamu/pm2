@@ -5,12 +5,11 @@
  */
 
 var debug = require('debug')('pm2:paths');
-var p     = require('path');
-var fs    = require('fs')
+var p = require('path');
+var fs = require('fs');
 
 function getDefaultPM2Home() {
-  if (process.env.PM2_HOME)
-    return process.env.PM2_HOME;
+  if (process.env.PM2_HOME) return process.env.PM2_HOME;
 
   var home = require('os').homedir();
   if (home) {
@@ -24,47 +23,47 @@ function getDefaultPM2Home() {
   return p.resolve('/etc', '.pm2');
 }
 
-module.exports = function(PM2_HOME) {
-  var has_node_embedded = false
+module.exports = function (PM2_HOME) {
+  var has_node_embedded = false;
 
   if (fs.existsSync(p.resolve(__dirname, './node')) === true) {
-    has_node_embedded = true
+    has_node_embedded = true;
   }
 
   if (!PM2_HOME) {
-    PM2_HOME = getDefaultPM2Home()
+    PM2_HOME = getDefaultPM2Home();
   }
 
   var pm2_file_stucture = {
-    PM2_HOME                 : PM2_HOME,
-    PM2_ROOT_PATH            : PM2_HOME,
+    PM2_HOME: PM2_HOME,
+    PM2_ROOT_PATH: PM2_HOME,
 
-    PM2_CONF_FILE            : p.resolve(PM2_HOME, 'conf.js'),
-    PM2_MODULE_CONF_FILE     : p.resolve(PM2_HOME, 'module_conf.json'),
+    PM2_CONF_FILE: p.resolve(PM2_HOME, 'conf.js'),
+    PM2_MODULE_CONF_FILE: p.resolve(PM2_HOME, 'module_conf.json'),
 
-    PM2_LOG_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.log'),
-    PM2_PID_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.pid'),
+    PM2_LOG_FILE_PATH: p.resolve(PM2_HOME, 'pm2.log'),
+    PM2_PID_FILE_PATH: p.resolve(PM2_HOME, 'pm2.pid'),
 
-    PM2_RELOAD_LOCKFILE      : p.resolve(PM2_HOME, 'reload.lock'),
+    PM2_RELOAD_LOCKFILE: p.resolve(PM2_HOME, 'reload.lock'),
 
-    DEFAULT_PID_PATH         : p.resolve(PM2_HOME, 'pids'),
-    DEFAULT_LOG_PATH         : p.resolve(PM2_HOME, 'logs'),
-    DEFAULT_MODULE_PATH      : p.resolve(PM2_HOME, 'modules'),
-    PM2_IO_ACCESS_TOKEN      : p.resolve(PM2_HOME, 'pm2-io-token'),
-    DUMP_FILE_PATH           : p.resolve(PM2_HOME, 'dump.pm2'),
-    DUMP_BACKUP_FILE_PATH    : p.resolve(PM2_HOME, 'dump.pm2.bak'),
+    DEFAULT_PID_PATH: p.resolve(PM2_HOME, 'pids'),
+    DEFAULT_LOG_PATH: p.resolve(PM2_HOME, 'logs'),
+    DEFAULT_MODULE_PATH: p.resolve(PM2_HOME, 'modules'),
+    PM2_IO_ACCESS_TOKEN: p.resolve(PM2_HOME, 'pm2-io-token'),
+    DUMP_FILE_PATH: p.resolve(PM2_HOME, 'dump.pm2'),
+    DUMP_BACKUP_FILE_PATH: p.resolve(PM2_HOME, 'dump.pm2.bak'),
 
-    DAEMON_RPC_PORT          : p.resolve(PM2_HOME, 'rpc.sock'),
-    DAEMON_PUB_PORT          : p.resolve(PM2_HOME, 'pub.sock'),
-    INTERACTOR_RPC_PORT      : p.resolve(PM2_HOME, 'interactor.sock'),
+    DAEMON_RPC_PORT: p.resolve(PM2_HOME, 'rpc.sock'),
+    DAEMON_PUB_PORT: p.resolve(PM2_HOME, 'pub.sock'),
+    INTERACTOR_RPC_PORT: p.resolve(PM2_HOME, 'interactor.sock'),
 
-    INTERACTOR_LOG_FILE_PATH : p.resolve(PM2_HOME, 'agent.log'),
-    INTERACTOR_PID_PATH      : p.resolve(PM2_HOME, 'agent.pid'),
-    INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5'),
+    INTERACTOR_LOG_FILE_PATH: p.resolve(PM2_HOME, 'agent.log'),
+    INTERACTOR_PID_PATH: p.resolve(PM2_HOME, 'agent.pid'),
+    INTERACTION_CONF: p.resolve(PM2_HOME, 'agent.json5'),
 
-    HAS_NODE_EMBEDDED        : has_node_embedded,
-    BUILTIN_NODE_PATH        : has_node_embedded === true ? p.resolve(__dirname, './node/bin/node') : null,
-    BUILTIN_NPM_PATH         : has_node_embedded === true ? p.resolve(__dirname, './node/bin/npm') : null,
+    HAS_NODE_EMBEDDED: has_node_embedded,
+    BUILTIN_NODE_PATH: has_node_embedded === true ? p.resolve(__dirname, './node/bin/node') : null,
+    BUILTIN_NPM_PATH: has_node_embedded === true ? p.resolve(__dirname, './node/bin/npm') : null,
   };
 
   // allow overide of file paths via environnement
@@ -76,8 +75,7 @@ module.exports = function(PM2_HOME) {
     }
   });
 
-  if (process.platform === 'win32' ||
-      process.platform === 'win64') {
+  if (process.platform === 'win32' || process.platform === 'win64') {
     //@todo instead of static unique rpc/pub file custom with PM2_HOME or UID
     pm2_file_stucture.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc.sock';
     pm2_file_stucture.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock';

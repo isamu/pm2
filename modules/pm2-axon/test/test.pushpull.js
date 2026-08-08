@@ -1,22 +1,21 @@
+var ss = require('../'),
+  should = require('should'),
+  assert = require('assert');
 
-var ss = require('../')
-  , should = require('should')
-  , assert = require('assert');
-
-var push = ss.socket('push')
-  , pull = ss.socket('pull');
+var push = ss.socket('push'),
+  pull = ss.socket('pull');
 
 // basic 1-1 push/pull
 
-var n = 0
-  , closed;
+var n = 0,
+  closed;
 
 push.bind(4000);
 push.send('foo');
 push.send('bar');
 
 pull.connect(4000);
-pull.on('message', function(msg){
+pull.on('message', function (msg) {
   assert('string' == typeof msg);
   msg.should.have.length(3);
   msg = msg.toString();
@@ -36,10 +35,10 @@ pull.on('message', function(msg){
   }
 });
 
-pull.on('connect', function(){
+pull.on('connect', function () {
   push.send('baz');
 });
 
-process.on('exit', function(){
+process.on('exit', function () {
   should.equal(true, closed);
 });

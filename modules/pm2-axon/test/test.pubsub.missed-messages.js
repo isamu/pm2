@@ -1,14 +1,14 @@
-// 
+//
 // var ss = require('../')
 //   , should = require('should');
-// 
+//
 // var pub = ss.socket('pub')
 //   , sub = ss.socket('sub');
-// 
+//
 // var n = 0;
-// 
+//
 // // test basic 1-1 pub/sub with missed messages
-// 
+//
 // pub.bind(3333, function(){
 //   pub.send('foo');
 //   pub.send('bar');
@@ -28,11 +28,11 @@
 //           break;
 //       }
 //     });
-// 
+//
 //     setTimeout(function(){
 //       pub.send('baz');
 //       pub.send('raz');
 //     }, 20);
 //   });
 // });
-// 
+//

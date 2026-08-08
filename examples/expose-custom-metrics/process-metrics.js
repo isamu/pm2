@@ -1,43 +1,41 @@
-
 var Probe = require('pmx').probe();
 
 var i = 0;
 
 var metric = Probe.metric({
-  name    : 'Metric',
-  value   : function() {
+  name: 'Metric',
+  value: function () {
     return i;
-  }
+  },
 });
 
-setInterval(function() {
+setInterval(function () {
   i++;
 }, 100);
 
-
 var meter = Probe.meter({
-  name    : 'Meter'
+  name: 'Meter',
 });
 
-setInterval(function() {
-  meter.mark()
+setInterval(function () {
+  meter.mark();
 }, 200);
 
 var histo = Probe.histogram({
-  name    : 'Histogram'
+  name: 'Histogram',
 });
 
 var latency;
 
-setInterval(function() {
+setInterval(function () {
   latency = Math.round(Math.random() * 100);
   histo.update(latency);
 }, 100);
 
 var counter = Probe.counter({
-  name    : 'Counter'
+  name: 'Counter',
 });
 
-setInterval(function() {
-  counter.inc()
+setInterval(function () {
+  counter.inc();
 }, 500);

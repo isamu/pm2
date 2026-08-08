@@ -1,4 +1,3 @@
+const pmx = require('../..');
 
-const pmx = require('../..')
-
-pmx.emit('myEvent', { prop1: 'value1' })
+pmx.emit('myEvent', { prop1: 'value1' });

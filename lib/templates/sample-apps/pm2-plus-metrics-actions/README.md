@@ -1,9 +1,9 @@
-
 # pm2 custom metrics boilerplate
 
 In this boilerplate you will discover a working example of custom metrics feature.
 
 Metrics covered are:
+
 - io.metric
 - io.counter
 - io.meter
@@ -28,16 +28,16 @@ Or on the PM2+ Web interface
 ## Example
 
 ```javascript
-const io = require('@pm2/io')
+const io = require('@pm2/io');
 
 const currentReq = io.counter({
   name: 'CM: Current Processing',
-  type: 'counter'
-})
+  type: 'counter',
+});
 
 setInterval(() => {
-  currentReq.inc()
-}, 1000)
+  currentReq.inc();
+}, 1000);
 ```
 
 ## Documentation

@@ -1,11 +1,10 @@
-
-const pmx = require('../..')
+const pmx = require('../..');
 
 process.env.fixtures = JSON.stringify({
   envVar: 'value',
-  password: 'toto'
-})
+  password: 'toto',
+});
 
 const conf = pmx.initModule({
-  test: 'toto'
-})
+  test: 'toto',
+});

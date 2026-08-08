@@ -13,7 +13,8 @@ function fclone(obj, refs) {
   let isArr = Array.isArray(obj);
   if (!isArr) {
     let len = obj.length;
-    isArr = typeof len === 'number' && (len === 0 || (len - 1) in obj) && typeof obj.indexOf === 'function';
+    isArr =
+      typeof len === 'number' && (len === 0 || len - 1 in obj) && typeof obj.indexOf === 'function';
   }
 
   if (isArr) {
@@ -21,7 +22,8 @@ function fclone(obj, refs) {
     let copy = new Array(obj.length);
     for (let i = 0; i < obj.length; i++) {
       let v = obj[i];
-      copy[i] = (v && typeof v === 'object' && refs.indexOf(v) !== -1) ? '[Circular]' : fclone(v, refs);
+      copy[i] =
+        v && typeof v === 'object' && refs.indexOf(v) !== -1 ? '[Circular]' : fclone(v, refs);
     }
     refs.pop();
     return copy;
@@ -39,7 +41,8 @@ function fclone(obj, refs) {
   let keys = Object.keys(obj);
   for (let i = 0; i < keys.length; i++) {
     let v = obj[keys[i]];
-    copy[keys[i]] = (v && typeof v === 'object' && refs.indexOf(v) !== -1) ? '[Circular]' : fclone(v, refs);
+    copy[keys[i]] =
+      v && typeof v === 'object' && refs.indexOf(v) !== -1 ? '[Circular]' : fclone(v, refs);
   }
 
   refs.pop();

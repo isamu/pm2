@@ -1,4 +1,3 @@
-
 ## 7.0.3
 
 ### Bug Fixes
@@ -41,7 +40,6 @@
 - Fix incorrect file permissions on `openrc.tpl` template (0755 → 0644) #5957
 - Fix Windows cmd.exe regression: revert `bin/pm2*` launchers to `#!/usr/bin/env node` shebang (was polyglot `#!/bin/sh`). Polyglot worked on Linux/macOS but broke npm's `pm2.cmd` shim on Windows — `cmd.exe` can't interpret `/bin/sh` shebang and failed with `'"/bin/sh"' is not recognized as an internal or external command`. PowerShell's auto-generated `pm2.ps1` shim happened to call `node` directly so it kept working, masking the regression. Bun-only Linux/macOS users (no Node installed) need to symlink `node` to `bun` (`sudo ln -s $(which bun) /usr/local/bin/node`) — same workaround used in the project's bun test Dockerfile. Documented in README #6108
 
-
 ## 7.0.0
 
 ### Breaking Changes
@@ -70,7 +68,7 @@
 - Fix command injection in WebAuth.js open() — replace exec() with execFile() #6089
 - Fix command injection in PM2IO.js open() — replace exec() with execFile(), validate SUDO_USER
 - Fix command injection in lib/tools/open.js — replace exec() with execFile(), validate SUDO_USER
-- Fix prototype pollution in Configuration.set/unset via __proto__ key traversal #6089
+- Fix prototype pollution in Configuration.set/unset via **proto** key traversal #6089
 - Fix HttpInterface env stripping never executing (WEB_STRIP_ENV_VARS) #6089
 
 ### Bug Fixes
@@ -104,7 +102,6 @@
 - Add test scripts for internalized modules (bpm, axon, axon-rpc, io-agent)
 - Fix test compatibility for Node.js 22+ and Bun
 - CI matrix: Node.js 18, 20 + latest
-
 
 ## 6.0.14
 
@@ -394,7 +391,6 @@ Data quantity sent from PM2 to PM2.io has been reduced by 80%, thanks for a json
 - chore: pm2-deploy@1.0.2 (revert fix)
 - chore: pm2-io-apm@4.3.4 (instant trace + broadcast trace threshold + boolean metrics support)
 
-
 ## 4.2.3
 
 - fix: Fix an import error on Node 9.x
@@ -454,12 +450,7 @@ Data quantity sent from PM2 to PM2.io has been reduced by 80%, thanks for a json
 
 - feat: make pm2 fully standalone with node embedded
 - feat: startup, npm, node system adaptation for standalone installs
-- feat: system information worker - retrieve:
-           - network I/O + latency
-           - disk I/O + space
-           - cpu usage + temperature
-           - memory usage
-           - intelligent display of information (e.g. display disks > 80% cpu usage)
+- feat: system information worker - retrieve: - network I/O + latency - disk I/O + space - cpu usage + temperature - memory usage - intelligent display of information (e.g. display disks > 80% cpu usage)
 - feat: listing of docker container on host machine with independent pm2 list
 - feat: upgrade of Chokidar to 3.x - Massive CPU & RAM consumption improvements for watch feature
 - r&d: manage container like pm2 processes
@@ -500,6 +491,7 @@ Data quantity sent from PM2 to PM2.io has been reduced by 80%, thanks for a json
 /!\ Warning, built-in custom metrics are not supported anymore on Node 4 and 5
 
 New builtin metrics when starting a Node.js application:
+
 - Heap Size
 - Heap Usage
 - Used Heap Size
@@ -603,12 +595,14 @@ New builtin metrics when starting a Node.js application:
 ## 3.1.3 (20/09/18)
 
 ### Features
+
 - allow non-node application to run multiple instances without auto switch to cluster mode
 - allow to call `pm2 logs` even without application (#3820)
 - switch `pm2 link` and `pm2 plus` protocol to websocket by default instead of axon
 - enhance the `pm2 init` template that generates ecosystem files by adding some extra fields
 
 ### Fix
+
 - remove deprecation message for node 0.10
 - pm2 login/register/monitor now hit the new oauth pm2 plus system
 
@@ -618,831 +612,748 @@ New builtin metrics when starting a Node.js application:
 
 ## 3.1.1 ( Mon Sep 10 2018 16:18:25 GMT+0200 (CEST) )
 
-
 ## Hot Fixes
-  - #3901 fix error when installing module
-  ([7b43fea5](https://github.com/Unitech/pm2/commit/7b43fea55d7c2853a3032b3bddd12201cd6a29e9))
 
+- #3901 fix error when installing module
+  ([7b43fea5](https://github.com/Unitech/pm2/commit/7b43fea55d7c2853a3032b3bddd12201cd6a29e9))
 
 ## 3.1.0 ( Mon Sep 10 2018 10:25:13 GMT+0200 (CEST) )
 
-
 ## Bug Fixes
-  - tmp fix io@beta + rename metric
+
+- tmp fix io@beta + rename metric
   ([04ab7ac4](https://github.com/Unitech/pm2/commit/04ab7ac4e1312c5a5332f37cbb81b0d98686936d))
-  - remove ending \n on git version comment
+- remove ending \n on git version comment
   ([9a36bfeb](https://github.com/Unitech/pm2/commit/9a36bfeb7e9f5ab1719ca3858510da08bb0cad6b))
-  - #3883 fix typings for max_memory_restart and add wait_ready
+- #3883 fix typings for max_memory_restart and add wait_ready
   ([b35ea237](https://github.com/Unitech/pm2/commit/b35ea237e3b448088112b2f3a771a9c5286417a7))
-  - restore monitored indicator
+- restore monitored indicator
   ([34966432](https://github.com/Unitech/pm2/commit/349664329eb56232321694be9e08f16a3cda6fbd))
-  - remove install of modules on pm2 plus command
+- remove install of modules on pm2 plus command
   ([6a8bb269](https://github.com/Unitech/pm2/commit/6a8bb26952a7dcf109d28af7224b89faf0977a71))
-  - invert kill/link
+- invert kill/link
   ([3c37b528](https://github.com/Unitech/pm2/commit/3c37b5283bf0dea130fd375a5563974bd84543a9))
-  - #3877 #3831
+- #3877 #3831
   ([16f4f2bc](https://github.com/Unitech/pm2/commit/16f4f2bc6589e8f0666f46d37c3f7f7739de7261))
-  - #3865 ensure pm2 never run simultaneous gracefullExit, prevent dump file corruption
+- #3865 ensure pm2 never run simultaneous gracefullExit, prevent dump file corruption
   ([79679db1](https://github.com/Unitech/pm2/commit/79679db1b321bbcc7296dbc41d005500cf61d273))
-  - #3786 fix issue when triggering an action that does not exist
+- #3786 fix issue when triggering an action that does not exist
   ([1ff7fd3d](https://github.com/Unitech/pm2/commit/1ff7fd3d49ccaf3f65540774426b62fdc811e4f1))
-  - fixed unstartup when launchd
+- fixed unstartup when launchd
   ([3d0461c3](https://github.com/Unitech/pm2/commit/3d0461c3e0a2362aef009e6f158b6f16b3d6510c))
-  - access gl_retry as class property
+- access gl_retry as class property
   ([bbcb2b6b](https://github.com/Unitech/pm2/commit/bbcb2b6b5c5fa0ef872b64a648461c266350423a))
-  - #3831 switch registerToKM() to register()
+- #3831 switch registerToKM() to register()
   ([8df2451e](https://github.com/Unitech/pm2/commit/8df2451e05bf5494b11f0546965718efe1f351b9))
 
-
-
-
 ## Features
-  - add id column in stacked mode (80 char mode)
+
+- add id column in stacked mode (80 char mode)
   ([83033d4c](https://github.com/Unitech/pm2/commit/83033d4cdeb899bc4c1d1fe7a8c6391e64e9d0d0))
 
-
-
-
 ## Refactor
-  - only enable deep monitoring if explicitly stated
+
+- only enable deep monitoring if explicitly stated
   ([f67e14f0](https://github.com/Unitech/pm2/commit/f67e14f0bd6d65bff6ef8f7e27e3f0aa93c60e40))
-  - #3786 clean code
+- #3786 clean code
   ([6cbca8bc](https://github.com/Unitech/pm2/commit/6cbca8bccc0126f1557bf8326c81facc62100704))
-  - removes unused imports.
+- removes unused imports.
   ([b8b48e83](https://github.com/Unitech/pm2/commit/b8b48e83f7f041508e39815e22501509259d4f26))
-  - only import the necessary methods from async.
+- only import the necessary methods from async.
   ([6466ee44](https://github.com/Unitech/pm2/commit/6466ee44c1b85858f9b7e56b01aa6f2a08bde508))
-  - removes unused async imports.
+- removes unused async imports.
   ([679b14ff](https://github.com/Unitech/pm2/commit/679b14ff4b24519b5479c9e5f4ce0d9c32e39e55))
 
-
-
-
 ## Chore
-  - upgrade to 3.1.0
+
+- upgrade to 3.1.0
   ([0285d12d](https://github.com/Unitech/pm2/commit/0285d12df335667e9e0311a7abe175796bb517f4))
-  - update apm version
+- update apm version
   ([cc27de4a](https://github.com/Unitech/pm2/commit/cc27de4a8b400f1c20ba2e4b12dadcef1dd34fae))
-  - README update
+- README update
   ([c505dcc1](https://github.com/Unitech/pm2/commit/c505dcc1685380728b23f8757aa80fa4387d7fd3))
-  - remove unused console.log
+- remove unused console.log
   ([61e32a43](https://github.com/Unitech/pm2/commit/61e32a4305490cc64c0a40cd83e2ad48c133b272))
-  - upgrade vizion to 2.0.2
+- upgrade vizion to 2.0.2
   ([c231e286](https://github.com/Unitech/pm2/commit/c231e28604aa4628d8f8ba10ea1f9f82e73269e6))
-  - #3415 try to update vizion to 2.0.1
+- #3415 try to update vizion to 2.0.1
   ([9b80d8c1](https://github.com/Unitech/pm2/commit/9b80d8c1b69c07d21e63441c266b7acafffe0673))
-  - #3415 try to update vizion to 2.0.0
+- #3415 try to update vizion to 2.0.0
   ([2c3df093](https://github.com/Unitech/pm2/commit/2c3df09378a92bac9de2d3b3b83103e02bd1bb82))
-  - update readme with 3.0.3 commits
+- update readme with 3.0.3 commits
   ([476542fb](https://github.com/Unitech/pm2/commit/476542fbad038b951b6cfe6d6903d7b6bc8540a5))
 
-
-
-
 ## Branchs merged
-  - Merge branch 'master' into development
+
+- Merge branch 'master' into development
   ([95321c6d](https://github.com/Unitech/pm2/commit/95321c6dd2602e9ef71028731fd7a2e7b40a0d3c))
-  - Merge branch 'master' into development
+- Merge branch 'master' into development
   ([c3c0e423](https://github.com/Unitech/pm2/commit/c3c0e423f9beeab25f53c0267d5f8a9e79d5c2e3))
-  - Merge branch 'master' into development
+- Merge branch 'master' into development
   ([8e6481bc](https://github.com/Unitech/pm2/commit/8e6481bc9a6d23283895bf9cd3c7831c49a811ae))
-  - Merge branch 'development' into development
+- Merge branch 'development' into development
   ([83294afe](https://github.com/Unitech/pm2/commit/83294afee7cf0204208e9cc7f4cf687469556492))
-  - Merge branch 'development' into flag--ext
+- Merge branch 'development' into flag--ext
   ([79ab9242](https://github.com/Unitech/pm2/commit/79ab92425fef22cdf679fa77840d86a6e7cfc755))
-  - Merge branch 'development' into post_install
+- Merge branch 'development' into post_install
   ([d5604300](https://github.com/Unitech/pm2/commit/d5604300685ace1c7dbd18776fd3df79da96f638))
 
-
-
-
 ## Pull requests merged
-  - Merge pull request #3885 from Unitech/typings
+
+- Merge pull request #3885 from Unitech/typings
   ([19a35e9b](https://github.com/Unitech/pm2/commit/19a35e9b23716df8f7d1301acf7b0f0b601f93dd))
-  - Merge pull request #3878 from cuspymd/fix-command-help
+- Merge pull request #3878 from cuspymd/fix-command-help
   ([2d3d2044](https://github.com/Unitech/pm2/commit/2d3d204427ce02617aa134ca0831a844de1a697d))
-  - Merge pull request #3876 from Unitech/lost_apps_sigterm
+- Merge pull request #3876 from Unitech/lost_apps_sigterm
   ([4fa247a3](https://github.com/Unitech/pm2/commit/4fa247a3e370607cf4198743de41dfa0a94bfbb5))
-  - Merge pull request #3874 from Unitech/trigger_no_action
+- Merge pull request #3874 from Unitech/trigger_no_action
   ([e868f003](https://github.com/Unitech/pm2/commit/e868f003e3063a57236cb8d0ead33af808e0df70))
-  - Merge pull request #3872 from Unitech/column_id_stacked
+- Merge pull request #3872 from Unitech/column_id_stacked
   ([55b6ccc3](https://github.com/Unitech/pm2/commit/55b6ccc32ae02e574ec1f80a36b4531761b94777))
-  - Merge pull request #3723 from livankrekh/development
+- Merge pull request #3723 from livankrekh/development
   ([98f49dc3](https://github.com/Unitech/pm2/commit/98f49dc393efd1fed03a1ef8a5752c0e490dd4b8))
-  - Merge pull request #3821 from imarakho/post_install
+- Merge pull request #3821 from imarakho/post_install
   ([4217b150](https://github.com/Unitech/pm2/commit/4217b1505419904252d0ae7640a51128a2459d98))
-  - Merge pull request #3823 from imarakho/flag--ext
+- Merge pull request #3823 from imarakho/flag--ext
   ([cc68dc1f](https://github.com/Unitech/pm2/commit/cc68dc1f9faf010af0648992193230af609413c5))
-  - Merge pull request #3822 from imarakho/flush_parameter
+- Merge pull request #3822 from imarakho/flush_parameter
   ([bbcc85a4](https://github.com/Unitech/pm2/commit/bbcc85a41683f5fa573bf504894f8e817c89784a))
-  - Merge pull request #3807 from medanat/minimize-async-lib-footprint
+- Merge pull request #3807 from medanat/minimize-async-lib-footprint
   ([7e92855f](https://github.com/Unitech/pm2/commit/7e92855ff5c394b5452db526d21262e343b89ef8))
-  - Merge pull request #3829 from soyuka/patch-pidusage
+- Merge pull request #3829 from soyuka/patch-pidusage
   ([a668f576](https://github.com/Unitech/pm2/commit/a668f5762190061dd05de5c5d888b53f35fa386e))
-
-
-
-
-
-
 
 ## 3.0.3 ( Tue Aug 07 2018 23:35:05 GMT+0200 (CEST) )
 
-
 ## Bug Fixes
-  - pm2 plus + register
+
+- pm2 plus + register
   ([277ec6ba](https://github.com/Unitech/pm2/commit/277ec6ba8d1cdda7f8fdf11eb9d9d33c2c095d65))
-
-
-
 
 ## 3.0.2 ( Tue Aug 07 2018 23:35:05 GMT+0200 (CEST) )
 
-
 ## Bug Fixes
-  - allow tracing activation
+
+- allow tracing activation
   ([f297ef1e](https://github.com/Unitech/pm2/commit/f297ef1ebbec292aedcfa48c27e3f31b8f206633))
 
-
-
-
 ## Branchs merged
-  - Merge branch 'development'
+
+- Merge branch 'development'
   ([80c94dd3](https://github.com/Unitech/pm2/commit/80c94dd3261544f627612ce4b541356e4adbc51f))
-
-
-
 
 ## 3.0.1 ( Mon Jul 23 2018 14:13:35 GMT+0200 (CEST) )
 
 ## Bug Fixes
-  - allow to set a name via pm2 link
+
+- allow to set a name via pm2 link
   ([ebffb609](https://github.com/Unitech/pm2/commit/ebffb609cf4da195c72ee67d8341c63b78f0654e))
-  - disable network monitoring as long as ampq not supported
+- disable network monitoring as long as ampq not supported
   ([ae1547bf](https://github.com/Unitech/pm2/commit/ae1547bfa9505b2d13e30df39ce614eee29463b0))
-  - display error message from pm2-deploy
+- display error message from pm2-deploy
   ([9171b810](https://github.com/Unitech/pm2/commit/9171b81024641c3e104f3eeb2e2c6eb852dbe7f4))
-  - protect geteuid/getegid from being called on windows #3793
+- protect geteuid/getegid from being called on windows #3793
   ([0495bd8e](https://github.com/Unitech/pm2/commit/0495bd8e4ffaeb1db729b35fa569696145d79c5f))
-  - put message module at the right level
+- put message module at the right level
   ([56f5e047](https://github.com/Unitech/pm2/commit/56f5e04787da29e8b582bf4fa8325f72404a2fbe))
-  - do not ignore child pres folder
+- do not ignore child pres folder
   ([10ee9987](https://github.com/Unitech/pm2/commit/10ee99876d75679723e1e8522da07413a618e48c))
-  - let->var
+- let->var
   ([89e2a125](https://github.com/Unitech/pm2/commit/89e2a125c22aee27014c279c86d1d9e0a0df0235))
-  - method renaming
+- method renaming
   ([f3faa3d8](https://github.com/Unitech/pm2/commit/f3faa3d846d1e895232743dd619f5ecb15fdf7ad))
-  - path
+- path
   ([4f980550](https://github.com/Unitech/pm2/commit/4f9805508d2c1c575aabc4abbab25728f1c6a28a))
-  - #3791 mitigate pidusage errores
+- #3791 mitigate pidusage errores
   ([88551b8c](https://github.com/Unitech/pm2/commit/88551b8cfe8bf8dd330d582e71b808faadfaf161))
-  - pm2 plus
+- pm2 plus
   ([9bc34e56](https://github.com/Unitech/pm2/commit/9bc34e56b7ad66cbc6efbd26d4017f1e1813a720))
-  - #3764
+- #3764
   ([3a582b42](https://github.com/Unitech/pm2/commit/3a582b42f9cca57779b99964c95a2cd0516efa11))
-  - drop coffee-script (installed via pm2 install coffeescript)
+- drop coffee-script (installed via pm2 install coffeescript)
   ([76ceb2fd](https://github.com/Unitech/pm2/commit/76ceb2fd52a2e5acbf03deacc3fa8a120a197023))
-  - restore no_interaction for pm2-dev
+- restore no_interaction for pm2-dev
   ([902e5a5a](https://github.com/Unitech/pm2/commit/902e5a5a1225d2072ab6337aa067caf9c6a7cca4))
-  - option -w doesn't work
+- option -w doesn't work
   ([165a05c8](https://github.com/Unitech/pm2/commit/165a05c854f9b3dd1418b988c954d333f81ba88f))
-  - retab shell script to use space for indent consistency
+- retab shell script to use space for indent consistency
   ([e3b4327d](https://github.com/Unitech/pm2/commit/e3b4327d9a6120c5ad589734ca926d3b49a8b706))
-  - set Makefile indent to tab instead of common space
+- set Makefile indent to tab instead of common space
   ([4db0ae01](https://github.com/Unitech/pm2/commit/4db0ae011c161cbfca9e250da40deff9fdc36069))
-  - set yaml file indent to 2 spaces instead of 3
+- set yaml file indent to 2 spaces instead of 3
   ([e4ecb0b2](https://github.com/Unitech/pm2/commit/e4ecb0b29dbcc4c6ca2d67b6bdc7da4c0a5d17a5))
-  - remove trailing spaces
+- remove trailing spaces
   ([5c115983](https://github.com/Unitech/pm2/commit/5c1159832680231bff5da79f1c91caf32ce3b5e0))
-  - fixes #3735
+- fixes #3735
   ([0548cb82](https://github.com/Unitech/pm2/commit/0548cb82aa1193a5725ca22e1babfc38db2e3b77))
 
-
-
-
 ## Hot Fixes
-  - fix #3767, do not consider as a command if space and slash are found
+
+- fix #3767, do not consider as a command if space and slash are found
   ([d15a12ce](https://github.com/Unitech/pm2/commit/d15a12ceae8b0c9c27625180ae002178b0bfe5d0))
-  - fix #3767, do not consider as a command if space and slash are found
+- fix #3767, do not consider as a command if space and slash are found
   ([f8ec1503](https://github.com/Unitech/pm2/commit/f8ec1503c3e92bc0dec10d395ac682b116e2914e))
 
-
-
-
 ## Features
-  - add inspector for node 10 and heap snapshot
+
+- add inspector for node 10 and heap snapshot
   ([dc61bca6](https://github.com/Unitech/pm2/commit/dc61bca66828c16cf6fd04a6f749f127da697cec))
-  - pm2 plus xx yy now generates a name with hostname-UID
+- pm2 plus xx yy now generates a name with hostname-UID
   ([fcf75e2c](https://github.com/Unitech/pm2/commit/fcf75e2cc321791273f6afe86c07fd147c6e8414))
-  - #3757 --only='app1,app2'
+- #3757 --only='app1,app2'
   ([bea98330](https://github.com/Unitech/pm2/commit/bea983306c4736d3a2b1090f2708b7b29c44ed03))
-  - pm2 plus cli
+- pm2 plus cli
   ([1da6edde](https://github.com/Unitech/pm2/commit/1da6edde80e3029d99084992ec1a4ada7b2cc279))
-  - reload all apps after connection to pm2 plus
+- reload all apps after connection to pm2 plus
   ([35a1ed2a](https://github.com/Unitech/pm2/commit/35a1ed2a1328a859a7797ec8e22024d171599d86))
-  - ask to install module after connection with KM
+- ask to install module after connection with KM
   ([68e87b39](https://github.com/Unitech/pm2/commit/68e87b39ae2b57e9fbb0b0abde68112c839f05ee))
-  - with pm2 plus command ask to install modules
+- with pm2 plus command ask to install modules
   ([28c61716](https://github.com/Unitech/pm2/commit/28c61716ee5e8f2402205e4b06ed7ee0a942a3cc))
 
-
-
-
 ## Test
-  - test with development packages
+
+- test with development packages
   ([d361c840](https://github.com/Unitech/pm2/commit/d361c8405db47969bd68c7b1058a54f38e8e0e52))
 
-
-
-
 ## Chore
-  - clean old snapshot method
+
+- clean old snapshot method
   ([d064750b](https://github.com/Unitech/pm2/commit/d064750be0d437945efdcd6a5ce4e56547b1bce6))
-  - update version to 3.0.1
+- update version to 3.0.1
   ([efbcb021](https://github.com/Unitech/pm2/commit/efbcb02180ae38dd930e43282113dbcb24288eab))
-  - bump to 3.0.1
+- bump to 3.0.1
   ([fb8357e3](https://github.com/Unitech/pm2/commit/fb8357e32f9f015e5b6e7ed8ef150f59de382c6d))
-  - new ascii logo + refactor pm2 plus command
+- new ascii logo + refactor pm2 plus command
   ([8692a1da](https://github.com/Unitech/pm2/commit/8692a1daf7b4b7dfb8a4d6ec3363ac0cc62203a8))
-  - change motd.update + alias register to pm2 plus
+- change motd.update + alias register to pm2 plus
   ([cdc4a767](https://github.com/Unitech/pm2/commit/cdc4a767d5f1ff5873d0466b471daa3006608604))
-  - btn
+- btn
   ([319fa0dc](https://github.com/Unitech/pm2/commit/319fa0dcbea331a88a9888c207368e52665309ce))
-  - README button
+- README button
   ([1c6fb68c](https://github.com/Unitech/pm2/commit/1c6fb68c758d76cf81e53c43c2423ecd742265e5))
-  - remove duplicate configs in .editorconfig
+- remove duplicate configs in .editorconfig
   ([86ad52b8](https://github.com/Unitech/pm2/commit/86ad52b837e23a7ec92705d21a152394c244571f))
 
-
-
-
 ## Branchs merged
-  - Merge branch 'development' into uid-gen
+
+- Merge branch 'development' into uid-gen
   ([5324c878](https://github.com/Unitech/pm2/commit/5324c878fd0d37e068bc25c8e37f19f73bfebf30))
-  - Merge branch 'master' into development
+- Merge branch 'master' into development
   ([7d04f638](https://github.com/Unitech/pm2/commit/7d04f63835845e92d32d6ad7ffab166a2954302f))
 
-
-
-
 ## Pull requests merged
-  - Merge pull request #3811 from Unitech/memory_inspector
+
+- Merge pull request #3811 from Unitech/memory_inspector
   ([62018044](https://github.com/Unitech/pm2/commit/62018044d7a1ef7fd0b37fe3082da4bf05989de0))
-  - Merge pull request #3801 from vkotovv/grammar-fixes
+- Merge pull request #3801 from vkotovv/grammar-fixes
   ([9bb37a66](https://github.com/Unitech/pm2/commit/9bb37a662a91369caaa5a1a43751541e41970a51))
-  - Merge pull request #3799 from Unitech/refactor-agent
+- Merge pull request #3799 from Unitech/refactor-agent
   ([bcc4fea8](https://github.com/Unitech/pm2/commit/bcc4fea80885ce941e11b17936aab6582660fc7f))
-  - Merge pull request #3787 from Unitech/multi-only
+- Merge pull request #3787 from Unitech/multi-only
   ([ea5d74a8](https://github.com/Unitech/pm2/commit/ea5d74a87f6911b238634419665c716bc877be10))
-  - Merge pull request #3788 from Unitech/uid-gen
+- Merge pull request #3788 from Unitech/uid-gen
   ([f70444f3](https://github.com/Unitech/pm2/commit/f70444f39b7cc8fe05faf57dac1b46fc15a2053c))
-  - Merge pull request #3784 from Unitech/pm2-plus-cli
+- Merge pull request #3784 from Unitech/pm2-plus-cli
   ([e8c13c37](https://github.com/Unitech/pm2/commit/e8c13c374dfeabf42f75af50b838adb7ac4a50aa))
-  - Merge pull request #3780 from Unitech/plus_modules
+- Merge pull request #3780 from Unitech/plus_modules
   ([466d2701](https://github.com/Unitech/pm2/commit/466d2701ca48d0c4b8466d6867135e43b22deeb5))
-  - Merge pull request #3768 from Unitech/spaces
+- Merge pull request #3768 from Unitech/spaces
   ([0477354b](https://github.com/Unitech/pm2/commit/0477354b502aef612012e833bd47ce1940da1a0b))
-  - Merge pull request #3771 from chinesedfan/patch-2
+- Merge pull request #3771 from chinesedfan/patch-2
   ([8de987a6](https://github.com/Unitech/pm2/commit/8de987a604679774ec39e7d5a1a905556524c53d))
-  - Merge pull request #3762 from shaharmor/issue-3441
+- Merge pull request #3762 from shaharmor/issue-3441
   ([429e455d](https://github.com/Unitech/pm2/commit/429e455db96d2a56448a11b7602333324c9bf433))
-  - Merge pull request #3761 from PeterDaveHello/fix-sh-indent-style
+- Merge pull request #3761 from PeterDaveHello/fix-sh-indent-style
   ([24cddc25](https://github.com/Unitech/pm2/commit/24cddc257734beebb33ee5abac5a4107a5d86093))
-  - Merge pull request #3737 from morugu/add-node-env-output
+- Merge pull request #3737 from morugu/add-node-env-output
   ([6628f163](https://github.com/Unitech/pm2/commit/6628f1637497771bbc5c4f0ba0e9423c63660e0e))
-  - Merge pull request #3743 from vivex/master
+- Merge pull request #3743 from vivex/master
   ([06872c25](https://github.com/Unitech/pm2/commit/06872c2520f73bcabb6198a96c4dafb46706c9e9))
-  - Merge pull request #3748 from JimiC/support_nvm4win
+- Merge pull request #3748 from JimiC/support_nvm4win
   ([2dac235b](https://github.com/Unitech/pm2/commit/2dac235bc8956d170fee2341517739d3781048d7))
-  - Merge pull request #3752 from PeterDaveHello/upstart.tpl
+- Merge pull request #3752 from PeterDaveHello/upstart.tpl
   ([d4e66e3a](https://github.com/Unitech/pm2/commit/d4e66e3a9d954ab5c15d5bc35910cdfb71ba8321))
-  - Merge pull request #3753 from PeterDaveHello/fix-editorconfig
+- Merge pull request #3753 from PeterDaveHello/fix-editorconfig
   ([d1478680](https://github.com/Unitech/pm2/commit/d1478680325822c206afbcb197a9a732318f6d64))
-  - Merge pull request #3754 from PeterDaveHello/remove-trailing-space
+- Merge pull request #3754 from PeterDaveHello/remove-trailing-space
   ([b660f03e](https://github.com/Unitech/pm2/commit/b660f03eba71bb80a1a3d313be4525160727921f))
-
-
-
-
-
 
 ## 3.0.0 ( Wed Jun 20 2018 11:06:21 GMT+0200 (CEST) )
 
-
 ## Breaking changes
-  - merge_logs is now activated by default if not in cluster mode. Logs will not be suffixed by the pm_id if only one app is started
-  ([ae02adf6](https://github.com/Unitech/pm2/commit/ae02adf63f70ceb3bf101be968996ca68d9ce277))
-  - Drop support for node 0.12
-  - Drop gracefulReload command
-  - Remove Interactor from PM2 source code
-  - Replace pmx with [pm2-io-apm](https://github.com/keymetrics/pm2-io-apm)
 
+- merge_logs is now activated by default if not in cluster mode. Logs will not be suffixed by the pm_id if only one app is started
+  ([ae02adf6](https://github.com/Unitech/pm2/commit/ae02adf63f70ceb3bf101be968996ca68d9ce277))
+- Drop support for node 0.12
+- Drop gracefulReload command
+- Remove Interactor from PM2 source code
+- Replace pmx with [pm2-io-apm](https://github.com/keymetrics/pm2-io-apm)
 
 ## Bug Fixes
-  - return the configuration and allow custom conf to override default values
+
+- return the configuration and allow custom conf to override default values
   ([37dc7de1](https://github.com/Unitech/pm2/commit/37dc7de11e930aa4fce6a485e892f11ee714acd6))
-  - add use strict for node 4 compatibility
+- add use strict for node 4 compatibility
   ([ba2ee3b1](https://github.com/Unitech/pm2/commit/ba2ee3b1ea9aa5fa665e706b3d49a205eac44d53))
-  - #3605 fix parameters definition, don't use camelcase for properties
+- #3605 fix parameters definition, don't use camelcase for properties
   ([c8616276](https://github.com/Unitech/pm2/commit/c8616276e4e08b4d90a742e219372e775bb81098))
-  - #3695 change version check method in order to make it work with alpha/beta versions
+- #3695 change version check method in order to make it work with alpha/beta versions
   ([052d6c55](https://github.com/Unitech/pm2/commit/052d6c55df0e941e1dd11430bbcbcaa34061a06e))
-  - deprecated warning on isbinaryfile
+- deprecated warning on isbinaryfile
   ([db09275f](https://github.com/Unitech/pm2/commit/db09275f8e353e257c89e12fed754236b15cee74))
-  - #3688 test adaptation + pm2 serve --port option
+- #3688 test adaptation + pm2 serve --port option
   ([f0249684](https://github.com/Unitech/pm2/commit/f0249684bcbfdb75749a516f447c8e8d32020709))
-  - startup script issue 18.04 #3645
+- startup script issue 18.04 #3645
   ([ff1a7f31](https://github.com/Unitech/pm2/commit/ff1a7f315bfee38eb9fd9cdd63efcc0d971585f8))
-  - that this - uncache node_modules
+- that this - uncache node_modules
   ([294038d7](https://github.com/Unitech/pm2/commit/294038d76272a915e3addc67d3694717a9f7d704))
-  - verify default conf variable via package.json on public module
+- verify default conf variable via package.json on public module
   ([157b106d](https://github.com/Unitech/pm2/commit/157b106df78af1d28d37bbea069b926de4dceca5))
-  - bug because of const
+- bug because of const
   ([56f05a90](https://github.com/Unitech/pm2/commit/56f05a900b03fb0c8dd635aede666c7d2f213271))
-  - do not run two pm2 para cmds
+- do not run two pm2 para cmds
   ([3274132b](https://github.com/Unitech/pm2/commit/3274132b866ba5c93d5786e755acbada922f5f1e))
-  - version
+- version
   ([3ec178e5](https://github.com/Unitech/pm2/commit/3ec178e577e79730aae02c913301cd905ea8ce52))
-  - re-enable agent tests
+- re-enable agent tests
   ([e6febcd7](https://github.com/Unitech/pm2/commit/e6febcd70dd0f1e68b74df8563d3046ee3b32b89))
-  - test/display summary
+- test/display summary
   ([b075e6d0](https://github.com/Unitech/pm2/commit/b075e6d09b09ff371adf045dc5079bb8ef82f1cf))
-  - skip interactor tests
+- skip interactor tests
   ([36c4d6bc](https://github.com/Unitech/pm2/commit/36c4d6bca7445b46afc1236dc8ab4b8bf921148b))
-  - remove unused tests
+- remove unused tests
   ([234c6314](https://github.com/Unitech/pm2/commit/234c63143e723a508796bc1d323c7241979bf4c2))
-  - add missing libraries in travis
+- add missing libraries in travis
   ([88fbb845](https://github.com/Unitech/pm2/commit/88fbb84597cee7029ce33f5b7e20e45f5a815b4b))
-  - remove unused variable when trying to use tracing
+- remove unused variable when trying to use tracing
   ([3aeeba02](https://github.com/Unitech/pm2/commit/3aeeba02f628bf4f19e8d5b93657fd94a6ef0ec7))
-  - remove useless tests from .sh
+- remove useless tests from .sh
   ([e0be81c8](https://github.com/Unitech/pm2/commit/e0be81c86c7defb5e7a271edd5cc37f960c6aa69))
-  - conflict
+- conflict
   ([e13f39c9](https://github.com/Unitech/pm2/commit/e13f39c90b6a5e803c59c5424332520564703f5c))
-  - fix bug with interpreter args
+- fix bug with interpreter args
   ([b26efa0d](https://github.com/Unitech/pm2/commit/b26efa0d4cd72cf04762df7b7d2eaddc4f4117d2))
-  - improve error message if action has failed
+- improve error message if action has failed
   ([d9f44f17](https://github.com/Unitech/pm2/commit/d9f44f170f115c2d6dfb6a7fe71dc31bd7fb66fb))
-  - use polyfill module for copySync with node 4.x
+- use polyfill module for copySync with node 4.x
   ([bc07f43b](https://github.com/Unitech/pm2/commit/bc07f43b115066f6077606df8f59379777f2a917))
-  - improve error message if action has failed
+- improve error message if action has failed
   ([dacc6542](https://github.com/Unitech/pm2/commit/dacc654207cbe494af0d12a3f9f27c3b16541802))
-  - solve empty list when no process and try to update pm2
+- solve empty list when no process and try to update pm2
   ([89511846](https://github.com/Unitech/pm2/commit/8951184688c720ded5b4b46bd5b393c3793f9b03))
-  - #3485 fix issue when there is empty dump file
+- #3485 fix issue when there is empty dump file
   ([f2523f6a](https://github.com/Unitech/pm2/commit/f2523f6a6b9d8b61ba6ace7b89a0353bee76360b))
-  - #3456 use homedir() instead of process.env.HOME, make module installation work on windows
+- #3456 use homedir() instead of process.env.HOME, make module installation work on windows
   ([1e001732](https://github.com/Unitech/pm2/commit/1e0017325fc8cf658263fb4e02c7bf8912f422b3))
 
-
-
-
 ## Features
-  - add support for openbsd rc.d init scripts
+
+- add support for openbsd rc.d init scripts
   ([fdeb0c32](https://github.com/Unitech/pm2/commit/fdeb0c327afd91b113b214c4c4de187848f9f1cb))
-  - add kill_retry_time argument
+- add kill_retry_time argument
   ([b2cc0031](https://github.com/Unitech/pm2/commit/b2cc003114b44f1a9a31876ee4a2f4cb91e210b3))
 
-  - **bin/pm2**
-    - improve usage
-  ([2c310084](https://github.com/Unitech/pm2/commit/2c310084453dd7b1546957e59b1fc7ef964d425b))
-
-
-
+- **bin/pm2**
+  - improve usage
+    ([2c310084](https://github.com/Unitech/pm2/commit/2c310084453dd7b1546957e59b1fc7ef964d425b))
 
 ## Refactor
-  - use @pm2/js-api for login/register on pm2.io via CLI
+
+- use @pm2/js-api for login/register on pm2.io via CLI
   ([cb6521ac](https://github.com/Unitech/pm2/commit/cb6521ac32f4737c42fc97fef972960bfe16c829))
-  - keymetrics examples
+- keymetrics examples
   ([109b331d](https://github.com/Unitech/pm2/commit/109b331ddf37e061d1890ef952f4cd167ce53f64))
-  - faster cli with less require
+- faster cli with less require
   ([ee5e6a06](https://github.com/Unitech/pm2/commit/ee5e6a06cbf93f2d1fa7fa022d6bdcad55a39695))
-  - replace fs-extra with node calls
+- replace fs-extra with node calls
   ([4576b4c9](https://github.com/Unitech/pm2/commit/4576b4c97bc685c9d774018d6b29c918abd7cb8d))
-  - centralize SECRET/PUBLIC/MACHINE_NAME + change some wordings
+- centralize SECRET/PUBLIC/MACHINE_NAME + change some wordings
   ([d0a2a30e](https://github.com/Unitech/pm2/commit/d0a2a30e4110496b178199fb33e026d6402dd00d))
-  - remove test deported to keymetrics-agent
+- remove test deported to keymetrics-agent
   ([299a52a2](https://github.com/Unitech/pm2/commit/299a52a253d70edcde23cbd7e0c201d492984df4))
-  - parallel test v1
+- parallel test v1
   ([08612de5](https://github.com/Unitech/pm2/commit/08612de5b7893a004ae33ed77fcb2ee3ff7b2251))
-  - e2e test rewrite
+- e2e test rewrite
   ([2b9ffd4e](https://github.com/Unitech/pm2/commit/2b9ffd4eb493f1ff32c979e3811f4f1fedfae97d))
-  - drop gracefullreload
+- drop gracefullreload
   ([bb57c76d](https://github.com/Unitech/pm2/commit/bb57c76d4191343925013d4353299092d80732c9))
-  - add node 4.x support
+- add node 4.x support
   ([d322dd00](https://github.com/Unitech/pm2/commit/d322dd00de0f527224c027b4fec5e86f12fd69ed))
-  - create alias method instead of modify prototype
+- create alias method instead of modify prototype
   ([6d8f0dfa](https://github.com/Unitech/pm2/commit/6d8f0dfae8106deb2fee0a7ae15b6ca9802a066d))
-  - change safety var to const
+- change safety var to const
   ([047aa494](https://github.com/Unitech/pm2/commit/047aa494d5c4dd4342915766b54d673db0d5cdf1))
-  - drop some 0.x patch
+- drop some 0.x patch
   ([0cab8880](https://github.com/Unitech/pm2/commit/0cab8880ffa362cf27ab7d7b6a64d6b478dce7cd))
-  - remove prototype from API and create method
+- remove prototype from API and create method
   ([9552bd61](https://github.com/Unitech/pm2/commit/9552bd61b72692beb620a91765ad440cdf6abefe))
-  - transform API into class
+- transform API into class
   ([e3831f95](https://github.com/Unitech/pm2/commit/e3831f95c8d71f98e8840da37f7e883727eccd59))
-  - name tests well
+- name tests well
   ([c3ccc651](https://github.com/Unitech/pm2/commit/c3ccc651d09ed7291090f516637b75bda99ff71c))
-  - refactor e2e one line parallel
+- refactor e2e one line parallel
   ([93802711](https://github.com/Unitech/pm2/commit/938027117cdb2f300ee772ab27f008cbe22a4b19))
-  - e2e rename
+- e2e rename
   ([8a7db95a](https://github.com/Unitech/pm2/commit/8a7db95aabc8437f292af0316cec81ab80ec41f5))
-  - change params
+- change params
   ([282186f2](https://github.com/Unitech/pm2/commit/282186f24b19b010999f7c7c49750935ef19c190))
-  - parallelize bash test
+- parallelize bash test
   ([d4b4375e](https://github.com/Unitech/pm2/commit/d4b4375e16fe7ac463b252702da662d3a21bf8b4))
 
-
-
-
 ## Test
-  - adapt test to new api
+
+- adapt test to new api
   ([7a275e27](https://github.com/Unitech/pm2/commit/7a275e279ea01b1239e9dd8b9cf8e088e407b96d))
-  - refactor before/after
+- refactor before/after
   ([b85ca3ca](https://github.com/Unitech/pm2/commit/b85ca3caa3c68e18f7ce6954cc85e90a9d33efef))
-  - 3 concurrent jobs
+- 3 concurrent jobs
   ([472aba34](https://github.com/Unitech/pm2/commit/472aba3499ff2d9d0eb834e819410026b1a44503))
-  - move test
+- move test
   ([9c973324](https://github.com/Unitech/pm2/commit/9c9733246dbe6afff1b488bc3ba3b6fea3877ea5))
-  - move test
+- move test
   ([952b7631](https://github.com/Unitech/pm2/commit/952b7631d19e1074ea73cc7a67bbaefe20950603))
-  - fix test with km_link
+- fix test with km_link
   ([23fd8ecf](https://github.com/Unitech/pm2/commit/23fd8ecfea9b2bf61359f62a8e6e1a582c3b0d6e))
 
-
-
-
 ## Chore
-  - shorten ecosystem file
+
+- shorten ecosystem file
   ([992a0452](https://github.com/Unitech/pm2/commit/992a045227aed559e708ac4e6bb3f54beabe48e0))
-  - change motd wording
+- change motd wording
   ([aa183ba1](https://github.com/Unitech/pm2/commit/aa183ba19d88777d82619aa40499c2661d67879e))
-  - merge master in development
+- merge master in development
   ([0e4453d9](https://github.com/Unitech/pm2/commit/0e4453d9cc789aa08ee778ff400572337e90d2e3))
-  - keymetrics -> pm2
+- keymetrics -> pm2
   ([2c8170c2](https://github.com/Unitech/pm2/commit/2c8170c25e231eb8827bb0944b76c2f4b041d84e))
-  - upgrade all modules + keymetrics-agent -> pm2/agent + increase version enabling v8-compile-cache
+- upgrade all modules + keymetrics-agent -> pm2/agent + increase version enabling v8-compile-cache
   ([53ca18c1](https://github.com/Unitech/pm2/commit/53ca18c12868ab177b60a4edff2ccaa8127e301f))
-  - pm2.io -> @pm2/io
+- pm2.io -> @pm2/io
   ([ae098962](https://github.com/Unitech/pm2/commit/ae098962df35eee7f482dc0a514fd29a02a5f4ad))
-  - right names as pm2 maintainers
+- right names as pm2 maintainers
   ([e8cd7131](https://github.com/Unitech/pm2/commit/e8cd7131a6b9c9d497a2079bcbfc03770a753a06))
-  - add changelog generation into contributing.md
+- add changelog generation into contributing.md
   ([d77bfbc3](https://github.com/Unitech/pm2/commit/d77bfbc3c8929851ee19ea604b2a6481d03771e3))
-  - cache node_modules
+- cache node_modules
   ([81627e94](https://github.com/Unitech/pm2/commit/81627e94c72efa1f4d726e20bbf67f0bbd5c116f))
-  - clone last 5 commits
+- clone last 5 commits
   ([dad38ed1](https://github.com/Unitech/pm2/commit/dad38ed1bae849147f66e44186cd71c4b9cb022d))
-  - delete old stagnating pmx inside test
+- delete old stagnating pmx inside test
   ([36834c2c](https://github.com/Unitech/pm2/commit/36834c2c00d496e04c38abaca30202eb650015c4))
-  - pmx -> pm2.io
+- pmx -> pm2.io
   ([adcbebc3](https://github.com/Unitech/pm2/commit/adcbebc3f6419cd97c5ea99f3c3a6789585bda66))
-  - updgrade pmx-2
+- updgrade pmx-2
   ([eeeb2988](https://github.com/Unitech/pm2/commit/eeeb2988f8886e405aea107db3b888fc1fc929f8))
-  - disable legacy test
+- disable legacy test
   ([13723bd9](https://github.com/Unitech/pm2/commit/13723bd938d0e6fb1cbf35f15eabe91c52d87b58))
-  - remove test for pmx alert system
+- remove test for pmx alert system
   ([c43414a6](https://github.com/Unitech/pm2/commit/c43414a63438d724b8099eb531ec72bab23b8ca2))
-  - sync from master
+- sync from master
   ([3424ee27](https://github.com/Unitech/pm2/commit/3424ee27870feaf62fdf4509cce9015f8b1a8a2e))
-  - add unique id for each process
+- add unique id for each process
   ([85a5ee0f](https://github.com/Unitech/pm2/commit/85a5ee0f1fd16da9635fb4b16ddcd8d53aca8224))
-  - use npm install for CI as yarn has issue with npm
+- use npm install for CI as yarn has issue with npm
   ([52902186](https://github.com/Unitech/pm2/commit/5290218626af815f6cae8173bc78d21881a4dda8))
-  - remove unused dependency
+- remove unused dependency
   ([830fc15f](https://github.com/Unitech/pm2/commit/830fc15fad1aee95e65b2681482b03369f1f97d7))
-  - upgrade PM2 to 3.0
+- upgrade PM2 to 3.0
   ([4bc2eb4c](https://github.com/Unitech/pm2/commit/4bc2eb4c9a8179b9ae38438e98ce7650a91b64db))
-  - remove unused console.log
+- remove unused console.log
   ([33db5084](https://github.com/Unitech/pm2/commit/33db5084814ae7940c90b7f933f9514d28008b78))
-  - wording on error message
+- wording on error message
   ([c251c8c9](https://github.com/Unitech/pm2/commit/c251c8c97e6f18aae584cac6b7f3c83cf4f2de9c))
-  - revert PR #3496
+- revert PR #3496
   ([aae1d55e](https://github.com/Unitech/pm2/commit/aae1d55e410c4dcfbbca83eaabbdf1a65d55f3aa))
-  - fix issue with snapshot command + remove command forceGc
+- fix issue with snapshot command + remove command forceGc
   ([97fd1010](https://github.com/Unitech/pm2/commit/97fd1010d005e59f2411042fa95891f9717fa8b7))
-  - wording on error message
+- wording on error message
   ([5f78ecbf](https://github.com/Unitech/pm2/commit/5f78ecbf90f9f46a7feb2a169968e86b0ecac91e))
-  - drop 0.12 test on travis
+- drop 0.12 test on travis
   ([beb6e487](https://github.com/Unitech/pm2/commit/beb6e48787c39c66569141d0fd8d090736114d23))
-  - downgrade promptly
+- downgrade promptly
   ([074a7a40](https://github.com/Unitech/pm2/commit/074a7a407a31b4d88442f5834d253d62f4e543b8))
-  - remove coffee and livescript dependencies
+- remove coffee and livescript dependencies
   ([13d6565c](https://github.com/Unitech/pm2/commit/13d6565c72e3596d05f87bfc8be15d3ee45fb279))
-  - upgrade module version and engine version
+- upgrade module version and engine version
   ([84796956](https://github.com/Unitech/pm2/commit/84796956347ca638750fe89cb5545e2a90a0f2c2))
 
-
-
-
 ## Branchs merged
-  - Merge branch 'development' into chore/dev-cache-node-modules
+
+- Merge branch 'development' into chore/dev-cache-node-modules
   ([146c4e11](https://github.com/Unitech/pm2/commit/146c4e113c88e8ade17c7558c8e14cf523a3b2d6))
-  - Merge branch 'development' of https://github.com/Unitech/pm2 into new-agent
+- Merge branch 'development' of https://github.com/Unitech/pm2 into new-agent
   ([3514e7fa](https://github.com/Unitech/pm2/commit/3514e7fac624bb83b4cc22651ebc05385f9c284d))
-  - Merge branch 'development' into master
+- Merge branch 'development' into master
   ([f5668331](https://github.com/Unitech/pm2/commit/f5668331dbe7346304258317a3b84450f421ed03))
-  - Merge branch 'development' into new-usage-cli
+- Merge branch 'development' into new-usage-cli
   ([4ae27694](https://github.com/Unitech/pm2/commit/4ae27694e34c4bc6ed389566d71fc5ec48b69652))
-  - Merge branch 'Eywek-improv/agent' into new-agent
+- Merge branch 'Eywek-improv/agent' into new-agent
   ([3e259dd1](https://github.com/Unitech/pm2/commit/3e259dd1d6bb96ea41897c49f3a84557c00c7dad))
-  - Merge branch 'ecosystem-documentation' of github.com:rmonnier/pm2 into ecosystem-documentation
+- Merge branch 'ecosystem-documentation' of github.com:rmonnier/pm2 into ecosystem-documentation
   ([98348955](https://github.com/Unitech/pm2/commit/98348955a6eb3a9cd524b991bd1dd6ed03d2c857))
-  - Merge branch 'development' into ecosystem-documentation
+- Merge branch 'development' into ecosystem-documentation
   ([40157784](https://github.com/Unitech/pm2/commit/40157784a63bcb0e744d4ed56f6c687e28379fdd))
-  - Merge branch 'inspect_mode' of github.com:Unitech/pm2 into inspect_mode
+- Merge branch 'inspect_mode' of github.com:Unitech/pm2 into inspect_mode
   ([7e1494c7](https://github.com/Unitech/pm2/commit/7e1494c7f7971aaf1f4d00d2ee691c3c41775001))
-  - Merge branch 'development' of github.com:Unitech/pm2 into development
+- Merge branch 'development' of github.com:Unitech/pm2 into development
   ([48f81a8b](https://github.com/Unitech/pm2/commit/48f81a8b2f6f0db39edd86083fb369b74845c387))
-  - Merge branch 'development' into master
+- Merge branch 'development' into master
   ([47e54109](https://github.com/Unitech/pm2/commit/47e5410987ab3d824a34c062d70c24ab686e57db))
-  - Merge branch 'development' into module_install_windows
+- Merge branch 'development' into module_install_windows
   ([7b82fb91](https://github.com/Unitech/pm2/commit/7b82fb916ed453c1c263bae43c962f6a5294d810))
-  - Merge branch 'development' into module_install_windows
+- Merge branch 'development' into module_install_windows
   ([80b0495f](https://github.com/Unitech/pm2/commit/80b0495f63d1224b850af4b14cdeb055e3fef50b))
 
-
-
-
 ## Pull requests merged
-  - Merge pull request #3726 from soyuka/fix-list
+
+- Merge pull request #3726 from soyuka/fix-list
   ([0255c5a6](https://github.com/Unitech/pm2/commit/0255c5a6ab1b8a8f609d2183d998695b8c42838d))
-  - Merge pull request #3725 from soyuka/fix-list
+- Merge pull request #3725 from soyuka/fix-list
   ([a39eb4f8](https://github.com/Unitech/pm2/commit/a39eb4f806e87565f53758a19f0ee289b6489b67))
-  - Merge pull request #3718 from AaronM04/openbsd-init-script
+- Merge pull request #3718 from AaronM04/openbsd-init-script
   ([85458261](https://github.com/Unitech/pm2/commit/85458261d2673c609cb252d64ad4dfbaa466d848))
-  - Merge pull request #3721 from Unitech/io_conf
+- Merge pull request #3721 from Unitech/io_conf
   ([70ec1f81](https://github.com/Unitech/pm2/commit/70ec1f81eae089f75e82723fde7b0b3926d0a9bc))
-  - Merge pull request #3716 from Unitech/io_conf
+- Merge pull request #3716 from Unitech/io_conf
   ([0bc000b9](https://github.com/Unitech/pm2/commit/0bc000b9aae7dd37b456bc2d4fbc9eb4a9f047ef))
-  - Merge pull request #3714 from Unitech/definition
+- Merge pull request #3714 from Unitech/definition
   ([d8cff0de](https://github.com/Unitech/pm2/commit/d8cff0dec5160a620d1512ff56726c073368d1a4))
-  - Merge pull request #3700 from Unitech/report_error
+- Merge pull request #3700 from Unitech/report_error
   ([4b2cad40](https://github.com/Unitech/pm2/commit/4b2cad407b76994e978074a2a3825fe70656304d))
-  - Merge pull request #3670 from Unitech/changelog
+- Merge pull request #3670 from Unitech/changelog
   ([4bcbcce1](https://github.com/Unitech/pm2/commit/4bcbcce16ced596f6ca2bab2b77d608a174a7c1a))
-  - Merge pull request #3662 from DanielRuf/chore/dev-cache-node-modules
+- Merge pull request #3662 from DanielRuf/chore/dev-cache-node-modules
   ([540590ee](https://github.com/Unitech/pm2/commit/540590ee056b44eed3b688a7b0b16ca78ec82cd9))
-  - Merge pull request #3663 from DanielRuf/chore/dev-clone-last-5-commits
+- Merge pull request #3663 from DanielRuf/chore/dev-clone-last-5-commits
   ([bdf95fc9](https://github.com/Unitech/pm2/commit/bdf95fc997f9ab2995b23668f25f11b6e98b5c47))
-  - Merge pull request #3584 from ngtmuzi/development
+- Merge pull request #3584 from ngtmuzi/development
   ([33984b64](https://github.com/Unitech/pm2/commit/33984b64a2969ca4a3a5913f0f7da0242b6c5ec1))
-  - Merge pull request #3500 from Unitech/test-parallel
+- Merge pull request #3500 from Unitech/test-parallel
   ([da56c7af](https://github.com/Unitech/pm2/commit/da56c7aff18d3a38b3ad068b22cd75b290bac9d0))
-  - Merge pull request #3539 from KimSeongIl/master
+- Merge pull request #3539 from KimSeongIl/master
   ([1325704d](https://github.com/Unitech/pm2/commit/1325704d95d324e56b0ebc86aed8137e0d0aa450))
-  - Merge pull request #3556 from N-Nagorny/logs-smart-app-name-cutting
+- Merge pull request #3556 from N-Nagorny/logs-smart-app-name-cutting
   ([bfddf4fd](https://github.com/Unitech/pm2/commit/bfddf4fdef5ec293119d850cc2532ac5d6490ae3))
-  - Merge pull request #3553 from Unitech/fix_tracing_not_working
+- Merge pull request #3553 from Unitech/fix_tracing_not_working
   ([9d51fe08](https://github.com/Unitech/pm2/commit/9d51fe0819182339f3a6a4aee7ea603ea3f4dd76))
-  - Merge pull request #3549 from Eywek/new-agent
+- Merge pull request #3549 from Eywek/new-agent
   ([2f04027b](https://github.com/Unitech/pm2/commit/2f04027b536094d192b399677b3a113102f06b8e))
-  - Merge pull request #3548 from rmonnier/start-ecosystem-default
+- Merge pull request #3548 from rmonnier/start-ecosystem-default
   ([55412f26](https://github.com/Unitech/pm2/commit/55412f263250395de0085144932cfe06b8c7180d))
-  - Merge pull request #3546 from soyuka/improve-monitor-perf
+- Merge pull request #3546 from soyuka/improve-monitor-perf
   ([e4e29233](https://github.com/Unitech/pm2/commit/e4e29233f99db36462a6e8f48eb8ebd3d2fd9fa5))
-  - Merge pull request #3534 from rmonnier/new-usage-cli
+- Merge pull request #3534 from rmonnier/new-usage-cli
   ([5dfba8a4](https://github.com/Unitech/pm2/commit/5dfba8a4491f0bb83f2879915f0c4b164be2552c))
-  - Merge pull request #3542 from rmonnier/default-start-ecosystem
+- Merge pull request #3542 from rmonnier/default-start-ecosystem
   ([c65595f4](https://github.com/Unitech/pm2/commit/c65595f4a70659e1e0d753e6c28a1fcedf45a91a))
-  - Merge pull request #3545 from rmonnier/default-ecosystem
+- Merge pull request #3545 from rmonnier/default-ecosystem
   ([b3718656](https://github.com/Unitech/pm2/commit/b3718656f630aa54880343d9742534a2a508daec))
-  - Merge pull request #3543 from rmonnier/ecosystem-documentation
+- Merge pull request #3543 from rmonnier/ecosystem-documentation
   ([a60580a1](https://github.com/Unitech/pm2/commit/a60580a12b4a0066c8df6620317fbc8bf599b0b6))
-  - Merge pull request #3541 from soyuka/development
+- Merge pull request #3541 from soyuka/development
   ([67e7a015](https://github.com/Unitech/pm2/commit/67e7a015cabaa7b08206a3b1bf9c0399af88f76b))
-  - Merge pull request #3511 from Unitech/inspect_mode
+- Merge pull request #3511 from Unitech/inspect_mode
   ([75fb87f8](https://github.com/Unitech/pm2/commit/75fb87f8a1c46a6db8e974b421e857175e69b535))
-  - Merge pull request #3517 from Unitech/polyfill_fs_copy_node4
+- Merge pull request #3517 from Unitech/polyfill_fs_copy_node4
   ([524f5494](https://github.com/Unitech/pm2/commit/524f54948de5080632d43bb512038d7bd7271619))
-  - Merge pull request #3516 from Unitech/drop_unused_feature
+- Merge pull request #3516 from Unitech/drop_unused_feature
   ([9436f11a](https://github.com/Unitech/pm2/commit/9436f11aeecfc07e77aa9d6b108df4478b43402e))
-  - Merge pull request #3510 from Unitech/dump_refacto
+- Merge pull request #3510 from Unitech/dump_refacto
   ([674e4469](https://github.com/Unitech/pm2/commit/674e4469554e6a765bb3d57a3c083e6ab53b20cc))
-  - Merge pull request #3501 from Unitech/refactor_api
+- Merge pull request #3501 from Unitech/refactor_api
   ([9f2c4ca4](https://github.com/Unitech/pm2/commit/9f2c4ca4c9eadf6c7730e3889c72e908cd2d8f5d))
-  - Merge pull request #3496 from rmonnier/master
+- Merge pull request #3496 from rmonnier/master
   ([829cc303](https://github.com/Unitech/pm2/commit/829cc3032b2d61e20f7a2e7d1d819c0ddc0845e8))
-  - Merge pull request #3484 from Unitech/pull_by_name
+- Merge pull request #3484 from Unitech/pull_by_name
   ([24d29404](https://github.com/Unitech/pm2/commit/24d294049008a0d01b2bc407b9b2b880d5843fbd))
-  - Merge pull request #3482 from Unitech/mjs_support
+- Merge pull request #3482 from Unitech/mjs_support
   ([ebe7b048](https://github.com/Unitech/pm2/commit/ebe7b0487218557858aaa98527360eca1776b140))
-  - Merge pull request #3495 from Unitech/module_install_windows
+- Merge pull request #3495 from Unitech/module_install_windows
   ([e9c625d3](https://github.com/Unitech/pm2/commit/e9c625d3088c71eef4237ecd866b806957c61815))
-  - Merge pull request #3507 from cheapsteak/patch-1
+- Merge pull request #3507 from cheapsteak/patch-1
   ([a49287d6](https://github.com/Unitech/pm2/commit/a49287d6a1d22b39270e2d05dee2a17c0ed55797))
-
-
-
 
 ## 2.10.4 ( Thu May 17 2018 14:32:40 GMT+0200 (CEST) )
 
-
 ## Bug Fixes
-  - #3645 throttle startup
+
+- #3645 throttle startup
   ([d529f675](https://github.com/Unitech/pm2/commit/d529f675d0240777cba95442ba35205c370cdb43))
 
-
-
-
 ## Chore
-  - update issue and PR templates to use comments to hide instructions in the frontend
+
+- update issue and PR templates to use comments to hide instructions in the frontend
   ([9e0180ed](https://github.com/Unitech/pm2/commit/9e0180eddab071916144ad7008817bd6aef1c8ce))
 
-
-
-
 ## Pull requests merged
-  - Merge pull request #3664 from DanielRuf/chore/update-issue-pr-templates
-  ([067446f2](https://github.com/Unitech/pm2/commit/067446f2133ba7f761b0ad3c9f3692b167affd8b))
 
+- Merge pull request #3664 from DanielRuf/chore/update-issue-pr-templates
+  ([067446f2](https://github.com/Unitech/pm2/commit/067446f2133ba7f761b0ad3c9f3692b167affd8b))
 
 ## v2.10.3 ( Fri Apr 27 2018 11:42:16 GMT+0200 (CEST) )
 
-
 ### Chore
-  - upgrade for node 10
+
+- upgrade for node 10
   ([cf7630e](https://github.com/Unitech/pm2/commit/cf7630e259742bdff8257cff4dbed2732bf24f9c))
 
 ## v2.10.2 ( Thu Mar 29 2018 13:06:11 GMT+0200 (CEST) )
 
-
 ## Bug Fixes
-  - reinforce pm2-runtime auto exit strategy #3567 #3206
+
+- reinforce pm2-runtime auto exit strategy #3567 #3206
   ([e09cdbab](https://github.com/Unitech/pm2/commit/e09cdbabd0b479acda3cb24154bbaa071aa35407))
 
-
-
-
 ## Pull requests merged
-  - Merge pull request #3569 from Unitech/pm2-runtime-hot-fix
+
+- Merge pull request #3569 from Unitech/pm2-runtime-hot-fix
   ([473a2d6d](https://github.com/Unitech/pm2/commit/473a2d6d3867c617e4a41571d1780618c5025b87))
-  - Merge pull request #3547 from Unitech/revert-3532-logs-smart-app-name-cutting
+- Merge pull request #3547 from Unitech/revert-3532-logs-smart-app-name-cutting
   ([438e3030](https://github.com/Unitech/pm2/commit/438e303013e82ecc199cb68d018144cde8a0b2e6))
-  - Merge pull request #3532 from N-Nagorny/logs-smart-app-name-cutting
+- Merge pull request #3532 from N-Nagorny/logs-smart-app-name-cutting
   ([067c18e6](https://github.com/Unitech/pm2/commit/067c18e601aca4fac10101a7c23cc4c3525ad776))
-
-
 
 ## v2.10.1 ( Mon Feb 26 2018 11:38:18 GMT+0100 (CET) )
 
-
 ## Bug Fixes
-  - restore --raw option #3476
-  ([340011ca](https://github.com/Unitech/pm2/commit/340011cace2b90c2a1ead8d86baba517f5570e15))
 
+- restore --raw option #3476
+  ([340011ca](https://github.com/Unitech/pm2/commit/340011cace2b90c2a1ead8d86baba517f5570e15))
 
 ## v2.10.0 ( Mon Feb 19 2018 14:51:19 GMT+0100 (CET) )
 
-
 ### Bug Fixes
-  - add livescript in default modules
+
+- add livescript in default modules
   ([a315eeb6](https://github.com/Unitech/pm2/commit/a315eeb65f04b22643a903f0cb1c0f416615ad8b))
-  - replace dash with underscore
+- replace dash with underscore
   ([203df768](https://github.com/Unitech/pm2/commit/203df7688ca348967c00bc45289ae70fd2c4aaaa))
-  - make sure not pm2 is running
+- make sure not pm2 is running
   ([bd798fd7](https://github.com/Unitech/pm2/commit/bd798fd748665e935db4bb91f9d1d66952d9842a))
-  - auto-exit edge case fix + pm2 no daemon mode + log in raw by default + less logs
+- auto-exit edge case fix + pm2 no daemon mode + log in raw by default + less logs
   ([704ae518](https://github.com/Unitech/pm2/commit/704ae518f5d7df0a631349e518d81cef51249a58))
-  - impact v8 flag in fork mode also
+- impact v8 flag in fork mode also
   ([41bf6ef7](https://github.com/Unitech/pm2/commit/41bf6ef7d3633180b4c1e90f36eb206d82fab2b1))
-  - fixup! #2182 Get rid of annoying popups in Windows 10
+- fixup! #2182 Get rid of annoying popups in Windows 10
   ([3a85b59d](https://github.com/Unitech/pm2/commit/3a85b59de4a76796ad0880368d8d085a7ba55d36))
 
-
-
-
 ### Hot Fixes
-  - \#3420 ([673acf36](https://github.com/Unitech/pm2/commit/673acf36b4ca1fd65c5135a92d56081f76237a8b))
 
-
-
+- \#3420 ([673acf36](https://github.com/Unitech/pm2/commit/673acf36b4ca1fd65c5135a92d56081f76237a8b))
 
 ### Features
-  - add dependencies section into ecosystem.json file.
+
+- add dependencies section into ecosystem.json file.
   ([828a30d0](https://github.com/Unitech/pm2/commit/828a30d0ccc88b3f6e2b66d517ccf5f2394bd08b))
-  - --deep-monitoring available from pm2-runtime
+- --deep-monitoring available from pm2-runtime
   ([99e62e3b](https://github.com/Unitech/pm2/commit/99e62e3bb808f071d6e4850c234b34f7de65b1c2))
-  - add deep_metrics to deep_monitoring flag
+- add deep_metrics to deep_monitoring flag
   ([4d1bea5e](https://github.com/Unitech/pm2/commit/4d1bea5e0bbaab1f16f75d012bca25702cdff88e))
-  - add flag to enable deep-monitoring
+- add flag to enable deep-monitoring
   ([c5418688](https://github.com/Unitech/pm2/commit/c541868837a1c4421394de5dd1029d2619b5ac82))
-  - allow pm2 to install a set of module as one single command and add deep-monitoring.
+- allow pm2 to install a set of module as one single command and add deep-monitoring.
   ([9dddc80d](https://github.com/Unitech/pm2/commit/9dddc80db5e496def44d4d36716b7de54e5171cf))
-  - pm2 pid <app_name> command
+- pm2 pid <app_name> command
   ([6687d499](https://github.com/Unitech/pm2/commit/6687d499415151bd62489fed5331f414576ec354))
-  - allow pm2 to install and enable event-loop-inspector data collecting
+- allow pm2 to install and enable event-loop-inspector data collecting
   ([e6b0c474](https://github.com/Unitech/pm2/commit/e6b0c47443d3e6a839bf29057ef0a80ef135c47e))
-  - ignore signal when running in --no-daemon
+- ignore signal when running in --no-daemon
   ([b9c01c99](https://github.com/Unitech/pm2/commit/b9c01c99d54aba98ab790b8888500ac0f0af05c9))
-  - upgrade pmx to git development branch
+- upgrade pmx to git development branch
   ([21be05a0](https://github.com/Unitech/pm2/commit/21be05a07bd93eacaddedde3b647c16468937473))
-  - allow pm2 to enable v8 data collecting from pmx
+- allow pm2 to enable v8 data collecting from pmx
   ([aa180fa8](https://github.com/Unitech/pm2/commit/aa180fa8ab47f0c687d7c21854d005ad0ebf8475))
-  - allow pm2 to install gc-stats
+- allow pm2 to install gc-stats
   ([15634168](https://github.com/Unitech/pm2/commit/15634168582e4c7b3c5f47a3f58a0fcf8b732a76))
-  - feat add changelog generation support
+- feat add changelog generation support
   ([14f53fc0](https://github.com/Unitech/pm2/commit/14f53fc0c28be4084778785aeace3763ed0d827f))
 
-  - **pm2**
-    - add pm2 init option to generate an ecosystem file
-  ([5d56fac7](https://github.com/Unitech/pm2/commit/5d56fac7cc12590af29ee46c68ba32a82a2b813b))
-    - add pm2 init option to generate an ecosystem file
-  ([a38fd199](https://github.com/Unitech/pm2/commit/a38fd199b90d27a2405f8cabab0e4f6e45c69b08))
-
-
-
+- **pm2**
+  - add pm2 init option to generate an ecosystem file
+    ([5d56fac7](https://github.com/Unitech/pm2/commit/5d56fac7cc12590af29ee46c68ba32a82a2b813b))
+  - add pm2 init option to generate an ecosystem file
+    ([a38fd199](https://github.com/Unitech/pm2/commit/a38fd199b90d27a2405f8cabab0e4f6e45c69b08))
 
 ### Documentation
-  - add documentation on new pm2 install command
+
+- add documentation on new pm2 install command
   ([c90c453f](https://github.com/Unitech/pm2/commit/c90c453f85b07adb346bc55c2b685d689a2e96f7))
-  - add sendDataToProcessId into typescript definitions
+- add sendDataToProcessId into typescript definitions
   ([4a2e8d2d](https://github.com/Unitech/pm2/commit/4a2e8d2d2c4b38fe0ff2377dfe32fce9a43c8044))
 
-
-
-
 ### Refactor
-  - delete all "if" condition when installing new module, create an object with all modules and a generic installation process
+
+- delete all "if" condition when installing new module, create an object with all modules and a generic installation process
   ([1b92a9c4](https://github.com/Unitech/pm2/commit/1b92a9c4000734367e68d8dbd60d0901009f4c56))
-  - deep pm2-runtime refactor #3408 #3257 #3266
+- deep pm2-runtime refactor #3408 #3257 #3266
   ([c13b2364](https://github.com/Unitech/pm2/commit/c13b23648269529a1f998d816be10f895665861e))
-  - no more interactive spinner for connection to KM + change pm2 log format + remove some logs
+- no more interactive spinner for connection to KM + change pm2 log format + remove some logs
   ([d1916f40](https://github.com/Unitech/pm2/commit/d1916f40962b2cc8a1866172eab7d5d89db093be))
 
-
-
-
 ### Chore
-  - pmx to 1.6.3-rc2
+
+- pmx to 1.6.3-rc2
   ([41815e0b](https://github.com/Unitech/pm2/commit/41815e0ba0298979f936b3d4badb196f8d9783d8))
-  - switch pmx to development
+- switch pmx to development
   ([748019d1](https://github.com/Unitech/pm2/commit/748019d1ef0cf760b5e8de9d5b6af6fee300db02))
-  - 2.10.0-beta
+- 2.10.0-beta
   ([0d2b7172](https://github.com/Unitech/pm2/commit/0d2b7172a093d0638deabb5f23383cc9eec5dda9))
-  - upgrade pmx to 1.6.3-next
+- upgrade pmx to 1.6.3-next
   ([5a1b4343](https://github.com/Unitech/pm2/commit/5a1b4343cc1e1f5018e21451a111340351706213))
-  - upgrade pmx dep
+- upgrade pmx dep
   ([4bbeec3d](https://github.com/Unitech/pm2/commit/4bbeec3d170ba63af0c0ae0e2d07beec2ab49772))
-  - switch to published pmx(@next)
+- switch to published pmx(@next)
   ([859d18fb](https://github.com/Unitech/pm2/commit/859d18fbc79e2a2760fe90e9c17e71209f8177ce))
-  - remove --exit from mocha.opts
+- remove --exit from mocha.opts
   ([36bf03e1](https://github.com/Unitech/pm2/commit/36bf03e1eed69a27e518151e2f7aa958b15db2fb))
-  - remove unused files
+- remove unused files
   ([65d233e5](https://github.com/Unitech/pm2/commit/65d233e5b5290f65796b7cf3daa20706e0f3bee6))
 
-
-
-
 ### Branchs merged
-  - Merge branch 'development' of ssh://github.com/deltasource/pm2 into hotfix/scoped-package-support
+
+- Merge branch 'development' of ssh://github.com/deltasource/pm2 into hotfix/scoped-package-support
   ([94ea9d9e](https://github.com/Unitech/pm2/commit/94ea9d9eeff40faca8aa9f7edfc81aa29c08e740))
-  - Merge branch 'master' into development
+- Merge branch 'master' into development
   ([46606903](https://github.com/Unitech/pm2/commit/46606903f25d0f4d0eee226da863e20e4b396dc9))
-  - Merge branch 'development' of github.com:Unitech/pm2 into v8_option
+- Merge branch 'development' of github.com:Unitech/pm2 into v8_option
   ([757562f7](https://github.com/Unitech/pm2/commit/757562f755b09124bbd006209ae38a096d692529))
-  - Merge branch 'development' of github.com:Unitech/pm2 into gc-stats
+- Merge branch 'development' of github.com:Unitech/pm2 into gc-stats
   ([3ed1a747](https://github.com/Unitech/pm2/commit/3ed1a7471aec7d79f7d604447ac7445720bdaced))
-  - Merge branch 'master' into development
+- Merge branch 'master' into development
   ([ee7651e4](https://github.com/Unitech/pm2/commit/ee7651e47e944c3c829933494c6cc765deb4bb29))
 
-
-
-
 ### Pull requests merged
-  - Merge pull request #3466 from natcl/development
+
+- Merge pull request #3466 from natcl/development
   ([c6d7ace8](https://github.com/Unitech/pm2/commit/c6d7ace802e667def75bc68344effa4856830fb4))
-  - Merge pull request #3464 from andyfleming/patch-1
+- Merge pull request #3464 from andyfleming/patch-1
   ([dd9ebb60](https://github.com/Unitech/pm2/commit/dd9ebb6051708ee5a13cc68dbcb8238e41860bb9))
-  - Merge pull request #3459 from rmonnier/master
+- Merge pull request #3459 from rmonnier/master
   ([46948a98](https://github.com/Unitech/pm2/commit/46948a98e90c7864f7b8100db5c519fe9d37f11a))
-  - Merge pull request #3458 from Unitech/pm2_install_command
+- Merge pull request #3458 from Unitech/pm2_install_command
   ([f3b35726](https://github.com/Unitech/pm2/commit/f3b35726895bd82b92813f308b787d68e9df1fa4))
-  - Merge pull request #3453 from deltasource/hotfix/scoped-package-support
+- Merge pull request #3453 from deltasource/hotfix/scoped-package-support
   ([974f9bf0](https://github.com/Unitech/pm2/commit/974f9bf0dc7a7aa7ff6860f8640da3593b802296))
-  - Merge pull request #3448 from Unitech/deep_monitoring_flag
+- Merge pull request #3448 from Unitech/deep_monitoring_flag
   ([331bc741](https://github.com/Unitech/pm2/commit/331bc741d7285094738a91cd816bc9755cc76605))
-  - Merge pull request #3447 from Unitech/deep-monitoring
+- Merge pull request #3447 from Unitech/deep-monitoring
   ([719d328e](https://github.com/Unitech/pm2/commit/719d328e8d14871b34fd33df54fd80f4f8e7825f))
-  - Merge pull request #3443 from Unitech/event-loop-inspector
+- Merge pull request #3443 from Unitech/event-loop-inspector
   ([77a35274](https://github.com/Unitech/pm2/commit/77a3527407f3d090c7a5fa0bedaf943a7536b5eb))
-  - Merge pull request #3442 from Unitech/event-loop-inspector
+- Merge pull request #3442 from Unitech/event-loop-inspector
   ([dad98e6e](https://github.com/Unitech/pm2/commit/dad98e6e0738983717fee155ff0f6519955ffc1b))
-  - Merge pull request #3424 from Unitech/sendDataToProcessId_def
+- Merge pull request #3424 from Unitech/sendDataToProcessId_def
   ([95e85eef](https://github.com/Unitech/pm2/commit/95e85eef84510dddfb0c6b13f0ada38a7dd66cae))
-  - Merge pull request #3438 from Unitech/v8_option
+- Merge pull request #3438 from Unitech/v8_option
   ([e46b15dc](https://github.com/Unitech/pm2/commit/e46b15dc32c18e8b24f66da0c79cc06f91cf11b5))
-  - Merge pull request #3437 from Unitech/gc-stats
+- Merge pull request #3437 from Unitech/gc-stats
   ([1a6771aa](https://github.com/Unitech/pm2/commit/1a6771aa361bb5718bafd6e33e616725f9c0d328))
-  - Merge pull request #3400 from toddwong/windowsHide2
+- Merge pull request #3400 from toddwong/windowsHide2
   ([f65e8794](https://github.com/Unitech/pm2/commit/f65e8794df6e67f4ff60dfbec7c05a37721cb6f9))
-  - Merge pull request #3421 from Unitech/generate_changelog
+- Merge pull request #3421 from Unitech/generate_changelog
   ([b0690618](https://github.com/Unitech/pm2/commit/b0690618d940c11e28eeb5115c060bf363c7b62b))
-  - Merge pull request #3419 from Rohja/fix-build-number-deb-rpm
+- Merge pull request #3419 from Rohja/fix-build-number-deb-rpm
   ([b4343de2](https://github.com/Unitech/pm2/commit/b4343de2703fce03f3cf48cc303b12bc6b69b743))
-
-
-
 
 ## 2.9.2
 
@@ -1596,8 +1507,8 @@ New builtin metrics when starting a Node.js application:
 ### Breaking change
 
 - the NODE_APP_INSTANCE var behavior has been changed :
-    - old behavior : when starting multiples instances of an app each one get an unique number, but its not working anymore if you are using `pm2 scale` (simply put its possible to have two application with the same number)
-    - new behavior : the number are consistent, if you scale up/down it will take a number that isn't used by another application (so two application should never have the same number)
+  - old behavior : when starting multiples instances of an app each one get an unique number, but its not working anymore if you are using `pm2 scale` (simply put its possible to have two application with the same number)
+  - new behavior : the number are consistent, if you scale up/down it will take a number that isn't used by another application (so two application should never have the same number)
 
 ## 2.4.5/6
 
@@ -1687,7 +1598,7 @@ New builtin metrics when starting a Node.js application:
   $ pm2 startup   # Auto detect available init system + Setup init scripts
   $ pm2 unstartup # Disable and Remove init scripts
 
-*SystemD, Upstart and Launchd scripts work like a charm*
+_SystemD, Upstart and Launchd scripts work like a charm_
 
 - #2515 New way to install PM2 on Debian based system:
 
@@ -1960,7 +1871,7 @@ The Keymetrics interface has been enhanced, dividing by two the memory usage and
 - blessed dependency removed
 - chalk, safe-clone-deep, shelljs, semver upgraded
 - New command: pm2 module:update <module_name> -> Update a module
-- New command: pm2 module:publish  -> Publish module in current folder + Git push
+- New command: pm2 module:publish -> Publish module in current folder + Git push
 - New command: pm2 module:generate [module name] -> Generate a sample module
 - Feature: configuration system for raw Node.js applications
 - alias pm2 install with pm2 i
@@ -2014,7 +1925,7 @@ The Keymetrics interface has been enhanced, dividing by two the memory usage and
 - New flag : `--no-treekill` : when used PM2 won't kill children processes
 - New flags : `pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--timestamp [format]]`
 - Enhancement: Modules installable via Github: `pm2 install username/repository`
-- Feature: PMX has *scoped function* -> pm2 stores temporary output from custom functions
+- Feature: PMX has _scoped function_ -> pm2 stores temporary output from custom functions
 - Fix: Interactor issue when doing an heapdump
 - Feature: PM2 CLI autocompletion
 
@@ -2082,12 +1993,12 @@ The Keymetrics interface has been enhanced, dividing by two the memory usage and
 
 ## 0.12.13
 
-- Enhanced  : PM2 doesn't leave processes behind when it crashes
-- Enhanced  : Call reload instead of restart when max-memory-limit reached
-- Enhanced  : Modules are compatible ES6 by default by adding --harmony flag
-- Enhanced  : Dump feature is now smarter
+- Enhanced : PM2 doesn't leave processes behind when it crashes
+- Enhanced : Call reload instead of restart when max-memory-limit reached
+- Enhanced : Modules are compatible ES6 by default by adding --harmony flag
+- Enhanced : Dump feature is now smarter
 - Fix #1206 : fix `pm2 logs` bug when merged_logs
-- Fix       : pm2 scale doesn't try to scale a fork_mode process
+- Fix : pm2 scale doesn't try to scale a fork_mode process
 
 ## 0.12.12
 
@@ -2109,13 +2020,13 @@ The Keymetrics interface has been enhanced, dividing by two the memory usage and
 ## 0.12.11
 
 - `--no-autorestart` flag : starts an app without automatic restart feature
-(`"autorestart" : false` in JSON declaration)
+  (`"autorestart" : false` in JSON declaration)
 
 - `--no-vizion` flag : starts an app completely without vizion features
-(`"vizion" : false` in JSON declaration)
+  (`"vizion" : false` in JSON declaration)
 
 - Fix #1146 : add module._initPaths() on ProcessContainer.js so it forces each
-new process to take the current NODE_PATH env value in account
+  new process to take the current NODE_PATH env value in account
 
 - New: pm2.start() now handles json objects as param
 
@@ -2128,13 +2039,13 @@ new process to take the current NODE_PATH env value in account
 - VersioningManagment: exec() timeout configurable via .json
 
 - Fix #1143 :
-If we start let's say 4 instances of an app (cluster_mode),
-Each app will have a value in process.env.NODE_APP_INSTANCE which will be 0 for the first one,
-1, 2 and 3 for the next ones.
+  If we start let's say 4 instances of an app (cluster_mode),
+  Each app will have a value in process.env.NODE_APP_INSTANCE which will be 0 for the first one,
+  1, 2 and 3 for the next ones.
 
 - Fix #1154 :
-Negative arguments to '-i' are substracted to CPU cores number.
-E.g: 'pm2 start app.js -i -3' in a 8 cpus environment will start 5 instances (8 - 3).
+  Negative arguments to '-i' are substracted to CPU cores number.
+  E.g: 'pm2 start app.js -i -3' in a 8 cpus environment will start 5 instances (8 - 3).
 
 ## 0.12.10
 
@@ -2414,7 +2325,6 @@ Big thanks to @Tjatse !
 - watch doesnt watch node_module folder
 - default log files and pid files location can be overrided by PM2_LOG_DIR / PM2_PID_DIR
 
-
 ## 0.8.1
 
 - Readme changes #400 #398
@@ -2500,8 +2410,8 @@ Big thanks to @Tjatse !
 ## 0.5.5
 
 - Ability to set a name to a launched script + tests
-    - with the --name option when launching file
-    - with the "name" parameter for JSON files
+  - with the --name option when launching file
+  - with the "name" parameter for JSON files
 - Ability to restart a script by name + tests
 - Upgrade node-usage to 0.3.8 - fix monitoring feedback for MacOSx
 - require.main now require the right file (activate it by modifying MODIFY_REQUIRE in constants.js)

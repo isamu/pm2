@@ -1,4 +1,3 @@
+const io = require('../..');
 
-const io = require('../..')
-
-io.init()
+io.init();

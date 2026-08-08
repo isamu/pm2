@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -35,7 +34,7 @@ function Server(sock) {
  * @api private
  */
 
-Server.prototype.methodDescriptions = function(){
+Server.prototype.methodDescriptions = function () {
   var obj = {};
   var fn;
 
@@ -43,7 +42,7 @@ Server.prototype.methodDescriptions = function(){
     fn = this.methods[name];
     obj[name] = {
       name: name,
-      params: params(fn)
+      params: params(fn),
     };
   }
 
@@ -57,7 +56,7 @@ Server.prototype.methodDescriptions = function(){
  * @api private
  */
 
-Server.prototype.respondWithMethods = function(reply){
+Server.prototype.respondWithMethods = function (reply) {
   reply({ methods: this.methodDescriptions() });
 };
 
@@ -69,7 +68,7 @@ Server.prototype.respondWithMethods = function(reply){
  * @api private
  */
 
-Server.prototype.onmessage = function(msg, reply){
+Server.prototype.onmessage = function (msg, reply) {
   if ('methods' == msg.type) return this.respondWithMethods(reply);
 
   if (!reply) {
@@ -90,12 +89,10 @@ Server.prototype.onmessage = function(msg, reply){
   if (!args) return reply({ error: '.args required' });
 
   // invoke
-  args.push(function(err){
+  args.push(function (err) {
     if (err) {
-      if (err instanceof Error)
-        return reply({ error: err.message, stack: err.stack });
-      else
-        return reply({error : err});
+      if (err instanceof Error) return reply({ error: err.message, stack: err.stack });
+      else return reply({ error: err });
     }
     var args = [].slice.call(arguments, 1);
     reply({ args: args });
@@ -112,7 +109,7 @@ Server.prototype.onmessage = function(msg, reply){
  * @api public
  */
 
-Server.prototype.expose = function(name, fn){
+Server.prototype.expose = function (name, fn) {
   if (1 == arguments.length) {
     for (var key in name) {
       this.expose(key, name[key]);
@@ -133,7 +130,10 @@ Server.prototype.expose = function(name, fn){
 
 function params(fn) {
   // remove space to make it work on node 10.x.x too
-  var ret = fn.toString().replace(/\s/g, '').match(/^function *(\w*)\((.*?)\)/)[2];
+  var ret = fn
+    .toString()
+    .replace(/\s/g, '')
+    .match(/^function *(\w*)\((.*?)\)/)[2];
   if (ret) return ret.split(/ *, */);
   return [];
 }

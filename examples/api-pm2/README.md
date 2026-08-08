@@ -1,4 +1,3 @@
-
 # PM2 API
 
 Here is an example of the PM2 API:

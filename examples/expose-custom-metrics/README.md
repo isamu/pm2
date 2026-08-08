@@ -1,4 +1,3 @@
-
 To expose custom metrics from your code and monitor it from CLI:
 
 ```bash

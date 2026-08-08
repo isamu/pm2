@@ -2,7 +2,7 @@
   "script": {
     "type": "string",
     "require": true,
-    "alias" : "exec",
+    "alias": "exec",
     "docDescription": "Path of the script to launch, required field"
   },
   "name": {
@@ -14,11 +14,7 @@
     "type": "string"
   },
   "filter_env": {
-    "type": [
-      "boolean",
-      "array",
-      "string"
-    ],
+    "type": ["boolean", "array", "string"],
     "docDefault": false,
     "docDescription": "Enable filtering global environments"
   },
@@ -36,10 +32,7 @@
     "docDescription": "Current working directory to start the process with"
   },
   "args": {
-    "type": [
-      "array",
-      "string"
-    ],
+    "type": ["array", "string"],
     "docDescription": "Arguments to pass to the script"
   },
   "exec_interpreter": {
@@ -49,10 +42,7 @@
     "docDescription": "Interpreter absolute path"
   },
   "node_args": {
-    "type": [
-      "array",
-      "string"
-    ],
+    "type": ["array", "string"],
     "alias": ["interpreterArgs", "interpreter_args"],
     "docDescription": "Arguments to pass to the interpreter"
   },
@@ -69,10 +59,7 @@
     "docDescription": "File path for stderr (each line is appended to this file)"
   },
   "log_file": {
-    "type": [
-      "boolean",
-      "string"
-    ],
+    "type": ["boolean", "string"],
     "alias": "log",
     "docDefault": "/dev/null",
     "docDescription": "File path for combined stdout and stderr (each line is appended to this file)"
@@ -94,24 +81,15 @@
     "type": "boolean"
   },
   "env": {
-    "type": [
-      "object",
-      "string"
-    ],
+    "type": ["object", "string"],
     "docDescription": "Specify environment variables to be injected"
   },
   "^env_\\S*$": {
-    "type": [
-      "object",
-      "string"
-    ],
+    "type": ["object", "string"],
     "docDescription": "Specify environment variables to be injected when using --env <env_name>"
   },
   "max_memory_restart": {
-    "type": [
-      "string",
-      "number"
-    ],
+    "type": ["string", "number"],
     "regex": "^\\d+(G|M|K)?$",
     "ext_type": "sbyte",
     "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)",
@@ -124,7 +102,7 @@
     "docDescription": "File path where the pid of the started process is written by pm2"
   },
   "restart_delay": {
-    "type" : "number",
+    "type": "number",
     "docDefault": 0,
     "docDescription": "Time in ms to wait before restarting a crashing app"
   },
@@ -168,23 +146,20 @@
     "docDescription": "Time in ms before forcing a reload if app is still not listening/has still note sent ready"
   },
   "cron_restart": {
-    "type": [
-      "string",
-      "number"
-    ],
+    "type": ["string", "number"],
     "alias": "cron",
     "docDescription": "A cron pattern to restart your app"
   },
   "merge_logs": {
     "type": "boolean",
-    "alias" : "combine_logs",
+    "alias": "combine_logs",
     "docDefault": false,
     "docDescription": "In cluster mode, merge each type of logs into a single file (instead of having one for each cluster)"
   },
   "vizion": {
     "type": "boolean",
-    "default" : true,
-    "docDefault" : "True",
+    "default": true,
+    "docDefault": "True",
     "docDescription": "Enable or disable the versioning metadatas (vizion library)"
   },
   "autostart": {
@@ -200,10 +175,7 @@
     "docDescription": "Enable or disable auto restart after process failure"
   },
   "stop_exit_codes": {
-    "type":  [
-      "array",
-      "number"
-    ],
+    "type": ["array", "number"],
     "docDescription": "List of exit codes that should allow the process to stop (skip autorestart)."
   },
   "watch_delay": {
@@ -212,19 +184,12 @@
     "docDescription": "Restart delay on file change detected"
   },
   "watch": {
-    "type": [
-      "boolean",
-      "array",
-      "string"
-    ],
+    "type": ["boolean", "array", "string"],
     "docDefault": false,
     "docDescription": "Enable or disable the watch mode"
   },
   "ignore_watch": {
-    "type": [
-      "array",
-      "string"
-    ],
+    "type": ["array", "string"],
     "docDescription": "List of paths to ignore (regex)"
   },
   "watch_options": {
@@ -232,10 +197,7 @@
     "docDescription": "Object that will be used as an options with chokidar (refer to chokidar documentation)"
   },
   "min_uptime": {
-    "type": [
-      "number",
-      "string"
-    ],
+    "type": ["number", "string"],
     "regex": "^\\d+(h|m|s)?$",
     "desc": "it should be a NUMBER - milliseconds, \"[NUMBER]h\"(hours), \"[NUMBER]m\"(minutes) or \"[NUMBER]s\"(seconds)",
     "min": 100,
@@ -274,33 +236,23 @@
     "docDescription": "List of commands executed after a pull/upgrade operation performed from Keymetrics dashboard"
   },
   "trace": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "docDefault": false,
     "docDescription": "Enable or disable the transaction tracing"
   },
   "disable_trace": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "docDefault": true,
     "docDescription": "Enable or disable the transaction tracing"
   },
   "v8": {
-    "type": [
-      "boolean"
-    ]
+    "type": ["boolean"]
   },
   "event_loop_inspector": {
-    "type": [
-      "boolean"
-    ]
+    "type": ["boolean"]
   },
   "deep_monitoring": {
-    "type": [
-      "boolean"
-    ]
+    "type": ["boolean"]
   },
   "increment_var": {
     "type": "string",
@@ -334,24 +286,18 @@
     "type": "number",
     "docDescription": "Shortcut to inject a PORT environment variable"
   },
-  "username" : {
+  "username": {
     "type": "string",
     "docDescription": "Current user that started the process"
   },
   "uid": {
-    "type" : [
-      "number",
-      "string"
-    ],
+    "type": ["number", "string"],
     "alias": "user",
     "docDefault": "Current user uid",
     "docDescription": "Set user id"
   },
   "gid": {
-    "type" : [
-      "number",
-      "string"
-    ],
+    "type": ["number", "string"],
     "docDefault": "Current user gid",
     "docDescription": "Set group id"
   },
@@ -363,7 +309,7 @@
   },
   "kill_retry_time": {
     "type": "number",
-    "default" : 100
+    "default": 100
   },
   "write": {
     "type": "boolean"

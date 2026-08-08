@@ -1,4 +1,3 @@
-
 var Probe = require('@pm2/io').probe();
 
 var counter = 0;
@@ -17,5 +16,4 @@ var counter = 0;
 //   }
 // });
 
-setInterval(function() {
-}, 100);
+setInterval(function () {}, 100);

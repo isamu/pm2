@@ -1,9 +1,8 @@
+const pmx = require('../..');
 
-const pmx = require('../..')
-
-pmx.init()
+pmx.init();
 try {
-  throw new Error('myNotify')
+  throw new Error('myNotify');
 } catch (err) {
-  pmx.notifyError(err)
+  pmx.notifyError(err);
 }

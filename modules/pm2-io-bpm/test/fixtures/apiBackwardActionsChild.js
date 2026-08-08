@@ -1,14 +1,13 @@
-
-const pmx = require('../..')
+const pmx = require('../..');
 
 pmx.init({
   actions: {
-    eventLoopDump: true
+    eventLoopDump: true,
   },
-  profiling: true
-})
+  profiling: true,
+});
 
 process.on('SIGINT', function () {
-  pmx.destroy()
-  process.exit(0)
-})
+  pmx.destroy();
+  process.exit(0);
+});

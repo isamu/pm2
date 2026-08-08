@@ -1,19 +1,18 @@
-
-var axon = require('..')
-  , assert = require('assert');
+var axon = require('..'),
+  assert = require('assert');
 
 var pull = axon.socket('pull');
 
 var closed = false;
 
-pull.bind(4000, function(){
-  pull.close(function(){
+pull.bind(4000, function () {
+  pull.close(function () {
     closed = true;
   });
 });
 
-pull.on('close', function(){
-  setTimeout(function(){
+pull.on('close', function () {
+  setTimeout(function () {
     assert(closed);
   }, 100);
 });

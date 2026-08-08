@@ -1,9 +1,8 @@
+var ss = require('../'),
+  should = require('should');
 
-var ss = require('../')
-  , should = require('should');
-
-var push = ss.socket('push')
-  , pull = ss.socket('pull');
+var push = ss.socket('push'),
+  pull = ss.socket('pull');
 
 // basic 1-1 push/pull
 
@@ -18,7 +17,7 @@ push.send({ path: '/tmp/baz.png' });
 var strs = ['foo', 'bar', 'baz'];
 
 pull.connect(4000);
-pull.on('message', function(msg){
+pull.on('message', function (msg) {
   msg.should.have.property('path', '/tmp/' + strs[n++] + '.png');
   if (n == 3) {
     push.close();

@@ -1,21 +1,21 @@
-'use strict'
+'use strict';
 
-const services = new Map()
+const services = new Map();
 
 class Service {}
 
 class ServiceManager {
-  static get (serviceName) {
-    return services.get(serviceName)
+  static get(serviceName) {
+    return services.get(serviceName);
   }
 
-  static set (serviceName, service) {
-    return services.set(serviceName, service)
+  static set(serviceName, service) {
+    return services.set(serviceName, service);
   }
 
-  static reset (serviceName) {
-    return services.delete(serviceName)
+  static reset(serviceName) {
+    return services.delete(serviceName);
   }
 }
 
-module.exports = { Service, ServiceManager }
+module.exports = { Service, ServiceManager };

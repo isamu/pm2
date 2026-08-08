@@ -1,4 +1,3 @@
-
 To start tcp application in cluster mode:
 
 ```bash

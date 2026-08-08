@@ -1,4 +1,3 @@
-
 To start http application in cluster mode:
 
 ```bash

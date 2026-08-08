@@ -1,7 +1,8 @@
-
-const pmx = require('../..')
+const pmx = require('../..');
 
 pmx.action({
   name: 'testActionWithConf',
-  action: function (reply) { reply({ data: 'testActionWithConfReply' }) }
-})
+  action: function (reply) {
+    reply({ data: 'testActionWithConfReply' });
+  },
+});

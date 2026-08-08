@@ -1,4 +1,3 @@
-
 /**
  * Constructors.
  */
@@ -20,12 +19,12 @@ exports.Socket = require('./sockets/sock');
 exports.types = {
   'pub-emitter': exports.PubEmitterSocket,
   'sub-emitter': exports.SubEmitterSocket,
-  'push': exports.PushSocket,
-  'pull': exports.PullSocket,
-  'pub': exports.PubSocket,
-  'sub': exports.SubSocket,
-  'req': exports.ReqSocket,
-  'rep': exports.RepSocket
+  push: exports.PushSocket,
+  pull: exports.PullSocket,
+  pub: exports.PubSocket,
+  sub: exports.SubSocket,
+  req: exports.ReqSocket,
+  rep: exports.RepSocket,
 };
 
 /**
@@ -37,7 +36,7 @@ exports.types = {
  * @api public
  */
 
-exports.socket = function(type, options){
+exports.socket = function (type, options) {
   var fn = exports.types[type];
   if (!fn) throw new Error('invalid socket type "' + type + '"');
   return new fn(options);

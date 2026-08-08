@@ -14,11 +14,10 @@ To launch using daemon you need to run :
 
 `node src/InteractorDaemon.js`
 
-
 Before, you need to set these environment vars
 
 | Key              | Value                                     |
-|------------------|-------------------------------------------|
+| ---------------- | ----------------------------------------- |
 | KEYMETRICS_NODE  | Where bucket's endpoints will be resolved |
 | PM2_SECRET_KEY   | Bucket's secret key                       |
 | PM2_PUBLIC_KEY   | Bucket's public key                       |
@@ -30,14 +29,17 @@ Before, you need to set these environment vars
 You can use `src/InteractorClient.js` and method `launchAndInteract` with constants as first argument (empty object is authorized), options as second argument which is an object with key `secret_key`, `public_key`, `machine_name` and callback as third argument.
 
 ```js
-const InteractorClient = require('keymetrics-agent/src/InteractorClient')
+const InteractorClient = require('keymetrics-agent/src/InteractorClient');
 
-InteractorClient.launchAndInteract({}, {
-  secret_key: '',
-  public_key: '',
-  machine_name: ''
-}, (err, msg) => {
-})
+InteractorClient.launchAndInteract(
+  {},
+  {
+    secret_key: '',
+    public_key: '',
+    machine_name: '',
+  },
+  (err, msg) => {},
+);
 ```
 
 ## Configuration

@@ -1,6 +1,5 @@
-
 module.exports = {
-  'allow-uncaught' : false,
+  'allow-uncaught': false,
   'async-only': false,
   bail: true,
   color: true,
@@ -10,5 +9,5 @@ module.exports = {
   timeout: 10000,
   'trace-warnings': true,
   ui: 'bdd',
-  retries: 2
-}
+  retries: 2,
+};

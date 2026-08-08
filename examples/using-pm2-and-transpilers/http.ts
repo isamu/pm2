@@ -5,21 +5,21 @@
  * example here: https://github.com/borisyankov/DefinitelyTyped
  */
 
-import * as Http from "http";
+import * as Http from 'http';
 
 class MyServer {
-  private header:Object = {'Content-Type': 'text/plain'};
+  private header: Object = { 'Content-Type': 'text/plain' };
 
   constructor() {
-    var server:Http.Server = Http.createServer(this.onRequest);
+    var server: Http.Server = Http.createServer(this.onRequest);
     server.listen(3000, () => {
-      console.log("Server started on port 3000");
+      console.log('Server started on port 3000');
     });
   }
 
-  private onRequest(request:Http.ServerRequest, response:Http.ServerResponse):void {
+  private onRequest(request: Http.ServerRequest, response: Http.ServerResponse): void {
     response.writeHead(200, this.header);
-    response.end("Hello TypeScript & node.js");
+    response.end('Hello TypeScript & node.js');
   }
 }
 

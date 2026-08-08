@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-module.exports = require('./util')
+module.exports = require('./util');

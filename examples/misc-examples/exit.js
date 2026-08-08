@@ -1,4 +1,3 @@
-
 // process.on('exit', function() {
 //   console.log('About to exit.');
 // });
@@ -14,15 +13,13 @@
 
 var worker = require('cluster').worker;
 
-worker.on('disconnect', function() {
+worker.on('disconnect', function () {
   console.log('exiting');
 });
 
+setInterval(function () {}, 1);
 
-setInterval(function() {
-}, 1);
-
-setInterval(function() {
+setInterval(function () {
   console.log('ok');
 }, 2000);
 console.log('ok');

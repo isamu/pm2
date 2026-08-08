@@ -1,18 +1,17 @@
-
 process.env.NODE_ENV = 'test';
 
-var PM2    = require('../..');
+var PM2 = require('../..');
 var should = require('should');
-var path   = require('path');
+var path = require('path');
 var OtelManager = require('../../lib/OtelManager');
 
 var FIXTURE = path.resolve(__dirname, '..', 'fixtures', 'otel-tracing-server.js');
 
-describe('PM2 OpenTelemetry Tracing E2E', function() {
+describe('PM2 OpenTelemetry Tracing E2E', function () {
   this.timeout(60000);
 
   var pm2 = new PM2.custom({
-    cwd : path.resolve(__dirname, '..', 'fixtures')
+    cwd: path.resolve(__dirname, '..', 'fixtures'),
   });
 
   before(function () {
@@ -21,38 +20,43 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
     }
   });
 
-  after(function(done) {
-    pm2.delete('all', function() {
+  after(function (done) {
+    pm2.delete('all', function () {
       pm2.kill(done);
     });
   });
 
-  describe('Phase 1: Start without --trace', function() {
+  describe('Phase 1: Start without --trace', function () {
     var bus;
 
-    before(function(done) {
-      pm2.connect(function() {
-        pm2.launchBus(function(err, _bus) {
+    before(function (done) {
+      pm2.connect(function () {
+        pm2.launchBus(function (err, _bus) {
           bus = _bus;
-          pm2.delete('all', function() { done(); });
+          pm2.delete('all', function () {
+            done();
+          });
         });
       });
     });
 
-    it('should start app without trace option', function(done) {
-      pm2.start({
-        script: FIXTURE,
-        name: 'otel-test-no-trace'
-      }, function(err, data) {
-        should(err).be.null();
-        should(data.length).eql(1);
-        done();
-      });
+    it('should start app without trace option', function (done) {
+      pm2.start(
+        {
+          script: FIXTURE,
+          name: 'otel-test-no-trace',
+        },
+        function (err, data) {
+          should(err).be.null();
+          should(data.length).eql(1);
+          done();
+        },
+      );
     });
 
-    it('should NOT have trace set in pm2_env', function(done) {
-      setTimeout(function() {
-        pm2.describe('otel-test-no-trace', function(err, procs) {
+    it('should NOT have trace set in pm2_env', function (done) {
+      setTimeout(function () {
+        pm2.describe('otel-test-no-trace', function (err, procs) {
           should(err).be.null();
           should(procs.length).eql(1);
           var env = procs[0].pm2_env;
@@ -63,8 +67,8 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
       }, 2000);
     });
 
-    it('should NOT have otel_tracing in axm_options', function(done) {
-      pm2.describe('otel-test-no-trace', function(err, procs) {
+    it('should NOT have otel_tracing in axm_options', function (done) {
+      pm2.describe('otel-test-no-trace', function (err, procs) {
         should(err).be.null();
         var axm = procs[0].pm2_env.axm_options || {};
         should(axm.otel_tracing).not.eql(true);
@@ -72,14 +76,14 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
       });
     });
 
-    it('should NOT receive any trace-span on bus', function(done) {
+    it('should NOT receive any trace-span on bus', function (done) {
       var received = false;
 
-      bus.on('trace-span', function() {
+      bus.on('trace-span', function () {
         received = true;
       });
 
-      setTimeout(function() {
+      setTimeout(function () {
         bus.off('trace-span');
         should(received).eql(false);
         done();
@@ -87,17 +91,17 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
     });
   });
 
-  describe('Phase 2: Restart without --trace', function() {
-    it('should restart the app', function(done) {
-      pm2.restart('otel-test-no-trace', function(err) {
+  describe('Phase 2: Restart without --trace', function () {
+    it('should restart the app', function (done) {
+      pm2.restart('otel-test-no-trace', function (err) {
         should(err).be.null();
         done();
       });
     });
 
-    it('should still NOT have otel_tracing after restart', function(done) {
-      setTimeout(function() {
-        pm2.describe('otel-test-no-trace', function(err, procs) {
+    it('should still NOT have otel_tracing after restart', function (done) {
+      setTimeout(function () {
+        pm2.describe('otel-test-no-trace', function (err, procs) {
           should(err).be.null();
           var axm = procs[0].pm2_env.axm_options || {};
           should(axm.otel_tracing).not.eql(true);
@@ -107,38 +111,41 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
     });
   });
 
-  describe('Phase 3: Kill PM2 daemon', function() {
-    it('should kill PM2', function(done) {
+  describe('Phase 3: Kill PM2 daemon', function () {
+    it('should kill PM2', function (done) {
       pm2.kill(done);
     });
   });
 
-  describe('Phase 4: Reconnect and start with --trace', function() {
+  describe('Phase 4: Reconnect and start with --trace', function () {
     var bus;
 
-    before(function(done) {
-      pm2.connect(function() {
-        pm2.launchBus(function(err, _bus) {
+    before(function (done) {
+      pm2.connect(function () {
+        pm2.launchBus(function (err, _bus) {
           bus = _bus;
           done();
         });
       });
     });
 
-    it('should start app with trace: true', function(done) {
-      pm2.start({
-        script: FIXTURE,
-        name: 'otel-test-traced',
-        trace: true
-      }, function(err, data) {
-        should(err).be.null();
-        should(data.length).eql(1);
-        done();
-      });
+    it('should start app with trace: true', function (done) {
+      pm2.start(
+        {
+          script: FIXTURE,
+          name: 'otel-test-traced',
+          trace: true,
+        },
+        function (err, data) {
+          should(err).be.null();
+          should(data.length).eql(1);
+          done();
+        },
+      );
     });
 
-    it('should have trace set in pm2_env', function(done) {
-      pm2.describe('otel-test-traced', function(err, procs) {
+    it('should have trace set in pm2_env', function (done) {
+      pm2.describe('otel-test-traced', function (err, procs) {
         should(err).be.null();
         var env = procs[0].pm2_env;
         should(env.trace == true).eql(true);
@@ -146,10 +153,10 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
       });
     });
 
-    it('should have otel_tracing in axm_options', function(done) {
+    it('should have otel_tracing in axm_options', function (done) {
       var attempts = 0;
       function check() {
-        pm2.describe('otel-test-traced', function(err, procs) {
+        pm2.describe('otel-test-traced', function (err, procs) {
           if (err) return done(err);
           var axm = procs[0].pm2_env.axm_options || {};
           if (axm.otel_tracing === true) {
@@ -157,7 +164,9 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
           }
           attempts++;
           if (attempts >= 20) {
-            return done(new Error('otel_tracing not set in axm_options after ' + attempts + ' attempts'));
+            return done(
+              new Error('otel_tracing not set in axm_options after ' + attempts + ' attempts'),
+            );
           }
           setTimeout(check, 500);
         });
@@ -165,10 +174,10 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
       check();
     });
 
-    it('should receive trace-span messages on bus', function(done) {
+    it('should receive trace-span messages on bus', function (done) {
       var received = false;
 
-      bus.on('trace-span', function(packet) {
+      bus.on('trace-span', function (packet) {
         if (received) return;
         received = true;
 
@@ -183,7 +192,7 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
         done();
       });
 
-      setTimeout(function() {
+      setTimeout(function () {
         if (!received) {
           bus.off('trace-span');
           done(new Error('No trace-span received within 15s'));
@@ -191,10 +200,10 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
       }, 15000);
     });
 
-    it('should receive HTTP trace-span with method and status tags', function(done) {
+    it('should receive HTTP trace-span with method and status tags', function (done) {
       var received = false;
 
-      bus.on('trace-span', function(packet) {
+      bus.on('trace-span', function (packet) {
         if (received) return;
         if (!packet.data || !packet.data.tags) return;
         if (!packet.data.tags['http.method']) return;
@@ -207,7 +216,7 @@ describe('PM2 OpenTelemetry Tracing E2E', function() {
         done();
       });
 
-      setTimeout(function() {
+      setTimeout(function () {
         if (!received) {
           bus.off('trace-span');
           done(new Error('No HTTP trace-span received within 15s'));

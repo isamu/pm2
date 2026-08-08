@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -37,8 +36,8 @@ SubSocket.prototype.__proto__ = Socket.prototype;
  * @api public
  */
 
-SubSocket.prototype.hasSubscriptions = function(){
-  return !! this.subscriptions.length;
+SubSocket.prototype.hasSubscriptions = function () {
+  return !!this.subscriptions.length;
 };
 
 /**
@@ -49,7 +48,7 @@ SubSocket.prototype.hasSubscriptions = function(){
  * @api public
  */
 
-SubSocket.prototype.matches = function(topic){
+SubSocket.prototype.matches = function (topic) {
   for (var i = 0; i < this.subscriptions.length; ++i) {
     if (this.subscriptions[i].test(topic)) {
       return true;
@@ -66,11 +65,11 @@ SubSocket.prototype.matches = function(topic){
  * @api private
  */
 
-SubSocket.prototype.onmessage = function(sock){
+SubSocket.prototype.onmessage = function (sock) {
   var subs = this.hasSubscriptions();
   var self = this;
 
-  return function(buf){
+  return function (buf) {
     var msg = new Message(buf);
 
     if (subs) {
@@ -90,9 +89,9 @@ SubSocket.prototype.onmessage = function(sock){
  * @api public
  */
 
-SubSocket.prototype.subscribe = function(re){
+SubSocket.prototype.subscribe = function (re) {
   debug('subscribe to "%s"', re);
-  this.subscriptions.push(re = toRegExp(re));
+  this.subscriptions.push((re = toRegExp(re)));
   return re;
 };
 
@@ -103,7 +102,7 @@ SubSocket.prototype.subscribe = function(re){
  * @api public
  */
 
-SubSocket.prototype.unsubscribe = function(re){
+SubSocket.prototype.unsubscribe = function (re) {
   debug('unsubscribe from "%s"', re);
   re = toRegExp(re);
   for (var i = 0; i < this.subscriptions.length; ++i) {
@@ -119,7 +118,7 @@ SubSocket.prototype.unsubscribe = function(re){
  * @api public
  */
 
-SubSocket.prototype.clearSubscriptions = function(){
+SubSocket.prototype.clearSubscriptions = function () {
   this.subscriptions = [];
 };
 
@@ -127,7 +126,7 @@ SubSocket.prototype.clearSubscriptions = function(){
  * Subscribers should not send messages.
  */
 
-SubSocket.prototype.send = function(){
+SubSocket.prototype.send = function () {
   throw new Error('subscribers cannot send messages');
 };
 

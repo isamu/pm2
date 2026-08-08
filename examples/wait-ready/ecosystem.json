@@ -1,11 +1,13 @@
 {
-  "apps": [{
-    "name": "app",
-    "script": "app.js",
-    "instances": 2,
-    "exec_mode": "cluster",
-    "wait_ready": true,
-    "kill_timeout" : 2000,
-    "listen_timeout": 1000
-  }]
+  "apps": [
+    {
+      "name": "app",
+      "script": "app.js",
+      "instances": 2,
+      "exec_mode": "cluster",
+      "wait_ready": true,
+      "kill_timeout": 2000,
+      "listen_timeout": 1000
+    }
+  ]
 }

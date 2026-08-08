@@ -1,23 +1,23 @@
-'use strict'
+'use strict';
 
 class Gauge {
-  constructor () {
-    this._value = 0
-    this._used = false
+  constructor() {
+    this._value = 0;
+    this._used = false;
   }
 
-  val () {
-    return this._value
+  val() {
+    return this._value;
   }
 
-  set (value) {
-    this._used = true
-    this._value = value
+  set(value) {
+    this._used = true;
+    this._value = value;
   }
 
-  isUsed () {
-    return this._used
+  isUsed() {
+    return this._used;
   }
 }
 
-module.exports = Gauge
+module.exports = Gauge;

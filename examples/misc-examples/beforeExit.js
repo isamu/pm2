@@ -1,4 +1,3 @@
-
 var stopped = false;
 
 function work() {
@@ -11,9 +10,9 @@ function stop() {
   stopped = true;
 }
 
-process.once('SIGINT', stop);   // CTRL-C
+process.once('SIGINT', stop); // CTRL-C
 
-process.on('beforeExit', function() {
+process.on('beforeExit', function () {
   console.log('exited cleanly :)');
   process.exit(0);
 });

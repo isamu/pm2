@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-function prepareGetHeaders (getExportRequestHeaders) {
+function prepareGetHeaders(getExportRequestHeaders) {
   return function () {
-    return getExportRequestHeaders()
-  }
+    return getExportRequestHeaders();
+  };
 }
 
-module.exports = { prepareGetHeaders }
+module.exports = { prepareGetHeaders };

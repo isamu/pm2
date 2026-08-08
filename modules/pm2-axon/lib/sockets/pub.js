@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -35,41 +34,38 @@ PubSocket.prototype.__proto__ = Socket.prototype;
  * @api public
  */
 
-PubSocket.prototype.send = function(msg){
+PubSocket.prototype.send = function (msg) {
   var socks = this.socks;
   var len = socks.length;
   var buf = this.pack(arguments);
 
   for (var sock of socks) {
-      if (sock.writable) sock.write(buf);
+    if (sock.writable) sock.write(buf);
   }
 
   return this;
 };
 
-PubSocket.prototype.sendv2 = function(data, cb){
+PubSocket.prototype.sendv2 = function (data, cb) {
   var socks = this.socks;
   var len = socks.length;
   var sock;
 
-  if (len == 0)
-    return process.nextTick(cb);
+  if (len == 0) return process.nextTick(cb);
 
   var buf = this.pack([data]);
 
   var i = 0;
 
-  socks.forEach(function(sock) {
+  socks.forEach(function (sock) {
     if (sock.writable)
-      sock.write(buf, function() {
+      sock.write(buf, function () {
         i++;
-        if (i == len)
-          process.nextTick(cb);
+        if (i == len) process.nextTick(cb);
       });
     else {
       i++;
-      if (i == len)
-        process.nextTick(cb);
+      if (i == len) process.nextTick(cb);
     }
   });
 

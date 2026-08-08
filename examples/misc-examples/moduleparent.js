@@ -1,4 +1,2 @@
-
-
-var a =require('./modulechild.js');
+var a = require('./modulechild.js');
 console.log(module.children);

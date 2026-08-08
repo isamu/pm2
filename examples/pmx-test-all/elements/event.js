@@ -1,9 +1,8 @@
-
 const pmx = require('pmx');
 
-setInterval(function() {
+setInterval(function () {
   pmx.emit('user:register', {
-    user : 'Alex registered',
-    email : 'thorustor@gmail.com'
+    user: 'Alex registered',
+    email: 'thorustor@gmail.com',
   });
 }, 200);

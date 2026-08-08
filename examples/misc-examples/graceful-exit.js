@@ -1,14 +1,13 @@
-
 /*
  * Example of graceful exit
  *
  * $ pm2 reload all
  */
 
-process.on('message', function(msg) {
+process.on('message', function (msg) {
   if (msg == 'shutdown') {
     console.log('Closing all connections...');
-    setTimeout(function() {
+    setTimeout(function () {
       console.log('Finished closing connections');
       process.exit(0);
     }, 1500);
@@ -17,10 +16,12 @@ process.on('message', function(msg) {
 
 var http = require('http');
 
-http.createServer(function(req, res) {
-  res.writeHead(200);
-  console.log('got');
-  res.end('hey');
-}).listen(8000, function() {
-  console.log('listening');
-});
+http
+  .createServer(function (req, res) {
+    res.writeHead(200);
+    console.log('got');
+    res.end('hey');
+  })
+  .listen(8000, function () {
+    console.log('listening');
+  });

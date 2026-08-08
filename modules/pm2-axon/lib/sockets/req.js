@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -43,7 +42,7 @@ ReqSocket.prototype.__proto__ = Socket.prototype;
  * @api private
  */
 
-ReqSocket.prototype.id = function(){
+ReqSocket.prototype.id = function () {
   return this.identity + ':' + this.ids++;
 };
 
@@ -56,10 +55,10 @@ ReqSocket.prototype.id = function(){
  * @api private
  */
 
-ReqSocket.prototype.onmessage = function(){
+ReqSocket.prototype.onmessage = function () {
   var self = this;
 
-  return function(buf){
+  return function (buf) {
     var msg = new Message(buf);
     var id = msg.pop();
     var fn = self.callbacks[id];
@@ -77,7 +76,7 @@ ReqSocket.prototype.onmessage = function(){
  * @api public
  */
 
-ReqSocket.prototype.send = function(msg){
+ReqSocket.prototype.send = function (msg) {
   var socks = this.socks;
   var len = socks.length;
   var sock = socks[this.n++ % len];
@@ -85,7 +84,7 @@ ReqSocket.prototype.send = function(msg){
 
   if (sock) {
     var hasCallback = 'function' == typeof args[args.length - 1];
-    if (!hasCallback) args.push(function(){});
+    if (!hasCallback) args.push(function () {});
     var fn = args.pop();
     fn.id = this.id();
     this.callbacks[fn.id] = fn;

@@ -1,6 +1,5 @@
-
-const pmx = require('../..')
+const pmx = require('../..');
 
 pmx.onExit(function () {
-  if (process && process.send) process.send('callback')
-})
+  if (process && process.send) process.send('callback');
+});
