@@ -29,9 +29,9 @@ const shouldCopy = (src) =>
   !NOT_SHIPPED.test(src) && !EMITTED_BY_TSC.test(src) && !IS_SOURCE.test(src);
 
 ROOTS.forEach((root) => {
-  cpSync(root, join('dist', root), { recursive: true, filter: shouldCopy, force: false });
+  cpSync(root, join('dist', root), { recursive: true, filter: shouldCopy });
 });
 
 ROOT_FILES.forEach((file) => {
-  cpSync(file, join('dist', file), { force: false });
+  cpSync(file, join('dist', file));
 });

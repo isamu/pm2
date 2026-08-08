@@ -61,4 +61,21 @@ describe('the build output', function () {
     });
     assert.deepStrictEqual(sources, []);
   });
+
+  // A build that leaves yesterday's output in place ships code nobody wrote today. Every .js in
+  // dist has to answer to a source that still exists, under either extension.
+  it('should not keep output whose source is gone', function () {
+    var root = pth.join(__dirname, '..', '..');
+    var orphans = filesUnder(DIST_DIR)
+      .filter(function (name) {
+        return name.endsWith('.js') && !name.startsWith('lib/templates/');
+      })
+      .filter(function (name) {
+        var asJs = pth.join(root, name);
+        var asTs = asJs.replace(/\.js$/, '.ts');
+        return !fs.existsSync(asJs) && !fs.existsSync(asTs);
+      });
+
+    assert.deepStrictEqual(orphans, []);
+  });
 });
