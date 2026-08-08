@@ -4,14 +4,6 @@
       "count": 1
     }
   },
-  "constants.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 1
-    }
-  },
   "lib/API.js": {
     "@typescript-eslint/no-this-alias": {
       "count": 25
@@ -85,9 +77,6 @@
       "count": 8
     },
     "max-lines-per-function": {
-      "count": 1
-    },
-    "sonarjs/block-scoped-var": {
       "count": 1
     },
     "sonarjs/no-nested-functions": {
@@ -439,9 +428,6 @@
     }
   },
   "lib/API/UX/helpers.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
     "id-length": {
       "count": 4
     },
@@ -449,9 +435,6 @@
       "count": 5
     },
     "sonarjs/no-redundant-boolean": {
-      "count": 1
-    },
-    "sonarjs/no-unused-vars": {
       "count": 1
     }
   },
@@ -1045,23 +1028,6 @@
       "count": 2
     }
   },
-  "lib/ProcessUtils.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 2
-    },
-    "no-empty": {
-      "count": 1
-    },
-    "sonarjs/no-ignored-exceptions": {
-      "count": 1
-    },
-    "sonarjs/prefer-single-boolean-return": {
-      "count": 1
-    }
-  },
   "lib/TreeKill.js": {
     "id-length": {
       "count": 1
@@ -1252,14 +1218,6 @@
       "count": 1
     }
   },
-  "lib/tools/IsAbsolute.js": {
-    "sonarjs/regex-complexity": {
-      "count": 1
-    },
-    "sonarjs/super-linear-regex": {
-      "count": 1
-    }
-  },
   "lib/tools/SysMetrics.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 5
@@ -1301,11 +1259,6 @@
     },
     "sonarjs/no-nested-conditional": {
       "count": 2
-    }
-  },
-  "lib/tools/deleteFolderRecursive.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
     }
   },
   "lib/tools/find-package-json.js": {
@@ -1450,14 +1403,6 @@
       "count": 1
     }
   },
-  "lib/tools/passwd.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 2
-    }
-  },
   "lib/tools/promise.min.js": {
     "@typescript-eslint/no-unused-expressions": {
       "count": 13
@@ -1484,14 +1429,6 @@
   "lib/tools/prompt.js": {
     "id-length": {
       "count": 8
-    }
-  },
-  "lib/tools/sexec.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    },
-    "id-length": {
-      "count": 2
     }
   },
   "lib/tools/treeify.js": {
@@ -2934,14 +2871,6 @@
   "modules/vizion/lib/vizion.js": {
     "id-length": {
       "count": 7
-    }
-  },
-  "paths.js": {
-    "id-length": {
-      "count": 1
-    },
-    "sonarjs/todo-tag": {
-      "count": 1
     }
   },
   "test/helpers/apps.js": {

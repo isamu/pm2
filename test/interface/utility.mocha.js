@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Utility = require('../../lib/Utility.js');
+var Utility = require('../../dist/lib/Utility.js');
 
 describe('Utility', function () {
   describe('.getCanonicModuleName', function () {

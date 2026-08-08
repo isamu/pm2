@@ -2,7 +2,7 @@ process.chdir(__dirname);
 
 var should = require('should');
 var PM2 = require('../..');
-var Configuration = require('../../lib/Configuration.js');
+var Configuration = require('../../dist/lib/Configuration.js');
 
 describe('Issue #6089 - Configuration prototype pollution', function () {
   this.timeout(30000);

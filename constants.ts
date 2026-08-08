@@ -4,20 +4,33 @@
  * can be found in the LICENSE file.
  */
 
-var debug = require('debug')('pm2:conf');
-var p = require('path');
-var util = require('util');
-var chalk = require('ansis');
+import { join } from 'node:path';
+import chalk from 'ansis';
+import createDebug from 'debug';
+import pm2Paths from './paths.js';
 
-/**
- * Get PM2 path structure
- */
-var path_structure = require('./paths.js')(process.env.OVER_HOME);
+const debug = createDebug('pm2:conf');
 
-/**
- * Constants variables used by PM2
- */
-var csts = {
+const pathStructure = pm2Paths(process.env.OVER_HOME);
+
+// parseInt needs a string; '' and undefined both give NaN, so the `||` fallback behaves exactly
+// as it did when process.env was handed straight to it.
+const intFromEnv = (value: string | undefined, fallback: number): number =>
+  parseInt(value ?? '') || fallback;
+
+const DEFAULT_REMOTE_PORT_TCP = 80;
+const DEFAULT_WEB_PORT = 9615;
+const MINUTE_MS = 60000;
+
+const concurrentActions = intFromEnv(process.env.PM2_CONCURRENT_ACTIONS, 2);
+debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrentActions);
+
+const isDebugRun =
+  Boolean(process.env.PM2_DEBUG) ||
+  process.env.NODE_ENV === 'local_test' ||
+  process.env.NODE_ENV === 'development';
+
+const csts = {
   PREFIX_MSG: chalk.green('[PM2] '),
   PREFIX_MSG_INFO: chalk.cyan('[PM2][INFO] '),
   PREFIX_MSG_ERR: chalk.red('[PM2][ERROR] '),
@@ -29,7 +42,7 @@ var csts = {
   PM2_IO_MSG: chalk.cyan('[PM2 I/O]'),
   PM2_IO_MSG_ERR: chalk.red('[PM2 I/O]'),
 
-  TEMPLATE_FOLDER: p.join(__dirname, 'lib/templates'),
+  TEMPLATE_FOLDER: join(__dirname, 'lib/templates'),
 
   APP_CONF_DEFAULT_FILE: 'ecosystem.config.js',
   APP_CONF_TPL: 'ecosystem.tpl',
@@ -45,11 +58,8 @@ var csts = {
   ERROR_EXIT: 1,
   CODE_UNCAUGHTEXCEPTION: 1,
 
-  IS_BUN: typeof Bun !== 'undefined',
-  IS_WINDOWS:
-    process.platform === 'win32' ||
-    process.platform === 'win64' ||
-    /^(msys|cygwin)$/.test(process.env.OSTYPE),
+  IS_BUN: 'Bun' in globalThis,
+  IS_WINDOWS: process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE ?? ''),
   ONLINE_STATUS: 'online',
   STOPPED_STATUS: 'stopped',
   STOPPING_STATUS: 'stopping',
@@ -83,37 +93,25 @@ var csts = {
   MODULE_CONF_PREFIX: 'module-db-v2',
   MODULE_CONF_PREFIX_TAR: 'tar-modules',
 
-  EXP_BACKOFF_RESET_TIMER: parseInt(process.env.EXP_BACKOFF_RESET_TIMER) || 30000,
-  REMOTE_PORT_TCP: isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT))
-    ? 80
-    : parseInt(process.env.KEYMETRICS_PUSH_PORT),
+  EXP_BACKOFF_RESET_TIMER: intFromEnv(process.env.EXP_BACKOFF_RESET_TIMER, 30000),
+  REMOTE_PORT_TCP: intFromEnv(process.env.KEYMETRICS_PUSH_PORT, DEFAULT_REMOTE_PORT_TCP),
   REMOTE_PORT: 41624,
   REMOTE_HOST: 's1.keymetrics.io',
   SEND_INTERVAL: 1000,
-  RELOAD_LOCK_TIMEOUT: parseInt(process.env.PM2_RELOAD_LOCK_TIMEOUT) || 30000,
-  GRACEFUL_TIMEOUT: parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
-  GRACEFUL_LISTEN_TIMEOUT: parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
+  RELOAD_LOCK_TIMEOUT: intFromEnv(process.env.PM2_RELOAD_LOCK_TIMEOUT, 30000),
+  GRACEFUL_TIMEOUT: intFromEnv(process.env.PM2_GRACEFUL_TIMEOUT, 8000),
+  GRACEFUL_LISTEN_TIMEOUT: intFromEnv(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT, 3000),
   LOGS_BUFFER_SIZE: 8,
   CONTEXT_ON_ERROR: 2,
-  AGGREGATION_DURATION:
-    process.env.PM2_DEBUG ||
-    process.env.NODE_ENV === 'local_test' ||
-    process.env.NODE_ENV === 'development'
-      ? 3000
-      : 5 * 60000,
+  AGGREGATION_DURATION: isDebugRun ? 3000 : 5 * MINUTE_MS,
   TRACE_FLUSH_INTERVAL:
-    process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' ? 1000 : 60000,
+    process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' ? 1000 : MINUTE_MS,
 
-  // Concurrent actions when doing start/restart/reload
-  CONCURRENT_ACTIONS: (function () {
-    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 2;
-    debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
-    return concurrent_actions;
-  })(),
+  CONCURRENT_ACTIONS: concurrentActions,
 
   DEBUG: process.env.PM2_DEBUG || false,
   WEB_IPADDR: process.env.PM2_API_IPADDR || '0.0.0.0',
-  WEB_PORT: parseInt(process.env.PM2_API_PORT) || 9615,
+  WEB_PORT: intFromEnv(process.env.PM2_API_PORT, DEFAULT_WEB_PORT),
   WEB_STRIP_ENV_VARS: process.env.PM2_WEB_STRIP_ENV_VARS || false,
   MODIFY_REQUIRE: process.env.PM2_MODIFY_REQUIRE || false,
 
@@ -129,4 +127,4 @@ var csts = {
       : 'YYYY-MM-DDTHH:mm:ss',
 };
 
-module.exports = Object.assign(csts, path_structure);
+export = Object.assign(csts, pathStructure);

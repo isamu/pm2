@@ -19,6 +19,7 @@
     "packager",
     "**/test/**",
     "**/*.mocha.js",
-    "**/*.spec.js"
+    "**/*.spec.js",
+    "lib/templates/**"
   ]
 }

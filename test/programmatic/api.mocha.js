@@ -320,7 +320,7 @@ describe('API checks', function () {
   });
 
   describe('Launch modules', function () {
-    var Modularizer = require('../../lib/API/Modules/Modularizer');
+    var Modularizer = require('../../dist/lib/API/Modules/Modularizer');
     var module = 'pm2-server-monit';
 
     after(function (done) {

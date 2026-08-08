@@ -1,5 +1,5 @@
 var should = require('should');
-var f_e = require('../../lib/API/Modules/flagExt.js');
+var f_e = require('../../dist/lib/API/Modules/flagExt.js');
 var fs = require('fs');
 
 describe('Flag -ext', function () {
