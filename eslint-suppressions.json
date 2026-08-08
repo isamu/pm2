@@ -4,14 +4,6 @@
       "count": 1
     }
   },
-  "constants.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 1
-    }
-  },
   "lib/API.js": {
     "@typescript-eslint/no-this-alias": {
       "count": 25
