@@ -176,10 +176,15 @@ function start(PM2, module_name, cb) {
     return cb();
   }
 
-  const opts = {};
-
-  opts.started_as_module = true;
-  opts.cwd = module_path;
+  const opts: {
+    started_as_module: boolean;
+    cwd: string;
+    install_url?: string;
+    name_prefix?: string;
+  } = {
+    started_as_module: true,
+    cwd: module_path,
+  };
 
   if (module_conf.install_url) opts.install_url = module_conf.install_url;
 
@@ -296,6 +301,11 @@ function packager(module_path, target_path, cb) {
   });
 }
 
+// The registry answers a rejected publish with {msg}, but nothing guarantees it — a proxy or a
+// gateway can answer with anything at all, and that is exactly when the operator needs to see it.
+const serverMessage = (body: unknown): string =>
+  typeof body === 'object' && body !== null && 'msg' in body ? String(body.msg) : String(body);
+
 function publish(PM2, folder, cb) {
   const target_folder = folder ? path.resolve(folder) : process.cwd();
 
@@ -352,7 +362,7 @@ function publish(PM2, folder, cb) {
       .then(function (res) {
         if (!res.ok) {
           return res.json().then(function (body) {
-            Common.errMod(`${pkg.name}-${pkg.version}: ${body.msg}`);
+            Common.errMod(`${pkg.name}-${pkg.version}: ${serverMessage(body)}`);
             process.exit(1);
           });
         }

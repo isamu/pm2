@@ -193,7 +193,20 @@ const contentTypes = {
   ttf: 'application/font-sfnt',
 };
 
-const options = {
+interface ServeConfig {
+  port: string | number;
+  host: string;
+  path: string;
+  spa: boolean;
+  ftp: boolean;
+  homepage: string;
+  basic_auth: { username?: string; password?: string } | null;
+  monitor?: string;
+  // Read out of agent.json5 further down, only when monitoring is switched on.
+  monitorBucket?: string;
+}
+
+const options: ServeConfig = {
   port: process.env.PM2_SERVE_PORT || process.argv[3] || 8080,
   host: process.env.PM2_SERVE_HOST || process.argv[4] || '0.0.0.0',
   path: path.resolve(process.env.PM2_SERVE_PATH || process.argv[2] || '.'),

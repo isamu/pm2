@@ -415,7 +415,8 @@ module.exports = function (CLI) {
       cb = params;
       params = null;
     }
-    const cmd = {
+    // Addressed either by name or by id, never both — see the isNaN branch below.
+    const cmd: { msg: string; opts?: unknown; name?: string; id?: number } = {
       msg: action_name,
     };
     let counter = 0;

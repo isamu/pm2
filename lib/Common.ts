@@ -658,7 +658,9 @@ Common.safeExtend = function (origin, add) {
 Common.mergeEnvironmentVariables = function (app_env, env_name, deploy_conf) {
   const app = fclone(app_env);
 
-  const new_conf = {
+  // Object.assign copies the whole app config over this further down; exec_mode is named
+  // because it is the one field deleted again before the result is returned.
+  const new_conf: { env: object; exec_mode?: unknown } = {
     env: {},
   };
 
@@ -695,7 +697,7 @@ Common.mergeEnvironmentVariables = function (app_env, env_name, deploy_conf) {
 
   delete new_conf.exec_mode;
 
-  const res = {
+  const res: { current_conf: { exec_interpreter?: string } } = {
     current_conf: {},
   };
 
