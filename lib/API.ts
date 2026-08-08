@@ -31,6 +31,36 @@ const sexec = require('./tools/sexec.js');
 
 const IMMUTABLE_MSG = chalk.bold.blue('Use --update-env to update environment variables');
 
+// `_handle` is a Node internal with no public type, and setBlocking exists on it only on some
+// platforms and stream kinds — which is why the original code tested for it before calling.
+const isBlockable = (value: unknown): value is { setBlocking(blocking: boolean): void } =>
+  typeof value === 'object' &&
+  value !== null &&
+  'setBlocking' in value &&
+  typeof value.setBlocking === 'function';
+
+// A `pm2 serve` entry in a process file.
+interface StaticEntry {
+  name?: string;
+  port?: number | string;
+  host?: string;
+  path?: string;
+  spa?: boolean;
+  ftp?: boolean;
+  directory?: boolean;
+  basic_auth?: { username?: string; password?: string };
+  monitor?: string;
+}
+
+// A process file, as parsed. The app entries are left open: their schema is what
+// Common.verifyConfs enforces, and describing it here would be describing it twice.
+interface ProcessFile {
+  deploy?: object;
+  static?: StaticEntry[];
+  apps?: object;
+  pm2?: object;
+}
+
 /**
  * Main Function to be imported
  * can be aliased to PM2
@@ -117,8 +147,8 @@ class API {
     if (conf.IS_WINDOWS) {
       // Weird fix, may need to be dropped
       // @todo windows connoisseur double check
-      if (process.stdout._handle && process.stdout._handle.setBlocking)
-        process.stdout._handle.setBlocking(true);
+      const handle: unknown = Reflect.get(process.stdout, '_handle');
+      if (isBlockable(handle)) handle.setBlocking(true);
     }
 
     this.Client = new Client({
@@ -242,7 +272,7 @@ class API {
     if (!cb) cb = function () {};
 
     this.Client.close(function (err, data) {
-      debug('The session lasted %ds', (new Date() - that.start_timer) / 1000);
+      debug('The session lasted %ds', (Date.now() - Number(that.start_timer)) / 1000);
       return cb(err, data);
     });
   }
@@ -293,7 +323,10 @@ class API {
         // exits process when stdout (1) and sdterr(2) are both drained.
         function tryToExit() {
           if (fds & 1 && fds & 2) {
-            debug('This command took %ds to execute', (new Date() - that.start_timer) / 1000);
+            debug(
+              'This command took %ds to execute',
+              (Date.now() - Number(that.start_timer)) / 1000,
+            );
             process.exit(code);
           }
         }
@@ -940,9 +973,9 @@ class API {
    * @private
    */
   _startJson(file, opts, action, pipe?, cb?) {
-    let config = {};
+    let config: ProcessFile = {};
     let appConf = {};
-    let staticConf = [];
+    let staticConf: StaticEntry[] = [];
     let deployConf = {};
     let apps_info = [];
     const that = this;
@@ -994,7 +1027,7 @@ class API {
     if ((appConf = Common.verifyConfs(appConf)) instanceof Error)
       return cb ? cb(appConf) : that.exitCli(conf.ERROR_EXIT);
 
-    process.env.PM2_JSON_PROCESSING = true;
+    process.env.PM2_JSON_PROCESSING = 'true';
 
     // Get App list
     const apps_name = [];
