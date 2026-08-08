@@ -151,8 +151,14 @@ fi
 echo "[*] Building dist/ inside the image..."
 BUILD_INPUT_TAR="$RESULTS_DIR/build-input.tar"
 tar -cf "$BUILD_INPUT_TAR" --exclude='.git' --exclude='node_modules' --exclude='dist' .
+# The bun image has no npm at all — it symlinks bun in as node and stops there.
+if [[ "$RUNTIME" == "bun" ]]; then
+    BUILD_COMMAND="bun run build"
+else
+    BUILD_COMMAND="npm run build"
+fi
 if ! docker run --rm -i "$IMAGE_NAME" \
-        bash -c "tar -xf - && npm run build >&2 && tar -cf - dist" \
+        bash -c "tar -xf - && $BUILD_COMMAND >&2 && tar -cf - dist" \
         < "$BUILD_INPUT_TAR" > "$RESULTS_DIR/dist.tar"; then
     echo "[!] Build failed"
     exit 1
