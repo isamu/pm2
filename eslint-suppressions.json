@@ -4,7 +4,10 @@
       "count": 1
     }
   },
-  "lib/API.js": {
+  "lib/API.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 38
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 25
     },
@@ -15,7 +18,7 @@
       "count": 18
     },
     "complexity": {
-      "count": 6
+      "count": 5
     },
     "id-length": {
       "count": 53
@@ -63,7 +66,10 @@
       "count": 1
     }
   },
-  "lib/API/Configuration.js": {
+  "lib/API/Configuration.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 5
     },
@@ -83,7 +89,10 @@
       "count": 2
     }
   },
-  "lib/API/Containerizer.js": {
+  "lib/API/Containerizer.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 12
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 2
     },
@@ -93,10 +102,10 @@
     "max-lines-per-function": {
       "count": 2
     },
-    "no-redeclare": {
+    "no-unassigned-vars": {
       "count": 1
     },
-    "no-unassigned-vars": {
+    "prefer-const": {
       "count": 1
     },
     "sonarjs/no-globals-shadowing": {
@@ -112,7 +121,10 @@
       "count": 4
     }
   },
-  "lib/API/Dashboard.js": {
+  "lib/API/Dashboard.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 2
     },
@@ -134,8 +146,8 @@
     "no-prototype-builtins": {
       "count": 2
     },
-    "no-redeclare": {
-      "count": 3
+    "no-var": {
+      "count": 4
     },
     "sonarjs/block-scoped-var": {
       "count": 1
@@ -153,7 +165,10 @@
       "count": 1
     }
   },
-  "lib/API/Deploy.js": {
+  "lib/API/Deploy.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 1
     },
@@ -170,7 +185,10 @@
       "count": 1
     }
   },
-  "lib/API/Extra.js": {
+  "lib/API/Extra.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 18
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 19
     },
@@ -183,6 +201,12 @@
     "max-lines-per-function": {
       "count": 4
     },
+    "prefer-rest-params": {
+      "count": 5
+    },
+    "prefer-spread": {
+      "count": 5
+    },
     "sonarjs/no-nested-functions": {
       "count": 7
     },
@@ -193,7 +217,10 @@
       "count": 2
     }
   },
-  "lib/API/Log.js": {
+  "lib/API/Log.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 5
     },
@@ -201,7 +228,7 @@
       "count": 1
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 8
+      "count": 9
     },
     "id-length": {
       "count": 3
@@ -216,7 +243,10 @@
       "count": 8
     }
   },
-  "lib/API/LogManagement.js": {
+  "lib/API/LogManagement.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 5
     },
@@ -248,7 +278,10 @@
       "count": 1
     }
   },
-  "lib/API/Modules/LOCAL.js": {
+  "lib/API/Modules/LOCAL.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 9
     },
@@ -265,7 +298,10 @@
       "count": 1
     }
   },
-  "lib/API/Modules/Modularizer.js": {
+  "lib/API/Modules/Modularizer.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
@@ -279,7 +315,10 @@
       "count": 1
     }
   },
-  "lib/API/Modules/NPM.js": {
+  "lib/API/Modules/NPM.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 19
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 9
     },
@@ -292,6 +331,12 @@
     "no-useless-assignment": {
       "count": 3
     },
+    "no-var": {
+      "count": 1
+    },
+    "prefer-const": {
+      "count": 1
+    },
     "sonarjs/no-nested-functions": {
       "count": 4
     },
@@ -299,7 +344,10 @@
       "count": 1
     }
   },
-  "lib/API/Modules/TAR.js": {
+  "lib/API/Modules/TAR.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 16
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 12
     },
@@ -308,6 +356,9 @@
     },
     "max-lines-per-function": {
       "count": 1
+    },
+    "no-var": {
+      "count": 3
     },
     "sonarjs/block-scoped-var": {
       "count": 3
@@ -331,7 +382,10 @@
       "count": 1
     }
   },
-  "lib/API/Modules/index.js": {
+  "lib/API/Modules/index.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 5
     },
@@ -345,18 +399,21 @@
       "count": 1
     }
   },
-  "lib/API/Monit.js": {
+  "lib/API/Monit.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
     "id-length": {
       "count": 2
-    },
-    "no-prototype-builtins": {
-      "count": 1
     },
     "no-useless-assignment": {
       "count": 1
     }
   },
-  "lib/API/Serve.js": {
+  "lib/API/Serve.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
@@ -370,7 +427,10 @@
       "count": 1
     }
   },
-  "lib/API/Startup.js": {
+  "lib/API/Startup.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 4
     },
@@ -386,8 +446,8 @@
     "max-lines-per-function": {
       "count": 6
     },
-    "no-redeclare": {
-      "count": 1
+    "no-var": {
+      "count": 5
     },
     "sonarjs/block-scoped-var": {
       "count": 3
@@ -405,12 +465,18 @@
       "count": 1
     }
   },
-  "lib/API/UX/index.js": {
+  "lib/API/UX/index.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "id-length": {
       "count": 1
     }
   },
-  "lib/API/UX/pm2-describe.js": {
+  "lib/API/UX/pm2-describe.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 2
     },
@@ -439,7 +505,10 @@
       "count": 1
     }
   },
-  "lib/API/UX/pm2-ls.js": {
+  "lib/API/UX/pm2-ls.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 7
     },
@@ -453,6 +522,9 @@
       "count": 3
     },
     "no-empty": {
+      "count": 1
+    },
+    "prefer-const": {
       "count": 1
     },
     "sonarjs/cognitive-complexity": {
@@ -471,7 +543,10 @@
       "count": 2
     }
   },
-  "lib/API/Version.js": {
+  "lib/API/Version.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 12
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 4
     },
@@ -487,6 +562,9 @@
     "max-nested-callbacks": {
       "count": 6
     },
+    "no-var": {
+      "count": 3
+    },
     "sonarjs/block-scoped-var": {
       "count": 1
     },
@@ -494,7 +572,10 @@
       "count": 6
     }
   },
-  "lib/API/pm2-plus/PM2IO.js": {
+  "lib/API/pm2-plus/PM2IO.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 8
     },
@@ -514,7 +595,10 @@
       "count": 2
     }
   },
-  "lib/API/pm2-plus/auth-strategies/CliAuth.js": {
+  "lib/API/pm2-plus/auth-strategies/CliAuth.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 6
     },
@@ -549,7 +633,10 @@
       "count": 1
     }
   },
-  "lib/API/pm2-plus/auth-strategies/WebAuth.js": {
+  "lib/API/pm2-plus/auth-strategies/WebAuth.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
@@ -560,12 +647,15 @@
       "count": 1
     }
   },
-  "lib/API/pm2-plus/helpers.js": {
+  "lib/API/pm2-plus/helpers.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 1
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 3
+      "count": 2
     },
     "id-length": {
       "count": 8
@@ -580,7 +670,10 @@
       "count": 1
     }
   },
-  "lib/API/pm2-plus/link.js": {
+  "lib/API/pm2-plus/link.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 3
     },
@@ -594,7 +687,10 @@
       "count": 2
     }
   },
-  "lib/API/pm2-plus/process-selector.js": {
+  "lib/API/pm2-plus/process-selector.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 1
     },
@@ -605,7 +701,10 @@
       "count": 2
     }
   },
-  "lib/Client.js": {
+  "lib/Client.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 16
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 10
     },
@@ -627,6 +726,12 @@
     "no-useless-assignment": {
       "count": 2
     },
+    "no-var": {
+      "count": 1
+    },
+    "prefer-const": {
+      "count": 3
+    },
     "sonarjs/cognitive-complexity": {
       "count": 1
     },
@@ -646,7 +751,10 @@
       "count": 1
     }
   },
-  "lib/Common.js": {
+  "lib/Common.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 21
+    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 2
     },
@@ -671,8 +779,17 @@
     "no-empty": {
       "count": 1
     },
-    "no-redeclare": {
-      "count": 1
+    "no-var": {
+      "count": 4
+    },
+    "prefer-const": {
+      "count": 2
+    },
+    "prefer-rest-params": {
+      "count": 2
+    },
+    "prefer-spread": {
+      "count": 2
     },
     "preserve-caught-error": {
       "count": 1
@@ -702,12 +819,18 @@
       "count": 1
     }
   },
-  "lib/Configuration.js": {
+  "lib/Configuration.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 6
     },
     "id-length": {
       "count": 16
+    },
+    "no-var": {
+      "count": 4
     },
     "sonarjs/block-scoped-var": {
       "count": 4
@@ -716,7 +839,10 @@
       "count": 1
     }
   },
-  "lib/Daemon.js": {
+  "lib/Daemon.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 14
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 6
     },
@@ -751,12 +877,18 @@
       "count": 3
     }
   },
-  "lib/Event.js": {
+  "lib/Event.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
     "id-length": {
       "count": 3
     }
   },
-  "lib/God.js": {
+  "lib/God.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 20
+    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 4
     },
@@ -777,6 +909,9 @@
     },
     "no-useless-assignment": {
       "count": 2
+    },
+    "no-var": {
+      "count": 3
     },
     "sonarjs/block-scoped-var": {
       "count": 1
@@ -800,7 +935,10 @@
       "count": 2
     }
   },
-  "lib/God/ActionMethods.js": {
+  "lib/God/ActionMethods.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 1
     },
@@ -816,7 +954,7 @@
     "no-empty": {
       "count": 1
     },
-    "no-unreachable": {
+    "no-var": {
       "count": 1
     },
     "sonarjs/block-scoped-var": {
@@ -832,14 +970,17 @@
       "count": 2
     }
   },
-  "lib/God/ClusterMode.js": {
+  "lib/God/ClusterMode.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
     "id-length": {
       "count": 4
     }
   },
-  "lib/God/ForkMode.js": {
-    "@typescript-eslint/no-unused-expressions": {
-      "count": 4
+  "lib/God/ForkMode.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
@@ -854,7 +995,10 @@
       "count": 3
     },
     "no-useless-assignment": {
-      "count": 3
+      "count": 2
+    },
+    "no-var": {
+      "count": 1
     },
     "sonarjs/block-scoped-var": {
       "count": 1
@@ -863,9 +1007,9 @@
       "count": 2
     }
   },
-  "lib/God/Methods.js": {
-    "@typescript-eslint/no-array-constructor": {
-      "count": 1
+  "lib/God/Methods.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
@@ -876,8 +1020,8 @@
     "max-lines-per-function": {
       "count": 2
     },
-    "no-redeclare": {
-      "count": 1
+    "no-var": {
+      "count": 3
     },
     "sonarjs/no-ignored-exceptions": {
       "count": 1
@@ -886,7 +1030,10 @@
       "count": 1
     }
   },
-  "lib/God/Reload.js": {
+  "lib/God/Reload.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 1
     },
@@ -899,6 +1046,9 @@
     "max-lines-per-function": {
       "count": 1
     },
+    "no-var": {
+      "count": 1
+    },
     "sonarjs/no-dead-store": {
       "count": 2
     },
@@ -906,7 +1056,10 @@
       "count": 2
     }
   },
-  "lib/OtelManager.js": {
+  "lib/OtelManager.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
@@ -920,15 +1073,15 @@
       "count": 2
     }
   },
-  "lib/ProcessContainer.js": {
+  "lib/ProcessContainer.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 6
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
-    },
-    "complexity": {
-      "count": 2
     },
     "id-length": {
       "count": 8
@@ -939,31 +1092,28 @@
     "no-empty": {
       "count": 1
     },
-    "no-unreachable": {
-      "count": 1
-    },
     "no-useless-assignment": {
       "count": 2
     },
-    "sonarjs/block-scoped-var": {
+    "no-var": {
       "count": 1
     },
-    "sonarjs/cognitive-complexity": {
-      "count": 2
+    "sonarjs/block-scoped-var": {
+      "count": 1
     },
     "sonarjs/no-nested-functions": {
       "count": 2
     }
   },
-  "lib/ProcessContainerBun.js": {
+  "lib/ProcessContainerBun.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 9
+    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 10
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
-    },
-    "complexity": {
-      "count": 2
     },
     "id-length": {
       "count": 7
@@ -974,23 +1124,23 @@
     "no-empty": {
       "count": 1
     },
-    "no-unreachable": {
-      "count": 1
-    },
     "no-useless-assignment": {
       "count": 4
     },
-    "sonarjs/block-scoped-var": {
+    "no-var": {
       "count": 1
     },
-    "sonarjs/cognitive-complexity": {
-      "count": 2
+    "sonarjs/block-scoped-var": {
+      "count": 1
     },
     "sonarjs/no-nested-functions": {
       "count": 2
     }
   },
-  "lib/Utility.js": {
+  "lib/Utility.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 1
     },
@@ -1002,6 +1152,12 @@
     },
     "no-useless-escape": {
       "count": 2
+    },
+    "no-var": {
+      "count": 1
+    },
+    "prefer-rest-params": {
+      "count": 5
     },
     "sonarjs/cognitive-complexity": {
       "count": 1
@@ -1016,7 +1172,10 @@
       "count": 1
     }
   },
-  "lib/VersionCheck.js": {
+  "lib/VersionCheck.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
     },
@@ -1030,7 +1189,10 @@
       "count": 2
     }
   },
-  "lib/Watcher.js": {
+  "lib/Watcher.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
     "@typescript-eslint/no-this-alias": {
       "count": 1
     },
@@ -1053,7 +1215,10 @@
       "count": 1
     }
   },
-  "lib/Worker.js": {
+  "lib/Worker.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 9
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
     },
@@ -1070,7 +1235,10 @@
       "count": 1
     }
   },
-  "lib/binaries/CLI.js": {
+  "lib/binaries/CLI.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 14
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 8
     },
@@ -1083,6 +1251,9 @@
     "max-lines-per-function": {
       "count": 2
     },
+    "prefer-rest-params": {
+      "count": 1
+    },
     "sonarjs/no-redundant-boolean": {
       "count": 3
     },
@@ -1090,7 +1261,10 @@
       "count": 1
     }
   },
-  "lib/binaries/DevCLI.js": {
+  "lib/binaries/DevCLI.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 2
     },
@@ -1107,11 +1281,22 @@
       "count": 2
     }
   },
-  "lib/binaries/Runtime4Docker.js": {
+  "lib/binaries/Runtime.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    }
+  },
+  "lib/binaries/Runtime4Docker.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 2
     },
     "id-length": {
+      "count": 1
+    },
+    "no-var": {
       "count": 1
     }
   },
@@ -1123,7 +1308,10 @@
       "count": 1
     }
   },
-  "lib/tools/SysMetrics.js": {
+  "lib/tools/SysMetrics.ts": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
     "@typescript-eslint/no-unused-vars": {
       "count": 5
     },
@@ -1326,9 +1514,6 @@
     },
     "sonarjs/no-nested-functions": {
       "count": 1
-    },
-    "sonarjs/prefer-while": {
-      "count": 1
     }
   },
   "lib/tools/prompt.js": {
@@ -1381,9 +1566,6 @@
     "id-length": {
       "count": 8
     },
-    "max-nested-callbacks": {
-      "count": 7
-    },
     "sonarjs/no-unused-vars": {
       "count": 1
     }
@@ -1391,9 +1573,6 @@
   "modules/pm2-axon-rpc/test/unix.js": {
     "id-length": {
       "count": 7
-    },
-    "max-nested-callbacks": {
-      "count": 5
     }
   },
   "modules/pm2-axon/lib/index.js": {
@@ -1607,9 +1786,6 @@
     },
     "id-length": {
       "count": 8
-    },
-    "max-nested-callbacks": {
-      "count": 1
     },
     "sonarjs/no-nested-functions": {
       "count": 1
@@ -2017,9 +2193,6 @@
     "id-length": {
       "count": 8
     },
-    "max-nested-callbacks": {
-      "count": 1
-    },
     "no-redeclare": {
       "count": 1
     },
@@ -2036,9 +2209,6 @@
     },
     "id-length": {
       "count": 7
-    },
-    "max-nested-callbacks": {
-      "count": 5
     },
     "no-redeclare": {
       "count": 1
@@ -2084,9 +2254,6 @@
     "id-length": {
       "count": 66
     },
-    "max-nested-callbacks": {
-      "count": 1
-    },
     "sonarjs/no-clear-text-protocols": {
       "count": 1
     },
@@ -2103,9 +2270,6 @@
     },
     "id-length": {
       "count": 29
-    },
-    "max-nested-callbacks": {
-      "count": 8
     },
     "sonarjs/assertions-in-tests": {
       "count": 3
@@ -2432,9 +2596,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 4
     },
-    "max-nested-callbacks": {
-      "count": 4
-    },
     "sonarjs/no-dead-store": {
       "count": 4
     }
@@ -2537,9 +2698,6 @@
   "modules/pm2-io-bpm/test/metrics/runtime.spec.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 1
-    },
-    "max-nested-callbacks": {
-      "count": 3
     },
     "sonarjs/assertions-in-tests": {
       "count": 1
@@ -2794,18 +2952,12 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
-    "max-nested-callbacks": {
-      "count": 22
-    },
     "sonarjs/no-nested-functions": {
       "count": 1
     }
   },
   "test/programmatic/auto_restart.mocha.js": {
     "@typescript-eslint/no-unused-vars": {
-      "count": 4
-    },
-    "max-nested-callbacks": {
       "count": 4
     }
   },
@@ -2817,9 +2969,6 @@
   "test/programmatic/cluster.mocha.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 12
-    },
-    "max-nested-callbacks": {
-      "count": 9
     }
   },
   "test/programmatic/conf_update.mocha.js": {
@@ -2861,9 +3010,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 14
     },
-    "max-nested-callbacks": {
-      "count": 1
-    },
     "sonarjs/no-dead-store": {
       "count": 2
     },
@@ -2874,9 +3020,6 @@
   "test/programmatic/env_switching.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 10
-    },
-    "max-nested-callbacks": {
-      "count": 1
     },
     "sonarjs/no-dead-store": {
       "count": 1
@@ -2930,9 +3073,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 5
     },
-    "max-nested-callbacks": {
-      "count": 3
-    },
     "sonarjs/no-unused-vars": {
       "count": 2
     }
@@ -2944,9 +3084,6 @@
     "id-length": {
       "count": 12
     },
-    "max-nested-callbacks": {
-      "count": 4
-    },
     "sonarjs/no-dead-store": {
       "count": 3
     },
@@ -2957,9 +3094,6 @@
   "test/programmatic/graceful.mocha.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 8
-    },
-    "max-nested-callbacks": {
-      "count": 10
     },
     "sonarjs/no-duplicate-test-title": {
       "count": 1
@@ -2974,15 +3108,9 @@
     },
     "id-length": {
       "count": 2
-    },
-    "max-nested-callbacks": {
-      "count": 3
     }
   },
   "test/programmatic/id.mocha.js": {
-    "max-nested-callbacks": {
-      "count": 4
-    },
     "sonarjs/assertions-in-tests": {
       "count": 1
     }
@@ -3068,9 +3196,6 @@
     "id-length": {
       "count": 2
     },
-    "max-nested-callbacks": {
-      "count": 9
-    },
     "no-empty": {
       "count": 2
     },
@@ -3091,9 +3216,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 6
     },
-    "max-nested-callbacks": {
-      "count": 6
-    },
     "sonarjs/no-unused-vars": {
       "count": 2
     }
@@ -3101,9 +3223,6 @@
   "test/programmatic/misc_commands.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 11
-    },
-    "max-nested-callbacks": {
-      "count": 2
     }
   },
   "test/programmatic/module_configuration.mocha.js": {
@@ -3114,15 +3233,9 @@
   "test/programmatic/module_tar.mocha.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 6
-    },
-    "max-nested-callbacks": {
-      "count": 1
     }
   },
   "test/programmatic/modules.mocha.js": {
-    "@typescript-eslint/no-array-constructor": {
-      "count": 1
-    },
     "@typescript-eslint/no-unused-vars": {
       "count": 2
     },
@@ -3136,15 +3249,9 @@
   "test/programmatic/namespace.mocha.js": {
     "id-length": {
       "count": 4
-    },
-    "max-nested-callbacks": {
-      "count": 4
     }
   },
   "test/programmatic/otel_tracing.mocha.js": {
-    "max-nested-callbacks": {
-      "count": 5
-    },
     "sonarjs/no-redundant-boolean": {
       "count": 1
     }
@@ -3152,9 +3259,6 @@
   "test/programmatic/otel_tracing_ws.mocha.js": {
     "id-length": {
       "count": 2
-    },
-    "max-nested-callbacks": {
-      "count": 4
     },
     "no-redeclare": {
       "count": 1
@@ -3166,9 +3270,6 @@
     },
     "id-length": {
       "count": 3
-    },
-    "max-nested-callbacks": {
-      "count": 19
     },
     "sonarjs/no-dead-store": {
       "count": 1
@@ -3192,9 +3293,6 @@
     "id-length": {
       "count": 3
     },
-    "max-nested-callbacks": {
-      "count": 5
-    },
     "sonarjs/no-skipped-tests": {
       "count": 1
     }
@@ -3203,9 +3301,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 8
     },
-    "max-nested-callbacks": {
-      "count": 1
-    },
     "sonarjs/no-unused-vars": {
       "count": 1
     }
@@ -3213,9 +3308,6 @@
   "test/programmatic/signals.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 26
-    },
-    "max-nested-callbacks": {
-      "count": 13
     },
     "sonarjs/no-dead-store": {
       "count": 4
@@ -3229,9 +3321,6 @@
   "test/programmatic/sysmetrics.mocha.js": {
     "id-length": {
       "count": 18
-    },
-    "max-nested-callbacks": {
-      "count": 1
     }
   },
   "test/programmatic/treekill.mocha.js": {
@@ -3240,9 +3329,6 @@
     },
     "id-length": {
       "count": 7
-    },
-    "max-nested-callbacks": {
-      "count": 16
     },
     "no-useless-escape": {
       "count": 1
@@ -3260,9 +3346,6 @@
   "test/programmatic/version.mocha.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 2
-    },
-    "max-nested-callbacks": {
-      "count": 1
     }
   },
   "test/programmatic/watcher.js": {

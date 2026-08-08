@@ -111,6 +111,16 @@ export default tseslint.config(
     },
   },
   {
+    // The three fields this reports are `static #pm2`, `static #io` and `static #strategy` —
+    // private class fields, which the message calls "public static property". They are also
+    // assigned in init(), so readonly is not available to them either. Both halves of the
+    // finding are wrong; recording it would put a false statement at the top of a backlog.
+    files: ['lib/API/pm2-plus/PM2IO.ts'],
+    rules: {
+      'sonarjs/public-static-readonly': 'off',
+    },
+  },
+  {
     // A spec repeats itself by nature and its length is not a comprehension problem.
     // The mocha globals are declared here rather than recorded as 1165 no-undef violations:
     // an environment the linter was never told about is not a backlog.
@@ -119,6 +129,12 @@ export default tseslint.config(
     rules: {
       'max-lines': 'off',
       'max-lines-per-function': 'off',
+      // describe/describe/it is three callbacks before a test has done anything, so any test
+      // driving a callback-style API — a stream, a forked process, a config write and read back
+      // — is over the limit by construction. This is the framework's shape, not nesting a
+      // reader has to hold in their head. Counted as descoping, not progress: it took 5 off
+      // the ceiling.
+      'max-nested-callbacks': 'off',
       'sonarjs/no-duplicate-string': 'off',
       // eslint-plugin-security asks whether untrusted input can reach a dangerous sink. A test
       // builds its own inputs, so the answer is always no — and leaving these on means every

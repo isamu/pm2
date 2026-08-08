@@ -18,12 +18,12 @@ const OAUTH_CLIENT_ID_CLI = '0943857435';
 module.exports = class PM2ioHandler {
   // Set once during init, then read from every command below. All three come from modules this
   // file requires, so there is no type to name them with beyond what those modules hand back.
-  static pm2;
-  static io;
-  static _strategy;
+  static #pm2;
+  static #io;
+  static #strategy;
 
   static usePM2Client(instance) {
-    this.pm2 = instance;
+    this.#pm2 = instance;
   }
 
   static strategy() {
@@ -61,7 +61,7 @@ module.exports = class PM2ioHandler {
   }
 
   static init() {
-    this._strategy = this.strategy();
+    this.#strategy = this.strategy();
     /**
      * If you are using a local backend you should give those options :
      * {
@@ -71,7 +71,7 @@ module.exports = class PM2ioHandler {
      *   }
      *  }
      */
-    this.io = new IOAPI().use(this._strategy);
+    this.#io = new IOAPI().use(this.#strategy);
   }
 
   static launch(command, opts) {
@@ -98,24 +98,24 @@ module.exports = class PM2ioHandler {
         return process.exit(0);
       }
       case 'logout': {
-        this._strategy
+        this.#strategy
           .isAuthenticated()
           .then((isConnected) => {
             // try to kill the agent anyway
-            this.pm2.killAgent((err) => {});
+            this.#pm2.killAgent((err) => {});
 
             if (isConnected === false) {
               console.log(`${cst.PM2_IO_MSG} Already disconnected`);
               return process.exit(0);
             }
 
-            this._strategy._retrieveTokens((err, tokens) => {
+            this.#strategy._retrieveTokens((err, tokens) => {
               if (err) {
                 console.log(`${cst.PM2_IO_MSG} Successfully disconnected`);
                 return process.exit(0);
               }
-              this._strategy
-                .deleteTokens(this.io)
+              this.#strategy
+                .deleteTokens(this.#io)
                 .then((_) => {
                   console.log(`${cst.PM2_IO_MSG} Successfully disconnected`);
                   return process.exit(0);
@@ -135,7 +135,7 @@ module.exports = class PM2ioHandler {
         break;
       }
       case 'create': {
-        this._strategy
+        this.#strategy
           .isAuthenticated()
           .then((res) => {
             // if the user isn't authenticated, we make them do the whole flow
@@ -154,7 +154,7 @@ module.exports = class PM2ioHandler {
         break;
       }
       case 'web': {
-        this._strategy
+        this.#strategy
           .isAuthenticated()
           .then((res) => {
             // if the user isn't authenticated, we make them do the whole flow
@@ -164,7 +164,7 @@ module.exports = class PM2ioHandler {
               );
               return process.exit(1);
             }
-            this._strategy._retrieveTokens(() => {
+            this.#strategy._retrieveTokens(() => {
               return this.openUI();
             });
           })
@@ -186,7 +186,7 @@ module.exports = class PM2ioHandler {
   }
 
   static openUI() {
-    this.io.bucket.retrieveAll().then((res) => {
+    this.#io.bucket.retrieveAll().then((res) => {
       const buckets = res.data;
 
       if (buckets.length === 0) {
@@ -253,7 +253,7 @@ module.exports = class PM2ioHandler {
   }
 
   static validateAccount(token) {
-    this.io.auth
+    this.#io.auth
       .validEmail(token)
       .then((res) => {
         console.log(`${cst.PM2_IO_MSG} Email succesfully validated.`);
@@ -302,7 +302,7 @@ module.exports = class PM2ioHandler {
       `${cst.PM2_IO_MSG} By default we allow you to trial PM2 Plus for 14 days without any credit card.`,
     );
 
-    this.io.bucket
+    this.#io.bucket
       .create({
         name: 'PM2 Plus Monitoring',
       })
@@ -310,7 +310,7 @@ module.exports = class PM2ioHandler {
         const bucket = res.data.bucket;
 
         console.log(`${cst.PM2_IO_MSG} Successfully created the bucket`);
-        this.pm2.link(
+        this.#pm2.link(
           {
             public_key: bucket.public_id,
             secret_key: bucket.secret_id,
@@ -335,7 +335,7 @@ module.exports = class PM2ioHandler {
    * @param {Function} cb
    */
   static connectToBucket(cb) {
-    this.io.bucket.retrieveAll().then((res) => {
+    this.#io.bucket.retrieveAll().then((res) => {
       const buckets = res.data;
 
       if (buckets.length === 0) {
@@ -364,7 +364,7 @@ module.exports = class PM2ioHandler {
 
           const bucket = buckets.find((bucket) => bucket.name === value);
           if (bucket === undefined) return cb();
-          this.pm2.link(
+          this.#pm2.link(
             {
               public_key: bucket.public_id,
               secret_key: bucket.secret_id,
@@ -384,17 +384,17 @@ module.exports = class PM2ioHandler {
    * @param {Function} cb
    */
   static authenticate() {
-    this._strategy._retrieveTokens((err, tokens) => {
+    this.#strategy._retrieveTokens((err, tokens) => {
       if (err) {
         const msg = err.data ? err.data.error_description || err.data.msg : err.message;
         console.log(`${cst.PM2_IO_MSG_ERR} Unexpected error : ${msg}`);
         return process.exit(1);
       }
       console.log(`${cst.PM2_IO_MSG} Successfully authenticated`);
-      this.io.user.retrieve().then((res) => {
+      this.#io.user.retrieve().then((res) => {
         const user = res.data;
 
-        this.io.user.retrieve().then((res) => {
+        this.#io.user.retrieve().then((res) => {
           const tmpUser = res.data;
           console.log(`${cst.PM2_IO_MSG} Successfully validated`);
           this.connectToBucket(this.createBucketHandler.bind(this));

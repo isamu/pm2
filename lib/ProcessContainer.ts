@@ -22,8 +22,8 @@ const isReloadRequest = (msg: unknown): boolean =>
 // have always answered with something falsy — undefined, false or null depending on the branch —
 // and nothing here ever emits 'drain', so this keeps that answer and only gives it the type the
 // contract asks for. Answering true would be a behaviour change, not a typing one.
-const doneWriting = (cb?: (err?: Error) => void): boolean => {
-  if (cb) cb();
+const doneWriting = (callback?: (err?: Error) => void): boolean => {
+  if (callback) callback();
   return false;
 };
 
