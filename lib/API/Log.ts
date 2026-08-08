@@ -9,7 +9,13 @@ const fs = require('fs'),
   forEachLimit = require('async/forEachLimit'),
   dayjs = require('dayjs');
 
-const Log = (module.exports = {});
+const Log = (module.exports = {
+  tail,
+  stream,
+  devStream,
+  jsonStream,
+  formatStream,
+});
 
 const DEFAULT_PADDING = '          ';
 
@@ -22,7 +28,7 @@ const DEFAULT_PADDING = '          ';
  * @return
  */
 
-Log.tail = function (apps_list, lines, raw, callback) {
+function tail(apps_list, lines, raw, callback) {
   const that = this;
 
   if (lines === 0 || apps_list.length === 0) return callback && callback();
@@ -38,9 +44,11 @@ Log.tail = function (apps_list, lines, raw, callback) {
       chunk += data.toString();
     });
     fd.on('end', function () {
-      chunk = chunk.split('\n').slice(-(lines + 1));
-      chunk.pop();
-      callback(chunk);
+      // The read starts mid-file, so the first line is almost always a partial one; taking
+      // lines+1 from the end and dropping the last empty split is what leaves `lines` whole ones.
+      const lastLines = chunk.split('\n').slice(-(lines + 1));
+      lastLines.pop();
+      callback(lastLines);
     });
   };
 
@@ -76,7 +84,7 @@ Log.tail = function (apps_list, lines, raw, callback) {
       callback && callback();
     },
   );
-};
+}
 
 /**
  * Stream logs in realtime from the bus eventemitter.
@@ -85,7 +93,7 @@ Log.tail = function (apps_list, lines, raw, callback) {
  * @return
  */
 
-Log.stream = function (Client, id, raw, timestamp, exclusive, highlight) {
+function stream(Client, id, raw, timestamp, exclusive, highlight) {
   const that = this;
 
   Client.launchBus(function (err, bus, socket) {
@@ -152,9 +160,9 @@ Log.stream = function (Client, id, raw, timestamp, exclusive, highlight) {
       });
     });
   });
-};
+}
 
-Log.devStream = function (Client, id, raw, timestamp, exclusive) {
+function devStream(Client, id, raw, timestamp, exclusive) {
   const that = this;
 
   Client.launchBus(function (err, bus) {
@@ -208,9 +216,9 @@ Log.devStream = function (Client, id, raw, timestamp, exclusive) {
       });
     });
   });
-};
+}
 
-Log.jsonStream = function (Client, id) {
+function jsonStream(Client, id) {
   const that = this;
 
   Client.launchBus(function (err, bus) {
@@ -247,9 +255,9 @@ Log.jsonStream = function (Client, id) {
       process.stdout.write('\n');
     });
   });
-};
+}
 
-Log.formatStream = function (Client, id, raw, timestamp, exclusive, highlight) {
+function formatStream(Client, id, raw, timestamp, exclusive, highlight) {
   const that = this;
 
   Client.launchBus(function (err, bus) {
@@ -295,7 +303,7 @@ Log.formatStream = function (Client, id, raw, timestamp, exclusive, highlight) {
       });
     });
   });
-};
+}
 
 function pad(pad, str, padLeft?) {
   if (typeof str === 'undefined') return pad;

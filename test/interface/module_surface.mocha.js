@@ -24,6 +24,10 @@ var MODULES = [
     ],
   },
   {
+    path: 'lib/API/Log.js',
+    methods: ['tail', 'stream', 'devStream', 'jsonStream', 'formatStream'],
+  },
+  {
     path: 'lib/API/Monit.js',
     methods: [
       'reset',

@@ -21,7 +21,16 @@ function hasDockerCGroup() {
 }
 
 module.exports = function (opts) {
-  const params = {
+  // The four below are filled in under a try: os.type() and the docker probes read the
+  // filesystem, and a failure there should still leave state and version to report.
+  const params: {
+    state: string;
+    version: string;
+    os?: string;
+    uptime?: number;
+    nodev?: string;
+    docker?: boolean;
+  } = {
     state: opts.state,
     version: opts.version,
   };
