@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T17:56:56.385Z",
+  "updatedAt": "2026-08-08T18:07:09.899Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -137,8 +137,8 @@
   },
   "rules": {
     "id-length": {
-      "baseline": 1330,
-      "current": 1330,
+      "baseline": 1328,
+      "current": 1328,
       "status": "draining"
     },
     "@typescript-eslint/no-require-imports": {

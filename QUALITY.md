@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **3586**
+- Open violations: **3584**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 3586 violations across 70 rules
+- [ ] **P3 drain** — 3584 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -31,7 +31,7 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
-| `id-length` | 1330 | 1330 | 0 | draining |
+| `id-length` | 1328 | 1328 | 0 | draining |
 | `@typescript-eslint/no-unused-vars` | 909 | 909 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
 | `max-lines-per-function` | 128 | 128 | 0 | draining |
