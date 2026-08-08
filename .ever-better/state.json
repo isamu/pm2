@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T09:55:51.525Z",
+  "updatedAt": "2026-08-08T12:50:07.624Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -137,8 +137,8 @@
   },
   "rules": {
     "id-length": {
-      "baseline": 1356,
-      "current": 1356,
+      "baseline": 1330,
+      "current": 1330,
       "status": "draining"
     },
     "@typescript-eslint/no-require-imports": {
@@ -147,23 +147,23 @@
       "status": "enforced"
     },
     "@typescript-eslint/no-unused-vars": {
-      "baseline": 920,
-      "current": 920,
+      "baseline": 909,
+      "current": 909,
       "status": "draining"
     },
     "max-lines-per-function": {
-      "baseline": 129,
-      "current": 129,
+      "baseline": 128,
+      "current": 128,
       "status": "draining"
     },
     "sonarjs/cognitive-complexity": {
-      "baseline": 49,
-      "current": 49,
+      "baseline": 48,
+      "current": 48,
       "status": "draining"
     },
     "complexity": {
-      "baseline": 40,
-      "current": 40,
+      "baseline": 39,
+      "current": 39,
       "status": "draining"
     },
     "@typescript-eslint/no-this-alias": {
@@ -172,18 +172,18 @@
       "status": "draining"
     },
     "sonarjs/no-redundant-boolean": {
-      "baseline": 62,
-      "current": 62,
+      "baseline": 61,
+      "current": 61,
       "status": "draining"
     },
     "sonarjs/todo-tag": {
-      "baseline": 10,
-      "current": 10,
+      "baseline": 8,
+      "current": 8,
       "status": "draining"
     },
     "sonarjs/no-ignored-exceptions": {
-      "baseline": 40,
-      "current": 40,
+      "baseline": 39,
+      "current": 39,
       "status": "draining"
     },
     "no-useless-assignment": {
@@ -197,8 +197,8 @@
       "status": "draining"
     },
     "sonarjs/no-unused-vars": {
-      "baseline": 63,
-      "current": 63,
+      "baseline": 62,
+      "current": 62,
       "status": "draining"
     },
     "@typescript-eslint/no-unused-expressions": {
@@ -237,13 +237,13 @@
       "status": "draining"
     },
     "sonarjs/block-scoped-var": {
-      "baseline": 22,
-      "current": 22,
+      "baseline": 21,
+      "current": 21,
       "status": "draining"
     },
     "no-redeclare": {
-      "baseline": 27,
-      "current": 27,
+      "baseline": 26,
+      "current": 26,
       "status": "draining"
     },
     "sonarjs/no-globals-shadowing": {
@@ -252,8 +252,8 @@
       "status": "draining"
     },
     "sonarjs/no-os-command-from-path": {
-      "baseline": 20,
-      "current": 20,
+      "baseline": 18,
+      "current": 18,
       "status": "draining"
     },
     "no-unassigned-vars": {
@@ -282,18 +282,18 @@
       "status": "draining"
     },
     "sonarjs/prefer-single-boolean-return": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "no-unreachable": {
       "baseline": 3,
       "current": 3,
       "status": "draining"
     },
-    "no-unreachable": {
-      "baseline": 8,
-      "current": 8,
-      "status": "draining"
-    },
     "no-empty": {
-      "baseline": 19,
-      "current": 19,
+      "baseline": 18,
+      "current": 18,
       "status": "draining"
     },
     "sonarjs/no-duplicated-branches": {
@@ -302,8 +302,8 @@
       "status": "draining"
     },
     "sonarjs/regex-complexity": {
-      "baseline": 11,
-      "current": 11,
+      "baseline": 10,
+      "current": 10,
       "status": "draining"
     },
     "no-useless-escape": {
@@ -367,13 +367,13 @@
       "status": "draining"
     },
     "max-depth": {
-      "baseline": 7,
-      "current": 7,
+      "baseline": 6,
+      "current": 6,
       "status": "draining"
     },
     "sonarjs/super-linear-regex": {
-      "baseline": 12,
-      "current": 12,
+      "baseline": 11,
+      "current": 11,
       "status": "draining"
     },
     "no-global-assign": {

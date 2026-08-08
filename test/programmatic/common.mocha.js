@@ -1,4 +1,4 @@
-var Common = require('../../lib/Common');
+var Common = require('../../dist/lib/Common');
 var should = require('should');
 
 process.chdir(__dirname);

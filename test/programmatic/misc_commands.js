@@ -3,7 +3,7 @@ var should = require('should');
 var path = require('path');
 var fs = require('fs');
 
-var cst = require('../../constants.js');
+var cst = require('../../dist/constants.js');
 
 describe('Misc commands', function () {
   var pm2 = new PM2.custom({

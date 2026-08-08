@@ -1,7 +1,7 @@
 process.chdir(__dirname);
 
 var should = require('should');
-var Config = require('../../lib/tools/Config.js');
+var Config = require('../../dist/lib/tools/Config.js');
 
 describe('Issue #6075 / CVE-2025-5891 - Config.js ReDoS', function () {
   this.timeout(5000);

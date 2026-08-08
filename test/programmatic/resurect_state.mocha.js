@@ -3,8 +3,8 @@ var should = require('should');
 var path = require('path');
 var fs = require('fs');
 
-var cst = require('../../constants.js');
-var Configuration = require('../../lib/Configuration.js');
+var cst = require('../../dist/constants.js');
+var Configuration = require('../../dist/lib/Configuration.js');
 
 describe.skip('Keep state on pm2 update', function () {
   var pm2;

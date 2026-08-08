@@ -17,7 +17,7 @@
 process.chdir(__dirname);
 
 var should = require('should');
-var Common = require('../../lib/Common');
+var Common = require('../../dist/lib/Common');
 
 describe('Bun interpreter detection (#5990)', function () {
   describe('Common.sink.determineExecMode', function () {
@@ -88,7 +88,7 @@ describe('Bun interpreter detection (#5990)', function () {
 
     function fork_container_for(interpreter, done) {
       var God = { bus: { emit: function () {} }, clusters_db: {} };
-      require('../../lib/God/ForkMode.js')(God);
+      require('../../dist/lib/God/ForkMode.js')(God);
 
       var pm2_env = {
         name: 'test',

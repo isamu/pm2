@@ -1,5 +1,5 @@
 var should = require('should');
-var Client = require('../../lib/Client');
+var Client = require('../../dist/lib/Client');
 
 describe('Client Daemon', function () {
   var client;

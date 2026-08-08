@@ -44,7 +44,7 @@
   ],
   "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "test:unit": "bash test/unit.sh",
@@ -60,7 +60,11 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "knip": "knip",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json && node packager/copy-dist-assets.mjs",
+    "prepare": "node -e \"require('fs').existsSync('tsconfig.build.json')&&require('child_process').execSync('npm run build',{stdio:'inherit'})\"",
+    "pretest": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "cli",
@@ -155,6 +159,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/debug": "^4.1.13",
     "@types/node": "^26.2.0",
     "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",

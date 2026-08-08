@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": ".",
+    "allowJs": false,
+    "strict": false,
+    "resolveJsonModule": true,
+    "sourceMap": true
+  },
+  "include": ["index.js", "constants.js", "paths.js", "lib/**/*", "modules/**/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "examples",
+    "test",
+    "packager",
+    "**/test/**",
+    "**/*.mocha.js",
+    "**/*.spec.js",
+    "lib/templates/**"
+  ]
+}

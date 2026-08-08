@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "node16",
-    "moduleResolution": "node16",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "lib": ["ES2022"],
     "types": ["node"],
     "strict": true,
@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["types/**/*.ts", "lib/**/*.ts"],
+  "include": ["types/**/*.ts", "lib/**/*.ts", "modules/**/*.ts", "*.ts"],
   "exclude": ["node_modules", "examples", "test/fixtures"]
 }

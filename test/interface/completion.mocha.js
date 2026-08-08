@@ -2,7 +2,7 @@ var assert = require('assert');
 var fs = require('fs');
 var os = require('os');
 var pth = require('path');
-var completion = require('../../lib/completion.js');
+var completion = require('../../dist/lib/completion.js');
 
 describe('completion', function () {
   describe('.missingRcError', function () {

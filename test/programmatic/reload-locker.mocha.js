@@ -6,7 +6,7 @@ var should = require('should');
 var path = require('path');
 var Plan = require('../helpers/plan.js');
 var fs = require('fs');
-var cst = require('../../constants.js');
+var cst = require('../../dist/constants.js');
 
 process.chdir(__dirname);
 

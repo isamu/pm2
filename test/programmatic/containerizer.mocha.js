@@ -1,4 +1,4 @@
-var Containerizer = require('../../lib/API/Containerizer.js');
+var Containerizer = require('../../dist/lib/API/Containerizer.js');
 var path = require('path');
 var fs = require('fs');
 var should = require('should');

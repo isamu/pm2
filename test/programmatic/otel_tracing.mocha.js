@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 var PM2 = require('../..');
 var should = require('should');
 var path = require('path');
-var OtelManager = require('../../lib/OtelManager');
+var OtelManager = require('../../dist/lib/OtelManager');
 
 var FIXTURE = path.resolve(__dirname, '..', 'fixtures', 'otel-tracing-server.js');
 

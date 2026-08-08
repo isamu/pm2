@@ -4,7 +4,7 @@ var PM2 = require('../..');
 var should = require('should');
 var path = require('path');
 var Plan = require('../helpers/plan.js');
-var sexec = require('../../lib/tools/sexec.js');
+var sexec = require('../../dist/lib/tools/sexec.js');
 
 process.chdir(__dirname);
 

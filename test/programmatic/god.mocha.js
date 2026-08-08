@@ -1,13 +1,13 @@
 var PM2 = require('../..');
-var God = require('../../lib/God');
+var God = require('../../dist/lib/God');
 var numCPUs = require('os').cpus().length;
 var fs = require('fs');
 var path = require('path');
 var should = require('should');
-var Common = require('../../lib/Common');
+var Common = require('../../dist/lib/Common');
 var eachLimit = require('async/eachLimit');
 
-var cst = require('../../constants.js');
+var cst = require('../../dist/constants.js');
 
 // Change to current folder
 process.chdir(__dirname);
@@ -315,7 +315,7 @@ describe('God', function () {
       },
     };
 
-    require('../../lib/God/ActionMethods.js')(g);
+    require('../../dist/lib/God/ActionMethods.js')(g);
 
     g.getMonitorData({}, function (err, procs) {
       should(err).be.null();

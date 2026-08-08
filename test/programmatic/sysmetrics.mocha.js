@@ -10,7 +10,7 @@
 var should = require('should');
 var os = require('os');
 
-var SysMetrics = require('../../lib/tools/SysMetrics.js');
+var SysMetrics = require('../../dist/lib/tools/SysMetrics.js');
 
 var SUPPORTED = process.platform === 'linux' || process.platform === 'darwin';
 

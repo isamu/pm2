@@ -145,6 +145,28 @@ else
     echo "[*] Docker image ready (Node.js ${NODE_VERSION})"
 fi
 
+# bin/pm2 and index.js run from dist/, so it has to be in the snapshot every container unpacks.
+# Built once here rather than inside each of them: the image has the toolchain and the host may
+# not, and a hundred containers each running tsc would cost more than the tests do.
+echo "[*] Building dist/ inside the image..."
+BUILD_INPUT_TAR="$RESULTS_DIR/build-input.tar"
+tar -cf "$BUILD_INPUT_TAR" --exclude='.git' --exclude='node_modules' --exclude='dist' .
+# The bun image has no npm at all — it symlinks bun in as node and stops there.
+if [[ "$RUNTIME" == "bun" ]]; then
+    BUILD_COMMAND="bun run build"
+else
+    BUILD_COMMAND="npm run build"
+fi
+if ! docker run --rm -i "$IMAGE_NAME" \
+        bash -c "tar -xf - && $BUILD_COMMAND >&2 && tar -cf - dist" \
+        < "$BUILD_INPUT_TAR" > "$RESULTS_DIR/dist.tar"; then
+    echo "[!] Build failed"
+    exit 1
+fi
+rm -rf dist
+tar -xf "$RESULTS_DIR/dist.tar"
+echo "[*] dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"
+
 # Create tarball of codebase once (for isolated container copies)
 # Exclude node_modules since it's pre-installed in the Docker image
 echo "[*] Creating codebase snapshot..."

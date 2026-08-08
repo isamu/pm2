@@ -1,7 +1,7 @@
 var should = require('should');
 var PM2 = require('../..');
 
-var Configuration = require('../../lib/Configuration.js');
+var Configuration = require('../../dist/lib/Configuration.js');
 
 describe('Configuration via SET / GET tests', function () {
   before(function (done) {
