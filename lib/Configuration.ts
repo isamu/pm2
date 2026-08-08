@@ -4,7 +4,18 @@
  * can be found in the LICENSE file.
  */
 
-const Configuration = (module.exports = {});
+const Configuration = (module.exports = {
+  set,
+  unset,
+  setSyncIfNotExist,
+  setSync,
+  unsetSync,
+  multiset,
+  get,
+  getSync,
+  getAll,
+  getAllSync,
+});
 
 const fs = require('fs');
 
@@ -40,7 +51,7 @@ function serializeConfiguration(json_conf) {
   return JSON.stringify(json_conf, null, 4);
 }
 
-Configuration.set = function (key, value, cb) {
+function set(key, value, cb) {
   fs.readFile(cst.PM2_MODULE_CONF_FILE, function (err, data) {
     if (err) return cb(err);
 
@@ -77,9 +88,9 @@ Configuration.set = function (key, value, cb) {
     });
     return false;
   });
-};
+}
 
-Configuration.unset = function (key, cb) {
+function unset(key, cb) {
   fs.readFile(cst.PM2_MODULE_CONF_FILE, function (err, data) {
     if (err) return cb(err);
 
@@ -115,9 +126,9 @@ Configuration.unset = function (key, cb) {
     });
     return false;
   });
-};
+}
 
-Configuration.setSyncIfNotExist = function (key, value) {
+function setSyncIfNotExist(key, value) {
   try {
     var conf = JSON.parse(fs.readFileSync(cst.PM2_MODULE_CONF_FILE));
   } catch (e) {
@@ -137,9 +148,9 @@ Configuration.setSyncIfNotExist = function (key, value) {
   if (exists === false) return Configuration.setSync(key, value);
 
   return null;
-};
+}
 
-Configuration.setSync = function (key, value) {
+function setSync(key, value) {
   try {
     var data = fs.readFileSync(cst.PM2_MODULE_CONF_FILE);
   } catch (e) {
@@ -181,9 +192,9 @@ Configuration.setSync = function (key, value) {
     console.error(e.message);
     return null;
   }
-};
+}
 
-Configuration.unsetSync = function (key) {
+function unsetSync(key) {
   try {
     var data = fs.readFileSync(cst.PM2_MODULE_CONF_FILE);
   } catch (e) {
@@ -219,9 +230,9 @@ Configuration.unsetSync = function (key) {
     console.error(e.message);
     return null;
   }
-};
+}
 
-Configuration.multiset = function (serial, cb) {
+function multiset(serial, cb) {
   const arrays = [];
   serial = serial.match(/(?:[^ "]+|"[^"]*")+/g);
 
@@ -234,9 +245,9 @@ Configuration.multiset = function (serial, cb) {
     },
     cb,
   );
-};
+}
 
-Configuration.get = function (key, cb) {
+function get(key, cb) {
   Configuration.getAll(function (err, data) {
     const climb = splitKey(key);
 
@@ -252,9 +263,9 @@ Configuration.get = function (key, cb) {
     if (!data) return cb({ err: 'Unknown key' }, null);
     return cb(null, data);
   });
-};
+}
 
-Configuration.getSync = function (key) {
+function getSync(key) {
   try {
     var data = Configuration.getAllSync();
   } catch (e) {
@@ -274,20 +285,20 @@ Configuration.getSync = function (key) {
 
   if (!data) return null;
   return data;
-};
+}
 
-Configuration.getAll = function (cb) {
+function getAll(cb) {
   fs.readFile(cst.PM2_MODULE_CONF_FILE, function (err, data) {
     if (err) return cb(err);
     return cb(null, JSON.parse(data));
   });
-};
+}
 
-Configuration.getAllSync = function () {
+function getAllSync() {
   try {
     return JSON.parse(fs.readFileSync(cst.PM2_MODULE_CONF_FILE));
   } catch (e) {
     console.error(e.stack || e);
     return {};
   }
-};
+}
