@@ -6,14 +6,14 @@
 
 ## 現状（`ever-better diagnose`, commit 31adee80 時点）
 
-| 項目 | 状態 |
-| --- | --- |
-| 言語 | JavaScript（TS は `types/index.d.ts` のみ、1%） |
-| ESLint / Prettier | 無し |
-| test | mocha + bash（`test/unit.sh`, `test/e2e.sh`, docker 版 `test:parallel`） |
-| package scripts | `format` / `lint` / `build` / `typecheck` 無し |
-| CI | ubuntu + windows で test のみ。lint / typecheck / gate 無し |
-| 600 行超 | 14 ファイル（`lib/API.js` 1933 行が最大） |
+| 項目              | 状態                                                                     |
+| ----------------- | ------------------------------------------------------------------------ |
+| 言語              | JavaScript（TS は `types/index.d.ts` のみ、1%）                          |
+| ESLint / Prettier | 無し                                                                     |
+| test              | mocha + bash（`test/unit.sh`, `test/e2e.sh`, docker 版 `test:parallel`） |
+| package scripts   | `format` / `lint` / `build` / `typecheck` 無し                           |
+| CI                | ubuntu + windows で test のみ。lint / typecheck / gate 無し              |
+| 600 行超          | 14 ファイル（`lib/API.js` 1933 行が最大）                                |
 
 gap は 12 件。`.ever-better/state.json` と `QUALITY.md` に記録済み。
 
@@ -21,25 +21,25 @@ gap は 12 件。`.ever-better/state.json` と `QUALITY.md` に記録済み。
 
 `ever-better` の対象は **pm2 が所有するコード** に限る。
 
-| ディレクトリ | format | lint / typecheck / TS 移行 | 理由 |
-| --- | --- | --- | --- |
-| `lib/` (83), `bin/`, `index.js`, `constants.js`, `paths.js` | ○ | ○ | pm2 本体 |
-| `modules/` (190) | ○ | ○ | `pm2-axon` / `vizion` 等を repo に取り込んだもので、今は pm2 のコード |
-| `test/` (183) | ○ | ○ | 自前のテスト |
-| `examples/` (115) | ○ | **×** | ユーザーに見せるサンプル。ライブラリのソースではない |
-| `examples/using-pm2-and-transpilers/node.d.ts` | **×** | × | DefinitelyTyped の Node v6 型定義の丸ごとコピー（第三者コード） |
+| ディレクトリ                                                | format | lint / typecheck / TS 移行 | 理由                                                                  |
+| ----------------------------------------------------------- | ------ | -------------------------- | --------------------------------------------------------------------- |
+| `lib/` (83), `bin/`, `index.js`, `constants.js`, `paths.js` | ○      | ○                          | pm2 本体                                                              |
+| `modules/` (190)                                            | ○      | ○                          | `pm2-axon` / `vizion` 等を repo に取り込んだもので、今は pm2 のコード |
+| `test/` (183)                                               | ○      | ○                          | 自前のテスト                                                          |
+| `examples/` (115)                                           | ○      | **×**                      | ユーザーに見せるサンプル。ライブラリのソースではない                  |
+| `examples/using-pm2-and-transpilers/node.d.ts`              | **×**  | ×                          | DefinitelyTyped の Node v6 型定義の丸ごとコピー（第三者コード）       |
 
 ## フェーズと PR
 
 1 フェーズ = 1 PR。整形は必ず単独で出す。
 
-| # | PR | 内容 |
-| --- | --- | --- |
-| 1 | prepare | この計画・`AGENTS.md`・`QUALITY.md`・`.ever-better/state.json` |
-| 2 | format | Prettier 設定 + 全ファイル整形。**整形以外を一切含めない** |
-| 3 | bootstrap | ESLint / TypeScript / `format` `lint` `build` `typecheck` script / CI に lint・typecheck・macos・`ever-better check` を追加 |
-| 4 | freeze | `eslint-suppressions.json` を生成し、今日の違反数を天井として固定 |
-| 5+ | migrate | `ever-better migrate` の依存順に沿って `lib/` から `.ts` へ。1 PR = 数ファイル |
+| #   | PR        | 内容                                                                                                                        |
+| --- | --------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1   | prepare   | この計画・`AGENTS.md`・`QUALITY.md`・`.ever-better/state.json`                                                              |
+| 2   | format    | Prettier 設定 + 全ファイル整形。**整形以外を一切含めない**                                                                  |
+| 3   | bootstrap | ESLint / TypeScript / `format` `lint` `build` `typecheck` script / CI に lint・typecheck・macos・`ever-better check` を追加 |
+| 4   | freeze    | `eslint-suppressions.json` を生成し、今日の違反数を天井として固定                                                           |
+| 5+  | migrate   | `ever-better migrate` の依存順に沿って `lib/` から `.ts` へ。1 PR = 数ファイル                                              |
 
 ## 判断のメモ
 
