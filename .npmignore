@@ -32,3 +32,13 @@ plans
 AGENTS.md
 .prettierrc.json
 .prettierignore
+
+# TypeScript sources. dist/ is what ships, and shipping these next to it recreates the
+# ambiguity that broke Bun before: Bun resolves require('pm2/lib/API.js') to lib/API.ts and
+# loads the uncompiled source. Node answers MODULE_NOT_FOUND; Bun answers with an error from
+# inside pm2. types/index.d.ts is the published typing and stays.
+lib/*.ts
+lib/**/*.ts
+/paths.ts
+/constants.ts
+tsconfig.migrating.json
