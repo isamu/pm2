@@ -27,6 +27,7 @@
     "lib/tools/deleteFolderRecursive.ts",
     "lib/tools/IsAbsolute.ts",
     "lib/tools/packageRoot.ts",
+    "lib/tools/processFile.ts",
     "lib/tools/passwd.ts",
     "lib/tools/sexec.ts",
     "lib/tools/which.ts",

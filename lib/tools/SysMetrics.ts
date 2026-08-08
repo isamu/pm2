@@ -47,7 +47,7 @@ const IFACE_RE = /^[A-Za-z0-9._-]+$/;
 
 const EXEC_OPTS = { timeout: 2000, maxBuffer: 1024 * 1024, windowsHide: true };
 
-function execFileP(bin, args) {
+function execFileP(bin, args): Promise<string | null> {
   return new Promise((resolve) => {
     try {
       execFile(bin, args, EXEC_OPTS, (err, stdout) => resolve(err ? null : stdout.toString()));
@@ -392,7 +392,6 @@ function create() {
 }
 
 // Default singleton used by the daemon Worker; `.create()` for isolated tests.
-const singleton = create();
-singleton.create = create;
+const singleton = Object.assign(create(), { create });
 
 module.exports = singleton;

@@ -52,14 +52,37 @@ interface StaticEntry {
   monitor?: string;
 }
 
-// A process file, as parsed. The app entries are left open: their schema is what
-// Common.verifyConfs enforces, and describing it here would be describing it twice.
-interface ProcessFile {
+// The fields of an app entry this file reads or writes. An entry carries far more than this —
+// the whole schema is what Common.verifyConfs enforces at runtime — so the rest is left off
+// rather than guessed at.
+interface AppEntry {
+  name?: string;
+  namespace?: string;
+  script?: string;
+  cwd?: string;
+  env?: Record<string, unknown>;
+  io?: unknown;
+  instances?: number | string;
+  watch?: unknown;
+  ignore_watch?: unknown;
+  install_url?: string;
+  append_env_to_name?: boolean;
+  uid?: string | number;
+  gid?: string | number;
+  username?: string;
+  pmx_module?: boolean;
+}
+
+// A process file, as parsed. It extends AppEntry because a file naming no `apps` is itself
+// treated as a single app — which is the last branch of the lookup below.
+interface ProcessFile extends AppEntry {
   deploy?: object;
   static?: StaticEntry[];
-  apps?: object;
-  pm2?: object;
+  apps?: AppEntry | AppEntry[];
+  pm2?: AppEntry | AppEntry[];
 }
+
+const { appsIn } = require('./tools/processFile.js');
 
 /**
  * Main Function to be imported
@@ -974,7 +997,6 @@ class API {
    */
   _startJson(file, opts, action, pipe?, cb?) {
     let config: ProcessFile = {};
-    let appConf = {};
     let staticConf: StaticEntry[] = [];
     let deployConf = {};
     let apps_info = [];
@@ -1019,10 +1041,7 @@ class API {
      */
     if (config.deploy) deployConf = config.deploy;
     if (config.static) staticConf = config.static;
-    if (config.apps) appConf = config.apps;
-    else if (config.pm2) appConf = config.pm2;
-    else appConf = config;
-    if (!Array.isArray(appConf)) appConf = [appConf];
+    let appConf: AppEntry[] = appsIn(config);
 
     if ((appConf = Common.verifyConfs(appConf)) instanceof Error)
       return cb ? cb(appConf) : that.exitCli(conf.ERROR_EXIT);
@@ -1275,14 +1294,14 @@ class API {
    * @param {Function}
    */
   actionFromJson(action, file, opts, jsonVia, cb) {
-    let appConf = {};
+    let parsed: ProcessFile = {};
     const ret_processes = [];
     const that = this;
 
     //accept programmatic calls
     if (typeof file == 'object') {
       cb = typeof jsonVia == 'function' ? jsonVia : cb;
-      appConf = file;
+      parsed = file;
     } else if (jsonVia == 'file') {
       let data = null;
 
@@ -1294,23 +1313,20 @@ class API {
       }
 
       try {
-        appConf = Common.parseConfig(data, file);
+        parsed = Common.parseConfig(data, file);
       } catch (e) {
         Common.printError(conf.PREFIX_MSG_ERR + 'File ' + file + ' malformated');
         console.error(e);
         return cb ? cb(Common.retErr(e)) : that.exitCli(conf.ERROR_EXIT);
       }
     } else if (jsonVia == 'pipe') {
-      appConf = Common.parseConfig(file, 'pipe');
+      parsed = Common.parseConfig(file, 'pipe');
     } else {
       Common.printError('Bad call to actionFromJson, jsonVia should be one of file, pipe');
       return that.exitCli(conf.ERROR_EXIT);
     }
 
-    // Backward compatibility
-    if (appConf.apps) appConf = appConf.apps;
-
-    if (!Array.isArray(appConf)) appConf = [appConf];
+    let appConf: AppEntry[] = appsIn(parsed);
 
     if ((appConf = Common.verifyConfs(appConf)) instanceof Error)
       return cb ? cb(appConf) : that.exitCli(conf.ERROR_EXIT);
