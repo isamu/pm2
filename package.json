@@ -57,7 +57,10 @@
     "test:io-agent": "mocha 'modules/pm2-io-agent/test/units/*.mocha.js' --reporter spec --exit",
     "test:windows": "bash test/windows.sh",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "knip": "knip",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "keywords": [
     "cli",
@@ -151,10 +154,21 @@
     "debug": "4.4.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.2.0",
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-security": "^4.0.1",
+    "eslint-plugin-sonarjs": "^4.2.0",
     "express": "^4.21.0",
+    "globals": "^17.9.0",
+    "knip": "^6.32.0",
     "mocha": "^11.7.0",
     "prettier": "^3.9.6",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.66.0"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
