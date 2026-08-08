@@ -1017,17 +1017,6 @@
       "count": 2
     }
   },
-  "lib/TreeKill.js": {
-    "id-length": {
-      "count": 1
-    },
-    "max-lines-per-function": {
-      "count": 1
-    },
-    "sonarjs/no-os-command-from-path": {
-      "count": 1
-    }
-  },
   "lib/Utility.js": {
     "@typescript-eslint/no-unused-expressions": {
       "count": 1
