@@ -196,7 +196,7 @@ function interactiveConfigEdit(cb) {
 /**
  * Configuration
  */
-function displayConf(target_app, cb) {
+function displayConf(target_app, cb?) {
   if (typeof target_app == 'function') {
     cb = target_app;
     target_app = null;

@@ -764,7 +764,7 @@ commander
     pm2.openDashboard();
   });
 
-function plusHandler(command, opts) {
+function plusHandler(command?, opts?) {
   if (opts && opts.infoNode) {
     process.env.KEYMETRICS_NODE = opts.infoNode;
   }

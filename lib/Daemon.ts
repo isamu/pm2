@@ -19,7 +19,7 @@ const God = require('./God');
 const eachLimit = require('async/eachLimit');
 const fmt = require('./tools/fmt.js');
 
-const Daemon = (module.exports = function (opts) {
+const Daemon = (module.exports = function (opts?) {
   if (!opts) opts = {};
 
   this.ignore_signals = opts.ignore_signals || false;

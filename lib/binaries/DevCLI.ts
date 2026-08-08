@@ -45,7 +45,7 @@ pm2.connect(function () {
   commander.parse(process.argv);
 });
 
-function postExecCmd(command, cb) {
+function postExecCmd(command, cb?) {
   const exec_cmd = exec(command);
 
   if (commander.silentExec !== true) {
@@ -154,7 +154,7 @@ function exitPM2() {
   } else process.exit(0);
 }
 
-function autoExit(final) {
+function autoExit(final?) {
   setTimeout(function () {
     pm2.list(function (err, apps) {
       if (err) console.error(err.stack || err);

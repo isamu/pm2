@@ -939,7 +939,7 @@ class API {
    *
    * @private
    */
-  _startJson(file, opts, action, pipe, cb) {
+  _startJson(file, opts, action, pipe?, cb?) {
     let config = {};
     let appConf = {};
     let staticConf = [];
@@ -1356,7 +1356,7 @@ class API {
    * @param {String} process_name can be 'all', a id integer or process name
    * @param {Object} envs         object with CLI options / environment
    */
-  _operate(action_name, process_name, envs, cb) {
+  _operate(action_name, process_name, envs?, cb?) {
     const that = this;
     let update_env = false;
     const ret = [];
@@ -1762,7 +1762,7 @@ class API {
    * @method speedList
    * @return
    */
-  speedList(code, apps_acted) {
+  speedList(code?, apps_acted?) {
     const that = this;
     let systemdata = null;
     const acted = [];

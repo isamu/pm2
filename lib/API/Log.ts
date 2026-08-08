@@ -297,7 +297,7 @@ Log.formatStream = function (Client, id, raw, timestamp, exclusive, highlight) {
   });
 };
 
-function pad(pad, str, padLeft) {
+function pad(pad, str, padLeft?) {
   if (typeof str === 'undefined') return pad;
   if (padLeft) {
     return (pad + str).slice(-pad.length);
