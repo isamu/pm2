@@ -1235,14 +1235,6 @@
       "count": 1
     }
   },
-  "lib/tools/IsAbsolute.js": {
-    "sonarjs/regex-complexity": {
-      "count": 1
-    },
-    "sonarjs/super-linear-regex": {
-      "count": 1
-    }
-  },
   "lib/tools/SysMetrics.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 5
@@ -1284,11 +1276,6 @@
     },
     "sonarjs/no-nested-conditional": {
       "count": 2
-    }
-  },
-  "lib/tools/deleteFolderRecursive.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
     }
   },
   "lib/tools/find-package-json.js": {

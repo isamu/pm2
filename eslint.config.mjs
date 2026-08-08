@@ -103,6 +103,14 @@ export default tseslint.config(
       'max-lines': 'off',
       'max-lines-per-function': 'off',
       'sonarjs/no-duplicate-string': 'off',
+      // eslint-plugin-security asks whether untrusted input can reach a dangerous sink. A test
+      // builds its own inputs, so the answer is always no — and leaving these on means every
+      // test that touches a temp directory or spawns pm2 raises the ceiling, which turns the
+      // ratchet into a reason not to write tests.
+      'security/detect-non-literal-fs-filename': 'off',
+      'security/detect-object-injection': 'off',
+      'security/detect-non-literal-require': 'off',
+      'security/detect-child-process': 'off',
     },
   },
 );
