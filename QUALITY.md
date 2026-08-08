@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **3612**
+- Open violations: **3606**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 3612 violations across 70 rules
+- [ ] **P3 drain** — 3606 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -31,8 +31,8 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
-| `id-length` | 1339 | 1339 | 0 | draining |
-| `@typescript-eslint/no-unused-vars` | 912 | 912 | 0 | draining |
+| `id-length` | 1338 | 1338 | 0 | draining |
+| `@typescript-eslint/no-unused-vars` | 911 | 911 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
 | `max-lines-per-function` | 129 | 129 | 0 | draining |
 | `@typescript-eslint/no-this-alias` | 122 | 122 | 0 | draining |
@@ -41,8 +41,8 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `sonarjs/no-unused-vars` | 62 | 62 | 0 | draining |
 | `sonarjs/no-nested-functions` | 61 | 61 | 0 | draining |
 | `sonarjs/no-dead-store` | 54 | 54 | 0 | draining |
-| `sonarjs/cognitive-complexity` | 49 | 49 | 0 | draining |
-| `complexity` | 40 | 40 | 0 | draining |
+| `sonarjs/cognitive-complexity` | 48 | 48 | 0 | draining |
+| `complexity` | 39 | 39 | 0 | draining |
 | `sonarjs/no-ignored-exceptions` | 39 | 39 | 0 | draining |
 | `no-useless-assignment` | 38 | 38 | 0 | draining |
 | `sonarjs/assertions-in-tests` | 38 | 38 | 0 | draining |
@@ -61,14 +61,14 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `sonarjs/super-linear-regex` | 11 | 11 | 0 | draining |
 | `sonarjs/no-nested-conditional` | 10 | 10 | 0 | draining |
 | `sonarjs/regex-complexity` | 10 | 10 | 0 | draining |
-| `sonarjs/todo-tag` | 9 | 9 | 0 | draining |
 | `sonarjs/pseudo-random` | 9 | 9 | 0 | draining |
 | `sonarjs/publicly-writable-directories` | 9 | 9 | 0 | draining |
+| `sonarjs/todo-tag` | 8 | 8 | 0 | draining |
 | `no-unreachable` | 8 | 8 | 0 | draining |
 | `sonarjs/no-duplicated-branches` | 8 | 8 | 0 | draining |
 | `sonarjs/single-character-alternation` | 7 | 7 | 0 | draining |
-| `max-depth` | 7 | 7 | 0 | draining |
 | `sonarjs/file-permissions` | 6 | 6 | 0 | draining |
+| `max-depth` | 6 | 6 | 0 | draining |
 | `no-control-regex` | 4 | 4 | 0 | draining |
 | `sonarjs/x-powered-by` | 4 | 4 | 0 | draining |
 | `max-lines` | 3 | 3 | 0 | draining |

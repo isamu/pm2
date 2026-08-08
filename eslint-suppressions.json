@@ -1439,26 +1439,6 @@
       "count": 1
     }
   },
-  "lib/tools/which.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "complexity": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 1
-    },
-    "max-depth": {
-      "count": 1
-    },
-    "sonarjs/cognitive-complexity": {
-      "count": 1
-    },
-    "sonarjs/todo-tag": {
-      "count": 1
-    }
-  },
   "modules/fclone.js": {
     "complexity": {
       "count": 1
