@@ -1028,23 +1028,6 @@
       "count": 2
     }
   },
-  "lib/ProcessUtils.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 2
-    },
-    "no-empty": {
-      "count": 1
-    },
-    "sonarjs/no-ignored-exceptions": {
-      "count": 1
-    },
-    "sonarjs/prefer-single-boolean-return": {
-      "count": 1
-    }
-  },
   "lib/TreeKill.js": {
     "id-length": {
       "count": 1

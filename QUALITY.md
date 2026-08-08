@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **3635**
+- Open violations: **3629**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 3635 violations across 70 rules
+- [ ] **P3 drain** — 3629 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -31,8 +31,8 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
-| `id-length` | 1354 | 1354 | 0 | draining |
-| `@typescript-eslint/no-unused-vars` | 917 | 917 | 0 | draining |
+| `id-length` | 1352 | 1352 | 0 | draining |
+| `@typescript-eslint/no-unused-vars` | 916 | 916 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
 | `max-lines-per-function` | 129 | 129 | 0 | draining |
 | `@typescript-eslint/no-this-alias` | 122 | 122 | 0 | draining |
@@ -43,7 +43,7 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `sonarjs/no-dead-store` | 54 | 54 | 0 | draining |
 | `sonarjs/cognitive-complexity` | 49 | 49 | 0 | draining |
 | `complexity` | 40 | 40 | 0 | draining |
-| `sonarjs/no-ignored-exceptions` | 40 | 40 | 0 | draining |
+| `sonarjs/no-ignored-exceptions` | 39 | 39 | 0 | draining |
 | `no-useless-assignment` | 38 | 38 | 0 | draining |
 | `sonarjs/assertions-in-tests` | 38 | 38 | 0 | draining |
 | `no-prototype-builtins` | 29 | 29 | 0 | draining |
@@ -52,7 +52,7 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `sonarjs/block-scoped-var` | 21 | 21 | 0 | draining |
 | `sonarjs/no-os-command-from-path` | 20 | 20 | 0 | draining |
 | `sonarjs/concise-regex` | 20 | 20 | 0 | draining |
-| `no-empty` | 19 | 19 | 0 | draining |
+| `no-empty` | 18 | 18 | 0 | draining |
 | `@typescript-eslint/no-explicit-any` | 17 | 17 | 0 | draining |
 | `sonarjs/no-skipped-tests` | 16 | 16 | 0 | draining |
 | `no-useless-escape` | 13 | 13 | 0 | draining |
@@ -73,10 +73,10 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `sonarjs/x-powered-by` | 4 | 4 | 0 | draining |
 | `max-lines` | 3 | 3 | 0 | draining |
 | `sonarjs/no-identical-functions` | 3 | 3 | 0 | draining |
-| `sonarjs/prefer-single-boolean-return` | 3 | 3 | 0 | draining |
 | `sonarjs/arguments-order` | 3 | 3 | 0 | draining |
 | `sonarjs/no-globals-shadowing` | 2 | 2 | 0 | draining |
 | `no-unassigned-vars` | 2 | 2 | 0 | draining |
+| `sonarjs/prefer-single-boolean-return` | 2 | 2 | 0 | draining |
 | `preserve-caught-error` | 2 | 2 | 0 | draining |
 | `@typescript-eslint/no-array-constructor` | 2 | 2 | 0 | draining |
 | `no-misleading-character-class` | 2 | 2 | 0 | draining |
