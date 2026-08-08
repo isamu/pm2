@@ -2,7 +2,7 @@
 
 process.env.PM2_NO_INTERACTION = 'true';
 // Do not print banner
-process.env.PM2_DISCRETE_MODE = true;
+process.env.PM2_DISCRETE_MODE = 'true';
 
 const commander = require('commander');
 

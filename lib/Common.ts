@@ -55,7 +55,7 @@ Common.determineSilentCLI = function () {
         console[key] = function () {};
       }
     }
-    process.env.PM2_DISCRETE_MODE = true;
+    process.env.PM2_DISCRETE_MODE = 'true';
   }
 };
 

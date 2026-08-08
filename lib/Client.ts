@@ -488,7 +488,7 @@ Client.prototype.disconnectBus = function disconnectBus(cb) {
     });
 
     timer = setTimeout(function () {
-      if (Client.sub_sock.destroy) that.sub_sock.destroy();
+      if (that.sub_sock.destroy) that.sub_sock.destroy();
       return cb();
     }, 200);
 
@@ -579,7 +579,7 @@ Client.prototype.killDaemon = function killDaemon(fn) {
   }
 
   // under unix, we listen for signal (that is send by daemon to notify us that its shuting down)
-  if (process.platform !== 'win32' && process.platform !== 'win64') {
+  if (process.platform !== 'win32') {
     process.once('SIGQUIT', function () {
       debug('Received SIGQUIT from pm2 daemon');
       clearTimeout(timeout);

@@ -1073,7 +1073,7 @@ commander
 
     let line = 15;
     let raw = false;
-    let exclusive = false;
+    let exclusive: string | boolean = false;
     let timestamp = false;
     let highlight = false;
 
