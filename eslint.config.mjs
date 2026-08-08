@@ -55,6 +55,12 @@ export default tseslint.config(
     // parse error and the file silently goes unlinted.
     files: ['**/*.js'],
     languageOptions: { sourceType: 'script' },
+    rules: {
+      // A .js file in a CommonJS package cannot use `import`, so there is nothing a new file
+      // could do to satisfy this — it would block every new test and module rather than hold
+      // a line. The rule is live for .ts, which is where the migration is heading.
+      '@typescript-eslint/no-require-imports': 'off',
+    },
   },
 
   {
