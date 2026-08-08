@@ -26,7 +26,7 @@ module.exports = function (CLI) {
     const uri = `https://app.pm2.io/#/r/${this.gl_interact_infos.public_key}`;
     console.log(cst.PM2_IO_MSG + ` Opening ${uri}`);
     open(uri);
-    setTimeout((_) => {
+    setTimeout(() => {
       this.exitCli();
     }, 200);
   };

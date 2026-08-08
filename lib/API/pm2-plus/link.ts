@@ -84,7 +84,7 @@ module.exports = function (CLI) {
   CLI.prototype.link = function (infos, cb) {
     const that = this;
 
-    process.env.WS_JSON_PATCH = true;
+    process.env.WS_JSON_PATCH = 'true';
 
     KMDaemon.launchAndInteract(cst, infos, function (err, dt) {
       if (err) {

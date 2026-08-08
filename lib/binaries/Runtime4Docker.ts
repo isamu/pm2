@@ -11,7 +11,7 @@ const pkg = require('../../package.json');
 const path = require('path');
 const DEFAULT_FAIL_COUNT = 3;
 
-process.env.PM2_DISCRETE_MODE = true;
+process.env.PM2_DISCRETE_MODE = 'true';
 
 commander
   .version(pkg.version)
@@ -154,7 +154,7 @@ var Runtime = {
   /**
    * Exit runtime mgmt
    */
-  exit: function (code) {
+  exit: function (code?) {
     if (!this.pm2) return process.exit(1);
 
     this.pm2.kill(function () {
@@ -166,7 +166,7 @@ var Runtime = {
    * Exit current PM2 instance if 0 app is online
    * function activated via --auto-exit
    */
-  autoExitWorker: function (fail_count) {
+  autoExitWorker: function (fail_count?) {
     const interval = 2000;
 
     if (typeof fail_count == 'undefined') fail_count = DEFAULT_FAIL_COUNT;

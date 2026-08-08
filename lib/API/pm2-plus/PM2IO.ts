@@ -16,6 +16,12 @@ const OAUTH_CLIENT_ID_WEB = '138558311';
 const OAUTH_CLIENT_ID_CLI = '0943857435';
 
 module.exports = class PM2ioHandler {
+  // Set once during init, then read from every command below. All three come from modules this
+  // file requires, so there is no type to name them with beyond what those modules hand back.
+  static pm2;
+  static io;
+  static _strategy;
+
   static usePM2Client(instance) {
     this.pm2 = instance;
   }
@@ -397,7 +403,7 @@ module.exports = class PM2ioHandler {
     });
   }
 
-  static open(target, appName, callback) {
+  static open(target, appName?, callback?) {
     if (typeof appName === 'function') {
       callback = appName;
       appName = null;

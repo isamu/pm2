@@ -1,4 +1,9 @@
 const cst = require('../../../constants');
+
+// Column name to width. Which columns are in the map is what changes between the full, condensed
+// and mini layouts, so the set of keys is not fixed.
+type ColumnWidths = Record<string, number>;
+
 const Common = require('../../Common');
 const Configuration = require('../../Configuration');
 const UxHelpers = require('./helpers.js');
@@ -67,7 +72,7 @@ function listModulesAndAppsManaged(list, commander) {
     4,
   );
 
-  let app_head = {
+  let app_head: ColumnWidths = {
     id: id_width,
     name: name_col_size,
     namespace: 13,
@@ -83,7 +88,7 @@ function listModulesAndAppsManaged(list, commander) {
     watching: 10,
   };
 
-  let mod_head = {
+  let mod_head: ColumnWidths = {
     id: id_width,
     module: 30,
     version: 15,
@@ -358,7 +363,7 @@ function listModulesAndAppsManaged(list, commander) {
 function containersListing(sys_infos) {
   const stacked_docker = (process.stdout.columns || 100) < 140;
 
-  let docker_head = {
+  let docker_head: ColumnWidths = {
     id: 4,
     image: 50,
     status: 10,

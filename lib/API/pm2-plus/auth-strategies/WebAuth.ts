@@ -164,7 +164,7 @@ module.exports = class WebStrategy extends AuthStrategy {
     });
   }
 
-  open(target, appName, callback) {
+  open(target, appName?, callback?) {
     if (typeof appName === 'function') {
       callback = appName;
       appName = null;
