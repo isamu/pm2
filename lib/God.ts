@@ -45,7 +45,40 @@ if (cst.IS_BUN == true) {
 /**
  * Expose God
  */
-const God = (module.exports = {
+// God is a namespace object rather than a class: this file creates it, then hands it in turn to
+// the seven modules required below, each of which hangs its own methods off it. Nothing in the
+// type system connects those assignments back to here, so what they contribute is declared —
+// optional, because that is what these are until the requires have run.
+interface GodContributions {
+  // Event.js
+  notify?(action_name: string, data: unknown, manually?: boolean): void;
+  // God/Methods.js
+  getNewId?(): number;
+  // God/ForkMode.js, God/ClusterMode.js
+  forkMode?(pm2_env: unknown, cb: unknown): void;
+  nodeApp?(env_copy: unknown, cb: unknown): void;
+  // God/ActionMethods.js
+  pm2_being_killed?: boolean;
+  // Worker.js
+  registerCron?(pm2_env: unknown): void;
+  Worker?: { is_running: boolean; start(): void; stop(): void };
+  // Watcher.js
+  watch?: {
+    _watchers: object;
+    enable(pm2_env: unknown): void;
+    disable(pm2_env: unknown): void;
+    disableAll(): void;
+  };
+}
+
+const GodState = {
+  init,
+  prepare,
+  executeApp,
+  handleExit,
+  finalizeProcedure,
+  injectVariables,
+  writeExitSeparator,
   next_id: 0,
   clusters_db: {},
   configuration: {},
@@ -57,7 +90,9 @@ const God = (module.exports = {
     delimiter: ':',
     maxListeners: 1000,
   }),
-});
+};
+
+const God: typeof GodState & GodContributions = (module.exports = GodState);
 
 Utility.overrideConsole(God.bus);
 
@@ -72,7 +107,7 @@ require('./God/Reload')(God);
 require('./God/ActionMethods')(God);
 require('./Watcher')(God);
 
-God.init = function () {
+function init() {
   require('./Worker.js')(this);
   God.system_infos_proc = null;
 
@@ -81,9 +116,9 @@ God.init = function () {
   setTimeout(function () {
     God.Worker.start();
   }, 500);
-};
+}
 
-God.writeExitSeparator = function (pm2_env, code, signal) {
+function writeExitSeparator(pm2_env, code, signal) {
   try {
     let exit_sep = `[PM2][${new Date().toISOString()}] app exited`;
     if (code) exit_sep += `itself with exit code: ${code}`;
@@ -94,12 +129,12 @@ God.writeExitSeparator = function (pm2_env, code, signal) {
     if (pm2_env.pm_err_log_path) fs.writeFileSync(pm2_env.pm_err_log_path, exit_sep);
     if (pm2_env.pm_log_path) fs.writeFileSync(pm2_env.pm_log_path, exit_sep);
   } catch (e) {}
-};
+}
 
 /**
  * Init new process
  */
-God.prepare = function prepare(env, cb) {
+function prepare(env, cb) {
   // generate a new unique id for each processes
   env.env.unique_id = Utility.generateUUID();
 
@@ -159,7 +194,7 @@ God.prepare = function prepare(env, cb) {
     },
     cb,
   );
-};
+}
 
 /**
  * Launch the specified script (present in env)
@@ -169,7 +204,7 @@ God.prepare = function prepare(env, cb) {
  * @param {Function} cb
  * @return Literal
  */
-God.executeApp = function executeApp(env, cb) {
+function executeApp(env, cb?) {
   const env_copy = Utility.clone(env);
 
   Utility.extend(env_copy, env_copy.env);
@@ -390,7 +425,7 @@ God.executeApp = function executeApp(env, cb) {
     });
   }
   return false;
-};
+}
 
 /**
  * Handle logic when a process exit (Node or Fork)
@@ -399,7 +434,7 @@ God.executeApp = function executeApp(env, cb) {
  * @param {} exit_code
  * @return
  */
-God.handleExit = function handleExit(clu, exit_code, kill_signal) {
+function handleExit(clu, exit_code, kill_signal?) {
   console.log(
     `App [${clu.pm2_env.name}:${clu.pm2_env.pm_id}] exited with code [${exit_code}] via signal [${kill_signal || 'SIGINT'}]`,
   );
@@ -532,14 +567,14 @@ God.handleExit = function handleExit(clu, exit_code, kill_signal) {
   }
 
   return false;
-};
+}
 
 /**
  * @method finalizeProcedure
  * @param proc {Object}
  * @return
  */
-God.finalizeProcedure = function finalizeProcedure(proc) {
+function finalizeProcedure(proc) {
   let last_path = '';
   let current_path = proc.pm2_env.cwd || path.dirname(proc.pm2_env.pm_exec_path);
   const proc_id = proc.pm2_env.pm_id;
@@ -584,14 +619,14 @@ God.finalizeProcedure = function finalizeProcedure(proc) {
     }
     return false;
   });
-};
+}
 
 /**
  * Inject variables into processes
  * @param {Object} env environnement to be passed to the process
  * @param {Function} cb invoked with <err, env>
  */
-God.injectVariables = function injectVariables(env, cb) {
+function injectVariables(env, cb) {
   // allow to override the key of NODE_APP_INSTANCE if wanted
   const instanceKey = process.env.PM2_PROCESS_INSTANCE_VAR || env.instance_var;
 
@@ -644,6 +679,6 @@ God.injectVariables = function injectVariables(env, cb) {
   }
 
   return cb(null, env);
-};
+}
 
 God.init();
