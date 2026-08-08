@@ -80,7 +80,10 @@ module.exports = function (CLI) {
     };
     const init_systems = Object.keys(hash_map);
 
-    for (var i = 0; i < init_systems.length; i++) {
+    // Declared out here because the check after the loop reads how far it got.
+    let i = 0;
+
+    for (; i < init_systems.length; i++) {
       if (which(init_systems[i]) != null) {
         break;
       }
@@ -128,6 +131,8 @@ module.exports = function (CLI) {
       platform = 'oldsystem';
     }
 
+    let destination;
+
     switch (platform) {
       case 'systemd':
         commands = [
@@ -163,7 +168,7 @@ module.exports = function (CLI) {
         ];
         break;
       case 'launchd':
-        var destination = path.join(
+        destination = path.join(
           process.env.HOME,
           'Library/LaunchAgents/' + launchd_service_name + '.plist',
         );
@@ -179,7 +184,7 @@ module.exports = function (CLI) {
         break;
       case 'rcd-openbsd':
         service_name = opts.serviceName || 'pm2_' + user;
-        var destination = path.join('/etc/rc.d', service_name);
+        destination = path.join('/etc/rc.d', service_name);
         commands = [
           'rcctl stop ' + service_name,
           'rcctl disable ' + service_name,
@@ -557,8 +562,9 @@ module.exports = function (CLI) {
 
     function readDumpFile(dumpFilePath) {
       Common.printOut(cst.PREFIX_MSG + 'Restoring processes located in %s', dumpFilePath);
+      let apps;
       try {
-        var apps = fs.readFileSync(dumpFilePath);
+        apps = fs.readFileSync(dumpFilePath);
       } catch (e) {
         Common.printError(cst.PREFIX_MSG_ERR + 'Failed to read dump file in %s', dumpFilePath);
         throw e;
@@ -568,8 +574,9 @@ module.exports = function (CLI) {
     }
 
     function parseDumpFile(dumpFilePath, apps) {
+      let processes;
       try {
-        var processes = Common.parseConfig(apps, 'none');
+        processes = Common.parseConfig(apps, 'none');
       } catch (e) {
         Common.printError(cst.PREFIX_MSG_ERR + 'Failed to parse dump file in %s', dumpFilePath);
         try {

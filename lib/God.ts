@@ -305,18 +305,21 @@ function executeApp(env, cb?) {
 
       God.clusters_db[clu.pm2_env.pm_id] = clu;
 
+      // Cleared by whichever of the error/exit/online handlers below fires first.
+      let bun_online_timer;
+
       if (cst.IS_BUN) {
         // When starting an app that does not listen on a port
         // Bun do not call 'online' event
         // This is a temporary workaround
-        var a = setTimeout(() => {
+        bun_online_timer = setTimeout(() => {
           if (clu.pm2_env) God.clusters_db[clu.pm2_env.pm_id].state = 'online';
           return readyCb(clu);
         }, 500);
       }
 
       clu.once('error', function (err) {
-        if (cst.IS_BUN) clearTimeout(a);
+        if (cst.IS_BUN) clearTimeout(bun_online_timer);
 
         console.error(err.stack || err);
         try {
@@ -328,14 +331,14 @@ function executeApp(env, cb?) {
       });
 
       clu.once('disconnect', function () {
-        if (cst.IS_BUN) clearTimeout(a);
+        if (cst.IS_BUN) clearTimeout(bun_online_timer);
 
         console.log('App name:%s id:%s disconnected', clu.pm2_env.name, clu.pm2_env.pm_id);
       });
 
       clu.once('exit', function cluExit(code, signal) {
         if (cst.IS_BUN) {
-          clearTimeout(a);
+          clearTimeout(bun_online_timer);
           if (cb_called == false) readyCb(clu);
         }
         //God.writeExitSeparator(clu.pm2_env, code, signal)
@@ -345,7 +348,7 @@ function executeApp(env, cb?) {
 
       return clu.once('online', function () {
         if (cst.IS_BUN) {
-          clearTimeout(a);
+          clearTimeout(bun_online_timer);
         }
 
         if (!clu.pm2_env.wait_ready) return readyCb(clu);
@@ -356,7 +359,7 @@ function executeApp(env, cb?) {
           return readyCb(clu);
         }, clu.pm2_env.listen_timeout || cst.GRACEFUL_LISTEN_TIMEOUT);
 
-        var listener = function (packet) {
+        const listener = function (packet) {
           if (
             packet.raw === 'ready' &&
             packet.process.name === clu.pm2_env.name &&
@@ -410,7 +413,7 @@ function executeApp(env, cb?) {
         return readyCb(clu);
       }, clu.pm2_env.listen_timeout || cst.GRACEFUL_LISTEN_TIMEOUT);
 
-      var listener = function (packet) {
+      const listener = function (packet) {
         if (
           packet.raw === 'ready' &&
           packet.process.name === clu.pm2_env.name &&

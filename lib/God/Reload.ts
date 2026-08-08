@@ -63,7 +63,7 @@ function softReload(God, id, cb) {
     }, new_env.listen_timeout || cst.GRACEFUL_LISTEN_TIMEOUT);
 
     // Remove old worker properly
-    var softCleanDeleteProcess = function () {
+    const softCleanDeleteProcess = function () {
       const cleanUp = function () {
         clearTimeout(timer);
         console.log('-softReload- Old worker disconnected');

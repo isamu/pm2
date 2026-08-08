@@ -134,12 +134,6 @@
     "no-prototype-builtins": {
       "count": 2
     },
-    "no-var": {
-      "count": 4
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
-    },
     "sonarjs/cognitive-complexity": {
       "count": 1
     },
@@ -298,9 +292,6 @@
     "no-useless-assignment": {
       "count": 3
     },
-    "no-var": {
-      "count": 1
-    },
     "prefer-const": {
       "count": 1
     },
@@ -320,12 +311,6 @@
     },
     "max-lines-per-function": {
       "count": 1
-    },
-    "no-var": {
-      "count": 3
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 3
     },
     "sonarjs/no-dead-store": {
       "count": 2
@@ -397,12 +382,6 @@
     },
     "max-lines-per-function": {
       "count": 6
-    },
-    "no-var": {
-      "count": 5
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 3
     },
     "sonarjs/cognitive-complexity": {
       "count": 1
@@ -501,12 +480,6 @@
     },
     "max-nested-callbacks": {
       "count": 6
-    },
-    "no-var": {
-      "count": 3
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
     },
     "sonarjs/no-nested-functions": {
       "count": 6
@@ -645,9 +618,6 @@
     "no-useless-assignment": {
       "count": 2
     },
-    "no-var": {
-      "count": 1
-    },
     "prefer-const": {
       "count": 3
     },
@@ -695,9 +665,6 @@
     "no-empty": {
       "count": 1
     },
-    "no-var": {
-      "count": 4
-    },
     "prefer-const": {
       "count": 2
     },
@@ -723,7 +690,7 @@
       "count": 1
     },
     "sonarjs/no-nested-assignment": {
-      "count": 2
+      "count": 1
     },
     "sonarjs/no-redundant-boolean": {
       "count": 3
@@ -741,12 +708,6 @@
     },
     "id-length": {
       "count": 16
-    },
-    "no-var": {
-      "count": 4
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 4
     },
     "sonarjs/prefer-single-boolean-return": {
       "count": 1
@@ -803,7 +764,7 @@
       "count": 1
     },
     "id-length": {
-      "count": 13
+      "count": 12
     },
     "max-lines-per-function": {
       "count": 3
@@ -813,12 +774,6 @@
     },
     "no-useless-assignment": {
       "count": 2
-    },
-    "no-var": {
-      "count": 3
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
     },
     "sonarjs/cognitive-complexity": {
       "count": 1
@@ -855,12 +810,6 @@
     "no-empty": {
       "count": 1
     },
-    "no-var": {
-      "count": 1
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
-    },
     "sonarjs/no-dead-store": {
       "count": 2
     },
@@ -892,12 +841,6 @@
     "no-useless-assignment": {
       "count": 2
     },
-    "no-var": {
-      "count": 1
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
-    },
     "sonarjs/no-nested-functions": {
       "count": 2
     }
@@ -911,9 +854,6 @@
     },
     "max-lines-per-function": {
       "count": 2
-    },
-    "no-var": {
-      "count": 3
     },
     "sonarjs/no-ignored-exceptions": {
       "count": 1
@@ -933,9 +873,6 @@
       "count": 5
     },
     "max-lines-per-function": {
-      "count": 1
-    },
-    "no-var": {
       "count": 1
     },
     "sonarjs/no-dead-store": {
@@ -978,12 +915,6 @@
     "no-useless-assignment": {
       "count": 2
     },
-    "no-var": {
-      "count": 1
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
-    },
     "sonarjs/no-nested-functions": {
       "count": 2
     }
@@ -1007,12 +938,6 @@
     "no-useless-assignment": {
       "count": 4
     },
-    "no-var": {
-      "count": 1
-    },
-    "sonarjs/block-scoped-var": {
-      "count": 1
-    },
     "sonarjs/no-nested-functions": {
       "count": 2
     }
@@ -1029,9 +954,6 @@
     },
     "no-useless-escape": {
       "count": 2
-    },
-    "no-var": {
-      "count": 1
     },
     "prefer-rest-params": {
       "count": 5
@@ -1148,9 +1070,6 @@
       "count": 2
     },
     "id-length": {
-      "count": 1
-    },
-    "no-var": {
       "count": 1
     }
   },

@@ -323,8 +323,11 @@ function exec(script, stds) {
 
         // Notify master that an uncaughtException has been catched
         try {
+          // Read after the if, so it cannot be scoped to it.
+          let errObj;
+
           if (err) {
-            var errObj = {};
+            errObj = {};
 
             Object.getOwnPropertyNames(err).forEach(function (key) {
               errObj[key] = err[key];

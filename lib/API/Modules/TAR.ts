@@ -169,8 +169,9 @@ function start(PM2, module_name, cb) {
   const package_json_path = path.join(module_path, 'package.json');
   const module_conf = Configuration.getSync(`${cst.MODULE_CONF_PREFIX_TAR}:${module_name}`);
 
+  let conf;
   try {
-    var conf = require(package_json_path);
+    conf = require(package_json_path);
   } catch (e) {
     Common.printError(`Could not find package.json as ${package_json_path}`);
     return cb();
@@ -210,8 +211,9 @@ function uninstall(PM2, module_name, cb) {
 
   Common.logMod(`Removing ${module_name} from auto startup`);
 
+  let pkg;
   try {
-    var pkg = require(path.join(module_path, 'package.json'));
+    pkg = require(path.join(module_path, 'package.json'));
   } catch (e) {
     Common.errMod('Could not retrieve module package.json');
     return cb(e);
@@ -309,8 +311,9 @@ const serverMessage = (body: unknown): string =>
 function publish(PM2, folder, cb) {
   const target_folder = folder ? path.resolve(folder) : process.cwd();
 
+  let pkg;
   try {
-    var pkg = JSON.parse(fs.readFileSync(path.join(target_folder, 'package.json')).toString());
+    pkg = JSON.parse(fs.readFileSync(path.join(target_folder, 'package.json')).toString());
   } catch (e) {
     Common.errMod(`${process.cwd()} module does not contain any package.json`);
     process.exit(1);

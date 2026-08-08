@@ -439,7 +439,7 @@ function StartModule(CLI, opts, cb) {
   });
 }
 
-var Rollback = {
+const Rollback = {
   revert: function (CLI, module_name, cb) {
     const canonic_module_name = Utility.getCanonicModuleName(module_name);
     const backup_path = path.join(require('os').tmpdir(), canonic_module_name);

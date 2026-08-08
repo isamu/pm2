@@ -405,18 +405,19 @@ function log(type, data) {
     this.logLines[data.process.pm_id] = [];
   }
   // Logs colors
+  let color;
   switch (type) {
     case 'PM2':
-      var color = '{blue-fg}';
+      color = '{blue-fg}';
       break;
     case 'out':
-      var color = '{green-fg}';
+      color = '{green-fg}';
       break;
     case 'err':
-      var color = '{red-fg}';
+      color = '{red-fg}';
       break;
     default:
-      var color = '{white-fg}';
+      color = '{white-fg}';
   }
 
   const logs = data.data.split('\n');

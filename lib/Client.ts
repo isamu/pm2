@@ -390,7 +390,7 @@ Client.prototype.launchRPC = function launchRPC(cb) {
     }
   };
 
-  var errorHandler = function (e) {
+  const errorHandler = function (e) {
     self.client.sock.removeListener('connect', connectHandler);
     if (cb) {
       return cb(e);

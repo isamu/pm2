@@ -129,8 +129,9 @@ function unset(key, cb) {
 }
 
 function setSyncIfNotExist(key, value) {
+  let conf;
   try {
-    var conf = JSON.parse(fs.readFileSync(cst.PM2_MODULE_CONF_FILE));
+    conf = JSON.parse(fs.readFileSync(cst.PM2_MODULE_CONF_FILE));
   } catch (e) {
     return null;
   }
@@ -151,8 +152,9 @@ function setSyncIfNotExist(key, value) {
 }
 
 function setSync(key, value) {
+  let data;
   try {
-    var data = fs.readFileSync(cst.PM2_MODULE_CONF_FILE);
+    data = fs.readFileSync(cst.PM2_MODULE_CONF_FILE);
   } catch (e) {
     return null;
   }
@@ -195,8 +197,9 @@ function setSync(key, value) {
 }
 
 function unsetSync(key) {
+  let data;
   try {
-    var data = fs.readFileSync(cst.PM2_MODULE_CONF_FILE);
+    data = fs.readFileSync(cst.PM2_MODULE_CONF_FILE);
   } catch (e) {
     return null;
   }
@@ -266,8 +269,9 @@ function get(key, cb) {
 }
 
 function getSync(key) {
+  let data;
   try {
-    var data = Configuration.getAllSync();
+    data = Configuration.getAllSync();
   } catch (e) {
     return null;
   }

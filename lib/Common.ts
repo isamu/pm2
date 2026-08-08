@@ -829,7 +829,7 @@ Common.verifyConfs = function (appConfs) {
 
       // 3/ Resolve user info via /etc/password
       const passwd = require('./tools/passwd.js');
-      var users;
+      let users;
       try {
         users = passwd.getUsers();
       } catch (e) {
@@ -848,7 +848,7 @@ Common.verifyConfs = function (appConfs) {
 
       // 4/ Resolve group id if gid is specified
       if (app.gid) {
-        var groups;
+        let groups;
         try {
           groups = passwd.getGroups();
         } catch (e) {
@@ -908,16 +908,15 @@ Common.verifyConfs = function (appConfs) {
       app.merge_logs = true;
     }
 
-    var ret;
-
     if (app.cron_restart) {
-      if ((ret = Common.sink.determineCron(app)) instanceof Error) return ret;
+      const cron_error = Common.sink.determineCron(app);
+      if (cron_error instanceof Error) return cron_error;
     }
 
     /**
      * Now validation configuration
      */
-    var ret = Config.validateJSON(app);
+    const ret = Config.validateJSON(app);
     if (ret.errors && ret.errors.length > 0) {
       ret.errors.forEach(function (err) {
         warn(err);

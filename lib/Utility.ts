@@ -16,7 +16,7 @@ const util = require('util');
 const dayjs = require('dayjs');
 const findPackageJson = require('./tools/find-package-json');
 
-var Utility = (module.exports = {
+const Utility = (module.exports = {
   findPackageVersion: function (fullpath) {
     let version;
 

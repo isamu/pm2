@@ -98,6 +98,9 @@ module.exports = function ForkMode(God) {
         return cb(err);
       }
 
+      // Declared out here because the checks that follow the catch read it.
+      let cspr;
+
       try {
         const spawn_env = {};
         for (const k in pm2_env) {
@@ -134,7 +137,7 @@ module.exports = function ForkMode(God) {
           options.gid = pm2_env.gid;
         }
 
-        var cspr = spawn(command, args, options);
+        cspr = spawn(command, args, options);
       } catch (e) {
         God.logAndGenerateError(e);
         return cb(e);

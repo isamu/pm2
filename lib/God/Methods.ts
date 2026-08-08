@@ -106,14 +106,14 @@ module.exports = function (God) {
     const arr = [];
 
     if (name == 'all') {
-      for (var key in db) {
+      for (const key in db) {
         // Avoid _old_proc process style
         if (typeof God.clusters_db[key].pm2_env.pm_id === 'number') arr.push(db[key]);
       }
       return arr;
     }
 
-    for (var key in db) {
+    for (const key in db) {
       if (
         God.clusters_db[key].pm2_env.name == name ||
         God.clusters_db[key].pm2_env.pm_exec_path == p.resolve(name)
@@ -170,7 +170,7 @@ module.exports = function (God) {
       });
     }
 
-    var timer = setInterval(function () {
+    const timer = setInterval(function () {
       if (allDead()) {
         console.log('pid=%d msg=process tree killed (%d pids)', pid, treePids.length);
         clearTimeout(timeout);

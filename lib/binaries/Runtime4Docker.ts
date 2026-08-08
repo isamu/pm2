@@ -80,7 +80,7 @@ if (process.argv.length == 2) {
   process.exit(1);
 }
 
-var Runtime = {
+const Runtime = {
   pm2: null,
   instanciate: function (cmd) {
     this.pm2 = new PM2.custom({

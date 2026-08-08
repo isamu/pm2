@@ -327,7 +327,7 @@ module.exports = function (CLI) {
    * @param {object} command_list
    * @return
    */
-  var execCommands = function (repo_path, command_list, cb) {
+  const execCommands = function (repo_path, command_list, cb) {
     let stdout = '';
 
     eachSeries(
@@ -354,7 +354,7 @@ module.exports = function (CLI) {
    * @param {string} proc_name
    * @return
    */
-  var getPostUpdateCmds = function (repo_path, proc_name, cb) {
+  const getPostUpdateCmds = function (repo_path, proc_name, cb) {
     if (typeof repo_path !== 'string') return cb([]);
     if (repo_path[repo_path.length - 1] !== '/') repo_path += '/';
 
@@ -362,9 +362,10 @@ module.exports = function (CLI) {
       fs.access(repo_path + file, fs.constants.F_OK, function (err) {
         const exists = !err;
         if (exists) {
+          let data;
           try {
             const conf_string = fs.readFileSync(repo_path + file);
-            var data = Common.parseConfig(conf_string, repo_path + file);
+            data = Common.parseConfig(conf_string, repo_path + file);
           } catch (e) {
             console.error(e.message || e);
           }

@@ -739,7 +739,7 @@ module.exports = function (God) {
       if (!(id in God.clusters_db)) return cb(God.logAndGenerateError(id + ' id unknown'), {});
       const proc = God.clusters_db[id];
 
-      var action_exist = false;
+      let action_exist = false;
 
       proc.pm2_env.axm_actions.forEach(function (action) {
         if (action.action_name == cmd.msg) {
@@ -807,6 +807,12 @@ module.exports = function (God) {
             name == 'all') &&
           (proc_env.status == cst.ONLINE_STATUS || proc_env.status == cst.LAUNCHING_STATUS)
         ) {
+          // Was reading the `var` declared in the enclosing method, so it was shared across
+          // every turn of this recursion. It is only ever read a few lines below, and the
+          // isActionAvailable guard above has already established the same fact for this
+          // process, so a fresh one per turn answers the same in every reachable case.
+          let action_exist = false;
+
           proc_env.axm_actions.forEach(function (action) {
             if (action.action_name == cmd.msg) {
               action_exist = true;
