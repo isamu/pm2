@@ -154,11 +154,13 @@ var Utility = (module.exports = {
     });
 
     // Create write streams.
-    (function createWS(io) {
-      if (io.length != 1) {
+    // Each turn is handed a one-element splice of `types`, so the list shrinks as it recurses
+    // and an empty splice is what ends it.
+    (function createWS(next_type) {
+      if (next_type.length != 1) {
         return false;
       }
-      io = io[0];
+      const io = next_type[0];
 
       // If `std` is a Stream type, try next `std`.
       // compatible with `pm2 reloadLogs`
