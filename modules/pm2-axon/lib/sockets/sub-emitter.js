@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -19,7 +18,7 @@ module.exports = SubEmitterSocket;
  */
 
 function SubEmitterSocket() {
-  this.sock = new SubSocket;
+  this.sock = new SubSocket();
   this.sock.onmessage = this.onmessage.bind(this);
   this.bind = this.sock.bind.bind(this.sock);
   this.connect = this.sock.connect.bind(this.sock);
@@ -35,11 +34,11 @@ function SubEmitterSocket() {
  * @api private
  */
 
-SubEmitterSocket.prototype.onmessage = function(){
+SubEmitterSocket.prototype.onmessage = function () {
   var listeners = this.listeners;
   var self = this;
 
-  return function(buf){
+  return function (buf) {
     var msg = new Message(buf);
     var topic = msg.shift();
 
@@ -51,7 +50,7 @@ SubEmitterSocket.prototype.onmessage = function(){
 
       listener.fn.apply(this, m.slice(1).concat(msg.args));
     }
-  }
+  };
 };
 
 /**
@@ -63,12 +62,12 @@ SubEmitterSocket.prototype.onmessage = function(){
  * @api public
  */
 
-SubEmitterSocket.prototype.on = function(event, fn){
+SubEmitterSocket.prototype.on = function (event, fn) {
   var re = this.sock.subscribe(event);
   this.listeners.push({
     event: event,
     re: re,
-    fn: fn
+    fn: fn,
   });
   return this;
 };
@@ -81,7 +80,7 @@ SubEmitterSocket.prototype.on = function(event, fn){
  * @api public
  */
 
-SubEmitterSocket.prototype.off = function(event){
+SubEmitterSocket.prototype.off = function (event) {
   for (var i = 0; i < this.listeners.length; ++i) {
     if (this.listeners[i].event === event) {
       this.sock.unsubscribe(this.listeners[i].re);

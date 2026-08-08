@@ -1,6 +1,6 @@
 {
-  "apps" : {
-    "treekill" : false,
-    "script" : "app.js"
+  "apps": {
+    "treekill": false,
+    "script": "app.js"
   }
 }

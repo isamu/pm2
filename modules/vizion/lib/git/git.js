@@ -17,7 +17,7 @@ function runGit(folder, args, { timeout = DEFAULT_TIMEOUT } = {}) {
     cwd: folder,
     timeout,
     maxBuffer: MAXBUFFER,
-    env: { ...process.env, LC_ALL: 'C', GIT_TERMINAL_PROMPT: '0' }
+    env: { ...process.env, LC_ALL: 'C', GIT_TERMINAL_PROMPT: '0' },
   }).then(({ stdout }) => stdout);
 }
 
@@ -87,8 +87,10 @@ async function isCurrentBranchOnRemote(folder, data) {
   }
   try {
     await runGit(folder, [
-      'rev-parse', '--verify', '--quiet',
-      'refs/remotes/' + data.remote + '/' + data.branch
+      'rev-parse',
+      '--verify',
+      '--quiet',
+      'refs/remotes/' + data.remote + '/' + data.branch,
     ]);
     data.branch_exists_on_remote = true;
   } catch (e) {
@@ -102,9 +104,7 @@ async function isCurrentBranchOnRemote(folder, data) {
 // remote-tracking, non-HEAD case, exactly as before).
 function historyRef(data) {
   if (data.branch === 'HEAD') {
-    return data.branch_exists_on_remote
-      ? 'refs/remotes/' + data.remote + '/HEAD'
-      : 'HEAD';
+    return data.branch_exists_on_remote ? 'refs/remotes/' + data.remote + '/HEAD' : 'HEAD';
   }
   return data.branch_exists_on_remote
     ? 'refs/remotes/origin/' + data.branch
@@ -115,14 +115,17 @@ async function getPrevNext(folder, data) {
   let history = [];
   try {
     const out = await runGit(folder, [
-      'rev-list', '--max-count=' + HISTORY_DEPTH, '--topo-order', historyRef(data)
+      'rev-list',
+      '--max-count=' + HISTORY_DEPTH,
+      '--topo-order',
+      historyRef(data),
     ]);
     history = out.split('\n').filter(Boolean); // newest -> oldest, full SHAs
   } catch (e) {
     // ref does not resolve -> empty history (legacy js-git returned [])
   }
 
-  const idx = history.findIndex(h => h === data.revision);
+  const idx = history.findIndex((h) => h === data.revision);
   if (idx === -1) {
     data.ahead = true;
     data.next_rev = null;
@@ -186,7 +189,7 @@ git.isUpdated = async function (folder) {
   return {
     new_revision,
     current_revision: data.revision,
-    is_up_to_date: new_revision === data.revision
+    is_up_to_date: new_revision === data.revision,
   };
 };
 
@@ -216,7 +219,7 @@ git.update = async function (folder) {
   return {
     output: dt.output,
     success: dt.success,
-    current_revision: dt.success ? data.new_revision : data.current_revision
+    current_revision: dt.success ? data.new_revision : data.current_revision,
   };
 };
 
@@ -237,11 +240,15 @@ async function step(folder, which) {
   return {
     output: meta.output,
     success: meta.success,
-    current_revision: meta.success ? target : data.revision
+    current_revision: meta.success ? target : data.revision,
   };
 }
 
-git.prev = function (folder) { return step(folder, 'prev'); };
-git.next = function (folder) { return step(folder, 'next'); };
+git.prev = function (folder) {
+  return step(folder, 'prev');
+};
+git.next = function (folder) {
+  return step(folder, 'next');
+};
 
 module.exports = git;

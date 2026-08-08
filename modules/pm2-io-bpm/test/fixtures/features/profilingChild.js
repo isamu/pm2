@@ -1,15 +1,14 @@
-
-const pmx = require('../../..')
+const pmx = require('../../..');
 pmx.init({
-  profiling: true
-})
+  profiling: true,
+});
 if (process && process.send) {
-  process.send('initialized')
+  process.send('initialized');
 }
 
-setInterval(_ => {
-  let str = 0
+setInterval((_) => {
+  let str = 0;
   for (let i = 0; i < 100; i++) {
-    str = str + str
+    str = str + str;
   }
-}, 1000)
+}, 1000);

@@ -1,0 +1,21 @@
+dist/
+build/
+coverage/
+
+# Written by ever-better; machine-generated, so Prettier must not police it.
+.ever-better/
+QUALITY.md
+eslint-suppressions.json
+
+# DefinitelyTyped's Node v6 definitions, copied in whole. Third-party source:
+# reformatting it only makes it harder to diff against the original.
+examples/using-pm2-and-transpilers/node.d.ts
+
+# Test inputs whose exact shape is the thing under test. conf.json and
+# configuration.json hold JS expressions pm2's own parser accepts and JSON does
+# not; source-map/*.js have committed .map files encoding their line and column
+# positions, which reformatting would silently invalidate.
+test/fixtures/
+
+# Malformed on purpose — it is the input for the config parse-error path.
+examples/misc-examples/malformated.json

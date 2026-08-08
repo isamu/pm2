@@ -1,6 +1,5 @@
-
-var ss = require('../')
-  , should = require('should');
+var ss = require('../'),
+  should = require('should');
 
 // multiple pushers
 
@@ -26,7 +25,7 @@ pull.connect(4446);
 
 var msgs = [];
 
-pull.on('message', function(msg){
+pull.on('message', function (msg) {
   var n = msgs.push(msg.toString());
   if (n == 3) {
     msgs.join(' ').should.equal('hey hey hey');

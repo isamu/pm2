@@ -21,7 +21,6 @@
   <i>Runtime Edition</i>
 <br/><br/>
 
-
 <a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2">
   <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
 </a>
@@ -39,7 +38,6 @@
 <br/>
 </div>
 
-
 PM2 is a production process manager for Node.js/Bun applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
@@ -53,7 +51,6 @@ PM2 is battle-tested by [a comprehensive test suite](https://github.com/Unitech/
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
 Works on Linux, macOS, and Windows. Supports Node.js 18+ and Bun 1+.
-
 
 ## Installing PM2
 
@@ -75,7 +72,7 @@ If you only have Bun installed (no Node.js), symlink `node` to `bun` so PM2's `#
 $ sudo ln -s $(which bun) /usr/local/bin/node
 ```
 
-___
+---
 
 You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm) or install Bun with `curl -fsSL https://bun.sh/install | bash`
 
@@ -226,7 +223,7 @@ $ npm install pm2@latest -g
 $ pm2 update
 ```
 
-*PM2 updates are seamless*
+_PM2 updates are seamless_
 
 ## PM2+ Monitoring
 

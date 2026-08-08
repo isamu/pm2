@@ -1,7 +1,6 @@
-
-var assert = require('assert')
-  , axon = require('..')
-  , sub = axon.socket('sub');
+var assert = require('assert'),
+  axon = require('..'),
+  sub = axon.socket('sub');
 
 function test(pattern, str) {
   sub.clearSubscriptions();

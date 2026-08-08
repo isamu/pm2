@@ -1,4 +1,3 @@
-
 var ss = require('..');
 var should = require('should');
 var assert = require('assert');
@@ -15,7 +14,7 @@ push.bind(4000);
 push.send('foo', { bar: 'baz' }, ['some', 1], Buffer.from('hello'));
 
 pull.connect(4000);
-pull.on('message', function(a, b, c, d){
+pull.on('message', function (a, b, c, d) {
   assert('string' == typeof a);
   b.should.eql({ bar: 'baz' });
   c.should.eql(['some', 1]);
@@ -27,6 +26,6 @@ pull.on('message', function(a, b, c, d){
   done = true;
 });
 
-process.on('exit', function(){
+process.on('exit', function () {
   assert(done);
 });

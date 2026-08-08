@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * Convert value to boolean but false if undefined
@@ -8,11 +8,11 @@
  */
 const useIfDefined = (value, fallback) => {
   if (typeof value === 'undefined') {
-    return fallback
+    return fallback;
   } else {
-    return value === 'true'
+    return value === 'true';
   }
-}
+};
 
 /**
  * Configuration for transporters
@@ -24,7 +24,7 @@ module.exports = {
   transporters: {
     websocket: {
       enabled: true, // useIfDefined(process.env.AGENT_TRANSPORT_WEBSOCKET, true),
-      endpoints: process.env.AGENT_WEBSOCKET_ENDPOINT || 'ws'
-    }
-  }
-}
+      endpoints: process.env.AGENT_WEBSOCKET_ENDPOINT || 'ws',
+    },
+  },
+};

@@ -1,4 +1,3 @@
-
 Here is an example on using pm2 inside container with the official image and pm2-runtime.
 
 To build & run it:

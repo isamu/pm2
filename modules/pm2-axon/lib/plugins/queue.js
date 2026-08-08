@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -21,11 +20,10 @@ var debug = require('debug')('axon:queue');
  * @api private
  */
 
-module.exports = function(options){
+module.exports = function (options) {
   options = options || {};
 
-  return function(sock){
-
+  return function (sock) {
     /**
      * Message buffer.
      */
@@ -36,7 +34,7 @@ module.exports = function(options){
      * Flush `buf` on `connect`.
      */
 
-    sock.on('connect', function(){
+    sock.on('connect', function () {
       var prev = sock.queue;
       var len = prev.length;
       sock.queue = [];
@@ -53,7 +51,7 @@ module.exports = function(options){
      * Pushes `msg` into `buf`.
      */
 
-    sock.enqueue = function(msg){
+    sock.enqueue = function (msg) {
       var hwm = sock.settings.hwm;
       if (sock.queue.length >= hwm) return drop(msg);
       sock.queue.push(msg);

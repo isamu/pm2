@@ -1,21 +1,20 @@
+const pmx = require('../..');
 
-const pmx = require('../..')
+const Koa = require('koa');
+const app = new Koa();
 
-const Koa = require('koa')
-const app = new Koa()
+app.use(pmx.koaErrorHandler());
 
-app.use(pmx.koaErrorHandler())
-
-app.use(async ctx => {
-  ctx.throw(new Error('toto'))
-})
+app.use(async (ctx) => {
+  ctx.throw(new Error('toto'));
+});
 
 pmx.onExit(() => {
-  pmx.destroy()
-})
+  pmx.destroy();
+});
 
 app.listen(3003, () => {
   if (typeof process.send === 'function') {
-    process.send('ready')
+    process.send('ready');
   }
-})
+});

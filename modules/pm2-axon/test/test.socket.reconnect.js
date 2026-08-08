@@ -1,4 +1,3 @@
-
 // var ss = require('../')
 //   , should = require('should')
 //   , assert = require('assert');

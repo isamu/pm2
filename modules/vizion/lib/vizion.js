@@ -3,7 +3,7 @@
 const git = require('./git/git.js');
 
 function resolveFolder(argv) {
-  return (argv && argv.folder !== undefined) ? argv.folder : '.';
+  return argv && argv.folder !== undefined ? argv.folder : '.';
 }
 
 // Run an async git op and deliver the result through a node-style callback.
@@ -11,8 +11,8 @@ function resolveFolder(argv) {
 // walk up parent directories when a folder is not a git repository.
 function toCallback(promise, cb) {
   promise.then(
-    res => cb(null, res),
-    err => cb(err)
+    (res) => cb(null, res),
+    (err) => cb(err),
   );
 }
 
@@ -31,7 +31,7 @@ vizion.update = function (argv, cb) {
 };
 
 vizion.revertTo = function (argv, cb) {
-  const revision = (argv && argv.revision) ? argv.revision : false;
+  const revision = argv && argv.revision ? argv.revision : false;
   const folder = resolveFolder(argv);
 
   if (!(revision && /^[A-Fa-f0-9]+$/.test(revision))) {

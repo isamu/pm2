@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -22,7 +21,7 @@ function parseAddr(str) {
       return { pathname: u.pathname, hostname: null, port: null };
     }
     return { hostname: u.hostname, port: u.port, pathname: null };
-  } catch(e) {
+  } catch (e) {
     return { pathname: str, hostname: null, port: null };
   }
 }
@@ -39,7 +38,7 @@ var ignore = [
   'ENETUNREACH',
   'ENETDOWN',
   'EPIPE',
-  'ENOENT'
+  'ENOENT',
 ];
 
 /**
@@ -89,7 +88,7 @@ Configurable(Socket.prototype);
  * @api private
  */
 
-Socket.prototype.use = function(plugin){
+Socket.prototype.use = function (plugin) {
   plugin(this);
   return this;
 };
@@ -102,7 +101,7 @@ Socket.prototype.use = function(plugin){
  * @api private
  */
 
-Socket.prototype.pack = function(args){
+Socket.prototype.pack = function (args) {
   var msg = new Message(args);
   return msg.toBuffer();
 };
@@ -113,9 +112,9 @@ Socket.prototype.pack = function(args){
  * @api private
  */
 
-Socket.prototype.closeSockets = function(){
+Socket.prototype.closeSockets = function () {
   debug('closing %d connections', this.socks.length);
-  this.socks.forEach(function(sock){
+  this.socks.forEach(function (sock) {
     sock.destroy();
   });
 };
@@ -130,7 +129,7 @@ Socket.prototype.closeSockets = function(){
  * @api public
  */
 
-Socket.prototype.close = function(fn){
+Socket.prototype.close = function (fn) {
   debug('closing');
   this.closing = true;
   this.closeSockets();
@@ -144,7 +143,7 @@ Socket.prototype.close = function(fn){
  * @api public
  */
 
-Socket.prototype.closeServer = function(fn){
+Socket.prototype.closeServer = function (fn) {
   debug('closing server');
   this.server.on('close', this.emit.bind(this, 'close'));
   this.server.close();
@@ -158,7 +157,7 @@ Socket.prototype.closeServer = function(fn){
  * @api public
  */
 
-Socket.prototype.address = function(){
+Socket.prototype.address = function () {
   if (!this.server) return;
   var addr = this.server.address();
   addr.string = 'tcp://' + addr.address + ':' + addr.port;
@@ -172,7 +171,7 @@ Socket.prototype.address = function(){
  * @api private
  */
 
-Socket.prototype.removeSocket = function(sock){
+Socket.prototype.removeSocket = function (sock) {
   var i = this.socks.indexOf(sock);
   if (!~i) return;
   debug('remove socket %d', i);
@@ -186,8 +185,8 @@ Socket.prototype.removeSocket = function(sock){
  * @api private
  */
 
-Socket.prototype.addSocket = function(sock){
-  var parser = new Parser;
+Socket.prototype.addSocket = function (sock) {
+  var parser = new Parser();
   var i = this.socks.push(sock) - 1;
   debug('add socket %d', i);
   sock.pipe(parser);
@@ -207,9 +206,9 @@ Socket.prototype.addSocket = function(sock){
  * @api private
  */
 
-Socket.prototype.handleErrors = function(sock){
+Socket.prototype.handleErrors = function (sock) {
   var self = this;
-  sock.on('error', function(err){
+  sock.on('error', function (err) {
     debug('error %s', err.code || err.message);
     self.emit('socket error', err);
     self.removeSocket(sock);
@@ -232,9 +231,9 @@ Socket.prototype.handleErrors = function(sock){
  * @api private
  */
 
-Socket.prototype.onmessage = function(sock){
+Socket.prototype.onmessage = function (sock) {
   var self = this;
-  return function(buf){
+  return function (buf) {
     var msg = new Message(buf);
     self.emit.apply(self, ['message'].concat(msg.args), sock);
   };
@@ -254,10 +253,10 @@ Socket.prototype.onmessage = function(sock){
  * @api public
  */
 
-Socket.prototype.connect = function(port, host, fn){
+Socket.prototype.connect = function (port, host, fn) {
   var self = this;
   if ('server' == this.type) throw new Error('cannot connect() after bind()');
-  if ('function' == typeof host) fn = host, host = undefined;
+  if ('function' == typeof host) ((fn = host), (host = undefined));
 
   if ('string' == typeof port) {
     port = parseAddr(port);
@@ -276,20 +275,20 @@ Socket.prototype.connect = function(port, host, fn){
   }
 
   var max = self.get('retry max timeout');
-  var sock = new net.Socket;
+  var sock = new net.Socket();
   sock.setNoDelay();
   this.type = 'client';
   port = port;
 
   this.handleErrors(sock);
 
-  sock.on('close', function(){
+  sock.on('close', function () {
     self.connected = false;
     self.removeSocket(sock);
     if (self.closing) return self.emit('close');
     var retry = self.retry || self.get('retry timeout');
     if (retry === 0) return self.emit('close');
-    setTimeout(function(){
+    setTimeout(function () {
       debug('attempting reconnect');
       self.emit('reconnect attempt');
       sock.destroy();
@@ -298,7 +297,7 @@ Socket.prototype.connect = function(port, host, fn){
     }, retry);
   });
 
-  sock.on('connect', function(){
+  sock.on('connect', function () {
     debug('connect');
     self.connected = true;
     self.addSocket(sock);
@@ -319,20 +318,18 @@ Socket.prototype.connect = function(port, host, fn){
  * @api private
  */
 
-Socket.prototype.onconnect = function(sock){
+Socket.prototype.onconnect = function (sock) {
   var self = this;
   var addr = null;
 
-  if (sock.remoteAddress && sock.remotePort)
-    addr = sock.remoteAddress + ':' + sock.remotePort;
-  else if (sock.server && sock.server._pipeName)
-    addr = sock.server._pipeName;
+  if (sock.remoteAddress && sock.remotePort) addr = sock.remoteAddress + ':' + sock.remotePort;
+  else if (sock.server && sock.server._pipeName) addr = sock.server._pipeName;
 
   debug('accept %s', addr);
   this.addSocket(sock);
   this.handleErrors(sock);
   this.emit('connect', sock);
-  sock.on('close', function(){
+  sock.on('close', function () {
     debug('disconnect %s', addr);
     self.emit('disconnect', sock);
     self.removeSocket(sock);
@@ -356,10 +353,10 @@ Socket.prototype.onconnect = function(sock){
  * @api public
  */
 
-Socket.prototype.bind = function(port, host, fn){
+Socket.prototype.bind = function (port, host, fn) {
   var self = this;
   if ('client' == this.type) throw new Error('cannot bind() after connect()');
-  if ('function' == typeof host) fn = host, host = undefined;
+  if ('function' == typeof host) ((fn = host), (host = undefined));
 
   var unixSocket = false;
 
@@ -388,7 +385,7 @@ Socket.prototype.bind = function(port, host, fn){
 
   if (unixSocket) {
     // TODO: move out
-    this.server.on('error', function(e) {
+    this.server.on('error', function (e) {
       debug('Got error while trying to bind', e.stack || e);
       if (e.code == 'EADDRINUSE') {
         // Unix file socket and error EADDRINUSE is the case if
@@ -398,28 +395,27 @@ Socket.prototype.bind = function(port, host, fn){
         // We try to connect to socket via plain network socket
         var clientSocket = new net.Socket();
 
-        clientSocket.on('error', function(e2) {
+        clientSocket.on('error', function (e2) {
           debug('Got sub-error', e2);
           if (e2.code == 'ECONNREFUSED' || e2.code == 'ENOENT') {
             // No other server listening, so we can delete stale
             // socket file and reopen server socket
             try {
               fs.unlinkSync(port);
-            } catch(e) {}
+            } catch (e) {}
             self.server.listen(port, host, fn);
           }
         });
 
-        clientSocket.connect({path: port}, function() {
+        clientSocket.connect({ path: port }, function () {
           // Connection is possible, so other server is listening
           // on this file socket
           if (fn) return fn(new Error('Process already listening on socket ' + port));
         });
-      }
-      else {
+      } else {
         try {
           fs.unlinkSync(port);
-        } catch(e) {}
+        } catch (e) {}
         self.server.listen(port, host, fn);
       }
     });

@@ -1,9 +1,8 @@
+var ss = require('../'),
+  should = require('should');
 
-var ss = require('../')
-  , should = require('should');
-
-var push = ss.socket('push')
-  , pull = ss.socket('pull');
+var push = ss.socket('push'),
+  pull = ss.socket('pull');
 
 // .queue testing
 
@@ -17,10 +16,11 @@ push.send('baz');
 push.queue.should.eql([['foo'], ['bar'], ['baz']]);
 
 pull.connect(4000);
-pull.on('message', function(msg){
+pull.on('message', function (msg) {
   push.queue.should.eql([]);
-  --pending || (function(){
-    push.close();
-    pull.close();
-  })();
+  --pending ||
+    (function () {
+      push.close();
+      pull.close();
+    })();
 });

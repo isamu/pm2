@@ -1,22 +1,21 @@
-
 var axm = require('@pm2/io');
 
-axm.action('refresh:db', { comment : 'Refresh the database' }, function(reply) {
+axm.action('refresh:db', { comment: 'Refresh the database' }, function (reply) {
   console.log('Refreshing');
-  reply({success : true});
+  reply({ success: true });
 });
 
-axm.action('chanme:ladb', { comment : 'Refresh la BIG database' }, function(reply) {
+axm.action('chanme:ladb', { comment: 'Refresh la BIG database' }, function (reply) {
   console.log('Refreshing BIG DB');
-  reply({success : true});
+  reply({ success: true });
 });
 
-axm.action('rm:rf', { comment : 'Delete moi ca plus vite que ca !' }, function(reply) {
+axm.action('rm:rf', { comment: 'Delete moi ca plus vite que ca !' }, function (reply) {
   console.log('RMING RFING');
-  reply({success : true});
+  reply({ success: true });
 });
 
-axm.action('rm:roff', function(reply) {
+axm.action('rm:roff', function (reply) {
   console.log('RMING RFING');
-  reply({success : true});
+  reply({ success: true });
 });

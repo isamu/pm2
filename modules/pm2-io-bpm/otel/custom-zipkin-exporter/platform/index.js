@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-module.exports = require('./node')
+module.exports = require('./node');

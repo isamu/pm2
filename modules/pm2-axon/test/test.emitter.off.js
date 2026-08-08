@@ -1,26 +1,18 @@
+var ss = require('..'),
+  should = require('should');
 
-var ss = require('..')
-  , should = require('should');
+var pub = ss.socket('pub-emitter'),
+  sub = ss.socket('sub-emitter');
 
-var pub = ss.socket('pub-emitter')
-  , sub = ss.socket('sub-emitter');
+var on = ['user:login', 'page:view', 'something:else', 'foo:bar'];
 
-var on = [
-  'user:login',
-  'page:view',
-  'something:else',
-  'foo:bar'
-];
-
-var off = [
-  'foo:bar'
-];
+var off = ['foo:bar'];
 
 var events = [];
 var expected = on;
 
-pub.bind(4000, function(){
-  sub.connect(4000, function(){
+pub.bind(4000, function () {
+  sub.connect(4000, function () {
     sub.on('user:login', function () {
       events.push('user:login');
       sub.off('user:login');

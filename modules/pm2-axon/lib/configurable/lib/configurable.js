@@ -1,4 +1,3 @@
-
 /**
  * Make `obj` configurable.
  *
@@ -7,11 +6,10 @@
  * @api public
  */
 
-module.exports = function(obj){
-
+module.exports = function (obj) {
   obj.settings = {};
 
-  obj.set = function(name, val){
+  obj.set = function (name, val) {
     if (1 == arguments.length) {
       for (var key in name) {
         this.set(key, name[key]);
@@ -23,24 +21,24 @@ module.exports = function(obj){
     return this;
   };
 
-  obj.get = function(name){
+  obj.get = function (name) {
     return this.settings[name];
   };
 
-  obj.enable = function(name){
+  obj.enable = function (name) {
     return this.set(name, true);
   };
 
-  obj.disable = function(name){
+  obj.disable = function (name) {
     return this.set(name, false);
   };
 
-  obj.enabled = function(name){
-    return !! this.get(name);
+  obj.enabled = function (name) {
+    return !!this.get(name);
   };
 
-  obj.disabled = function(name){
-    return ! this.get(name);
+  obj.disabled = function (name) {
+    return !this.get(name);
   };
 
   return obj;

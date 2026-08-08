@@ -1,5 +1,5 @@
-const pmx = require('../..')
+const pmx = require('../..');
 
 pmx.action('testAction', function (reply) {
-  reply({ data: 'testActionReply' })
-})
+  reply({ data: 'testActionReply' });
+});

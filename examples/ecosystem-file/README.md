@@ -1,4 +1,3 @@
-
 Here we have 3 applications (apps folder) that we can start with process file.
 These process file can be of different format, javascript, json or yaml:
 

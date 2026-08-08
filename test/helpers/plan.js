@@ -1,4 +1,3 @@
-
 var assert = require('assert');
 
 /**
@@ -19,7 +18,7 @@ function Plan(count, done) {
  * @param {} expression
  * @return
  */
-Plan.prototype.ok = function(expression) {
+Plan.prototype.ok = function (expression) {
   assert(expression);
 
   if (this.count === 0) {

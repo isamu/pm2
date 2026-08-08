@@ -1,30 +1,32 @@
+var axon = require('..'),
+  should = require('should');
 
-var axon = require('..')
-  , should = require('should');
-
-var req = axon.socket('req')
-  , rep = axon.socket('rep');
+var req = axon.socket('req'),
+  rep = axon.socket('rep');
 
 req.bind(4000);
 rep.connect(4000);
 
-var pending = 10
-  , n = pending
-  , msgs = [];
+var pending = 10,
+  n = pending,
+  msgs = [];
 
-rep.on('message', function(msg, reply){
+rep.on('message', function (msg, reply) {
   reply('got "' + msg + '"');
 });
 
 while (n--) {
-  (function(n){
+  (function (n) {
     n = String(n);
-    setTimeout(function(){
-      req.send(n, function(msg){
-        msgs.push(msg.toString());
-        --pending || done();
-      });
-    }, Math.random() * 200 | 0);
+    setTimeout(
+      function () {
+        req.send(n, function (msg) {
+          msgs.push(msg.toString());
+          --pending || done();
+        });
+      },
+      (Math.random() * 200) | 0,
+    );
   })(n);
 }
 

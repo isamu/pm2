@@ -1,4 +1,3 @@
-
 Here is a source map support demo.
 Source map are automatically handled by pm2:
 

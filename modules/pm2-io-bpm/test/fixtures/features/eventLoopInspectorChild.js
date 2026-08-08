@@ -1,10 +1,10 @@
-const pmx = require('../../..')
+const pmx = require('../../..');
 pmx.init({
   actions: {
-    eventLoopDump: true
-  }
-})
+    eventLoopDump: true,
+  },
+});
 
-setInterval(_ => {
-  return
-}, 10000)
+setInterval((_) => {
+  return;
+}, 10000);

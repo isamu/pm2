@@ -1,10 +1,9 @@
-
 /**
  * Module dependencies.
  */
 
-var axon = require('../')
-  , assert = require('assert');
+var axon = require('../'),
+  assert = require('assert');
 
 // socket types
 

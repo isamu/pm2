@@ -1,4 +1,3 @@
-
 # Basic HTTP Server and Cluster mode
 
 In this boilerplate it will start an http server in cluster mode.

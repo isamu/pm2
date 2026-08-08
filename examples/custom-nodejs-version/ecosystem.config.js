@@ -3,12 +3,12 @@ module.exports = {
    * Application configuration section
    * http://pm2.keymetrics.io/docs/usage/application-declaration/
    */
-  apps : [
+  apps: [
     // First application
     {
-      name      : "API",
-      script    : "http.js",
-      interpreter : "node@6.9.0"
-    }
-  ]
-}
+      name: 'API',
+      script: 'http.js',
+      interpreter: 'node@6.9.0',
+    },
+  ],
+};

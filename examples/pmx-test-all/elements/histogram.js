@@ -1,15 +1,13 @@
-
-
 const pmx = require('pmx');
 const Probe = pmx.probe();
 
 var metric = Probe.histogram({
-  name    : 'Histogram'
+  name: 'Histogram',
 });
 
 var latency;
 
-setInterval(function() {
+setInterval(function () {
   latency = Math.round(Math.random() * 100);
   metric.update(latency);
 }, 100);

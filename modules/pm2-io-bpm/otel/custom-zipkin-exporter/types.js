@@ -19,6 +19,6 @@ const SpanKind = {
   SERVER: 'SERVER',
   CONSUMER: 'CONSUMER',
   PRODUCER: 'PRODUCER',
-}
+};
 
-module.exports = { SpanKind }
+module.exports = { SpanKind };

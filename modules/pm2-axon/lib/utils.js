@@ -1,4 +1,3 @@
-
 /**
  * Slice helper.
  *
@@ -7,7 +6,7 @@
  * @return {Array}
  */
 
-exports.slice = function(args){
+exports.slice = function (args) {
   var len = args.length;
   var ret = new Array(len);
 

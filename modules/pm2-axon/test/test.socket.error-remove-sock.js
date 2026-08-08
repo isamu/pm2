@@ -1,11 +1,10 @@
+var axon = require('..'),
+  assert = require('assert');
 
-var axon = require('..')
-  , assert = require('assert');
-
-var a = axon.socket('push')
-  , b = axon.socket('push')
-  , c = axon.socket('push')
-  , pull = axon.socket('pull');
+var a = axon.socket('push'),
+  b = axon.socket('push'),
+  c = axon.socket('push'),
+  pull = axon.socket('pull');
 
 a.bind(4441);
 b.bind(4442);
@@ -15,7 +14,7 @@ pull.connect(4441);
 pull.connect(4442);
 pull.connect(4443);
 
-pull.once('error', function(err){
+pull.once('error', function (err) {
   assert('boom' == err.message);
   assert(2 == pull.socks.length);
   var err = new Error('faux EPIPE');
@@ -23,7 +22,7 @@ pull.once('error', function(err){
   pull.socks[0].destroy(err);
 });
 
-pull.once('ignored error', function(err){
+pull.once('ignored error', function (err) {
   assert('EPIPE' == err.code);
   assert(1 == pull.socks.length);
   a.close();
@@ -42,11 +41,11 @@ pull.on('connect', connect);
 
 var pending = 6;
 
-function connect(){
+function connect() {
   --pending || done();
 }
 
-function done(){
+function done() {
   assert(1 == a.socks.length);
   assert(1 == b.socks.length);
   assert(1 == c.socks.length);

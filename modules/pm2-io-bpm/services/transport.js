@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
-const { IPCTransport } = require('../transports/IPCTransport')
+const { IPCTransport } = require('../transports/IPCTransport');
 
-function createTransport (name, config) {
-  const transport = new IPCTransport()
-  transport.init(config)
-  return transport
+function createTransport(name, config) {
+  const transport = new IPCTransport();
+  transport.init(config);
+  return transport;
 }
 
-module.exports = { createTransport }
+module.exports = { createTransport };

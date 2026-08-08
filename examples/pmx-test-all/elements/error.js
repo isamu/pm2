@@ -1,4 +1,3 @@
-
-setInterval(function() {
+setInterval(function () {
   new Error('toto');
 }, 10);

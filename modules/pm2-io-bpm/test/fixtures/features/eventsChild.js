@@ -1,10 +1,9 @@
-
-const pmx = require('../../..')
+const pmx = require('../../..');
 
 pmx.init({
-  profiling: true
-})
+  profiling: true,
+});
 
-setInterval(_ => {
-  pmx.emit('myEvent', { prop1: 'value1' })
-}, 100)
+setInterval((_) => {
+  pmx.emit('myEvent', { prop1: 'value1' });
+}, 100);

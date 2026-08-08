@@ -1,4 +1,3 @@
-
-setInterval(function() {
-  console.log('OK')
-}, 1000)
+setInterval(function () {
+  console.log('OK');
+}, 1000);

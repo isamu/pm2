@@ -50,21 +50,22 @@ $ pm2 update
 A good commit message should describe what changed and why.
 
 It should :
-  * contain a short description of the change (preferably 50 characters or less)
-  * be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code, like function/variable names
-  * be prefixed with one of the following word
-    * fix : bug fix
-    * hotfix : urgent bug fix
-    * feat : new or updated feature
-    * docs : documentation updates
-    * BREAKING : if commit is a breaking change
-    * refactor : code refactoring (no functional change)
-    * perf : performance improvement
-    * style : UX and display updates
-    * test : tests and CI updates
-    * chore : updates on build, tools, configuration ...
-    * Merge branch : when merging branch
-    * Merge pull request : when merging PR
+
+- contain a short description of the change (preferably 50 characters or less)
+- be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code, like function/variable names
+- be prefixed with one of the following word
+  - fix : bug fix
+  - hotfix : urgent bug fix
+  - feat : new or updated feature
+  - docs : documentation updates
+  - BREAKING : if commit is a breaking change
+  - refactor : code refactoring (no functional change)
+  - perf : performance improvement
+  - style : UX and display updates
+  - test : tests and CI updates
+  - chore : updates on build, tools, configuration ...
+  - Merge branch : when merging branch
+  - Merge pull request : when merging PR
 
 ## Tests
 
@@ -116,6 +117,7 @@ Change "version_name" to the next version to release (example 1.1.2).
 Change "tag" to the latest existing tag (example 1.1.1).
 
 Run the following command into pm2 directory
+
 ```
 git-changelog
 ```

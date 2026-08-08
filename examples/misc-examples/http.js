@@ -1,15 +1,16 @@
-
 var pmx = require('pmx');
 var conf = pmx.init({
-  http: true
+  http: true,
 });
 
 var http = require('http');
 
-http.createServer(function(req, res) {
-  res.writeHead(200);
-  res.end('hey');
-}).listen(8000);
+http
+  .createServer(function (req, res) {
+    res.writeHead(200);
+    res.end('hey');
+  })
+  .listen(8000);
 
 var Probe = pmx.probe();
 
@@ -19,8 +20,8 @@ var value_to_inspect = 0;
  * .metric, .counter, .meter, .histogram are also available (cf doc)
  */
 var val = Probe.metric({
-  name : 'test-probe',
-  value : function() {
+  name: 'test-probe',
+  value: function () {
     return value_to_inspect;
   },
   /**
@@ -28,27 +29,27 @@ var val = Probe.metric({
    * These options can be overriden via Keymetrics or via pm2
    * More: http://bit.ly/1O02aap
    */
-  alert : {
-    mode     : 'threshold',
-    value    : 20,
-    msg      : 'test-probe alert!',
-    action   : function(val) {
+  alert: {
+    mode: 'threshold',
+    value: 20,
+    msg: 'test-probe alert!',
+    action: function (val) {
       // Besides the automatic alert sent via Keymetrics
       // You can also configure your own logic to do something
       console.log('Value has reached %d', val);
-    }
-  }
+    },
+  },
 });
 
-setInterval(function() {
+setInterval(function () {
   // Then we can see that this value increase over the time in Keymetrics
   value_to_inspect++;
 }, 300);
 
-process.on('message', function(msg) {
+process.on('message', function (msg) {
   if (msg == 'shutdown') {
     console.log('Closing all connections...');
-    setTimeout(function() {
+    setTimeout(function () {
       console.log('Finished closing connections');
       process.exit(0);
     }, 500);

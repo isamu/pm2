@@ -1,5 +1,7 @@
 module.exports = {
-  apps : [{
-    script : 'process-metrics.js'
-  }]
-}
+  apps: [
+    {
+      script: 'process-metrics.js',
+    },
+  ],
+};

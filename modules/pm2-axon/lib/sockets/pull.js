@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -32,6 +31,6 @@ PullSocket.prototype.__proto__ = Socket.prototype;
  * Pull sockets should not send messages.
  */
 
-PullSocket.prototype.send = function(){
+PullSocket.prototype.send = function () {
   throw new Error('pull sockets should not send messages');
 };

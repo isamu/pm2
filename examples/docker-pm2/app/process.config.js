@@ -1,6 +1,8 @@
 module.exports = {
-  apps : [{
-    name   : "express-app",
-    script : "./app.js"
-  }]
-}
+  apps: [
+    {
+      name: 'express-app',
+      script: './app.js',
+    },
+  ],
+};

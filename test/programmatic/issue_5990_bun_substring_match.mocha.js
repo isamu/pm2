@@ -20,7 +20,6 @@ var should = require('should');
 var Common = require('../../lib/Common');
 
 describe('Bun interpreter detection (#5990)', function () {
-
   describe('Common.sink.determineExecMode', function () {
     function exec_mode_for(interpreter, instances) {
       var app = { exec_interpreter: interpreter };
@@ -99,7 +98,7 @@ describe('Bun interpreter detection (#5990)', function () {
         pm_pid_path: '/tmp/dummy.pid',
         pm_out_log_path: '/dev/null',
         pm_err_log_path: '/dev/null',
-        env: {}
+        env: {},
       };
 
       capturedArgs = null;

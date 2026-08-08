@@ -1,12 +1,11 @@
-
-const pmx = require('../..')
+const pmx = require('../..');
 
 pmx.onExit(function () {
-  if (process && process.send) process.send('callback')
-})
+  if (process && process.send) process.send('callback');
+});
 
 setTimeout(function () {
-  let toto
+  let toto;
 
-  console.log(toto.titi)
-}, 1100)
+  console.log(toto.titi);
+}, 1100);

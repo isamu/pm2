@@ -1,4 +1,3 @@
-
 /**
  * Deps.
  */
@@ -15,12 +14,11 @@ var slice = require('../utils').slice;
  * @api private
  */
 
-module.exports = function(options){
+module.exports = function (options) {
   options = options || {};
-  var fallback = options.fallback || function(){};
+  var fallback = options.fallback || function () {};
 
-  return function(sock){
-
+  return function (sock) {
     /**
      * Bind callback to `sock`.
      */
@@ -37,7 +35,7 @@ module.exports = function(options){
      * Sends `msg` to all connected peers round-robin.
      */
 
-    sock.send = function(){
+    sock.send = function () {
       var socks = this.socks;
       var len = socks.length;
       var sock = socks[n++ % len];
@@ -50,6 +48,5 @@ module.exports = function(options){
         fallback(msg);
       }
     };
-
   };
 };

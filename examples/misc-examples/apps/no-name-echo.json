@@ -1,4 +1,4 @@
 {
-  "script" : "examples/echo.js",
-  "max" : "1"
+  "script": "examples/echo.js",
+  "max": "1"
 }

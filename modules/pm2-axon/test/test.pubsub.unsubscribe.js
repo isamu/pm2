@@ -1,8 +1,7 @@
-
-var axon = require('..')
-  , should = require('should')
-  , pub = axon.socket('pub')
-  , sub = axon.socket('sub')
+var axon = require('..'),
+  should = require('should'),
+  pub = axon.socket('pub'),
+  sub = axon.socket('sub');
 
 pub.bind(4000);
 
@@ -23,12 +22,12 @@ function fireEvents() {
   pub.send('other', 'message');
   pub.send('foo:bar', 'baz');
   pub.send('page:view', '/home');
-};
+}
 
 sub.connect(4000);
 
 var msgs = [];
-sub.on('message', function(type, name){
+sub.on('message', function (type, name) {
   msgs.push(type, name);
   if ('page:view' == type) {
     msgs.map(String).should.eql(expected);
@@ -38,8 +37,7 @@ sub.on('message', function(type, name){
       msgs = [];
       expected = unsubscribed;
       fireEvents();
-    }
-    else {
+    } else {
       pub.close();
       sub.close();
     }
@@ -58,14 +56,9 @@ var subscribed = [
   'foo:bar',
   'baz',
   'page:view',
-  '/home'
+  '/home',
 ];
 
-var unsubscribed = [
-  'something:else',
-  'pork',
-  'page:view',
-  '/home'
-];
+var unsubscribed = ['something:else', 'pork', 'page:view', '/home'];
 
 var expected = subscribed;

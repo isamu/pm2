@@ -1,4 +1,3 @@
-
 process.chdir(__dirname);
 
 var path = require('path');
@@ -7,7 +6,6 @@ var should = require('should');
 var pathsFn = require('../../paths.js');
 
 describe('PM2 Home Path Resolution (#6106)', function () {
-
   var savedEnv;
 
   beforeEach(function () {

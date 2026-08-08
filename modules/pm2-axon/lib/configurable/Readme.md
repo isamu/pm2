@@ -1,11 +1,10 @@
-
 # configurable
 
-  Configuration mixin.
+Configuration mixin.
 
 ## API
 
- Make something configurable:
+Make something configurable:
 
 ```js
 var Configurable = require('configurable');
@@ -31,7 +30,7 @@ Configurable(MyThing.prototype);
 .disabled(name)
 ```
 
-## License 
+## License
 
 (The MIT License)
 

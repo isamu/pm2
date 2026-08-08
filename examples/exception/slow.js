@@ -1,3 +1,3 @@
 setTimeout(() => {
-  throw new Error('err')
-}, 1500)
+  throw new Error('err');
+}, 1500);
