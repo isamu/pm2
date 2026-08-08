@@ -12,7 +12,7 @@ const debug = require('debug')('pm2:monit');
 // Total memory
 const totalMem = os.totalmem();
 
-const Dashboard = {};
+const Dashboard = { init, refresh, log };
 
 const DEFAULT_PADDING = {
   top: 0,
@@ -27,7 +27,7 @@ const WIDTH_LEFT_PANEL = 30;
  * @method init
  * @return this
  */
-Dashboard.init = function () {
+function init() {
   // Init Screen
   this.screen = blessed.screen({
     smartCSR: true,
@@ -221,7 +221,7 @@ Dashboard.init = function () {
   }, 300);
 
   return this;
-};
+}
 
 /**
  * Refresh dashboard
@@ -229,7 +229,7 @@ Dashboard.init = function () {
  * @param {} processes
  * @return this
  */
-Dashboard.refresh = function (processes) {
+function refresh(processes) {
   debug('Monit refresh');
 
   if (!processes) {
@@ -390,7 +390,7 @@ Dashboard.refresh = function (processes) {
   }
 
   return this;
-};
+}
 
 /**
  * Put Log
@@ -398,7 +398,7 @@ Dashboard.refresh = function (processes) {
  * @param {} data
  * @return this
  */
-Dashboard.log = function (type, data) {
+function log(type, data) {
   const that = this;
 
   if (typeof this.logLines[data.process.pm_id] == 'undefined') {
@@ -428,7 +428,9 @@ Dashboard.log = function (type, data) {
       //removing logs if longer than limit
       let count = 0;
       let max_count = 0;
-      let leading_process_id = -1;
+      // Set from a for...in key below, so it is a string once anything is found; the -1 stands
+      // for "nothing yet" and is never used to index with.
+      let leading_process_id: string | number = -1;
 
       for (const process_id in this.logLines) {
         count += this.logLines[process_id].length;
@@ -445,12 +447,12 @@ Dashboard.log = function (type, data) {
   });
 
   return this;
-};
+}
 
 module.exports = Dashboard;
 
 function timeSince(date) {
-  const seconds = Math.floor((new Date() - date) / 1000);
+  const seconds = Math.floor((Date.now() - Number(date)) / 1000);
 
   let interval = Math.floor(seconds / 31536000);
 
@@ -489,9 +491,9 @@ function gradient(p, rgb_beginning, rgb_end) {
   const w2 = 1 - w1;
 
   const rgb = [
-    parseInt(rgb_beginning[0] * w1 + rgb_end[0] * w2),
-    parseInt(rgb_beginning[1] * w1 + rgb_end[1] * w2),
-    parseInt(rgb_beginning[2] * w1 + rgb_end[2] * w2),
+    Math.floor(rgb_beginning[0] * w1 + rgb_end[0] * w2),
+    Math.floor(rgb_beginning[1] * w1 + rgb_end[1] * w2),
+    Math.floor(rgb_beginning[2] * w1 + rgb_end[2] * w2),
   ];
 
   return '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1);

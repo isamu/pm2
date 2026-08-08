@@ -491,7 +491,7 @@ module.exports = function (CLI) {
 
         // Overwrite dump file, delete if broken and exit
         try {
-          fs.writeFileSync(cst.DUMP_FILE_PATH, JSON.stringify(env_arr, '', 2));
+          fs.writeFileSync(cst.DUMP_FILE_PATH, JSON.stringify(env_arr, null, 2));
         } catch (e) {
           console.error(e.stack || e);
           try {

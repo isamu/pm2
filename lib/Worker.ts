@@ -153,7 +153,7 @@ module.exports = function (God) {
           God.Worker.is_running = false;
           debug(
             '[PM2][WORKER] My job here is done, next job in %d seconds',
-            parseInt(cst.WORKER_INTERVAL / 1000),
+            Math.floor(cst.WORKER_INTERVAL / 1000),
           );
         },
       );

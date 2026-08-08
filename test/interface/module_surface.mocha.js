@@ -24,6 +24,10 @@ var MODULES = [
     ],
   },
   {
+    path: 'lib/API/Dashboard.js',
+    methods: ['init', 'refresh', 'log'],
+  },
+  {
     path: 'lib/API/Log.js',
     methods: ['tail', 'stream', 'devStream', 'jsonStream', 'formatStream'],
   },
