@@ -14,12 +14,21 @@ const NPM = require('./NPM.js');
 const TAR = require('./TAR.js');
 const LOCAL = require('./LOCAL.js');
 
-const Modularizer = (module.exports = {});
+const Modularizer = (module.exports = {
+  install,
+  launchModules,
+  package: packageModule,
+  uninstall,
+  listModules,
+  getAdditionalConf,
+  publish,
+  generateSample,
+});
 
 /**
  * PM2 Module System.
  */
-Modularizer.install = function (CLI, module_name, opts, cb) {
+function install(CLI, module_name, opts, cb) {
   module_name = module_name.replace(/[;`|]/g, '');
   if (typeof opts == 'function') {
     cb = opts;
@@ -44,13 +53,13 @@ Modularizer.install = function (CLI, module_name, opts, cb) {
     Common.logMod(`Installing NPM ${module_name} module`);
     NPM.install(CLI, module_name, opts, cb);
   }
-};
+}
 
 /**
  * Launch All Modules
  * Used PM2 at startup
  */
-Modularizer.launchModules = function (CLI, cb) {
+function launchModules(CLI, cb) {
   const modules = Modularizer.listModules();
 
   if (!modules) return cb();
@@ -88,18 +97,20 @@ Modularizer.launchModules = function (CLI, cb) {
   }
 
   launchNPMModules(cb);
-};
+}
 
-Modularizer.package = function (CLI, module_path, cb) {
+// `package` is a reserved word in strict mode, which every .ts file is, so the exported name
+// and the declaration have to differ.
+function packageModule(CLI, module_path, cb) {
   let fullpath = process.cwd();
   if (module_path) fullpath = require('path').resolve(module_path);
   TAR.packager(fullpath, process.cwd(), cb);
-};
+}
 
 /**
  * Uninstall module
  */
-Modularizer.uninstall = function (CLI, module_name, cb) {
+function uninstall(CLI, module_name, cb) {
   Common.printOut(cst.PREFIX_MSG_MOD + 'Uninstalling module ' + module_name);
   const modules_list = Modularizer.listModules();
 
@@ -133,30 +144,30 @@ Modularizer.uninstall = function (CLI, module_name, cb) {
     Common.errMod('Unknown module');
     CLI.exitCli(1);
   }
-};
+}
 
 /**
  * List modules based on modules present in ~/.pm2/modules/ folder
  */
-Modularizer.listModules = function () {
+function listModules() {
   return {
     npm_modules: Configuration.getSync(cst.MODULE_CONF_PREFIX) || {},
     tar_modules: Configuration.getSync(cst.MODULE_CONF_PREFIX_TAR) || {},
   };
-};
+}
 
-Modularizer.getAdditionalConf = function (app_name) {
+function getAdditionalConf(app_name) {
   return NPM.getModuleConf(app_name);
-};
+}
 
-Modularizer.publish = function (PM2, folder, opts, cb) {
+function publish(PM2, folder, opts, cb) {
   if (opts.npm == true) {
     NPM.publish(opts, cb);
   } else {
     TAR.publish(PM2, folder, cb);
   }
-};
+}
 
-Modularizer.generateSample = function (app_name, cb) {
+function generateSample(app_name, cb) {
   NPM.generateSample(app_name, cb);
-};
+}
