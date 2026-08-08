@@ -87,9 +87,6 @@
     "max-lines-per-function": {
       "count": 1
     },
-    "sonarjs/block-scoped-var": {
-      "count": 1
-    },
     "sonarjs/no-nested-functions": {
       "count": 2
     }
@@ -439,9 +436,6 @@
     }
   },
   "lib/API/UX/helpers.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
     "id-length": {
       "count": 4
     },
@@ -449,9 +443,6 @@
       "count": 5
     },
     "sonarjs/no-redundant-boolean": {
-      "count": 1
-    },
-    "sonarjs/no-unused-vars": {
       "count": 1
     }
   },
@@ -2934,14 +2925,6 @@
   "modules/vizion/lib/vizion.js": {
     "id-length": {
       "count": 7
-    }
-  },
-  "paths.js": {
-    "id-length": {
-      "count": 1
-    },
-    "sonarjs/todo-tag": {
-      "count": 1
     }
   },
   "test/helpers/apps.js": {

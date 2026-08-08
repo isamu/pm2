@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T09:55:51.525Z",
+  "updatedAt": "2026-08-08T10:56:10.923Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -137,8 +137,8 @@
   },
   "rules": {
     "id-length": {
-      "baseline": 1356,
-      "current": 1356,
+      "baseline": 1355,
+      "current": 1355,
       "status": "draining"
     },
     "@typescript-eslint/no-require-imports": {
@@ -147,8 +147,8 @@
       "status": "enforced"
     },
     "@typescript-eslint/no-unused-vars": {
-      "baseline": 920,
-      "current": 920,
+      "baseline": 919,
+      "current": 919,
       "status": "draining"
     },
     "max-lines-per-function": {
@@ -177,8 +177,8 @@
       "status": "draining"
     },
     "sonarjs/todo-tag": {
-      "baseline": 10,
-      "current": 10,
+      "baseline": 9,
+      "current": 9,
       "status": "draining"
     },
     "sonarjs/no-ignored-exceptions": {
@@ -197,8 +197,8 @@
       "status": "draining"
     },
     "sonarjs/no-unused-vars": {
-      "baseline": 63,
-      "current": 63,
+      "baseline": 62,
+      "current": 62,
       "status": "draining"
     },
     "@typescript-eslint/no-unused-expressions": {
@@ -237,8 +237,8 @@
       "status": "draining"
     },
     "sonarjs/block-scoped-var": {
-      "baseline": 22,
-      "current": 22,
+      "baseline": 21,
+      "current": 21,
       "status": "draining"
     },
     "no-redeclare": {
