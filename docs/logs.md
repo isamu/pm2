@@ -509,3 +509,79 @@ node packager/clean-dist.mjs && npx tsc -p tsconfig.build.json ; node packager/c
   誤検知。private 化した上でスコープ例外に理由付きで隔離した
 - `id-length` ×2 — 自分が足した `cb`。`cb` を例外リストに足せば既存の違反も一緒に消えて
   天井が下がるが、それは仕事をせずに数字を良くする行為なので、**引数名を `callback` に変えた**
+
+---
+
+## 恒常的に赤かった CI を直した (issue #13)
+
+`Node.js CI` は main を含めてずっと赤だった。直った結果、**全ジョブが緑になったのは今回が初めて**
+（test-node 18/20/24 / test-windows 18/20/latest / test-bun / macOS unit / quality / ever-better）。
+
+### 原因は 4 つあり、1 つずつ順番にしか見えなかった
+
+ランナーは **最初の失敗で止まる**（`report_failure` の直後に `exit 1`）。だから
+「FAILED: 1 件」しか出ず、直すたびに次が現れる。4 回ぶん、直しては回した。
+
+**① 計装は最初から動いていた**
+
+`otel_tracing_ws.mocha.js` は「span が来ない」と 15 秒待って落ちていた。
+バスを直接観測したら **12 秒で trace-span が 50 件** 届いていた。
+テストが読んでいた属性名が、OpenTelemetry の HTTP semantic conventions 安定化で改名されていた:
+
+| テストの期待       | 実際                        |
+| ------------------ | --------------------------- |
+| `http.target`      | `url.path`                  |
+| `http.method`      | `http.request.method`       |
+| `http.status_code` | `http.response.status_code` |
+
+**「届いていない」と読める失敗が、実は「届いているが名前が違う」だった。**
+タイムアウトのメッセージは、待っていた条件が偽だったことしか言わない。
+何が来ていたかは、待っている側に聞くのではなく**バスに聞く**しかない。
+
+`OtelManager.install()` は `npm install --no-save` を**バージョン指定なし**で実行する。
+つまりこの改名はまた起こる。`test/helpers/otel.js` が新旧どちらの綴りでも値を取るようにした。
+テストの意図は「server span が正しい method / path / status で届く」ことで、
+綴りは instrumentation 側の都合。
+
+**② `bus.off(event)` は購読ごと落とす**
+
+①を直しても `otel_tracing.mocha.js` は 11 passing / 1 failing のままだった。
+最後のテストに計測を入れたら、fixture が 200ms 毎にリクエストを出しているのに
+**15 秒間で受信 0 件**。
+
+原因は 3 つ前のテストの `bus.off('trace-span')` — **リスナー引数なし**。
+これはそのイベントの全リスナーを外し、axon の購読自体を落とす。以降のテストには何も届かない。
+WS 側が通っていたのは、成功パスで `bus.off('trace-span', onSpan)` と名前付きで外していたから。
+
+なお名前付き関数式の名前は**関数の外からは見えない**ので、`setTimeout` 側から外すには
+変数に束ねる必要がある（一度これで `onAnySpan is not defined` を踏んだ）。
+
+**③ テストがソースパスを require していた**
+
+`modules/pm2-io-bpm/test/features/otel-tracing.spec.js` は `../../../../lib/OtelManager` を
+require していた。TS 化で `lib/OtelManager.js` は消えて `.ts` になったので、
+**アサーション以前にモジュールが読めない**。他の otel テストは元から dist を見ていた。
+テストが `lib/` のソースパスを直接 require している箇所は、grep したらここ 1 つだけだった。
+
+**④ Bun で node 用コンテナを fork していた**
+
+`fork()` は「今このスイートを動かしているもの」を起動する。bun イメージは
+**`node` という名前で bun を symlink している**ので、そこに fork できる node は無い。
+そして forkしていたのは node 用コンテナで、アプリを `require('module')._load`
+（node の内部 API）で読む。**それが Bun で動かないことこそ ProcessContainerForkBun が
+存在する理由**だった。node 用コンテナは node が動かしているときだけ回すようにした。
+
+ここで一度騙された: **ローカルの `bunx mocha` は bun で走っていない**。
+bunx は mocha のバイナリを解決するだけで、shebang の node が実行する。
+だから `process.versions.bun` が未定義で、guard は無効のまま「通った」ように見えた。
+`bun node_modules/.bin/_mocha` と直接叩いて初めて 12 pending になった。
+
+### 教訓
+
+- **常時赤い CI は、赤いという情報を失う。** この状態のせいで、自分が main の Bun を
+  壊したとき（#20）「いつもの赤」と読み違えた。緑にする価値は、直った 4 テストより大きい
+- **fail-fast のランナーでは「FAILED 1 件」は「残り 1 件」ではない。** 直すたびに次が出る前提で回す
+- **タイムアウトの失敗メッセージは、待っていた条件が偽だったことしか言わない。**
+  何が来ていたかは供給側を観測する
+- **`Passed: N / M` を回帰の指標に使わない。** fail-fast なので N は「最初の失敗までに終わった数」で、
+  並列スケジューリング次第で動く。83 → 70 を回帰と読みかけた
