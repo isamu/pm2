@@ -60,7 +60,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "knip": "knip",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.migrating.json",
     "build": "node packager/clean-dist.mjs && tsc -p tsconfig.build.json && node packager/copy-dist-assets.mjs",
     "prepare": "node -e \"require('fs').existsSync('tsconfig.build.json')&&require('child_process').execSync('npm run build',{stdio:'inherit'})\"",
     "pretest": "npm run build",

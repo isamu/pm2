@@ -10,12 +10,22 @@
 // `const isThing = (v: unknown): v is Thing => ...` — which is testable, narrows for every
 // caller, and fails at the boundary where the data was actually wrong.
 
+import { readFileSync } from 'node:fs';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import sonarjs from 'eslint-plugin-sonarjs';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import security from 'eslint-plugin-security';
+
+// Files renamed to .ts whose types are not written yet — tsconfig.migrating.json's exclude list
+// is the ones that ARE done, so what is left is the migration's remaining work. Read from there
+// rather than copied, so a file graduating to strict checking also starts being held to the
+// module rules below, in the same commit and without anyone remembering to.
+const migratingConfig = JSON.parse(
+  readFileSync(new URL('./tsconfig.migrating.json', import.meta.url), 'utf8'),
+);
+const migratedFiles = migratingConfig.exclude.filter((entry) => entry.endsWith('.ts'));
 
 export default tseslint.config(
   {
@@ -59,6 +69,18 @@ export default tseslint.config(
       // A .js file in a CommonJS package cannot use `import`, so there is nothing a new file
       // could do to satisfy this — it would block every new test and module rather than hold
       // a line. The rule is live for .ts, which is where the migration is heading.
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    // Renaming a file does not convert its module system. These are CommonJS in every way
+    // except the extension, and rewriting 436 require() calls is a migration of its own —
+    // one that changes what the emitted module looks like to its callers, so it is not
+    // something to do on the way past. The rule is enforced, at zero, on every file that has
+    // finished migrating; this list shrinks to nothing as they do.
+    files: migratedFiles.length ? ['lib/**/*.ts'] : [],
+    ignores: migratedFiles,
+    rules: {
       '@typescript-eslint/no-require-imports': 'off',
     },
   },
@@ -111,6 +133,16 @@ export default tseslint.config(
     },
   },
   {
+    // The three fields this reports are `static #pm2`, `static #io` and `static #strategy` —
+    // private class fields, which the message calls "public static property". They are also
+    // assigned in init(), so readonly is not available to them either. Both halves of the
+    // finding are wrong; recording it would put a false statement at the top of a backlog.
+    files: ['lib/API/pm2-plus/PM2IO.ts'],
+    rules: {
+      'sonarjs/public-static-readonly': 'off',
+    },
+  },
+  {
     // A spec repeats itself by nature and its length is not a comprehension problem.
     // The mocha globals are declared here rather than recorded as 1165 no-undef violations:
     // an environment the linter was never told about is not a backlog.
@@ -119,6 +151,12 @@ export default tseslint.config(
     rules: {
       'max-lines': 'off',
       'max-lines-per-function': 'off',
+      // describe/describe/it is three callbacks before a test has done anything, so any test
+      // driving a callback-style API — a stream, a forked process, a config write and read back
+      // — is over the limit by construction. This is the framework's shape, not nesting a
+      // reader has to hold in their head. Counted as descoping, not progress: it took 5 off
+      // the ceiling.
+      'max-nested-callbacks': 'off',
       'sonarjs/no-duplicate-string': 'off',
       // eslint-plugin-security asks whether untrusted input can reach a dangerous sink. A test
       // builds its own inputs, so the answer is always no — and leaving these on means every

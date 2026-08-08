@@ -1,0 +1,331 @@
+/**
+ * Copyright 2013-present the PM2 project authors. All rights reserved.
+ * Use of this source code is governed by a license that
+ * can be found in the LICENSE file.
+ */
+'use strict';
+
+/**
+ * @file Fork execution related functions
+ * @author Alexandre Strzelewicz <as@unitech.io>
+ * @project PM2
+ */
+const log = require('debug')('pm2:fork_mode');
+const fs = require('fs');
+const Utility = require('../Utility.js');
+const path = require('path');
+const dayjs = require('dayjs');
+const cst = require('../../constants.js');
+
+// Utility.startLogging replaces each path in this object with an open stream, in place — except
+// the ones that mean "discard", such as /dev/null, which it leaves as the string it was given.
+// So an entry is a path until it is a stream, and may stay a path forever.
+interface LogSink {
+  write(data: string): void;
+}
+
+const isOpen = (target: string | LogSink | undefined): target is LogSink =>
+  typeof target === 'object' && target !== null && typeof target.write === 'function';
+
+/**
+ * Description
+ * @method exports
+ * @param {} God
+ * @return
+ */
+module.exports = function ForkMode(God) {
+  /**
+   * For all apps - FORK MODE
+   * fork the app
+   * @method forkMode
+   * @param {} pm2_env
+   * @param {} cb
+   * @return
+   */
+  God.forkMode = function forkMode(pm2_env, cb) {
+    let command = '';
+    let args = [];
+
+    console.log(`App [${pm2_env.name}:${pm2_env.pm_id}] starting in -fork mode-`);
+    const spawn = require('child_process').spawn;
+
+    const interpreter = pm2_env.exec_interpreter || process.execPath;
+    const pidFile = pm2_env.pm_pid_path;
+
+    if (interpreter !== 'none') {
+      command = interpreter;
+
+      if (pm2_env.node_args && Array.isArray(pm2_env.node_args)) {
+        args = args.concat(pm2_env.node_args);
+      }
+
+      // Deprecated - to remove at some point
+      if (process.env.PM2_NODE_OPTIONS) {
+        args = args.concat(process.env.PM2_NODE_OPTIONS.split(' '));
+      }
+
+      if (interpreter === 'node' || RegExp('node$').test(interpreter)) {
+        args.push(path.resolve(path.dirname(module.filename), '..', 'ProcessContainerFork.js'));
+      } else if (interpreter === 'bun' || RegExp('bun$').test(interpreter)) {
+        args.push(path.resolve(path.dirname(module.filename), '..', 'ProcessContainerForkBun.js'));
+      } else args.push(pm2_env.pm_exec_path);
+    } else {
+      command = pm2_env.pm_exec_path;
+      args = [];
+    }
+
+    if (pm2_env.args) {
+      args = args.concat(pm2_env.args);
+    }
+
+    // piping stream o file
+    // `std` is the combined log, present only when the app asked for one.
+    const stds: { out: string | LogSink; err: string | LogSink; std?: string | LogSink } = {
+      out: pm2_env.pm_out_log_path,
+      err: pm2_env.pm_err_log_path,
+    };
+
+    // entire log std if necessary.
+    if ('pm_log_path' in pm2_env) {
+      stds.std = pm2_env.pm_log_path;
+    }
+
+    log('stds: %j', stds);
+
+    Utility.startLogging(stds, function (err, result) {
+      if (err) {
+        God.logAndGenerateError(err);
+        return cb(err);
+      }
+
+      // Declared out here because the checks that follow the catch read it.
+      let cspr;
+
+      try {
+        const spawn_env = {};
+        for (const k in pm2_env) {
+          if (pm2_env[k] !== null && pm2_env[k] !== undefined && typeof pm2_env[k] !== 'object')
+            spawn_env[k] = pm2_env[k];
+        }
+
+        const options: {
+          env: object;
+          detached: boolean;
+          cwd: string;
+          stdio: string[];
+          windowsHide?: boolean;
+          uid?: number;
+          gid?: number;
+        } = {
+          env: spawn_env,
+          detached: true,
+          cwd: pm2_env.pm_cwd || process.cwd(),
+          stdio: ['pipe', 'pipe', 'pipe', 'ipc'], //Same as fork() in node core
+        };
+
+        if (typeof pm2_env.windowsHide === 'boolean') {
+          options.windowsHide = pm2_env.windowsHide;
+        } else {
+          options.windowsHide = true;
+        }
+
+        if (pm2_env.uid) {
+          options.uid = pm2_env.uid;
+        }
+
+        if (pm2_env.gid) {
+          options.gid = pm2_env.gid;
+        }
+
+        cspr = spawn(command, args, options);
+      } catch (e) {
+        God.logAndGenerateError(e);
+        return cb(e);
+      }
+
+      if (!cspr || !cspr.stderr || !cspr.stdout) {
+        const fatalError = new Error(
+          'Process could not be forked properly, check your system health',
+        );
+        God.logAndGenerateError(fatalError);
+        return cb(fatalError);
+      }
+
+      cspr.process = {};
+      cspr.process.pid = cspr.pid;
+      cspr.pm2_env = pm2_env;
+
+      function transformLogToJson(pm2_env, type, data) {
+        return (
+          JSON.stringify({
+            message: data.toString(),
+            timestamp: pm2_env.log_date_format
+              ? dayjs().format(pm2_env.log_date_format)
+              : new Date().toISOString(),
+            type: type,
+            process_id: cspr.pm2_env.pm_id,
+            app_name: cspr.pm2_env.name,
+          }) + '\n'
+        );
+      }
+
+      function prefixLogWithDate(pm2_env, data) {
+        // A chunk almost never ends on a line boundary, so the trailing fragment after the last
+        // newline is dropped rather than dated as if it were a line of its own.
+        const lines = data.toString().split('\n');
+        if (lines.length > 1) lines.pop();
+        return lines
+          .map((line) => `${dayjs().format(pm2_env.log_date_format)}: ${line}\n`)
+          .join('');
+      }
+
+      cspr.stderr.on('data', function forkErrData(data) {
+        let log_data = null;
+
+        // via --out /dev/null --err /dev/null
+        if (pm2_env.disable_logs === true) return false;
+
+        if (pm2_env.log_type && pm2_env.log_type === 'json')
+          log_data = transformLogToJson(pm2_env, 'err', data);
+        else if (pm2_env.log_date_format) log_data = prefixLogWithDate(pm2_env, data);
+        else log_data = data.toString();
+
+        God.bus.emit('log:err', {
+          process: {
+            pm_id: cspr.pm2_env.pm_id,
+            name: cspr.pm2_env.name,
+            rev:
+              cspr.pm2_env.versioning && cspr.pm2_env.versioning.revision
+                ? cspr.pm2_env.versioning.revision
+                : null,
+            namespace: cspr.pm2_env.namespace,
+          },
+          at: Utility.getDate(),
+          data: log_data,
+        });
+
+        if (
+          Utility.checkPathIsNull(pm2_env.pm_err_log_path) &&
+          (!pm2_env.pm_log_path || Utility.checkPathIsNull(pm2_env.pm_log_path))
+        ) {
+          return false;
+        }
+
+        if (isOpen(stds.std)) stds.std.write(log_data);
+        if (isOpen(stds.err)) stds.err.write(log_data);
+      });
+
+      cspr.stdout.on('data', function forkOutData(data) {
+        let log_data = null;
+
+        if (pm2_env.disable_logs === true) return false;
+
+        if (pm2_env.log_type && pm2_env.log_type === 'json')
+          log_data = transformLogToJson(pm2_env, 'out', data);
+        else if (pm2_env.log_date_format) log_data = prefixLogWithDate(pm2_env, data);
+        else log_data = data.toString();
+
+        God.bus.emit('log:out', {
+          process: {
+            pm_id: cspr.pm2_env.pm_id,
+            name: cspr.pm2_env.name,
+            rev:
+              cspr.pm2_env.versioning && cspr.pm2_env.versioning.revision
+                ? cspr.pm2_env.versioning.revision
+                : null,
+            namespace: cspr.pm2_env.namespace,
+          },
+          at: Utility.getDate(),
+          data: log_data,
+        });
+
+        if (
+          Utility.checkPathIsNull(pm2_env.pm_out_log_path) &&
+          (!pm2_env.pm_log_path || Utility.checkPathIsNull(pm2_env.pm_log_path))
+        )
+          return false;
+
+        if (isOpen(stds.std)) stds.std.write(log_data);
+        if (isOpen(stds.out)) stds.out.write(log_data);
+      });
+
+      /**
+       * Broadcast message to God
+       */
+      cspr.on('message', function forkMessage(msg) {
+        /*********************************
+         * If you edit this function
+         * Do the same in ClusterMode.js !
+         *********************************/
+        if (msg.data && msg.type) {
+          process.nextTick(function () {
+            return God.bus.emit(msg.type ? msg.type : 'process:msg', {
+              at: Utility.getDate(),
+              data: msg.data,
+              process: {
+                pm_id: cspr.pm2_env.pm_id,
+                name: cspr.pm2_env.name,
+                versioning: cspr.pm2_env.versioning,
+                namespace: cspr.pm2_env.namespace,
+              },
+            });
+          });
+        } else {
+          if (typeof msg == 'object' && 'node_version' in msg) {
+            cspr.pm2_env.node_version = msg.node_version;
+            return false;
+          }
+
+          return God.bus.emit('process:msg', {
+            at: Utility.getDate(),
+            raw: msg,
+            process: {
+              pm_id: cspr.pm2_env.pm_id,
+              name: cspr.pm2_env.name,
+              namespace: cspr.pm2_env.namespace,
+            },
+          });
+        }
+      });
+
+      try {
+        const pid = cspr.pid;
+        if (typeof pid !== 'undefined') fs.writeFileSync(pidFile, pid.toString());
+      } catch (e) {
+        console.error(e.stack || e);
+      }
+
+      cspr.once('exit', function forkClose(status) {
+        try {
+          for (const k in stds) {
+            if (stds[k] && stds[k].destroy) stds[k].destroy();
+            else if (stds[k] && stds[k].end) stds[k].end();
+            else if (stds[k] && stds[k].close) stds[k].close();
+            stds[k] = stds[k]._file;
+          }
+        } catch (e) {
+          God.logAndGenerateError(e);
+        }
+      });
+
+      cspr._reloadLogs = function (cb) {
+        try {
+          for (const k in stds) {
+            if (stds[k] && stds[k].destroy) stds[k].destroy();
+            else if (stds[k] && stds[k].end) stds[k].end();
+            else if (stds[k] && stds[k].close) stds[k].close();
+            stds[k] = stds[k]._file;
+          }
+        } catch (e) {
+          God.logAndGenerateError(e);
+        }
+        //cspr.removeAllListeners();
+        Utility.startLogging(stds, cb);
+      };
+
+      cspr.unref();
+
+      return cb(null, cspr);
+    });
+  };
+};

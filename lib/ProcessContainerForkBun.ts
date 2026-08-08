@@ -29,7 +29,14 @@ if (process.connected && process.send && process.versions?.node) {
 // no ES-module branch here.
 requireFrom(String(script));
 
-// Make the application see what it would have seen had it been started directly.
-process.mainModule ??= requireFrom.main;
+// Make the application see what it would have seen had it been started directly. Bun does not
+// always give this file a main module, so the fallback is an empty object rather than whatever
+// createRequire happens to hold — an application reading process.mainModule.loaded should find
+// `false`, not throw.
+//
+// The matching `requireFrom.main = ...` the node container ends with is deliberately absent:
+// under Bun that property is read-only and assigning to it throws, and since `requireFrom` is
+// local to this file the assignment was never something the application could observe. What it
+// can observe is process.mainModule, which is set above.
+process.mainModule = process.mainModule || Object.create(null);
 if (process.mainModule) process.mainModule.loaded = false;
-requireFrom.main = process.mainModule;
