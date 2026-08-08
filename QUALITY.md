@@ -3,9 +3,9 @@
 Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are rendered from
 `.ever-better/state.json`; edits outside the notes block are overwritten on the next run.
 
-- Phase: **diagnose**
-- Frozen: not yet — run `ever-better freeze`
-- Open violations: **0**
+- Phase: **drain**
+- Frozen: 2026-08-08T09:40:43.166Z
+- Open violations: **4942**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -13,10 +13,15 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 Top to bottom. An unattended run works this list and nothing else.
 
-- [x] **P0 diagnose** — taken 2026-08-08T08:37:19.234Z
-- [ ] **P1 bootstrap** — 5 gap(s) still open
-- [ ] **P2 freeze** — baseline not pinned yet
-- [ ] **P3 drain** — backlog empty
+- [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
+- [ ] **P1 bootstrap** — 2 gap(s) still open
+- [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
+- [ ] **P3 drain** — 4942 violations across 72 rules
+  - [ ] `sonarjs/no-parameter-reassignment` — 1 left
+  - [ ] `sonarjs/reduce-initial-value` — 1 left
+  - [ ] `sonarjs/duplicates-in-character-class` — 1 left
+  - [ ] `sonarjs/code-eval` — 1 left
+  - [ ] `sonarjs/no-invariant-returns` — 1 left
 - [ ] **P4 tighten** — add the next rule tier, then freeze and drain again
 - [ ] **P5 duplication and dead code** — report-only scans; extraction is judgment, not a threshold
 
@@ -24,17 +29,93 @@ Top to bottom. An unattended run works this list and nothing else.
 
 Ceiling is the count at the last freeze. It may fall and must never rise.
 
-No rule violations recorded yet. Run `ever-better freeze`.
+| Rule | Ceiling | Now | Change | Status |
+| --- | ---: | ---: | ---: | --- |
+| `id-length` | 1356 | 1356 | 0 | draining |
+| `@typescript-eslint/no-require-imports` | 1293 | 1293 | 0 | draining |
+| `@typescript-eslint/no-unused-vars` | 922 | 922 | 0 | draining |
+| `max-nested-callbacks` | 197 | 197 | 0 | draining |
+| `max-lines-per-function` | 129 | 129 | 0 | draining |
+| `@typescript-eslint/no-this-alias` | 122 | 122 | 0 | draining |
+| `@typescript-eslint/no-unused-expressions` | 89 | 89 | 0 | draining |
+| `sonarjs/no-unused-vars` | 63 | 63 | 0 | draining |
+| `sonarjs/no-redundant-boolean` | 62 | 62 | 0 | draining |
+| `sonarjs/no-nested-functions` | 61 | 61 | 0 | draining |
+| `sonarjs/no-dead-store` | 54 | 54 | 0 | draining |
+| `sonarjs/cognitive-complexity` | 49 | 49 | 0 | draining |
+| `complexity` | 40 | 40 | 0 | draining |
+| `sonarjs/no-ignored-exceptions` | 40 | 40 | 0 | draining |
+| `no-useless-assignment` | 38 | 38 | 0 | draining |
+| `sonarjs/assertions-in-tests` | 38 | 38 | 0 | draining |
+| `no-prototype-builtins` | 29 | 29 | 0 | draining |
+| `no-redeclare` | 27 | 27 | 0 | draining |
+| `sonarjs/no-duplicate-test-title` | 25 | 25 | 0 | draining |
+| `sonarjs/block-scoped-var` | 22 | 22 | 0 | draining |
+| `sonarjs/no-os-command-from-path` | 20 | 20 | 0 | draining |
+| `sonarjs/concise-regex` | 20 | 20 | 0 | draining |
+| `no-empty` | 19 | 19 | 0 | draining |
+| `@typescript-eslint/no-explicit-any` | 17 | 17 | 0 | draining |
+| `sonarjs/no-skipped-tests` | 16 | 16 | 0 | draining |
+| `no-useless-escape` | 13 | 13 | 0 | draining |
+| `sonarjs/no-clear-text-protocols` | 13 | 13 | 0 | draining |
+| `sonarjs/super-linear-regex` | 12 | 12 | 0 | draining |
+| `sonarjs/no-nested-assignment` | 11 | 11 | 0 | draining |
+| `sonarjs/regex-complexity` | 11 | 11 | 0 | draining |
+| `sonarjs/todo-tag` | 10 | 10 | 0 | draining |
+| `sonarjs/no-nested-conditional` | 10 | 10 | 0 | draining |
+| `sonarjs/pseudo-random` | 9 | 9 | 0 | draining |
+| `sonarjs/publicly-writable-directories` | 9 | 9 | 0 | draining |
+| `no-unreachable` | 8 | 8 | 0 | draining |
+| `sonarjs/no-duplicated-branches` | 8 | 8 | 0 | draining |
+| `sonarjs/single-character-alternation` | 7 | 7 | 0 | draining |
+| `max-depth` | 7 | 7 | 0 | draining |
+| `sonarjs/file-permissions` | 6 | 6 | 0 | draining |
+| `no-control-regex` | 4 | 4 | 0 | draining |
+| `sonarjs/x-powered-by` | 4 | 4 | 0 | draining |
+| `max-lines` | 3 | 3 | 0 | draining |
+| `sonarjs/no-identical-functions` | 3 | 3 | 0 | draining |
+| `sonarjs/prefer-single-boolean-return` | 3 | 3 | 0 | draining |
+| `sonarjs/arguments-order` | 3 | 3 | 0 | draining |
+| `sonarjs/no-globals-shadowing` | 2 | 2 | 0 | draining |
+| `no-unassigned-vars` | 2 | 2 | 0 | draining |
+| `no-undef` | 2 | 2 | 0 | draining |
+| `preserve-caught-error` | 2 | 2 | 0 | draining |
+| `@typescript-eslint/no-array-constructor` | 2 | 2 | 0 | draining |
+| `no-misleading-character-class` | 2 | 2 | 0 | draining |
+| `sonarjs/no-misleading-character-class` | 2 | 2 | 0 | draining |
+| `no-self-assign` | 2 | 2 | 0 | draining |
+| `sonarjs/no-gratuitous-expressions` | 2 | 2 | 0 | draining |
+| `security/detect-object-injection` | 2 | 2 | 0 | draining |
+| `sonarjs/slow-regex` | 2 | 2 | 0 | draining |
+| `sonarjs/no-hardcoded-ip` | 2 | 2 | 0 | draining |
+| `no-dupe-keys` | 2 | 2 | 0 | draining |
+| `sonarjs/no-parameter-reassignment` | 1 | 1 | 0 | draining |
+| `sonarjs/reduce-initial-value` | 1 | 1 | 0 | draining |
+| `sonarjs/duplicates-in-character-class` | 1 | 1 | 0 | draining |
+| `sonarjs/code-eval` | 1 | 1 | 0 | draining |
+| `sonarjs/no-invariant-returns` | 1 | 1 | 0 | draining |
+| `sonarjs/no-redundant-jump` | 1 | 1 | 0 | draining |
+| `no-global-assign` | 1 | 1 | 0 | draining |
+| `sonarjs/no-control-regex` | 1 | 1 | 0 | draining |
+| `sonarjs/prefer-while` | 1 | 1 | 0 | draining |
+| `max-params` | 1 | 1 | 0 | draining |
+| `no-dupe-else-if` | 1 | 1 | 0 | draining |
+| `sonarjs/no-identical-conditions` | 1 | 1 | 0 | draining |
+| `no-async-promise-executor` | 1 | 1 | 0 | draining |
+| `sonarjs/stable-tests` | 1 | 1 | 0 | draining |
+
+## Other counters
+
+| Counter | Ceiling | Now |
+| --- | ---: | ---: |
+| eslint:warnings | 1037 | 1037 |
 
 ## Outstanding
 
 ### bootstrap
 
-- [ ] **ESLint is not configured** — Nothing enforces anything yet. This is the first thing bootstrap installs.
-- [ ] **No TypeScript** — Types are the cheapest rule set there is, and the type-aware lint tier cannot run without them. `ever-better migrate` walks it one file at a time, dependencies first.
-- [ ] **No formatter** — Formatting must land before linting starts, or the first drain PR is a diff nobody can read.
 - [ ] **No test runner** — Draining warnings finds bugs. Without a runner there is nowhere to pin them.
-- [ ] **Missing package scripts: format, lint, build, typecheck** — CI runs scripts, not commands. A gate with no script behind it cannot be enforced.
+- [ ] **Missing package scripts: build** — CI runs scripts, not commands. A gate with no script behind it cannot be enforced.
 
 ### drain
 
@@ -42,18 +123,12 @@ No rule violations recorded yet. Run `ever-better freeze`.
 
 ### tighten
 
-- [ ] **No dead-code detection** — knip reports unused exports and files. Report-only at first; a counter later.
+- [ ] **Only 1% of sources are TypeScript** — The type-aware rules cover the typed part only, so the remaining .js files are the blind spot the counts will not show.
+- [ ] **6 strictness flags `strict` does not include are off** — Measured with `tsc --showConfig`, after every extends: noUncheckedIndexedAccess, exactOptionalPropertyTypes, noImplicitReturns, noFallthroughCasesInSwitch, noImplicitOverride, noPropertyAccessFromIndexSignature. Type errors have no suppression mechanism, so enable them one at a time and measure the cost first.
 
 ### split
 
-- [ ] **No duplication detection** — jscpd is what turns 'this feels repetitive' into a number that can only go down.
 - [ ] **14 files over 600 lines** — These are the split-and-DRY backlog. Knowing the count now makes the limit a choice.
-
-### review
-
-- [ ] **CI does not run on macos** — Path handling and file watching break per platform, and only per platform.
-- [ ] **CI does not run lint** — The rules are configured but nothing runs them on a pull request.
-- [ ] **CI does not run `ever-better check`** — A baseline is only a ratchet if something rejects a regression. Thorough CI that never runs the gate enforces nothing, and looks identical from the outside.
 
 ## Notes
 

@@ -39,10 +39,21 @@ CI を通すために **ルール自体を弱めない**。ignore glob を広げ
 例外は freeze の一度きり意図的に与えたもので、ルールを緩めるとそれが恒久かつ無言の免除になる。
 ルールがこの repo に本当に合っていないなら、それは編集ではなく issue にする。
 
-## ゲートは終了コードで判定する
+## ゲート
 
-`npm run lint | tail` のようにパイプすると最後の段の終了コードが返るため、lint が落ちていても
-0 に見える。各コマンドを単独で走らせ、終了コードで合否を判断する。
+コードを変えたら、この 4 つをこの順で走らせる。
 
-（`format` / `lint` / `build` / `typecheck` の script は bootstrap フェーズで追加する。
-経緯と全体計画は `plans/ever-better.md`。）
+```bash
+npm run format      # Prettier で整形（CI は format:check で判定）
+npm run lint        # ESLint。suppressions を超えた分だけ error になる
+npm run typecheck   # tsc --noEmit
+npx ever-better check --no-write   # 天井を超えていないか
+```
+
+`build` script は無い。pm2 は素の JavaScript をそのまま配布していて、コンパイルする対象が無い
+（TypeScript 移行が `lib/` に届いた時点で必要になる）。
+
+**判定は終了コードで行う。** `npm run lint | tail` のようにパイプすると最後の段の終了コードが
+返るため、lint が落ちていても 0 に見える。各コマンドを単独で走らせること。
+
+経緯と全体計画は `plans/ever-better.md`。

@@ -26,25 +26,25 @@ describe('Flag -ext', function () {
   it('should not crash in case, when no access for file or directory by permissions', function () {
     // Clean up from any previous failed run
     try {
-      fs.chmodSync('noAccessDir', 0777);
-      fs.chmodSync('noAccessDir/checkPermissions.txt', 0777);
+      fs.chmodSync('noAccessDir', 0o777);
+      fs.chmodSync('noAccessDir/checkPermissions.txt', 0o777);
       fs.unlinkSync('noAccessDir/checkPermissions.txt');
       fs.rmdirSync('noAccessDir');
     } catch (e) {
       /* ignore */
     }
-    var dir = fs.mkdirSync('noAccessDir', 0777);
+    var dir = fs.mkdirSync('noAccessDir', 0o777);
     opts.ext = 'txt';
     fs.writeFileSync(
       'noAccessDir/checkPermissions.txt',
       "It's a temporary file for testing flag --ext in PM2",
     );
-    fs.chmodSync('noAccessDir/checkPermissions.txt', 0000);
-    fs.chmodSync('noAccessDir', 0000);
+    fs.chmodSync('noAccessDir/checkPermissions.txt', 0o0);
+    fs.chmodSync('noAccessDir', 0o0);
     f_e.make_available_extension(opts, []);
     f_e.make_available_extension(opts, []);
-    fs.chmodSync('noAccessDir', 0777);
-    fs.chmodSync('noAccessDir/checkPermissions.txt', 0777);
+    fs.chmodSync('noAccessDir', 0o777);
+    fs.chmodSync('noAccessDir/checkPermissions.txt', 0o777);
     fs.unlinkSync('noAccessDir/checkPermissions.txt');
     fs.rmdirSync('noAccessDir/');
   });
