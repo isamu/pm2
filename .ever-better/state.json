@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T11:58:39.767Z",
+  "updatedAt": "2026-08-08T11:47:15.782Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -147,7 +147,7 @@
       "status": "enforced"
     },
     "@typescript-eslint/no-unused-vars": {
-      "baseline": 903,
+      "baseline": 913,
       "current": 913,
       "status": "draining"
     },
