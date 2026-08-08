@@ -28,3 +28,4 @@ unit_time
 *.heapprofile
 a.out
 scripts/
+/dist

@@ -20,5 +20,15 @@ artifacts
 .gitattributes
 e2e_time
 run.sh
-dist
 bun.lock
+tsconfig.json
+tsconfig.build.json
+eslint.config.mjs
+knip.json
+eslint-suppressions.json
+.ever-better
+QUALITY.md
+plans
+AGENTS.md
+.prettierrc.json
+.prettierignore

@@ -44,7 +44,7 @@
   ],
   "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "test:unit": "bash test/unit.sh",
@@ -60,7 +60,10 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "knip": "knip",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json && node packager/copy-dist-assets.mjs",
+    "prepare": "npm run build",
+    "pretest": "npm run build"
   },
   "keywords": [
     "cli",
