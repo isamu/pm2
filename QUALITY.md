@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **3606**
+- Open violations: **3603**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 3606 violations across 70 rules
+- [ ] **P3 drain** — 3603 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -31,7 +31,7 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
-| `id-length` | 1338 | 1338 | 0 | draining |
+| `id-length` | 1336 | 1336 | 0 | draining |
 | `@typescript-eslint/no-unused-vars` | 911 | 911 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
 | `max-lines-per-function` | 129 | 129 | 0 | draining |
@@ -50,8 +50,8 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `no-redeclare` | 27 | 27 | 0 | draining |
 | `sonarjs/no-duplicate-test-title` | 25 | 25 | 0 | draining |
 | `sonarjs/block-scoped-var` | 21 | 21 | 0 | draining |
-| `sonarjs/no-os-command-from-path` | 20 | 20 | 0 | draining |
 | `sonarjs/concise-regex` | 20 | 20 | 0 | draining |
+| `sonarjs/no-os-command-from-path` | 19 | 19 | 0 | draining |
 | `no-empty` | 18 | 18 | 0 | draining |
 | `@typescript-eslint/no-explicit-any` | 17 | 17 | 0 | draining |
 | `sonarjs/no-skipped-tests` | 16 | 16 | 0 | draining |

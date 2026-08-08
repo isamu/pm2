@@ -193,14 +193,6 @@
       "count": 2
     }
   },
-  "lib/API/ExtraMgmt/Docker.js": {
-    "id-length": {
-      "count": 2
-    },
-    "sonarjs/no-os-command-from-path": {
-      "count": 1
-    }
-  },
   "lib/API/Log.js": {
     "@typescript-eslint/no-this-alias": {
       "count": 5
