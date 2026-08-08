@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T12:24:32.594Z",
+  "updatedAt": "2026-08-08T12:35:08.773Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -137,8 +137,8 @@
   },
   "rules": {
     "id-length": {
-      "baseline": 1335,
-      "current": 1335,
+      "baseline": 1334,
+      "current": 1334,
       "status": "draining"
     },
     "@typescript-eslint/no-require-imports": {
@@ -147,8 +147,8 @@
       "status": "enforced"
     },
     "@typescript-eslint/no-unused-vars": {
-      "baseline": 911,
-      "current": 911,
+      "baseline": 909,
+      "current": 909,
       "status": "draining"
     },
     "max-lines-per-function": {
@@ -242,8 +242,8 @@
       "status": "draining"
     },
     "no-redeclare": {
-      "baseline": 27,
-      "current": 27,
+      "baseline": 26,
+      "current": 26,
       "status": "draining"
     },
     "sonarjs/no-globals-shadowing": {

@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **3600**
+- Open violations: **3596**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 3600 violations across 70 rules
+- [ ] **P3 drain** — 3596 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -31,8 +31,8 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
-| `id-length` | 1335 | 1335 | 0 | draining |
-| `@typescript-eslint/no-unused-vars` | 911 | 911 | 0 | draining |
+| `id-length` | 1334 | 1334 | 0 | draining |
+| `@typescript-eslint/no-unused-vars` | 909 | 909 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
 | `max-lines-per-function` | 128 | 128 | 0 | draining |
 | `@typescript-eslint/no-this-alias` | 122 | 122 | 0 | draining |
@@ -47,7 +47,7 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `no-useless-assignment` | 38 | 38 | 0 | draining |
 | `sonarjs/assertions-in-tests` | 38 | 38 | 0 | draining |
 | `no-prototype-builtins` | 29 | 29 | 0 | draining |
-| `no-redeclare` | 27 | 27 | 0 | draining |
+| `no-redeclare` | 26 | 26 | 0 | draining |
 | `sonarjs/no-duplicate-test-title` | 25 | 25 | 0 | draining |
 | `sonarjs/block-scoped-var` | 21 | 21 | 0 | draining |
 | `sonarjs/concise-regex` | 20 | 20 | 0 | draining |

@@ -331,17 +331,6 @@
       "count": 1
     }
   },
-  "lib/API/Modules/flagExt.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    },
-    "id-length": {
-      "count": 1
-    },
-    "no-redeclare": {
-      "count": 1
-    }
-  },
   "lib/API/Modules/index.js": {
     "@typescript-eslint/no-this-alias": {
       "count": 5
