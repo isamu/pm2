@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **4942**
+- Open violations: **3645**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 4942 violations across 72 rules
+- [ ] **P3 drain** — 3645 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -32,8 +32,7 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
 | `id-length` | 1356 | 1356 | 0 | draining |
-| `@typescript-eslint/no-require-imports` | 1293 | 1293 | 0 | draining |
-| `@typescript-eslint/no-unused-vars` | 922 | 922 | 0 | draining |
+| `@typescript-eslint/no-unused-vars` | 920 | 920 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
 | `max-lines-per-function` | 129 | 129 | 0 | draining |
 | `@typescript-eslint/no-this-alias` | 122 | 122 | 0 | draining |
@@ -78,7 +77,6 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `sonarjs/arguments-order` | 3 | 3 | 0 | draining |
 | `sonarjs/no-globals-shadowing` | 2 | 2 | 0 | draining |
 | `no-unassigned-vars` | 2 | 2 | 0 | draining |
-| `no-undef` | 2 | 2 | 0 | draining |
 | `preserve-caught-error` | 2 | 2 | 0 | draining |
 | `@typescript-eslint/no-array-constructor` | 2 | 2 | 0 | draining |
 | `no-misleading-character-class` | 2 | 2 | 0 | draining |
@@ -129,6 +127,12 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 ### split
 
 - [ ] **14 files over 600 lines** — These are the split-and-DRY backlog. Knowing the count now makes the limit a choice.
+
+## Work log
+
+| Date | Commit | Kind | Rule | What |
+| --- | --- | --- | --- | --- |
+| 2026-08-08 | 2f404a42 | drained | no-undef | fixed cst/completer ReferenceErrors in lib/API/Extra.js and lib/completion.js; regression test in test/interface/completion.mocha.js |
 
 ## Notes
 
