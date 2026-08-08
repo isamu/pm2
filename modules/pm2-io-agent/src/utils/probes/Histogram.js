@@ -94,7 +94,7 @@ Histogram.prototype.percentiles = function (percentiles) {
 };
 
 Histogram.prototype.reset = function () {
-  this.constructor.call(this); // eslint-disable-line
+  this.constructor.call(this);
 };
 
 Histogram.prototype.val = function () {

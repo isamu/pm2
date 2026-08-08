@@ -1,0 +1,507 @@
+{
+  "version": 1,
+  "tool": "ever-better",
+  "phase": "drain",
+  "updatedAt": "2026-08-08T09:40:43.167Z",
+  "frozenAt": "2026-08-08T09:40:43.166Z",
+  "diagnosedAt": "2026-08-08T09:40:21.066Z",
+  "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
+  "diagnosis": {
+    "packageManager": "npm",
+    "language": "mixed",
+    "framework": "none",
+    "runtime": "node",
+    "typescriptFileRatio": 0.010752688172043012,
+    "tooling": {
+      "eslint": "flat",
+      "prettier": true,
+      "testRunner": "none",
+      "knip": true,
+      "jscpd": true,
+      "agentInstructions": []
+    },
+    "scripts": {
+      "lint": true,
+      "format": true,
+      "build": false,
+      "typecheck": true,
+      "test": true
+    },
+    "ci": {
+      "present": true,
+      "runners": [
+        "macos-latest",
+        "ubuntu-latest",
+        "windows-latest"
+      ],
+      "runsLint": true,
+      "runsTest": true,
+      "runsBuild": false,
+      "runsTypecheck": true,
+      "runsEverBetterCheck": true
+    },
+    "sizes": {
+      "total": 558,
+      "overFileLimit": 14,
+      "largest": [
+        {
+          "path": "examples/using-pm2-and-transpilers/node.d.ts",
+          "ext": "ts",
+          "lines": 2611
+        },
+        {
+          "path": "lib/API.js",
+          "ext": "js",
+          "lines": 1982
+        },
+        {
+          "path": "examples/sourcemap-auto-resolve/API.js",
+          "ext": "js",
+          "lines": 1658
+        },
+        {
+          "path": "lib/binaries/CLI.js",
+          "ext": "js",
+          "lines": 1256
+        },
+        {
+          "path": "modules/pm2-io-agent/test/units/InteractorClient.mocha.js",
+          "ext": "js",
+          "lines": 1218
+        },
+        {
+          "path": "lib/Common.js",
+          "ext": "js",
+          "lines": 983
+        },
+        {
+          "path": "lib/God/ActionMethods.js",
+          "ext": "js",
+          "lines": 913
+        },
+        {
+          "path": "lib/Client.js",
+          "ext": "js",
+          "lines": 791
+        },
+        {
+          "path": "types/index.d.ts",
+          "ext": "ts",
+          "lines": 765
+        },
+        {
+          "path": "lib/API/Extra.js",
+          "ext": "js",
+          "lines": 757
+        }
+      ]
+    },
+    "gaps": [
+      {
+        "id": "typescript-partial",
+        "title": "Only 1% of sources are TypeScript",
+        "detail": "The type-aware rules cover the typed part only, so the remaining .js files are the blind spot the counts will not show.",
+        "phase": "tighten"
+      },
+      {
+        "id": "test-runner",
+        "title": "No test runner",
+        "detail": "Draining warnings finds bugs. Without a runner there is nowhere to pin them.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "agent-instructions",
+        "title": "No CLAUDE.md / AGENTS.md",
+        "detail": "Draining is done by agents. Rules that live only in your head produce a different fix every session.",
+        "phase": "drain"
+      },
+      {
+        "id": "scripts",
+        "title": "Missing package scripts: build",
+        "detail": "CI runs scripts, not commands. A gate with no script behind it cannot be enforced.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "file-size",
+        "title": "14 files over 600 lines",
+        "detail": "These are the split-and-DRY backlog. Knowing the count now makes the limit a choice.",
+        "phase": "split"
+      },
+      {
+        "id": "tsconfig-strictness",
+        "title": "6 strictness flags `strict` does not include are off",
+        "detail": "Measured with `tsc --showConfig`, after every extends: noUncheckedIndexedAccess, exactOptionalPropertyTypes, noImplicitReturns, noFallthroughCasesInSwitch, noImplicitOverride, noPropertyAccessFromIndexSignature. Type errors have no suppression mechanism, so enable them one at a time and measure the cost first.",
+        "phase": "tighten"
+      }
+    ]
+  },
+  "rules": {
+    "id-length": {
+      "baseline": 1356,
+      "current": 1356,
+      "status": "draining"
+    },
+    "@typescript-eslint/no-require-imports": {
+      "baseline": 1293,
+      "current": 1293,
+      "status": "draining"
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "baseline": 922,
+      "current": 922,
+      "status": "draining"
+    },
+    "max-lines-per-function": {
+      "baseline": 129,
+      "current": 129,
+      "status": "draining"
+    },
+    "sonarjs/cognitive-complexity": {
+      "baseline": 49,
+      "current": 49,
+      "status": "draining"
+    },
+    "complexity": {
+      "baseline": 40,
+      "current": 40,
+      "status": "draining"
+    },
+    "@typescript-eslint/no-this-alias": {
+      "baseline": 122,
+      "current": 122,
+      "status": "draining"
+    },
+    "sonarjs/no-redundant-boolean": {
+      "baseline": 62,
+      "current": 62,
+      "status": "draining"
+    },
+    "sonarjs/todo-tag": {
+      "baseline": 10,
+      "current": 10,
+      "status": "draining"
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "baseline": 40,
+      "current": 40,
+      "status": "draining"
+    },
+    "no-useless-assignment": {
+      "baseline": 38,
+      "current": 38,
+      "status": "draining"
+    },
+    "sonarjs/no-dead-store": {
+      "baseline": 54,
+      "current": 54,
+      "status": "draining"
+    },
+    "sonarjs/no-unused-vars": {
+      "baseline": 63,
+      "current": 63,
+      "status": "draining"
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "baseline": 89,
+      "current": 89,
+      "status": "draining"
+    },
+    "sonarjs/no-nested-functions": {
+      "baseline": 61,
+      "current": 61,
+      "status": "draining"
+    },
+    "max-nested-callbacks": {
+      "baseline": 197,
+      "current": 197,
+      "status": "draining"
+    },
+    "sonarjs/no-nested-assignment": {
+      "baseline": 11,
+      "current": 11,
+      "status": "draining"
+    },
+    "max-lines": {
+      "baseline": 3,
+      "current": 3,
+      "status": "draining"
+    },
+    "sonarjs/single-character-alternation": {
+      "baseline": 7,
+      "current": 7,
+      "status": "draining"
+    },
+    "sonarjs/no-nested-conditional": {
+      "baseline": 10,
+      "current": 10,
+      "status": "draining"
+    },
+    "sonarjs/block-scoped-var": {
+      "baseline": 22,
+      "current": 22,
+      "status": "draining"
+    },
+    "no-redeclare": {
+      "baseline": 27,
+      "current": 27,
+      "status": "draining"
+    },
+    "sonarjs/no-globals-shadowing": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/no-os-command-from-path": {
+      "baseline": 20,
+      "current": 20,
+      "status": "draining"
+    },
+    "no-unassigned-vars": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "no-prototype-builtins": {
+      "baseline": 29,
+      "current": 29,
+      "status": "draining"
+    },
+    "no-undef": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/no-identical-functions": {
+      "baseline": 3,
+      "current": 3,
+      "status": "draining"
+    },
+    "sonarjs/no-parameter-reassignment": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/prefer-single-boolean-return": {
+      "baseline": 3,
+      "current": 3,
+      "status": "draining"
+    },
+    "no-unreachable": {
+      "baseline": 8,
+      "current": 8,
+      "status": "draining"
+    },
+    "no-empty": {
+      "baseline": 19,
+      "current": 19,
+      "status": "draining"
+    },
+    "sonarjs/no-duplicated-branches": {
+      "baseline": 8,
+      "current": 8,
+      "status": "draining"
+    },
+    "sonarjs/regex-complexity": {
+      "baseline": 11,
+      "current": 11,
+      "status": "draining"
+    },
+    "no-useless-escape": {
+      "baseline": 13,
+      "current": 13,
+      "status": "draining"
+    },
+    "sonarjs/concise-regex": {
+      "baseline": 20,
+      "current": 20,
+      "status": "draining"
+    },
+    "sonarjs/reduce-initial-value": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/duplicates-in-character-class": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "preserve-caught-error": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/code-eval": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "no-control-regex": {
+      "baseline": 4,
+      "current": 4,
+      "status": "draining"
+    },
+    "sonarjs/file-permissions": {
+      "baseline": 6,
+      "current": 6,
+      "status": "draining"
+    },
+    "sonarjs/no-invariant-returns": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "@typescript-eslint/no-array-constructor": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/pseudo-random": {
+      "baseline": 9,
+      "current": 9,
+      "status": "draining"
+    },
+    "sonarjs/no-redundant-jump": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "max-depth": {
+      "baseline": 7,
+      "current": 7,
+      "status": "draining"
+    },
+    "sonarjs/super-linear-regex": {
+      "baseline": 12,
+      "current": 12,
+      "status": "draining"
+    },
+    "no-global-assign": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/no-control-regex": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "no-misleading-character-class": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/no-misleading-character-class": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/prefer-while": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/arguments-order": {
+      "baseline": 3,
+      "current": 3,
+      "status": "draining"
+    },
+    "max-params": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "no-self-assign": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/publicly-writable-directories": {
+      "baseline": 9,
+      "current": 9,
+      "status": "draining"
+    },
+    "no-dupe-else-if": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/no-identical-conditions": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/no-gratuitous-expressions": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "security/detect-object-injection": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/slow-regex": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/assertions-in-tests": {
+      "baseline": 38,
+      "current": 38,
+      "status": "draining"
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "baseline": 25,
+      "current": 25,
+      "status": "draining"
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "baseline": 13,
+      "current": 13,
+      "status": "draining"
+    },
+    "sonarjs/no-hardcoded-ip": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "sonarjs/no-skipped-tests": {
+      "baseline": 16,
+      "current": 16,
+      "status": "draining"
+    },
+    "no-async-promise-executor": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "sonarjs/x-powered-by": {
+      "baseline": 4,
+      "current": 4,
+      "status": "draining"
+    },
+    "sonarjs/stable-tests": {
+      "baseline": 1,
+      "current": 1,
+      "status": "draining"
+    },
+    "no-dupe-keys": {
+      "baseline": 2,
+      "current": 2,
+      "status": "draining"
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "baseline": 17,
+      "current": 17,
+      "status": "draining"
+    }
+  },
+  "counters": {
+    "eslint:warnings": {
+      "baseline": 1037,
+      "current": 1037
+    }
+  },
+  "log": []
+}

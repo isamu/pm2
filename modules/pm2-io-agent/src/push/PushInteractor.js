@@ -186,7 +186,7 @@ module.exports = class PushInteractor {
         this.broadcast_logs.set(
           process.pm_id,
           process.pm2_env.broadcast_logs == 1 || process.pm2_env.broadcast_logs == 'true',
-        ); // eslint-disable-line
+        );
       });
 
       processes = processes.filter((process) => process.pm2_env._km_monitored !== false);

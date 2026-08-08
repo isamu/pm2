@@ -1,0 +1,4524 @@
+{
+  ".mocharc.js": {
+    "id-length": {
+      "count": 1
+    }
+  },
+  "constants.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "lib/API.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 37
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 25
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 18
+    },
+    "complexity": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 54
+    },
+    "max-lines": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 15
+    },
+    "max-nested-callbacks": {
+      "count": 5
+    },
+    "no-useless-assignment": {
+      "count": 9
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 10
+    },
+    "sonarjs/no-dead-store": {
+      "count": 3
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-nested-assignment": {
+      "count": 5
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 4
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 7
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 3
+    },
+    "sonarjs/single-character-alternation": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "lib/API/Configuration.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    }
+  },
+  "lib/API/Containerizer.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 12
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "no-unassigned-vars": {
+      "count": 1
+    },
+    "sonarjs/no-globals-shadowing": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 4
+    }
+  },
+  "lib/API/Dashboard.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 38
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "no-prototype-builtins": {
+      "count": 2
+    },
+    "no-redeclare": {
+      "count": 3
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/API/Deploy.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    }
+  },
+  "lib/API/Extra.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 18
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 19
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 30
+    },
+    "max-lines-per-function": {
+      "count": 4
+    },
+    "no-undef": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 7
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "lib/API/ExtraMgmt/Docker.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 1
+    }
+  },
+  "lib/API/Log.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 3
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "sonarjs/no-dead-store": {
+      "count": 7
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 8
+    }
+  },
+  "lib/API/LogManagement.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 5
+    },
+    "max-lines-per-function": {
+      "count": 6
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 2
+    },
+    "sonarjs/no-identical-functions": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 4
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 1
+    }
+  },
+  "lib/API/Modules/LOCAL.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 9
+    },
+    "id-length": {
+      "count": 4
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/API/Modules/Modularizer.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    },
+    "no-prototype-builtins": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    }
+  },
+  "lib/API/Modules/NPM.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 19
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 9
+    },
+    "id-length": {
+      "count": 17
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 3
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 4
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/API/Modules/TAR.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 16
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 12
+    },
+    "id-length": {
+      "count": 14
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 3
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 3
+    },
+    "sonarjs/no-parameter-reassignment": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    },
+    "sonarjs/prefer-single-boolean-return": {
+      "count": 1
+    }
+  },
+  "lib/API/Modules/flagExt.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    }
+  },
+  "lib/API/Modules/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-lines-per-function": {
+      "count": 1
+    }
+  },
+  "lib/API/Monit.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 2
+    },
+    "no-prototype-builtins": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 1
+    }
+  },
+  "lib/API/Serve.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 29
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    }
+  },
+  "lib/API/Startup.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 10
+    },
+    "complexity": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 18
+    },
+    "max-lines-per-function": {
+      "count": 6
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 3
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    }
+  },
+  "lib/API/UX/helpers.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 4
+    },
+    "no-unreachable": {
+      "count": 5
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/API/UX/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "lib/API/UX/pm2-describe.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "no-prototype-builtins": {
+      "count": 2
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/API/UX/pm2-ls-minimal.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "lib/API/UX/pm2-ls.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 7
+    },
+    "complexity": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 14
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 2
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 8
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "lib/API/Version.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 12
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 11
+    },
+    "max-lines-per-function": {
+      "count": 8
+    },
+    "max-nested-callbacks": {
+      "count": 6
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 6
+    }
+  },
+  "lib/API/pm2-plus/PM2IO.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 4
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-duplicated-branches": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "lib/API/pm2-plus/auth-strategies/CliAuth.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 13
+    },
+    "max-lines-per-function": {
+      "count": 4
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "no-useless-escape": {
+      "count": 2
+    },
+    "sonarjs/concise-regex": {
+      "count": 4
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 4
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/regex-complexity": {
+      "count": 1
+    }
+  },
+  "lib/API/pm2-plus/auth-strategies/WebAuth.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-lines-per-function": {
+      "count": 1
+    }
+  },
+  "lib/API/pm2-plus/helpers.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    }
+  },
+  "lib/API/pm2-plus/link.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-lines-per-function": {
+      "count": 2
+    }
+  },
+  "lib/API/pm2-plus/process-selector.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "lib/Client.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 16
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 10
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 12
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 36
+    },
+    "max-lines-per-function": {
+      "count": 4
+    },
+    "no-useless-assignment": {
+      "count": 2
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 3
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 3
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "lib/Common.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 21
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "complexity": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 17
+    },
+    "max-lines": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "no-control-regex": {
+      "count": 2
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "preserve-caught-error": {
+      "count": 1
+    },
+    "sonarjs/code-eval": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 5
+    },
+    "sonarjs/duplicates-in-character-class": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-nested-assignment": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 3
+    },
+    "sonarjs/reduce-initial-value": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "lib/Configuration.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 16
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 4
+    },
+    "sonarjs/prefer-single-boolean-return": {
+      "count": 1
+    }
+  },
+  "lib/Daemon.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 14
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 16
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "no-empty": {
+      "count": 2
+    },
+    "no-useless-assignment": {
+      "count": 4
+    },
+    "sonarjs/file-permissions": {
+      "count": 2
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 3
+    }
+  },
+  "lib/Event.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 3
+    }
+  },
+  "lib/God.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 20
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 13
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 2
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/concise-regex": {
+      "count": 2
+    },
+    "sonarjs/no-identical-functions": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-invariant-returns": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 2
+    }
+  },
+  "lib/God/ActionMethods.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 34
+    },
+    "max-lines-per-function": {
+      "count": 4
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "no-unreachable": {
+      "count": 1
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "lib/God/ClusterMode.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 4
+    }
+  },
+  "lib/God/ForkMode.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 10
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "no-useless-assignment": {
+      "count": 3
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    }
+  },
+  "lib/God/Methods.js": {
+    "@typescript-eslint/no-array-constructor": {
+      "count": 1
+    },
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 10
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    }
+  },
+  "lib/God/Reload.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 5
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "lib/HttpInterface.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    }
+  },
+  "lib/OtelManager.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 4
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 2
+    }
+  },
+  "lib/ProcessContainer.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "complexity": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "no-unreachable": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 2
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 2
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    }
+  },
+  "lib/ProcessContainerBun.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 9
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 10
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "complexity": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "no-unreachable": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 4
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 2
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    }
+  },
+  "lib/ProcessContainerFork.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    }
+  },
+  "lib/ProcessContainerForkBun.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "lib/ProcessUtils.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/prefer-single-boolean-return": {
+      "count": 1
+    }
+  },
+  "lib/TreeKill.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 1
+    }
+  },
+  "lib/Utility.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 8
+    },
+    "no-useless-escape": {
+      "count": 2
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/concise-regex": {
+      "count": 10
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "lib/VersionCheck.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 1
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    }
+  },
+  "lib/Watcher.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-useless-escape": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "lib/Worker.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 9
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 4
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-jump": {
+      "count": 1
+    }
+  },
+  "lib/binaries/CLI.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 14
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 9
+    },
+    "max-lines": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 3
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "lib/binaries/DevCLI.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 2
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 2
+    }
+  },
+  "lib/binaries/Runtime.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    }
+  },
+  "lib/binaries/Runtime4Docker.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "lib/completion.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 5
+    },
+    "id-length": {
+      "count": 20
+    },
+    "no-undef": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/templates/sample-apps/http-server/api.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "lib/templates/sample-apps/pm2-plus-metrics-actions/custom-metrics.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "lib/tools/Config.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 5
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 13
+    },
+    "max-depth": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 2
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 2
+    },
+    "sonarjs/regex-complexity": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "lib/tools/IsAbsolute.js": {
+    "sonarjs/regex-complexity": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "lib/tools/SysMetrics.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 5
+    },
+    "id-length": {
+      "count": 38
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 4
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 1
+    }
+  },
+  "lib/tools/copydirSync.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-depth": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 2
+    }
+  },
+  "lib/tools/deleteFolderRecursive.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/tools/find-package-json.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "lib/tools/fmt.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "lib/tools/isbinaryfile.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "lib/tools/json5.js": {
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 15
+    },
+    "max-depth": {
+      "count": 4
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "no-control-regex": {
+      "count": 2
+    },
+    "no-global-assign": {
+      "count": 1
+    },
+    "no-misleading-character-class": {
+      "count": 2
+    },
+    "no-prototype-builtins": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "no-useless-escape": {
+      "count": 1
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 3
+    },
+    "sonarjs/no-control-regex": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-globals-shadowing": {
+      "count": 1
+    },
+    "sonarjs/no-misleading-character-class": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/tools/multimeter/bar.js": {
+    "id-length": {
+      "count": 8
+    }
+  },
+  "lib/tools/multimeter/charm/encode.js": {
+    "id-length": {
+      "count": 4
+    }
+  },
+  "lib/tools/multimeter/charm/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 18
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "lib/tools/multimeter/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 12
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 2
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    }
+  },
+  "lib/tools/open.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "lib/tools/passwd.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "lib/tools/promise.min.js": {
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 13
+    },
+    "id-length": {
+      "count": 83
+    },
+    "sonarjs/arguments-order": {
+      "count": 3
+    },
+    "sonarjs/block-scoped-var": {
+      "count": 1
+    },
+    "sonarjs/no-nested-assignment": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/prefer-while": {
+      "count": 1
+    }
+  },
+  "lib/tools/prompt.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    }
+  },
+  "lib/tools/sexec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "lib/tools/treeify.js": {
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 2
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "max-params": {
+      "count": 1
+    },
+    "no-prototype-builtins": {
+      "count": 1
+    }
+  },
+  "lib/tools/which.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "max-depth": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "modules/fclone.js": {
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon-rpc/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon-rpc/lib/client.js": {
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon-rpc/lib/server.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 4
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon-rpc/test/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-nested-callbacks": {
+      "count": 7
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon-rpc/test/unix.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-nested-callbacks": {
+      "count": 5
+    }
+  },
+  "modules/pm2-axon/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/configurable/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 9
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/plugins/queue.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/plugins/round-robin.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/sockets/pub-emitter.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/sockets/pub.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/lib/sockets/pull.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/sockets/push.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    }
+  },
+  "modules/pm2-axon/lib/sockets/rep.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/sockets/req.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 4
+    }
+  },
+  "modules/pm2-axon/lib/sockets/sock.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 10
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-empty": {
+      "count": 2
+    },
+    "no-self-assign": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/lib/sockets/sub-emitter.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/lib/sockets/sub.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/no-nested-assignment": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.arg-types.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 6
+    }
+  },
+  "modules/pm2-axon/test/test.bind-event.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.bind.ephemeral.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.emitter.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    }
+  },
+  "modules/pm2-axon/test/test.emitter.many-connect.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 7
+    },
+    "no-redeclare": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.emitter.many.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    }
+  },
+  "modules/pm2-axon/test/test.emitter.off.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.emitter.wildcards.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.hwm.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.pubsub.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.pubsub.multiple-subscribers.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.pubsub.string-subscriptions.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.pubsub.subscriptions.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.pubsub.unsubscribe.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.pushpull.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.pushpull.json.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/publicly-writable-directories": {
+      "count": 4
+    }
+  },
+  "modules/pm2-axon/test/test.pushpull.multiple-pushers.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.pushpull.pull-bind.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.queue.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.callback.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.chain.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.error-reply.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.json.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.ordering.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.undefined.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.reqrep.vargs.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.socket.accept.econnrefused.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.accept.econnreset.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.accept.epipe.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.close.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.connect.econnrefused.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.connect.econnreset.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.connect.epipe.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.connect.error.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.error-remove-sock.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 3
+    },
+    "no-redeclare": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.socket.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.socket.rebind.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-axon/test/test.sub.matches.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 17
+    }
+  },
+  "modules/pm2-axon/test/test.unixsocket.advanced.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-axon/test/test.unixsocket.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/config.js": {
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/constants.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/InteractorClient.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 10
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 19
+    },
+    "complexity": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 16
+    },
+    "max-lines-per-function": {
+      "count": 2
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "no-dupe-else-if": {
+      "count": 1
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-identical-conditions": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-agent/src/InteractorDaemon.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 16
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-lines-per-function": {
+      "count": 3
+    },
+    "no-empty": {
+      "count": 1
+    },
+    "sonarjs/no-gratuitous-expressions": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/PM2Client.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 7
+    },
+    "id-length": {
+      "count": 3
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/PM2Interface.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 15
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/TransporterInterface.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/Utility.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 7
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/regex-complexity": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/WatchDog.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/push/DataRetriever.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/push/PushInteractor.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
+    "complexity": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-gratuitous-expressions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/push/TransactionAggregator.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 5
+    },
+    "max-lines-per-function": {
+      "count": 5
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/concise-regex": {
+      "count": 2
+    },
+    "sonarjs/no-duplicated-branches": {
+      "count": 3
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/regex-complexity": {
+      "count": 3
+    },
+    "sonarjs/single-character-alternation": {
+      "count": 2
+    },
+    "sonarjs/slow-regex": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/reverse/ReverseInteractor.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/transporters/Transporter.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-agent/src/transporters/WebsocketTransport.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/utils/EDS.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/src/utils/probes/Histogram.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-agent/test/integrations/websocket.json-patch.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 14
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 8
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 3
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/integrations/websocket.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 13
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 15
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-nested-callbacks": {
+      "count": 5
+    },
+    "no-redeclare": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/misc/trace_factory.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 1
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 1
+    },
+    "sonarjs/no-hardcoded-ip": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/mock/module.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-agent/test/mock/servers.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-agent/test/units/InteractorClient.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 14
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 75
+    },
+    "id-length": {
+      "count": 66
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 1
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/units/InteractorDaemon.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 47
+    },
+    "id-length": {
+      "count": 29
+    },
+    "max-nested-callbacks": {
+      "count": 8
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 3
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/units/PM2Client.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 15
+    },
+    "id-length": {
+      "count": 4
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 5
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/units/PM2Interface.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 19
+    },
+    "id-length": {
+      "count": 38
+    }
+  },
+  "modules/pm2-io-agent/test/units/TransporterInterface.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 20
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-agent/test/units/Utility/cache.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 3
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-agent/test/units/Utility/stacktrace.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "no-self-assign": {
+      "count": 1
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 9
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/units/WatchDog.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 1
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/units/push/PushInteractor.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 30
+    },
+    "id-length": {
+      "count": 28
+    }
+  },
+  "modules/pm2-io-agent/test/units/push/TransactionAggregator.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 5
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-agent/test/units/reverse/ReverseInteractor.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 5
+    }
+  },
+  "modules/pm2-io-agent/test/units/transporters/WebsocketTransport.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 41
+    },
+    "id-length": {
+      "count": 11
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 1
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/configuration.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "preserve-caught-error": {
+      "count": 1
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/featureManager.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "sonarjs/single-character-alternation": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/features/dependencies.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-bpm/features/events.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "no-useless-assignment": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/features/metrics.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "sonarjs/single-character-alternation": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/features/notify.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/features/profiling.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-bpm/features/tracing.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 5
+    }
+  },
+  "modules/pm2-io-bpm/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/metrics/eventLoopMetrics.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "max-lines-per-function": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/metrics/httpMetrics.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 9
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/metrics/network.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/metrics/runtime.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "max-lines-per-function": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/metrics/v8.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "no-prototype-builtins": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/otel/custom-zipkin-exporter/platform/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/otel/custom-zipkin-exporter/platform/node/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/otel/custom-zipkin-exporter/platform/node/util.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/otel/custom-zipkin-exporter/transform.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    }
+  },
+  "modules/pm2-io-bpm/otel/custom-zipkin-exporter/zipkin.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 8
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/pmx.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 16
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 3
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "sonarjs/no-duplicated-branches": {
+      "count": 1
+    },
+    "sonarjs/no-identical-functions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/profilers/addonProfiler.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 5
+    }
+  },
+  "modules/pm2-io-bpm/profilers/inspectorProfiler.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 5
+    },
+    "id-length": {
+      "count": 8
+    },
+    "no-async-promise-executor": {
+      "count": 1
+    },
+    "no-prototype-builtins": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/services/actions.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 4
+    },
+    "sonarjs/no-nested-conditional": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/services/inspector.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/services/metrics.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 7
+    }
+  },
+  "modules/pm2-io-bpm/services/runtimeStats.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    }
+  },
+  "modules/pm2-io-bpm/services/transport.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/api.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "no-prototype-builtins": {
+      "count": 7
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 3
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 5
+    }
+  },
+  "modules/pm2-io-bpm/test/autoExit.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/test/features/events.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    }
+  },
+  "modules/pm2-io-bpm/test/features/otel-tracing.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-bpm/test/features/profiling.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "max-nested-callbacks": {
+      "count": 4
+    },
+    "sonarjs/no-dead-store": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-bpm/test/features/tracing.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "no-prototype-builtins": {
+      "count": 2
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiActionsChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiActionsJsonChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiBackwardActionsChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiBackwardConfChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/x-powered-by": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiBackwardEventChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiBackwardExpressChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "sonarjs/x-powered-by": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiInitModuleChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiKoaErrorHandler.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiMetricsChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiNotifyChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiOnExitChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/apiOnExitExceptionChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "no-unassigned-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/autoExitChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/features/eventLoopInspectorChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/features/eventsChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/features/profilingChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/metrics/gcv8Child.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/metrics/httpWrapperChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/metrics/networkChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/metrics/networkWithoutDownloadChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/metrics/tracingChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "sonarjs/x-powered-by": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/fixtures/otelTracingChild.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/test/metrics/eventloop.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/test/metrics/http.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "no-prototype-builtins": {
+      "count": 2
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/metrics/network.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "no-prototype-builtins": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-bpm/test/metrics/runtime.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "max-nested-callbacks": {
+      "count": 3
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 1
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/metrics/v8.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/services/actions.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/services/metrics.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/standalone/events.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 1
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/standalone/helper.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/x-powered-by": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/test/standalone/tracing.spec.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 1
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/transports/IPCTransport.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/EDS.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/EWMA.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/autocast.js": {
+    "id-length": {
+      "count": 4
+    }
+  },
+  "modules/pm2-io-bpm/utils/metrics/counter.js": {
+    "id-length": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/utils/metrics/histogram.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "no-prototype-builtins": {
+      "count": 1
+    },
+    "sonarjs/no-nested-assignment": {
+      "count": 2
+    }
+  },
+  "modules/pm2-io-bpm/utils/metrics/meter.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-this-alias": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/miscellaneous.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "no-prototype-builtins": {
+      "count": 1
+    },
+    "sonarjs/pseudo-random": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/module.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/stackParser.js": {
+    "sonarjs/regex-complexity": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "modules/pm2-io-bpm/utils/transactionAggregator.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "complexity": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-lines-per-function": {
+      "count": 1
+    },
+    "no-useless-escape": {
+      "count": 3
+    },
+    "sonarjs/cognitive-complexity": {
+      "count": 1
+    },
+    "sonarjs/concise-regex": {
+      "count": 2
+    },
+    "sonarjs/no-duplicated-branches": {
+      "count": 3
+    },
+    "sonarjs/regex-complexity": {
+      "count": 3
+    },
+    "sonarjs/single-character-alternation": {
+      "count": 2
+    },
+    "sonarjs/slow-regex": {
+      "count": 1
+    },
+    "sonarjs/super-linear-regex": {
+      "count": 1
+    }
+  },
+  "modules/vizion/index.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "modules/vizion/lib/git/git.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 5
+    },
+    "id-length": {
+      "count": 9
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 5
+    }
+  },
+  "modules/vizion/lib/vizion.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 7
+    }
+  },
+  "paths.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/todo-tag": {
+      "count": 1
+    }
+  },
+  "test/helpers/apps.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 4
+    }
+  },
+  "test/helpers/plan.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "test/interface/bus.fork.spec.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "id-length": {
+      "count": 6
+    }
+  },
+  "test/interface/bus.spec.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 9
+    },
+    "id-length": {
+      "count": 6
+    }
+  },
+  "test/interface/utility.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 2
+    }
+  },
+  "test/parallel.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 4
+    },
+    "no-redeclare": {
+      "count": 1
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "test/programmatic/api.backward.compatibility.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/api.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "max-nested-callbacks": {
+      "count": 22
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    }
+  },
+  "test/programmatic/auto_restart.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 4
+    },
+    "max-nested-callbacks": {
+      "count": 4
+    }
+  },
+  "test/programmatic/client.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "sonarjs/publicly-writable-directories": {
+      "count": 2
+    }
+  },
+  "test/programmatic/cluster.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 12
+    },
+    "max-nested-callbacks": {
+      "count": 9
+    }
+  },
+  "test/programmatic/common.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "test/programmatic/conf_update.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    }
+  },
+  "test/programmatic/configuration.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 12
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 6
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "test/programmatic/containerizer.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    }
+  },
+  "test/programmatic/custom_action.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 2
+    }
+  },
+  "test/programmatic/dump.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 14
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/env_switching.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 10
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/exp_backoff_restart_delay.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/fclone.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 36
+    }
+  },
+  "test/programmatic/filter_env.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "test/programmatic/fixtures/instances/http.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "test/programmatic/fixtures/json-env-passing/ecosystem.config.js": {
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/no-hardcoded-ip": {
+      "count": 1
+    }
+  },
+  "test/programmatic/fixtures/tar-module/mono-app-module/http.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "test/programmatic/fixtures/tar-module/multi-app-module/http.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 1
+    }
+  },
+  "test/programmatic/flagExt.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/file-permissions": {
+      "count": 4
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/flush.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 5
+    },
+    "max-nested-callbacks": {
+      "count": 3
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "test/programmatic/god.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 11
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 25
+    },
+    "id-length": {
+      "count": 12
+    },
+    "max-nested-callbacks": {
+      "count": 4
+    },
+    "sonarjs/no-dead-store": {
+      "count": 3
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 4
+    }
+  },
+  "test/programmatic/graceful.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "max-nested-callbacks": {
+      "count": 10
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    },
+    "sonarjs/stable-tests": {
+      "count": 1
+    }
+  },
+  "test/programmatic/http_interface.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-nested-callbacks": {
+      "count": 3
+    }
+  },
+  "test/programmatic/id.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "max-nested-callbacks": {
+      "count": 4
+    },
+    "sonarjs/assertions-in-tests": {
+      "count": 1
+    }
+  },
+  "test/programmatic/inside.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "test/programmatic/instances.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 3
+    }
+  },
+  "test/programmatic/internal_config.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "sonarjs/no-clear-text-protocols": {
+      "count": 2
+    }
+  },
+  "test/programmatic/issue_5990_bun_substring_match.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    },
+    "sonarjs/publicly-writable-directories": {
+      "count": 3
+    }
+  },
+  "test/programmatic/issue_6073_object_env.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 2
+    },
+    "no-empty": {
+      "count": 2
+    }
+  },
+  "test/programmatic/issue_6075_redos.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/issue_6089_prototype_pollution.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    }
+  },
+  "test/programmatic/issue_6106_windows_home.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/issues/json_env_passing_4080.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "test/programmatic/json_validation.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "no-dupe-keys": {
+      "count": 2
+    }
+  },
+  "test/programmatic/lazy_api.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 2
+    }
+  },
+  "test/programmatic/logs.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 5
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-nested-callbacks": {
+      "count": 9
+    },
+    "no-empty": {
+      "count": 2
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 3
+    }
+  },
+  "test/programmatic/max_memory_limit.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "max-nested-callbacks": {
+      "count": 6
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "test/programmatic/misc_commands.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 11
+    },
+    "max-nested-callbacks": {
+      "count": 2
+    }
+  },
+  "test/programmatic/module_configuration.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "test/programmatic/module_tar.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 6
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    }
+  },
+  "test/programmatic/modules.mocha.js": {
+    "@typescript-eslint/no-array-constructor": {
+      "count": 1
+    },
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 3
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "test/programmatic/namespace.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 4
+    },
+    "max-nested-callbacks": {
+      "count": 4
+    }
+  },
+  "test/programmatic/otel_tracing.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "max-nested-callbacks": {
+      "count": 5
+    },
+    "sonarjs/no-redundant-boolean": {
+      "count": 1
+    }
+  },
+  "test/programmatic/otel_tracing_ws.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "id-length": {
+      "count": 2
+    },
+    "max-nested-callbacks": {
+      "count": 4
+    },
+    "no-redeclare": {
+      "count": 1
+    }
+  },
+  "test/programmatic/path_resolution.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    }
+  },
+  "test/programmatic/programmatic.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 32
+    },
+    "id-length": {
+      "count": 3
+    },
+    "max-nested-callbacks": {
+      "count": 19
+    },
+    "sonarjs/no-dead-store": {
+      "count": 1
+    },
+    "sonarjs/no-duplicate-test-title": {
+      "count": 2
+    }
+  },
+  "test/programmatic/reload-locker.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 2
+    }
+  },
+  "test/programmatic/resurect_state.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 7
+    },
+    "id-length": {
+      "count": 3
+    },
+    "max-nested-callbacks": {
+      "count": 5
+    },
+    "sonarjs/no-skipped-tests": {
+      "count": 1
+    }
+  },
+  "test/programmatic/send_data_process.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 8
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    },
+    "sonarjs/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "test/programmatic/signals.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 26
+    },
+    "max-nested-callbacks": {
+      "count": 13
+    },
+    "sonarjs/no-dead-store": {
+      "count": 4
+    }
+  },
+  "test/programmatic/sys_infos.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    }
+  },
+  "test/programmatic/sysmetrics.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 3
+    },
+    "id-length": {
+      "count": 18
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    }
+  },
+  "test/programmatic/treekill.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 4
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "id-length": {
+      "count": 7
+    },
+    "max-nested-callbacks": {
+      "count": 16
+    },
+    "no-useless-escape": {
+      "count": 1
+    },
+    "sonarjs/no-ignored-exceptions": {
+      "count": 2
+    },
+    "sonarjs/no-nested-functions": {
+      "count": 1
+    },
+    "sonarjs/no-os-command-from-path": {
+      "count": 7
+    }
+  },
+  "test/programmatic/user_management.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 2
+    }
+  },
+  "test/programmatic/version.mocha.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 5
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "max-nested-callbacks": {
+      "count": 1
+    }
+  },
+  "test/programmatic/watcher.js": {
+    "@typescript-eslint/no-require-imports": {
+      "count": 6
+    },
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "id-length": {
+      "count": 22
+    }
+  },
+  "types/index.d.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 17
+    }
+  }
+}

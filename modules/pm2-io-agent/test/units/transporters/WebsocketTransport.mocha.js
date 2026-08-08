@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 'use strict';
 
 process.env.NODE_ENV = 'test';
@@ -394,7 +392,7 @@ describe('WebsocketTransport', () => {
       let _checkInternetCalls = 0;
       transport._checkInternet = (cb) => {
         _checkInternetCalls++;
-        cb(false); // eslint-disable-line
+        cb(false);
       };
       transport._reconnect();
       assert(transport._reconnecting === false);
@@ -411,7 +409,7 @@ describe('WebsocketTransport', () => {
       let emptyQueue = 0;
       let transport = new WebsocketTransport(opts, daemon);
       transport._checkInternet = (cb) => {
-        cb(true); // eslint-disable-line
+        cb(true);
       };
       transport.connect = (cb) => {
         connectCount++;
@@ -434,7 +432,7 @@ describe('WebsocketTransport', () => {
       let _connectCalls = 0;
       transport._checkInternet = (cb) => {
         _checkInternetCalls++;
-        cb(true); // eslint-disable-line
+        cb(true);
       };
       transport.connect = (cb) => {
         _connectCalls++;

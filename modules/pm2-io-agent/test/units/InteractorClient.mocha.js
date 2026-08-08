@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 'use strict';
 
 process.env.NODE_ENV = 'test';
@@ -258,7 +256,7 @@ describe('InteractorClient', () => {
       mock({
         ping: (conf, cb) => {
           pingCalled = true;
-          cb(null, true); // eslint-disable-line
+          cb(null, true);
         },
         launchRPC: (conf, cb) => {
           launchRPCCalled = true;

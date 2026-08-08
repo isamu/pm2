@@ -50,6 +50,14 @@ export default tseslint.config(
   { languageOptions: { globals: globals.node } },
 
   {
+    // pm2 ships CommonJS: no "type": "module", and every .js file is loaded by require().
+    // Parsing them as ES modules puts them in strict mode, where legacy octal literals are a
+    // parse error and the file silently goes unlinted.
+    files: ['**/*.js'],
+    languageOptions: { sourceType: 'script' },
+  },
+
+  {
     // Size and complexity guards. These are the ones that turn into refactoring work rather
     // than one-line fixes, which is exactly why they are recorded rather than negotiated.
     rules: {

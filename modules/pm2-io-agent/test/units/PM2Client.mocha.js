@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 'use strict';
 
 process.env.NODE_ENV = 'test';
@@ -69,15 +67,14 @@ describe('PM2Client', (_) => {
     it('should emit connect', (done) => {
       let client = new PM2Client();
       let _generateMethodsCalled = false;
-      let tmp = client.__proto__.generateMethods; // eslint-disable-line
+      let tmp = client.__proto__.generateMethods;
       client.__proto__.generateMethods = (cb) => {
-        // eslint-disable-line
         _generateMethodsCalled = true;
         cb();
       };
       client.on('ready', (_) => {
         assert(_generateMethodsCalled === true);
-        client.__proto__.generateMethods = tmp; // eslint-disable-line
+        client.__proto__.generateMethods = tmp;
         done();
       });
       EventEmitter.emit('connect');

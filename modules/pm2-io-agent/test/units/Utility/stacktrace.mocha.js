@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 'use strict';
 
 process.env.NODE_ENV = 'test';
