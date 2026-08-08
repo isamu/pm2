@@ -2,7 +2,7 @@ process.chdir(__dirname);
 
 var spawn = require('child_process').spawn;
 var should = require('should');
-var treekill = require('../../lib/TreeKill');
+var treekill = require('../../dist/lib/TreeKill');
 
 function checkAlive(pid) {
   try {
