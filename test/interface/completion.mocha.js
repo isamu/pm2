@@ -3,6 +3,7 @@ var fs = require('fs');
 var os = require('os');
 var pth = require('path');
 var completion = require('../../dist/lib/completion.js');
+var withEnv = require('../helpers/env.js').withEnv;
 
 describe('completion', function () {
   describe('.missingRcError', function () {
@@ -44,6 +45,50 @@ describe('completion', function () {
       completion.complete('pm2', 'pm2', function (err) {
         assert(err instanceof Error);
         assert(err.message.indexOf('pm2 completion >> ~/.bashrc') !== -1);
+        done();
+      });
+    });
+  });
+
+  // SHELL is routinely absent — containers, cron, anything not started from a login shell — and
+  // the rc file name was built from it without checking, so `pm2 completion install` threw a
+  // TypeError instead of saying what it could not work out.
+  describe('with no usable SHELL', function () {
+    var emptyHome;
+
+    beforeEach(function () {
+      emptyHome = fs.mkdtempSync(pth.join(os.tmpdir(), 'pm2-completion-'));
+      process.argv = ['node', 'pm2', 'completion', 'install'];
+    });
+
+    afterEach(function () {
+      fs.rmSync(emptyHome, { recursive: true, force: true });
+    });
+
+    var errorFor = function (shell, whenAnswered) {
+      withEnv({ HOME: emptyHome, SHELL: shell }, function () {
+        completion.complete('pm2', 'pm2', whenAnswered);
+      });
+    };
+
+    it('should report an error when SHELL is unset', function (done) {
+      errorFor(undefined, function (err) {
+        assert.strictEqual(err.constructor, Error);
+        done();
+      });
+    });
+
+    it('should report an error when SHELL is empty', function (done) {
+      errorFor('', function (err) {
+        assert.strictEqual(err.constructor, Error);
+        done();
+      });
+    });
+
+    it('should report an error when SHELL is not a path it recognises', function (done) {
+      errorFor('something-odd', function (err) {
+        assert.strictEqual(err.constructor, Error);
+        assert(err.message.indexOf('something-odd') !== -1);
         done();
       });
     });

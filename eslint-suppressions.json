@@ -1115,54 +1115,11 @@
       "count": 1
     }
   },
-  "lib/completion.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 3
-    },
-    "id-length": {
-      "count": 20
-    },
-    "sonarjs/no-dead-store": {
-      "count": 1
-    },
-    "sonarjs/no-unused-vars": {
-      "count": 1
-    }
-  },
   "lib/templates/sample-apps/pm2-plus-metrics-actions/custom-metrics.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
     "sonarjs/pseudo-random": {
-      "count": 1
-    }
-  },
-  "lib/tools/Config.js": {
-    "@typescript-eslint/no-unused-expressions": {
-      "count": 5
-    },
-    "complexity": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 13
-    },
-    "max-depth": {
-      "count": 1
-    },
-    "max-lines-per-function": {
-      "count": 1
-    },
-    "no-redeclare": {
-      "count": 2
-    },
-    "sonarjs/cognitive-complexity": {
-      "count": 2
-    },
-    "sonarjs/regex-complexity": {
-      "count": 1
-    },
-    "sonarjs/super-linear-regex": {
       "count": 1
     }
   },
