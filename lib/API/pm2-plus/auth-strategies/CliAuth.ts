@@ -11,6 +11,21 @@ const chalk = require('ansis');
 const cst = require('../../../../constants.js');
 const promptly = require('../../../tools/prompt');
 
+// What the register endpoint answers with. Field errors come back as objects carrying a message,
+// which is why `email` is not a string here.
+interface RegisterResponse {
+  email?: { message?: string };
+  username?: { message?: string };
+  access_token?: { token: string };
+  refresh_token?: { token: string };
+  msg?: string;
+}
+
+// fetch gives back `unknown`, and anything between the CLI and the API — a proxy, a captive
+// portal, a gateway returning HTML — can answer with something that is not this shape at all.
+const isRegisterResponse = (value: unknown): value is RegisterResponse =>
+  typeof value === 'object' && value !== null;
+
 module.exports = class CliStrategy extends AuthStrategy {
   // the client will try to call this but we handle this part ourselves
   retrieveTokens(km, cb) {
@@ -248,9 +263,12 @@ module.exports = class CliStrategy extends AuthStrategy {
     })
       .then((res) => res.json())
       .then((body) => {
+        if (!isRegisterResponse(body)) {
+          return cb(new Error(`Unexpected response from ${this.BASE_URI}`));
+        }
         if (body.email && body.email.message) return cb(new Error(body.email.message));
         if (body.username && body.username.message) return cb(new Error(body.username.message));
-        if (!body.access_token) return cb(new Error(body.msg));
+        if (!body.access_token || !body.refresh_token) return cb(new Error(body.msg));
         return cb(null, {
           refresh_token: body.refresh_token.token,
           access_token: body.access_token.token,
