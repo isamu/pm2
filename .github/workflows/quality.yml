@@ -30,8 +30,9 @@ jobs:
       - run: npm run typecheck
 
   macos-units:
-    # The e2e suite runs in Docker and cannot, so the module unit suites are what covers
-    # path handling and file watching on a non-Linux, non-Windows host.
+    # The e2e suite runs in Docker and cannot, so this is what covers path handling on a
+    # non-Linux, non-Windows host. test:bpm is deliberately not here: its OpenTelemetry span
+    # test waits on a live trace and fails locally too, and it has never run in CI.
     name: unit tests (macos)
     runs-on: macos-latest
     timeout-minutes: 20
@@ -46,5 +47,8 @@ jobs:
 
       - run: npm install
 
+      # InteractorClient writes agent.pid straight into PM2_HOME and expects it to be there
+      # already. A fresh runner has no ~/.pm2, so the suite fails before it starts.
+      - run: mkdir -p "$HOME/.pm2"
+
       - run: npm run test:io-agent
-      - run: npm run test:bpm
