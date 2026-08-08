@@ -2,6 +2,7 @@ process.env.NODE_ENV = 'test';
 
 var PM2 = require('../..');
 var should = require('should');
+var otelTag = require('../helpers/otel.js');
 var path = require('path');
 var OtelManager = require('../../dist/lib/OtelManager');
 
@@ -79,12 +80,14 @@ describe('PM2 OpenTelemetry Tracing E2E', function () {
     it('should NOT receive any trace-span on bus', function (done) {
       var received = false;
 
-      bus.on('trace-span', function () {
+      var onAnySpan = function () {
         received = true;
-      });
+      };
+
+      bus.on('trace-span', onAnySpan);
 
       setTimeout(function () {
-        bus.off('trace-span');
+        bus.off('trace-span', onAnySpan);
         should(received).eql(false);
         done();
       }, 3000);
@@ -177,7 +180,7 @@ describe('PM2 OpenTelemetry Tracing E2E', function () {
     it('should receive trace-span messages on bus', function (done) {
       var received = false;
 
-      bus.on('trace-span', function (packet) {
+      var onFirstSpan = function (packet) {
         if (received) return;
         received = true;
 
@@ -188,13 +191,15 @@ describe('PM2 OpenTelemetry Tracing E2E', function () {
         should(packet).have.property('process');
         should(packet.process).have.property('name', 'otel-test-traced');
 
-        bus.off('trace-span');
+        bus.off('trace-span', onFirstSpan);
         done();
-      });
+      };
+
+      bus.on('trace-span', onFirstSpan);
 
       setTimeout(function () {
         if (!received) {
-          bus.off('trace-span');
+          bus.off('trace-span', onFirstSpan);
           done(new Error('No trace-span received within 15s'));
         }
       }, 15000);
@@ -203,22 +208,24 @@ describe('PM2 OpenTelemetry Tracing E2E', function () {
     it('should receive HTTP trace-span with method and status tags', function (done) {
       var received = false;
 
-      bus.on('trace-span', function (packet) {
+      var onHttpSpan = function (packet) {
         if (received) return;
         if (!packet.data || !packet.data.tags) return;
-        if (!packet.data.tags['http.method']) return;
+        if (!otelTag.method(packet.data.tags)) return;
         received = true;
 
-        should(packet.data.tags['http.method']).eql('GET');
-        should(packet.data.tags).have.property('http.status_code');
+        should(otelTag.method(packet.data.tags)).eql('GET');
+        should(otelTag.status(packet.data.tags)).eql('200');
 
-        bus.off('trace-span');
+        bus.off('trace-span', onHttpSpan);
         done();
-      });
+      };
+
+      bus.on('trace-span', onHttpSpan);
 
       setTimeout(function () {
         if (!received) {
-          bus.off('trace-span');
+          bus.off('trace-span', onHttpSpan);
           done(new Error('No HTTP trace-span received within 15s'));
         }
       }, 15000);
