@@ -194,9 +194,6 @@
     }
   },
   "lib/API/ExtraMgmt/Docker.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
     "id-length": {
       "count": 2
     },
