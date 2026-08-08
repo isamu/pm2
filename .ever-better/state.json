@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T11:20:46.214Z",
+  "updatedAt": "2026-08-08T11:26:09.607Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -137,8 +137,8 @@
   },
   "rules": {
     "id-length": {
-      "baseline": 1350,
-      "current": 1350,
+      "baseline": 1348,
+      "current": 1348,
       "status": "draining"
     },
     "@typescript-eslint/no-require-imports": {
@@ -147,8 +147,8 @@
       "status": "enforced"
     },
     "@typescript-eslint/no-unused-vars": {
-      "baseline": 914,
-      "current": 914,
+      "baseline": 913,
+      "current": 913,
       "status": "draining"
     },
     "max-lines-per-function": {

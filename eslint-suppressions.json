@@ -1403,14 +1403,6 @@
       "count": 1
     }
   },
-  "lib/tools/passwd.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 2
-    }
-  },
   "lib/tools/promise.min.js": {
     "@typescript-eslint/no-unused-expressions": {
       "count": 13
