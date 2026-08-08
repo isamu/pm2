@@ -17,6 +17,16 @@ const path = require('path');
 const dayjs = require('dayjs');
 const cst = require('../../constants.js');
 
+// Utility.startLogging replaces each path in this object with an open stream, in place — except
+// the ones that mean "discard", such as /dev/null, which it leaves as the string it was given.
+// So an entry is a path until it is a stream, and may stay a path forever.
+interface LogSink {
+  write(data: string): void;
+}
+
+const isOpen = (target: string | LogSink | undefined): target is LogSink =>
+  typeof target === 'object' && target !== null && typeof target.write === 'function';
+
 /**
  * Description
  * @method exports
@@ -69,7 +79,8 @@ module.exports = function ForkMode(God) {
     }
 
     // piping stream o file
-    const stds = {
+    // `std` is the combined log, present only when the app asked for one.
+    const stds: { out: string | LogSink; err: string | LogSink; std?: string | LogSink } = {
       out: pm2_env.pm_out_log_path,
       err: pm2_env.pm_err_log_path,
     };
@@ -94,7 +105,15 @@ module.exports = function ForkMode(God) {
             spawn_env[k] = pm2_env[k];
         }
 
-        const options = {
+        const options: {
+          env: object;
+          detached: boolean;
+          cwd: string;
+          stdio: string[];
+          windowsHide?: boolean;
+          uid?: number;
+          gid?: number;
+        } = {
           env: spawn_env,
           detached: true,
           cwd: pm2_env.pm_cwd || process.cwd(),
@@ -148,12 +167,13 @@ module.exports = function ForkMode(God) {
       }
 
       function prefixLogWithDate(pm2_env, data) {
-        let log_data = [];
-        log_data = data.toString().split('\n');
-        if (log_data.length > 1) log_data.pop();
-        log_data = log_data.map((line) => `${dayjs().format(pm2_env.log_date_format)}: ${line}\n`);
-        log_data = log_data.join('');
-        return log_data;
+        // A chunk almost never ends on a line boundary, so the trailing fragment after the last
+        // newline is dropped rather than dated as if it were a line of its own.
+        const lines = data.toString().split('\n');
+        if (lines.length > 1) lines.pop();
+        return lines
+          .map((line) => `${dayjs().format(pm2_env.log_date_format)}: ${line}\n`)
+          .join('');
       }
 
       cspr.stderr.on('data', function forkErrData(data) {
@@ -188,8 +208,8 @@ module.exports = function ForkMode(God) {
           return false;
         }
 
-        stds.std && stds.std.write && stds.std.write(log_data);
-        stds.err && stds.err.write && stds.err.write(log_data);
+        if (isOpen(stds.std)) stds.std.write(log_data);
+        if (isOpen(stds.err)) stds.err.write(log_data);
       });
 
       cspr.stdout.on('data', function forkOutData(data) {
@@ -222,8 +242,8 @@ module.exports = function ForkMode(God) {
         )
           return false;
 
-        stds.std && stds.std.write && stds.std.write(log_data);
-        stds.out && stds.out.write && stds.out.write(log_data);
+        if (isOpen(stds.std)) stds.std.write(log_data);
+        if (isOpen(stds.out)) stds.out.write(log_data);
       });
 
       /**
