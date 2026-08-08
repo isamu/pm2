@@ -172,3 +172,34 @@ suppressions ファイルは 1 バイトも変わっていないのに `ever-bet
 - main の CI は元から赤い（issue #13）。**新しく壊れたときに気づけない**状態が続いている。
   実際この作業中、docker のイメージビルドが失敗するようになったとき「いつもの赤」と
   区別がつかず一度見落としかけた。
+
+---
+
+## 追記
+
+### `Docker.js` — 3 件（issue #17）
+
+`processCommand` が `executeRemote` の `err` を完全に無視しており、`getSystemData` が失敗すると
+エラー報告ではなく `TypeError` になっていた。containers のチェック条件も逆
+（`containers &&  length == 0` は containers が無いときガードを素通りする）で、
+未知の action ではどの `if` にも当たらずコールバックが呼ばれないまま関数が終わっていた。
+
+TypeScript 化は見送った。`spawn('docker', ...)` の PATH 解決を sonarjs が咎めるので
+`lib/tools/which.js` を使いたいが、そのためには which を型付けする必要があり、
+125 行の Windows PATHEXT 処理を無監督で変換するのは risk が見合わない。
+`OtelManager` も which に依存している。
+
+### 移行対象から外したもの
+
+第三者コードと、利用者に配られる雛形は対象外にしている。
+
+| 対象                                                        | 理由                            |
+| ----------------------------------------------------------- | ------------------------------- |
+| `lib/tools/fmt.js`                                          | MIT, Andrew Chilton             |
+| `lib/tools/treeify.js`                                      | UMD の第三者ライブラリ          |
+| `lib/tools/json5.js` / `isbinaryfile.js` / `promise.min.js` | 第三者                          |
+| `lib/tools/copydirSync.js`                                  | `copy-dir` パッケージの取り込み |
+| `lib/templates/sample-apps/**`                              | 利用者に配られる雛形            |
+| `examples/**`                                               | 同上                            |
+
+`lib/` の 83 ファイルのうち、実際の移行対象はこれらを除いた分になる。
