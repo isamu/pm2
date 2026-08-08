@@ -5,7 +5,7 @@ Maintained by [ever-better](https://github.com/isamu/ever-better). Numbers are r
 
 - Phase: **drain**
 - Frozen: 2026-08-08T09:40:43.166Z
-- Open violations: **3586**
+- Open violations: **3532**
 - Rules improved since the ceiling: **0**
 - Everything is at or below its ceiling.
 
@@ -16,7 +16,7 @@ Top to bottom. An unattended run works this list and nothing else.
 - [x] **P0 diagnose** — taken 2026-08-08T09:40:21.066Z
 - [ ] **P1 bootstrap** — 2 gap(s) still open
 - [x] **P2 freeze** — frozen 2026-08-08T09:40:43.166Z
-- [ ] **P3 drain** — 3586 violations across 70 rules
+- [ ] **P3 drain** — 3532 violations across 70 rules
   - [ ] `sonarjs/no-parameter-reassignment` — 1 left
   - [ ] `sonarjs/reduce-initial-value` — 1 left
   - [ ] `sonarjs/duplicates-in-character-class` — 1 left
@@ -31,24 +31,24 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 
 | Rule | Ceiling | Now | Change | Status |
 | --- | ---: | ---: | ---: | --- |
-| `id-length` | 1330 | 1330 | 0 | draining |
-| `@typescript-eslint/no-unused-vars` | 909 | 909 | 0 | draining |
+| `id-length` | 1295 | 1295 | 0 | draining |
+| `@typescript-eslint/no-unused-vars` | 906 | 906 | 0 | draining |
 | `max-nested-callbacks` | 197 | 197 | 0 | draining |
-| `max-lines-per-function` | 128 | 128 | 0 | draining |
+| `max-lines-per-function` | 127 | 127 | 0 | draining |
 | `@typescript-eslint/no-this-alias` | 122 | 122 | 0 | draining |
-| `@typescript-eslint/no-unused-expressions` | 89 | 89 | 0 | draining |
-| `sonarjs/no-unused-vars` | 62 | 62 | 0 | draining |
+| `@typescript-eslint/no-unused-expressions` | 84 | 84 | 0 | draining |
 | `sonarjs/no-redundant-boolean` | 61 | 61 | 0 | draining |
+| `sonarjs/no-unused-vars` | 61 | 61 | 0 | draining |
 | `sonarjs/no-nested-functions` | 61 | 61 | 0 | draining |
-| `sonarjs/no-dead-store` | 54 | 54 | 0 | draining |
-| `sonarjs/cognitive-complexity` | 48 | 48 | 0 | draining |
-| `complexity` | 39 | 39 | 0 | draining |
+| `sonarjs/no-dead-store` | 53 | 53 | 0 | draining |
+| `sonarjs/cognitive-complexity` | 46 | 46 | 0 | draining |
 | `sonarjs/no-ignored-exceptions` | 39 | 39 | 0 | draining |
+| `complexity` | 38 | 38 | 0 | draining |
 | `no-useless-assignment` | 38 | 38 | 0 | draining |
 | `sonarjs/assertions-in-tests` | 38 | 38 | 0 | draining |
 | `no-prototype-builtins` | 29 | 29 | 0 | draining |
-| `no-redeclare` | 26 | 26 | 0 | draining |
 | `sonarjs/no-duplicate-test-title` | 25 | 25 | 0 | draining |
+| `no-redeclare` | 24 | 24 | 0 | draining |
 | `sonarjs/block-scoped-var` | 21 | 21 | 0 | draining |
 | `sonarjs/concise-regex` | 20 | 20 | 0 | draining |
 | `sonarjs/no-os-command-from-path` | 18 | 18 | 0 | draining |
@@ -58,16 +58,16 @@ Ceiling is the count at the last freeze. It may fall and must never rise.
 | `no-useless-escape` | 13 | 13 | 0 | draining |
 | `sonarjs/no-clear-text-protocols` | 13 | 13 | 0 | draining |
 | `sonarjs/no-nested-assignment` | 11 | 11 | 0 | draining |
-| `sonarjs/super-linear-regex` | 11 | 11 | 0 | draining |
 | `sonarjs/no-nested-conditional` | 10 | 10 | 0 | draining |
-| `sonarjs/regex-complexity` | 10 | 10 | 0 | draining |
+| `sonarjs/super-linear-regex` | 10 | 10 | 0 | draining |
+| `sonarjs/regex-complexity` | 9 | 9 | 0 | draining |
 | `sonarjs/pseudo-random` | 9 | 9 | 0 | draining |
 | `sonarjs/publicly-writable-directories` | 9 | 9 | 0 | draining |
 | `sonarjs/todo-tag` | 8 | 8 | 0 | draining |
 | `sonarjs/no-duplicated-branches` | 8 | 8 | 0 | draining |
 | `sonarjs/single-character-alternation` | 7 | 7 | 0 | draining |
 | `sonarjs/file-permissions` | 6 | 6 | 0 | draining |
-| `max-depth` | 6 | 6 | 0 | draining |
+| `max-depth` | 5 | 5 | 0 | draining |
 | `no-control-regex` | 4 | 4 | 0 | draining |
 | `sonarjs/x-powered-by` | 4 | 4 | 0 | draining |
 | `max-lines` | 3 | 3 | 0 | draining |

@@ -98,6 +98,19 @@ export default tseslint.config(
     languageOptions: { globals: { define: 'readonly' } },
   },
   {
+    // The args-splitting pattern here IS the fix for CVE-2025-5891, and sonarjs reads its five
+    // alternatives as backtracking. Measured against pumped input — repeated `a=`, an
+    // unterminated quote, repeated `x-` then a quote, repeated `key="` — sixteen times the
+    // input costs sixteen times the time, so it is linear and the warning is wrong. Rewriting a
+    // security fix to satisfy a false positive is the trade this exception refuses to make.
+    // test/programmatic/issue_6075_redos.mocha.js holds the pattern to that behaviour.
+    files: ['lib/tools/Config.ts'],
+    rules: {
+      'sonarjs/super-linear-regex': 'off',
+      'sonarjs/regex-complexity': 'off',
+    },
+  },
+  {
     // A spec repeats itself by nature and its length is not a comprehension problem.
     // The mocha globals are declared here rather than recorded as 1165 no-undef violations:
     // an environment the linter was never told about is not a backlog.
