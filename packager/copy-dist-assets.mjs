@@ -6,6 +6,12 @@ import { join } from 'node:path';
 // files, the xdg-open helper, and JSON it opens with fs rather than require. Without this they
 // are absent from a dist build and every feature that reads one fails at the point of use.
 const ROOTS = ['lib', 'modules'];
+
+// `pm2 boilerplate` and `pm2 ecosystem` copy these out to the user's own directory. They are
+// not pm2's code to compile — running them through tsc rewrites what the user ends up with —
+// so tsconfig.build.json leaves them alone and they are copied whole, .js files included.
+const VERBATIM_ROOTS = ['lib/templates'];
+
 const NOT_SHIPPED = /(^|[/\\])(test|node_modules)([/\\]|$)/;
 const EMITTED_BY_TSC = /\.(js|map)$/;
 
@@ -14,6 +20,7 @@ const EMITTED_BY_TSC = /\.(js|map)$/;
 // directory to descend into.
 const shouldCopy = (src) => !NOT_SHIPPED.test(src) && !EMITTED_BY_TSC.test(src);
 
-ROOTS.forEach((root) => {
-  cpSync(root, join('dist', root), { recursive: true, filter: shouldCopy });
-});
+const copyInto = (root, filter) => cpSync(root, join('dist', root), { recursive: true, filter });
+
+ROOTS.forEach((root) => copyInto(root, shouldCopy));
+VERBATIM_ROOTS.forEach((root) => copyInto(root, (src) => !NOT_SHIPPED.test(src)));
