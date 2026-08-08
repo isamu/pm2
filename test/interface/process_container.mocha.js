@@ -44,6 +44,12 @@ var runContainer = function (pm2_env, done) {
 describe('ProcessContainer', function () {
   this.timeout(15000);
 
+  // The cluster-mode container for node; Bun gets ProcessContainerBun. fork() launches whatever
+  // runs this suite, so under Bun this would be running the wrong one.
+  before(function () {
+    if (typeof process.versions.bun === 'string') this.skip();
+  });
+
   var dir, pm2_env, messages;
 
   before(function (done) {
@@ -65,7 +71,8 @@ describe('ProcessContainer', function () {
   });
 
   after(function () {
-    fs.rmSync(dir, { recursive: true, force: true });
+    // `before` skips the whole suite under Bun, so there may be nothing to clean up.
+    if (dir) fs.rmSync(dir, { recursive: true, force: true });
   });
 
   var messageOfType = function (type) {

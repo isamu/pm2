@@ -1,7 +1,9 @@
 const assert = require('assert');
 const { fork } = require('child_process');
 const { resolve } = require('path');
-const OtelManager = require('../../../../lib/OtelManager');
+// dist, not lib: OtelManager is TypeScript now, so the source path no longer resolves.
+const OtelManager = require('../../../../dist/lib/OtelManager');
+const otelTag = require('../../../../test/helpers/otel.js');
 
 const launch = (fixture) => {
   return fork(resolve(__dirname, fixture), [], {
@@ -57,12 +59,12 @@ describe('OpenTelemetry tracing integration', function () {
 
     child.on('message', (pck) => {
       if (pck.type !== 'trace-span') return;
-      if (!pck.data.tags || !pck.data.tags['http.method']) return;
+      if (!pck.data.tags || !otelTag.method(pck.data.tags)) return;
       if (received) return;
       received = true;
 
-      assert.strictEqual(pck.data.tags['http.method'], 'GET');
-      assert.strictEqual(pck.data.tags['http.status_code'], '200');
+      assert.strictEqual(otelTag.method(pck.data.tags), 'GET');
+      assert.strictEqual(otelTag.status(pck.data.tags), '200');
 
       child.kill('SIGINT');
       setTimeout(() => {

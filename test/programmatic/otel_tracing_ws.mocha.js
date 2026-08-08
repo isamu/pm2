@@ -5,6 +5,7 @@ var should = require('should');
 var path = require('path');
 var WebSocket = require('ws');
 var OtelManager = require('../../dist/lib/OtelManager');
+var otelTag = require('../helpers/otel.js');
 
 var FIXTURE = path.resolve(__dirname, '..', 'fixtures', 'otel-tracing-ws-server.js');
 
@@ -115,11 +116,11 @@ describe('PM2 OpenTelemetry Tracing - WebSocket Server', function () {
     bus.on('trace-span', function onSpan(packet) {
       if (received) return;
       if (!packet.data || !packet.data.tags) return;
-      if (packet.data.tags['http.target'] !== '/health') return;
+      if (otelTag.path(packet.data.tags) !== '/health') return;
       received = true;
 
-      should(packet.data.tags['http.method']).eql('GET');
-      should(packet.data.tags['http.status_code']).eql('200');
+      should(otelTag.method(packet.data.tags)).eql('GET');
+      should(otelTag.status(packet.data.tags)).eql('200');
       should(packet.data.kind).eql('SERVER');
       should(packet.process.name).eql('otel-ws-test');
 
@@ -142,11 +143,11 @@ describe('PM2 OpenTelemetry Tracing - WebSocket Server', function () {
     bus.on('trace-span', function onSpan(packet) {
       if (received) return;
       if (!packet.data || !packet.data.tags) return;
-      if (packet.data.tags['http.target'] !== '/ws-test-route') return;
+      if (otelTag.path(packet.data.tags) !== '/ws-test-route') return;
       received = true;
 
-      should(packet.data.tags['http.method']).eql('GET');
-      should(packet.data.tags['http.status_code']).eql('200');
+      should(otelTag.method(packet.data.tags)).eql('GET');
+      should(otelTag.status(packet.data.tags)).eql('200');
 
       clearInterval(interval);
       bus.off('trace-span', onSpan);
