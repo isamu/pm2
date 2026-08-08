@@ -18,7 +18,7 @@
       "count": 6
     },
     "id-length": {
-      "count": 54
+      "count": 53
     },
     "max-lines": {
       "count": 1
@@ -193,17 +193,6 @@
       "count": 2
     }
   },
-  "lib/API/ExtraMgmt/Docker.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 2
-    },
-    "sonarjs/no-os-command-from-path": {
-      "count": 1
-    }
-  },
   "lib/API/Log.js": {
     "@typescript-eslint/no-this-alias": {
       "count": 5
@@ -342,17 +331,6 @@
       "count": 1
     }
   },
-  "lib/API/Modules/flagExt.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    },
-    "id-length": {
-      "count": 1
-    },
-    "no-redeclare": {
-      "count": 1
-    }
-  },
   "lib/API/Modules/index.js": {
     "@typescript-eslint/no-this-alias": {
       "count": 5
@@ -422,17 +400,6 @@
     },
     "sonarjs/no-nested-functions": {
       "count": 2
-    },
-    "sonarjs/no-redundant-boolean": {
-      "count": 1
-    }
-  },
-  "lib/API/UX/helpers.js": {
-    "id-length": {
-      "count": 4
-    },
-    "no-unreachable": {
-      "count": 5
     },
     "sonarjs/no-redundant-boolean": {
       "count": 1
@@ -537,7 +504,7 @@
       "count": 8
     },
     "id-length": {
-      "count": 4
+      "count": 3
     },
     "max-lines-per-function": {
       "count": 3
@@ -1028,17 +995,6 @@
       "count": 2
     }
   },
-  "lib/TreeKill.js": {
-    "id-length": {
-      "count": 1
-    },
-    "max-lines-per-function": {
-      "count": 1
-    },
-    "sonarjs/no-os-command-from-path": {
-      "count": 1
-    }
-  },
   "lib/Utility.js": {
     "@typescript-eslint/no-unused-expressions": {
       "count": 1
@@ -1047,7 +1003,7 @@
       "count": 2
     },
     "id-length": {
-      "count": 8
+      "count": 7
     },
     "no-useless-escape": {
       "count": 2
@@ -1180,9 +1136,6 @@
   },
   "lib/templates/sample-apps/pm2-plus-metrics-actions/custom-metrics.js": {
     "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
       "count": 1
     },
     "sonarjs/pseudo-random": {
@@ -1442,26 +1395,6 @@
       "count": 1
     },
     "no-prototype-builtins": {
-      "count": 1
-    }
-  },
-  "lib/tools/which.js": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "complexity": {
-      "count": 1
-    },
-    "id-length": {
-      "count": 1
-    },
-    "max-depth": {
-      "count": 1
-    },
-    "sonarjs/cognitive-complexity": {
-      "count": 1
-    },
-    "sonarjs/todo-tag": {
       "count": 1
     }
   },
@@ -2426,11 +2359,6 @@
       "count": 5
     }
   },
-  "modules/pm2-io-bpm/index.js": {
-    "id-length": {
-      "count": 1
-    }
-  },
   "modules/pm2-io-bpm/metrics/eventLoopMetrics.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 2
@@ -2588,18 +2516,10 @@
   "modules/pm2-io-bpm/test/fixtures/apiMetricsChild.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 2
-    },
-    "id-length": {
-      "count": 1
     }
   },
   "modules/pm2-io-bpm/test/fixtures/apiOnExitExceptionChild.js": {
     "no-unassigned-vars": {
-      "count": 1
-    }
-  },
-  "modules/pm2-io-bpm/test/fixtures/autoExitChild.js": {
-    "id-length": {
       "count": 1
     }
   },
@@ -2704,9 +2624,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
-    "id-length": {
-      "count": 1
-    },
     "sonarjs/assertions-in-tests": {
       "count": 1
     },
@@ -2732,9 +2649,6 @@
     }
   },
   "modules/pm2-io-bpm/test/standalone/tracing.spec.js": {
-    "id-length": {
-      "count": 1
-    },
     "sonarjs/assertions-in-tests": {
       "count": 1
     },

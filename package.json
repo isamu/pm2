@@ -62,8 +62,9 @@
     "knip": "knip",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json && node packager/copy-dist-assets.mjs",
-    "prepare": "npm run build",
-    "pretest": "npm run build"
+    "prepare": "node -e \"require('fs').existsSync('tsconfig.build.json')&&require('child_process').execSync('npm run build',{stdio:'inherit'})\"",
+    "pretest": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "cli",

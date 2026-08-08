@@ -48,3 +48,17 @@ describe('lib/templates in the build', function () {
     assert.deepStrictEqual(maps, []);
   });
 });
+
+var DIST_DIR = pth.join(__dirname, '..', '..', 'dist');
+
+describe('the build output', function () {
+  // Bun resolves a require of ./x.js to ./x.ts when both are there, so a stray source file
+  // beside its own compiled output means Bun runs the TypeScript instead — and chokes on the
+  // import statement in a file that `export =` made CommonJS.
+  it('should not ship TypeScript sources beside the JavaScript', function () {
+    var sources = filesUnder(DIST_DIR).filter(function (name) {
+      return name.endsWith('.ts') && !name.endsWith('.d.ts');
+    });
+    assert.deepStrictEqual(sources, []);
+  });
+});

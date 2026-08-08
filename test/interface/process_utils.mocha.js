@@ -13,6 +13,35 @@ var makeProject = function (packageJson) {
   return root;
 };
 
+describe('ProcessUtils.injectModules', function () {
+  var AGENT = require.resolve('../../dist/modules/pm2-io-bpm');
+  var withEnv = require('../helpers/env.js').withEnv;
+
+  var agentIsLoaded = function () {
+    return Object.prototype.hasOwnProperty.call(require.cache, AGENT);
+  };
+
+  // Requiring pm2-io-bpm is not a lookup, it is the instrumentation: loading it is what puts
+  // the process:exception hooks in place. The original required it before deciding whether to
+  // call init, so every forked application got the hooks even with no io config — and the bus
+  // specs are what notice when it stops happening.
+  it('should load the agent even when there is no io config to init it with', function () {
+    delete require.cache[AGENT];
+    withEnv({ pmx: undefined, io: undefined, trace: undefined }, function () {
+      ProcessUtils.injectModules();
+    });
+    assert.strictEqual(agentIsLoaded(), true);
+  });
+
+  it('should not load the agent when pmx is switched off', function () {
+    delete require.cache[AGENT];
+    withEnv({ pmx: 'false', io: undefined, trace: undefined }, function () {
+      ProcessUtils.injectModules();
+    });
+    assert.strictEqual(agentIsLoaded(), false);
+  });
+});
+
 describe('ProcessUtils.isESModule', function () {
   var leftovers = [];
 

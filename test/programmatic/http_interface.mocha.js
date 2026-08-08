@@ -54,7 +54,7 @@ describe('HttpInterface', function () {
       envVars,
     );
 
-    webChild = fork(path.resolve(__dirname, '../../lib/HttpInterface.js'), [], {
+    webChild = fork(path.resolve(__dirname, '../../dist/lib/HttpInterface.js'), [], {
       env: env,
       silent: true,
     });
@@ -126,9 +126,6 @@ describe('HttpInterface', function () {
           should(data.processes.length).be.above(0);
           var proc = data.processes[0];
 
-          // BUG: HttpInterface.js line 54 uses && instead of ||:
-          //   if (typeof proc.pm2_env === 'undefined' && typeof proc.pm2_env.env === 'undefined') return;
-          // This means the env is NEVER stripped. Fix: change && to ||.
           should(proc.pm2_env.env === undefined).be.true(
             'env should have been stripped but was not',
           );
