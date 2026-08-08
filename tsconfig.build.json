@@ -7,7 +7,11 @@
     "allowJs": false,
     "strict": false,
     "resolveJsonModule": true,
-    "sourceMap": true
+    "sourceMap": true,
+    // The .ts files are not published — see .npmignore — so a map that only names them would
+    // resolve to nothing on a user's machine. Carrying the source inside the map keeps stack
+    // traces readable without putting a second, uncompiled copy of every module in node_modules.
+    "inlineSources": true
   },
   "include": ["index.js", "constants.js", "paths.js", "lib/**/*", "modules/**/*"],
   "exclude": [
