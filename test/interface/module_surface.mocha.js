@@ -24,6 +24,19 @@ var MODULES = [
     ],
   },
   {
+    path: 'lib/API/Monit.js',
+    methods: [
+      'reset',
+      'init',
+      'stop',
+      'refresh',
+      'addProcess',
+      'addProcesses',
+      'drawRatio',
+      'updateBars',
+    ],
+  },
+  {
     path: 'lib/API/Modules/Modularizer.js',
     methods: [
       'install',
@@ -53,5 +66,13 @@ describe('module surface', function () {
         assert.deepStrictEqual(Object.keys(loaded).sort(), mod.methods.slice().sort());
       });
     });
+  });
+
+  // Monit counted the keys of an object through a helper it hung off the global `Object`, so
+  // importing pm2 changed a built-in for every other library in the process. It had exactly one
+  // caller, in the same file.
+  it('should not add anything to the global Object', function () {
+    require(pth.join(DIST, 'lib/API/Monit.js'));
+    assert.strictEqual(Object.size, undefined);
   });
 });

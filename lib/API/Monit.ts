@@ -25,24 +25,25 @@ const RATIO_T3 = Math.floor(os.totalmem() / 5);
 // Cst for heavy programs
 const RATIO_T4 = Math.floor(os.totalmem());
 
-const Monit = {};
-
-//helper to get bars.length (num bars printed)
-Object.size = function (obj) {
-  let size = 0,
-    key;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) size++;
-  }
-  return size;
+const Monit = {
+  reset,
+  init,
+  stop,
+  refresh,
+  addProcess,
+  addProcesses,
+  drawRatio,
+  updateBars,
 };
+
+const countBars = (bars) => Object.keys(bars).length;
 
 /**
  * Reset the monitor through charm, basically \033c
  * @param  String msg optional message to show
  * @return Monit
  */
-Monit.reset = function (msg) {
+function reset(msg) {
   this.multi.charm.reset();
 
   this.multi.write(
@@ -56,14 +57,14 @@ Monit.reset = function (msg) {
   this.bars = {};
 
   return this;
-};
+}
 
 /**
  * Synchronous Monitor init method
  * @method init
  * @return Monit
  */
-Monit.init = function () {
+function init() {
   this.multi = multimeter(process);
 
   this.multi.on('^C', this.stop);
@@ -71,16 +72,16 @@ Monit.init = function () {
   this.reset();
 
   return this;
-};
+}
 
 /**
  * Stops monitor
  * @method stop
  */
-Monit.stop = function () {
+function stop() {
   this.multi.charm.destroy();
   process.exit(0);
-};
+}
 
 /**
  * Refresh monitor
@@ -88,7 +89,7 @@ Monit.stop = function () {
  * @param {} processes
  * @return this
  */
-Monit.refresh = function (processes) {
+function refresh(processes) {
   debug('Monit refresh');
 
   if (!processes) {
@@ -96,7 +97,7 @@ Monit.refresh = function (processes) {
   }
 
   const num = processes.length;
-  this.num_bars = Object.size(this.bars);
+  this.num_bars = countBars(this.bars);
 
   if (num !== this.num_bars) {
     debug('Monit addProcesses - actual: %s, new: %s', this.num_bars, num);
@@ -125,9 +126,9 @@ Monit.refresh = function (processes) {
   }
 
   return this;
-};
+}
 
-Monit.addProcess = function (proc, i) {
+function addProcess(proc, i) {
   if (proc.pm_id in this.bars) {
     return;
   }
@@ -176,9 +177,9 @@ Monit.addProcess = function (proc, i) {
   this.multi.write('\n');
 
   return this;
-};
+}
 
-Monit.addProcesses = function (processes) {
+function addProcesses(processes) {
   if (!processes) {
     processes = [];
   }
@@ -194,7 +195,7 @@ Monit.addProcesses = function (processes) {
   } else {
     this.reset('No processes to monit');
   }
-};
+}
 
 // Draw memory bars
 /**
@@ -204,7 +205,7 @@ Monit.addProcesses = function (processes) {
  * @param {} memory
  * @return
  */
-Monit.drawRatio = function (bar_memory, memory) {
+function drawRatio(bar_memory, memory) {
   let scale = 0;
 
   if (memory < RATIO_T1) scale = RATIO_T1;
@@ -213,14 +214,14 @@ Monit.drawRatio = function (bar_memory, memory) {
   else scale = RATIO_T4;
 
   bar_memory.ratio(memory, scale, UX.helpers.bytesToSize(memory, 3));
-};
+}
 
 /**
  * Updates bars informations
  * @param  {} proc       proc object
  * @return  this
  */
-Monit.updateBars = function (proc) {
+function updateBars(proc) {
   if (this.bars[proc.pm_id]) {
     if (proc.pm2_env.status !== 'online' || proc.pm2_env.status !== this.bars[proc.pm_id].status) {
       this.bars[proc.pm_id].cpu.percent(0, chalk.red(proc.pm2_env.status));
@@ -235,6 +236,6 @@ Monit.updateBars = function (proc) {
   }
 
   return this;
-};
+}
 
 module.exports = Monit;
