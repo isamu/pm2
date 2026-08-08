@@ -1,0 +1,50 @@
+name: quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: lint / format / typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - run: npm install
+
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+
+  macos-units:
+    # The e2e suite runs in Docker and cannot, so the module unit suites are what covers
+    # path handling and file watching on a non-Linux, non-Windows host.
+    name: unit tests (macos)
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - run: npm install
+
+      - run: npm run test:io-agent
+      - run: npm run test:bpm
