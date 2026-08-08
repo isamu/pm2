@@ -15,10 +15,15 @@ const VERBATIM_ROOTS = ['lib/templates'];
 const NOT_SHIPPED = /(^|[/\\])(test|node_modules)([/\\]|$)/;
 const EMITTED_BY_TSC = /\.(js|map)$/;
 
+// A .ts file next to its own compiled .js is worse than useless: Bun resolves a require of
+// ./x.js to ./x.ts when both exist, so it runs the TypeScript and fails on the import statement
+// in a file that `export =` made CommonJS. Every pm2 test under Bun died this way.
+const IS_SOURCE = /\.(ts|tsx)$/;
+
 // Decided from the path alone rather than by stat: no directory under either root is named
-// like an emitted file, so anything not ending in .js or .map is either an asset or a
-// directory to descend into.
-const shouldCopy = (src) => !NOT_SHIPPED.test(src) && !EMITTED_BY_TSC.test(src);
+// like one of these, so anything left is either an asset or a directory to descend into.
+const shouldCopy = (src) =>
+  !NOT_SHIPPED.test(src) && !EMITTED_BY_TSC.test(src) && !IS_SOURCE.test(src);
 
 const copyInto = (root, filter) => cpSync(root, join('dist', root), { recursive: true, filter });
 
