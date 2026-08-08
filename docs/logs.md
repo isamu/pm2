@@ -361,3 +361,91 @@ Bun のコンテナで `json-reload` / `app-config-update` / `yaml-configuration
 
 最後の 1 つは、**作業前の CI 結果と比べなければ「いつもの赤」と区別がつかなかった**。
 main が恒常的に赤い（issue #13）と、この比較そのものが難しくなる。
+
+---
+
+## lib/ の TypeScript 化 — 機械的改名のあと (issue #21)
+
+`lib/` の 49 ファイルを `git mv` で `.ts` にした時点で型エラーが 259 件。
+そこから何を「機械的」と見なして自動化し、何を手で確かめたかの記録。
+
+### 型チェッカーは何を見つけたか
+
+**バグではなかったもの**が最も多い。TS2554（引数不足）54 件は、宣言が 9 箇所しか無く、
+どれも本体が `cb ? cb(...)` や `if (!envs) envs = {}` で欠落を想定していた。
+JS が optional として扱っていた引数を optional と宣言しただけで 54 件が消えた。
+**emit される JS は 1 バイトも変わらない**（引数リストは実行時の挙動を持たない）。
+
+WIP コミットで「`new Daemon()` が引数不足」と書いたのは誤りだった。`Daemon` は
+`if (!opts) opts = {}` で始まっている。**型エラーを読んでバグと決めつけた**例。
+
+**本物だったもの**は 1 件、しかも重い（issue #22）:
+
+```js
+timer = setTimeout(function () {
+  if (Client.sub_sock.destroy) that.sub_sock.destroy();
+```
+
+`Client` はコンストラクタなので `Client.sub_sock` は常に undefined。
+`undefined.destroy` が **タイマーの中で** 投げるので、5 行上の try/catch には入らない。
+200ms 以内に閉じないソケットがあると落ちる。**このタイムアウト分岐は一度も成功したことが無い。**
+
+### 名前空間オブジェクトの変換 — 自動化とその止め方
+
+`Configuration` / `Modularizer` / `Monit` / `Log` は同じ形をしていた:
+空オブジェクトを export して、そこにメソッドを 1 つずつ生やす。型は `{}` のまま。
+
+codemod は「代入の数」と「トップレベルの `^};$` の数」が **一致しなければ止まる**。
+これが実際に効いた:
+
+- `Monit` は 8 代入 / 9 closer で拒否された。9 個目の正体は
+  **`Object.size = function` — グローバルの `Object` への書き込み**。
+  require しただけで組み込みが変わる。呼び出しは 12 行下の 1 箇所だけだった。
+- `Modularizer` は変換できたが `function package(` を生んだ。`package` は strict mode の
+  **将来予約語** で、`.ts` は常に strict。宣言名を分けて literal で `package: packageModule` と繋いだ。
+
+どちらも「数を数えるだけの安いチェック」が、読んでも気づきにくいものを止めている。
+
+### この変換の失敗モードと、それを突くテスト
+
+メソッドを literal に入れ忘れても **どこも壊れない**。ビルドは通り、その機能を使う
+コマンドだけが静かに消える。だから `test/interface/module_surface.mocha.js` は
+`Object.keys(module)` を期待リストと **完全一致** で比較する。
+
+`this` の束縛は変わらない。`Monit.reset()` と呼ぶ限り `this` は呼び出し側で決まるので、
+宣言が `Monit.reset = function` でも `function reset` でも同じ。
+
+### 「先にテストを書く」が実際に効いた場所
+
+- `Configuration`（26 テスト）: 構造を変える前に書いて緑を確認 → 変換 → 再度緑。
+  `PM2_HOME` を temp に向けて `paths`/`constants`/`Configuration` を require し直すことで、
+  デーモン無しで 10 メソッド全部を回せる。
+- `Object.size` の除去: 先に「require しても `Object.size` は生えない」を書いて
+  **赤を見てから** 直した。
+- `disconnectBus`: スタブソケットで先に書き、`Cannot read properties of undefined (reading 'destroy')`
+  を再現してから直した。
+
+赤を見ずに直したものは、直っていない可能性を排除できない。
+
+### 検証ループ（ブランチがまだビルドを通らない間）
+
+`npm run build` は `tsc && copy-assets` の `&&` チェーンなので、型エラーで
+アセットコピーまで届かない。ただし tsc は `noEmitOnError` 無しで **emit はしている**。
+
+```
+node packager/clean-dist.mjs && npx tsc -p tsconfig.build.json ; node packager/copy-dist-assets.mjs
+```
+
+と exit code を無視して繋ぐと完全な `dist/` ができ、ユニットテストが回る。
+これで **改名が実行時挙動を壊していないこと**（268 passing）を、型エラーを全部潰す前に確認できた。
+
+### 残り
+
+155 件。うち `God` 名前空間 34 + `God/ForkMode` 12 は、`clusters_db` の中身
+（= pm2 のプロセス環境オブジェクト）に本物の型を与えないと解けない。
+`{}` は `noImplicitAny: false` の下で添字アクセスが any になるため今は通っているが、
+`Record<string, unknown>` にすると全部の読み出しが壊れる。ここが「機械的でない」残作業の本体。
+
+`ProcessContainer` の 5 件は `process.send` / `process.stdout.write` の差し替えで、
+**戻り値がバックプレッシャに使われる**（`write` は boolean を返す契約）。
+現状の差し替えは `false | void` を返すので、型を合わせにいくと挙動が変わる。触っていない。
