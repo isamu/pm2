@@ -6,8 +6,10 @@ interface AgentModule {
   init: (conf: object) => void;
 }
 
-// Loaded on demand, not at import time: every forked application runs this file, and pulling the
-// agent in when nothing asked for it would cost each of them the whole module graph.
+// Required from inside injectModules rather than at the top of the file, because whether it is
+// loaded at all depends on the environment. Requiring it is not a lookup — loading the agent is
+// what installs the process:exception hooks — so the call below happens before any decision
+// about init, exactly where it always has.
 const requireAgent = (): AgentModule => createRequire(__filename)('../modules/pm2-io-bpm');
 
 const findPackageJson = (directory: string): string | null => {
@@ -21,14 +23,17 @@ const findPackageJson = (directory: string): string | null => {
 const injectModules = (): void => {
   if (process.env.pmx === 'false') return;
 
-  // Set by pm2 itself when it has already initialised the agent in this process.
+  const agent = requireAgent();
+
+  // Without either of these pm2 has already initialised the agent in this process, and calling
+  // init a second time is what this guard is avoiding — not the require above it.
   const hasSpecificConfig = typeof process.env.io === 'string' || process.env.trace === 'true';
   if (!hasSpecificConfig) return;
 
   const ioSettings: unknown = process.env.io ? JSON.parse(process.env.io) : null;
   const conf = isObject(ioSettings) && isObject(ioSettings.conf) ? ioSettings.conf : {};
 
-  requireAgent().init(Object.assign({ tracing: process.env.trace === 'true' || false }, conf));
+  agent.init(Object.assign({ tracing: process.env.trace === 'true' || false }, conf));
 };
 
 /**
