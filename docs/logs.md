@@ -494,10 +494,10 @@ node packager/clean-dist.mjs && npx tsc -p tsconfig.build.json ; node packager/c
 改名で全キーが `.js` → `.ts` になるので freeze をやり直した。天井は 3524 → 3815 に**上がった**。
 上がった分は全部 **TypeScript にしか適用されないルール**:
 
-| ルール | 増加 | なぜ |
-| --- | --- | --- |
-| `@typescript-eslint/no-require-imports` | +436 | 設定で `**/*.js` にだけ off にしてある（`.ts` では live、と設定のコメント自身が予告していた） |
-| `no-var` / `prefer-rest-params` / `prefer-const` / `prefer-spread` | +66 | typescript-eslint の `eslint-recommended` は TS ファイルにしか当たらない |
+| ルール                                                             | 増加 | なぜ                                                                                          |
+| ------------------------------------------------------------------ | ---- | --------------------------------------------------------------------------------------------- |
+| `@typescript-eslint/no-require-imports`                            | +436 | 設定で `**/*.js` にだけ off にしてある（`.ts` では live、と設定のコメント自身が予告していた） |
+| `no-var` / `prefer-rest-params` / `prefer-const` / `prefer-spread` | +66  | typescript-eslint の `eslint-recommended` は TS ファイルにしか当たらない                      |
 
 **元から真だったものが、リンタに聞かれていなかっただけ**。改名がそれを聞いた。
 `.js` を `.ts` にする作業は、それ自体は挙動を変えないのに天井を上げる — この 502 件は

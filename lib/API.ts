@@ -105,25 +105,38 @@ const { appsIn } = require('./tools/processFile.js');
  * @param {String}  [opts.machine_name=null]     pm2 plus instance name
  */
 class API {
+  // These six are not written here: the modules required at the bottom of this file are handed
+  // the class and assign them onto its prototype. `declare` emits nothing, which is the whole
+  // point — a plain field with no initialiser is still defined on the instance, as undefined,
+  // and an own property shadows the prototype. Writing `getVersion;` here is what made
+  // `pm2.getVersion is not a function`.
+  declare dump: (force: unknown, cb?: unknown) => void;
+  declare getVersion: (cb: unknown) => void;
+  declare killAgent: (cb?: unknown) => void;
+  declare launchAll: (instance: unknown, cb?: unknown) => void;
+  declare resurrect: (cb?: unknown) => void;
+  declare streamLogs: (
+    id: unknown,
+    lines: unknown,
+    raw: unknown,
+    timestamp: unknown,
+    exclusive: unknown,
+    highlight?: unknown,
+  ) => void;
+
   Client;
   _conf;
   cwd;
   daemon_mode;
-  dump;
-  getVersion;
   gl_interact_infos;
   gl_is_km_linked;
   gl_retry;
-  killAgent;
-  launchAll;
   machine_name;
   pm2_configuration;
   pm2_home;
   public_key;
-  resurrect;
   secret_key;
   start_timer;
-  streamLogs;
 
   constructor(opts) {
     if (!opts) opts = {};
