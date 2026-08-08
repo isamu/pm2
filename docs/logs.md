@@ -267,3 +267,39 @@ ENOENT: no such file or directory, stat '.../test/e2e/cli/.#interpreter.sh'
 
 CI から外されたテストは、落ちても誰も見ないので、**壊れていることに誰も気づかないまま残る**。
 このリポジトリには除外リストに 20 個以上入っている。
+
+---
+
+## 追記 3: プロトタイプ経由の引きは 1 箇所ではなかった
+
+`passwd`（issue #11）で見つけた「ユーザー入力をプレーンオブジェクトのキーにする」形は、
+このコードベースに**繰り返し出てくる**。
+
+| 場所                         | 症状                                                                 | issue |
+| ---------------------------- | -------------------------------------------------------------------- | ----- |
+| `passwd.getUsers()`          | `--user constructor` が「見つかった」扱いになる                      | #11   |
+| `pm2-ls.js` のソート項目検証 | `--sort constructor` が `TypeError` でクラッシュ                     | #19   |
+| `helpers.getNestedProperty`  | `constructor.prototype` でプロセス一覧から `Object.prototype` に到達 | #19   |
+
+`Configuration.js` には既に `__proto__` / `constructor` / `prototype` を弾くガードがある
+（CVE ではなく issue #6089 の対応）。**同じ問題が別の場所で繰り返されている**ということで、
+1 箇所ずつ潰すよりも「ユーザー入力をキーにする箇所」を洗い出すほうが早い。
+
+対処は 2 通り使い分けた:
+
+- 引く側が固定表を持つ場合 → `Object.prototype.hasOwnProperty.call()` で own property に限定
+- マップを自分で作る場合 → `Object.create(null)` でプロトタイプごと外す
+
+## 追記 4: `pm2 ls` 周りの表示ヘルパーにはテストが 1 つも無かった
+
+`bytesToSize` / `colorStatus` / `safe_push` / `timeSince` / `colorizedMetric` /
+`getNestedProperty` — `pm2 ls` の表示を組み立てる純粋関数群だが、テストが存在しなかった。
+19 件追加した。
+
+書いていて分かったこと:
+
+- `colorStatus` は `switch` の各 `case` で `return` した直後に `break` が置かれていた（到達しない）
+- `timeSince` は「1 単位ちょうど」を次に小さい単位に落とす（`> 1` 判定）。1 日ちょうどは `24h` になる。
+  意図的かどうか判断できないので**現状のままテストで固定**した
+- `bytesToSize` の分岐は小さい順に並んでいて、各段で範囲の上下を両方見ていた。大きい順に
+  並べ替えると上限の判定が要らなくなる（挙動は同じ）
