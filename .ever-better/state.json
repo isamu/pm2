@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "tool": "ever-better",
+  "phase": "diagnose",
+  "updatedAt": "2026-08-08T08:37:19.234Z",
+  "frozenAt": null,
+  "diagnosedAt": "2026-08-08T08:37:19.234Z",
+  "diagnosedCommit": "31adee8048dbbc1ee36a7df7cdbcaca2559708df",
+  "diagnosis": {
+    "packageManager": "npm",
+    "language": "javascript",
+    "framework": "none",
+    "runtime": "node",
+    "typescriptFileRatio": 0.010752688172043012,
+    "tooling": {
+      "eslint": "none",
+      "prettier": false,
+      "testRunner": "none",
+      "knip": false,
+      "jscpd": false,
+      "agentInstructions": []
+    },
+    "scripts": {
+      "lint": false,
+      "format": false,
+      "build": false,
+      "typecheck": false,
+      "test": true
+    },
+    "ci": {
+      "present": true,
+      "runners": [
+        "ubuntu-latest",
+        "windows-latest"
+      ],
+      "runsLint": false,
+      "runsTest": true,
+      "runsBuild": false,
+      "runsTypecheck": false,
+      "runsEverBetterCheck": false
+    },
+    "sizes": {
+      "total": 558,
+      "overFileLimit": 14,
+      "largest": [
+        {
+          "path": "examples/using-pm2-and-transpilers/node.d.ts",
+          "ext": "ts",
+          "lines": 2611
+        },
+        {
+          "path": "lib/API.js",
+          "ext": "js",
+          "lines": 1933
+        },
+        {
+          "path": "examples/sourcemap-auto-resolve/API.js",
+          "ext": "js",
+          "lines": 1635
+        },
+        {
+          "path": "modules/pm2-io-agent/test/units/InteractorClient.mocha.js",
+          "ext": "js",
+          "lines": 1195
+        },
+        {
+          "path": "lib/binaries/CLI.js",
+          "ext": "js",
+          "lines": 1072
+        },
+        {
+          "path": "lib/Common.js",
+          "ext": "js",
+          "lines": 919
+        },
+        {
+          "path": "lib/God/ActionMethods.js",
+          "ext": "js",
+          "lines": 909
+        },
+        {
+          "path": "lib/Client.js",
+          "ext": "js",
+          "lines": 776
+        },
+        {
+          "path": "lib/tools/json5.js",
+          "ext": "js",
+          "lines": 752
+        },
+        {
+          "path": "lib/API/Extra.js",
+          "ext": "js",
+          "lines": 734
+        }
+      ]
+    },
+    "gaps": [
+      {
+        "id": "eslint",
+        "title": "ESLint is not configured",
+        "detail": "Nothing enforces anything yet. This is the first thing bootstrap installs.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "typescript",
+        "title": "No TypeScript",
+        "detail": "Types are the cheapest rule set there is, and the type-aware lint tier cannot run without them. `ever-better migrate` walks it one file at a time, dependencies first.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "prettier",
+        "title": "No formatter",
+        "detail": "Formatting must land before linting starts, or the first drain PR is a diff nobody can read.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "test-runner",
+        "title": "No test runner",
+        "detail": "Draining warnings finds bugs. Without a runner there is nowhere to pin them.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "knip",
+        "title": "No dead-code detection",
+        "detail": "knip reports unused exports and files. Report-only at first; a counter later.",
+        "phase": "tighten"
+      },
+      {
+        "id": "jscpd",
+        "title": "No duplication detection",
+        "detail": "jscpd is what turns 'this feels repetitive' into a number that can only go down.",
+        "phase": "split"
+      },
+      {
+        "id": "agent-instructions",
+        "title": "No CLAUDE.md / AGENTS.md",
+        "detail": "Draining is done by agents. Rules that live only in your head produce a different fix every session.",
+        "phase": "drain"
+      },
+      {
+        "id": "scripts",
+        "title": "Missing package scripts: format, lint, build, typecheck",
+        "detail": "CI runs scripts, not commands. A gate with no script behind it cannot be enforced.",
+        "phase": "bootstrap"
+      },
+      {
+        "id": "ci-runners",
+        "title": "CI does not run on macos",
+        "detail": "Path handling and file watching break per platform, and only per platform.",
+        "phase": "review"
+      },
+      {
+        "id": "ci-lint",
+        "title": "CI does not run lint",
+        "detail": "The rules are configured but nothing runs them on a pull request.",
+        "phase": "review"
+      },
+      {
+        "id": "ci-gate",
+        "title": "CI does not run `ever-better check`",
+        "detail": "A baseline is only a ratchet if something rejects a regression. Thorough CI that never runs the gate enforces nothing, and looks identical from the outside.",
+        "phase": "review"
+      },
+      {
+        "id": "file-size",
+        "title": "14 files over 600 lines",
+        "detail": "These are the split-and-DRY backlog. Knowing the count now makes the limit a choice.",
+        "phase": "split"
+      }
+    ]
+  },
+  "rules": {},
+  "counters": {},
+  "log": []
+}
