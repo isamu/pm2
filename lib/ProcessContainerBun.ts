@@ -10,6 +10,18 @@ const Utility = require('./Utility.js');
 const ProcessUtils = require('./ProcessUtils');
 const util = require('util');
 
+const isReloadRequest = (msg: unknown): boolean =>
+  typeof msg === 'object' && msg !== null && 'type' in msg && msg.type === 'log:reload';
+
+// write() owes its caller a boolean saying whether there is room for more. The overrides below
+// have always answered with something falsy — undefined, false or null depending on the branch —
+// and nothing here ever emits 'drain', so this keeps that answer and only gives it the type the
+// contract asks for. Answering true would be a behaviour change, not a typing one.
+const doneWriting = (cb?: (err?: Error) => void): boolean => {
+  if (cb) cb();
+  return false;
+};
+
 // Load all env-vars from master.
 const pm2_env = JSON.parse(process.env.pm2_env);
 for (const k in pm2_env) {
@@ -43,8 +55,9 @@ delete process.env.pm2_env;
 
   const original_send = process.send;
 
-  process.send = function () {
-    if (process.connected) original_send.apply(this, arguments);
+  process.send = function (message, sendHandle?, options?, callback?) {
+    if (!process.connected) return false;
+    return original_send.call(this, message, sendHandle, options, callback);
   };
 
   //send node version
@@ -70,7 +83,9 @@ delete process.env.pm2_env;
   if (process.env.args != null) process.argv = process.argv.concat(pm2_env.args);
 
   // stdio, including: out, err and entire (both out and err if necessary).
-  const stds = {
+  // `std` is the combined log, present only when the app asked for one. Utility.startLogging
+  // replaces each path here with an open stream, in place.
+  const stds: { out: string; err: string; std?: string } = {
     out: outFile,
     err: errFile,
   };
@@ -102,7 +117,7 @@ delete process.env.pm2_env;
  */
 function exec(script, stds) {
   process.on('message', function (msg) {
-    if (msg.type === 'log:reload') {
+    if (isReloadRequest(msg)) {
       for (const k in stds) {
         if (typeof stds[k] == 'object' && !isNaN(stds[k].fd)) {
           if (stds[k].destroy) stds[k].destroy();
@@ -210,12 +225,12 @@ function exec(script, stds) {
     });
 
     process.stderr.write = (function (write) {
-      return function (string, encoding, cb) {
+      return function (string, encoding?, cb?) {
         let log_data = null;
 
         // Disable logs if specified
         if (pm2_env.disable_logs === true) {
-          return cb ? cb() : false;
+          return doneWriting(cb);
         }
 
         if (pm2_env.log_type && pm2_env.log_type === 'json') {
@@ -244,20 +259,21 @@ function exec(script, stds) {
           Utility.checkPathIsNull(pm2_env.pm_err_log_path) &&
           (!pm2_env.pm_log_path || Utility.checkPathIsNull(pm2_env.pm_log_path))
         )
-          return cb ? cb() : false;
+          return doneWriting(cb);
 
         stds.std && stds.std.write && stds.std.write(log_data, encoding);
         stds.err && stds.err.write && stds.err.write(log_data, encoding, cb);
+        return false;
       };
     })(process.stderr.write);
 
     process.stdout.write = (function (write) {
-      return function (string, encoding, cb) {
+      return function (string, encoding?, cb?) {
         let log_data = null;
 
         // Disable logs if specified
         if (pm2_env.disable_logs === true) {
-          return cb ? cb() : false;
+          return doneWriting(cb);
         }
 
         if (pm2_env.log_type && pm2_env.log_type === 'json') {
@@ -285,10 +301,11 @@ function exec(script, stds) {
           Utility.checkPathIsNull(pm2_env.pm_out_log_path) &&
           (!pm2_env.pm_log_path || Utility.checkPathIsNull(pm2_env.pm_log_path))
         )
-          return cb ? cb() : null;
+          return doneWriting(cb);
 
         stds.std && stds.std.write && stds.std.write(log_data, encoding);
         stds.out && stds.out.write && stds.out.write(log_data, encoding, cb);
+        return false;
       };
     })(process.stdout.write);
 
