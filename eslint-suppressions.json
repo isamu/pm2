@@ -405,17 +405,6 @@
       "count": 1
     }
   },
-  "lib/API/UX/helpers.js": {
-    "id-length": {
-      "count": 4
-    },
-    "no-unreachable": {
-      "count": 5
-    },
-    "sonarjs/no-redundant-boolean": {
-      "count": 1
-    }
-  },
   "lib/API/UX/index.js": {
     "id-length": {
       "count": 1

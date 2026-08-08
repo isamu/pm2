@@ -2,7 +2,7 @@
   "version": 1,
   "tool": "ever-better",
   "phase": "drain",
-  "updatedAt": "2026-08-08T12:35:08.773Z",
+  "updatedAt": "2026-08-08T12:41:37.355Z",
   "frozenAt": "2026-08-08T09:40:43.166Z",
   "diagnosedAt": "2026-08-08T09:40:21.066Z",
   "diagnosedCommit": "82328358878cd9be3dd45685e354929b20837b05",
@@ -137,8 +137,8 @@
   },
   "rules": {
     "id-length": {
-      "baseline": 1334,
-      "current": 1334,
+      "baseline": 1330,
+      "current": 1330,
       "status": "draining"
     },
     "@typescript-eslint/no-require-imports": {
@@ -172,8 +172,8 @@
       "status": "draining"
     },
     "sonarjs/no-redundant-boolean": {
-      "baseline": 62,
-      "current": 62,
+      "baseline": 61,
+      "current": 61,
       "status": "draining"
     },
     "sonarjs/todo-tag": {
@@ -287,8 +287,8 @@
       "status": "draining"
     },
     "no-unreachable": {
-      "baseline": 8,
-      "current": 8,
+      "baseline": 3,
+      "current": 3,
       "status": "draining"
     },
     "no-empty": {
