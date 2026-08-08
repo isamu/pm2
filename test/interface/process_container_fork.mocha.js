@@ -54,7 +54,18 @@ var reportFrom = function (messages) {
   });
 };
 
+// fork() launches whatever is running this suite, and under Bun that is Bun. This container is
+// the node one — it loads the application through `require('module')._load`, a node internal —
+// which is the whole reason ProcessContainerForkBun exists beside it. The bun image has no node
+// to fork either: it symlinks bun in under that name. So the node container is only exercised
+// when node is what is running.
+var IS_BUN = typeof process.versions.bun === 'string';
+
 describe('ProcessContainerFork', function () {
+  before(function () {
+    if (IS_BUN) this.skip();
+  });
+
   this.timeout(20000);
 
   it('should load the application it was pointed at', function (done) {
