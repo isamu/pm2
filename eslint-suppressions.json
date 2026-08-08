@@ -18,7 +18,7 @@
       "count": 6
     },
     "id-length": {
-      "count": 54
+      "count": 53
     },
     "max-lines": {
       "count": 1
@@ -537,7 +537,7 @@
       "count": 8
     },
     "id-length": {
-      "count": 4
+      "count": 3
     },
     "max-lines-per-function": {
       "count": 3
@@ -1047,7 +1047,7 @@
       "count": 2
     },
     "id-length": {
-      "count": 8
+      "count": 7
     },
     "no-useless-escape": {
       "count": 2
@@ -1180,9 +1180,6 @@
   },
   "lib/templates/sample-apps/pm2-plus-metrics-actions/custom-metrics.js": {
     "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
-    "id-length": {
       "count": 1
     },
     "sonarjs/pseudo-random": {
@@ -2426,11 +2423,6 @@
       "count": 5
     }
   },
-  "modules/pm2-io-bpm/index.js": {
-    "id-length": {
-      "count": 1
-    }
-  },
   "modules/pm2-io-bpm/metrics/eventLoopMetrics.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 2
@@ -2588,18 +2580,10 @@
   "modules/pm2-io-bpm/test/fixtures/apiMetricsChild.js": {
     "@typescript-eslint/no-unused-vars": {
       "count": 2
-    },
-    "id-length": {
-      "count": 1
     }
   },
   "modules/pm2-io-bpm/test/fixtures/apiOnExitExceptionChild.js": {
     "no-unassigned-vars": {
-      "count": 1
-    }
-  },
-  "modules/pm2-io-bpm/test/fixtures/autoExitChild.js": {
-    "id-length": {
       "count": 1
     }
   },
@@ -2704,9 +2688,6 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
-    "id-length": {
-      "count": 1
-    },
     "sonarjs/assertions-in-tests": {
       "count": 1
     },
@@ -2732,9 +2713,6 @@
     }
   },
   "modules/pm2-io-bpm/test/standalone/tracing.spec.js": {
-    "id-length": {
-      "count": 1
-    },
     "sonarjs/assertions-in-tests": {
       "count": 1
     },
