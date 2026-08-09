@@ -17,6 +17,7 @@
     "lib/API/UX/helpers.ts",
     "lib/API/UX/pm2-ls-minimal.ts",
     "lib/completion.ts",
+    "lib/Event.ts",
     "lib/HttpInterface.ts",
     "lib/ProcessContainerFork.ts",
     "lib/ProcessContainerForkBun.ts",
@@ -31,6 +32,7 @@
     "lib/tools/which.ts",
     "lib/TreeKill.ts",
     "lib/VersionCheck.ts",
+    "lib/Utility.ts",
     "lib/Watcher.ts"
   ]
 }
