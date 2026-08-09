@@ -26,6 +26,7 @@
     "lib/tools/errors.ts",
     "lib/API/pm2-plus/auth-strategies/WebAuth.ts",
     "lib/API/Log.ts",
+    "lib/tools/SysMetrics.ts",
     "lib/HttpInterface.ts",
     "lib/ProcessContainerFork.ts",
     "lib/ProcessContainerForkBun.ts",
