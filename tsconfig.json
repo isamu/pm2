@@ -31,7 +31,9 @@
     "lib/tools/passwd.ts",
     "lib/tools/sexec.ts",
     "lib/tools/which.ts",
-    "lib/TreeKill.ts"
+    "lib/TreeKill.ts",
+    "lib/VersionCheck.ts",
+    "lib/Watcher.ts"
   ],
   "exclude": ["node_modules", "examples", "test/fixtures"],
   "//": "Files that have been through the migration properly. A file joins this list when its types are written, and gains the strict family by doing so. The ones still waiting are in tsconfig.migrating.json."

@@ -3,114 +3,134 @@
  * Use of this source code is governed by a license that
  * can be found in the LICENSE file.
  */
-const chokidar = require('chokidar');
-const util = require('util');
-const log = require('debug')('pm2:watch');
+import { createRequire } from 'node:module';
 
-module.exports = function ClusterMode(God) {
-  /**
-   * Watch folder for changes and restart
-   * @method watch
-   * @param {Object} pm2_env pm2 app environnement
-   * @return MemberExpression
-   */
-  God.watch = {};
+const requireFrom = createRequire(__filename);
+const chokidar: { watch(paths: unknown, options: WatchOptions): Watcher } = requireFrom('chokidar');
+const log: (...args: unknown[]) => void = requireFrom('debug')('pm2:watch');
 
-  God.watch._watchers = {};
+interface Watcher {
+  on(event: string, handler: (...args: never[]) => void): void;
+  close(): void;
+}
 
-  ((God.watch.enable = function (pm2_env) {
-    if (God.watch._watchers[pm2_env.pm_id]) {
-      God.watch._watchers[pm2_env.pm_id].close();
-      God.watch._watchers[pm2_env.pm_id] = null;
-      delete God.watch._watchers[pm2_env.pm_id];
-    }
+interface WatchOptions {
+  ignored: unknown;
+  persistent: boolean;
+  ignoreInitial: boolean;
+  cwd: string;
+}
+
+// Only the fields this file reads. An app's environment carries far more; the schema is what
+// Common.verifyConfs enforces.
+interface WatchedEnv {
+  pm_id: number;
+  name: string;
+  pm_cwd: string;
+  watch?: boolean | string | string[];
+  ignore_watch?: unknown;
+  watch_options?: Partial<WatchOptions>;
+  watch_delay?: number;
+}
+
+// What this module needs of God, rather than the whole namespace: a mixin states its own
+// requirements and structural typing does the rest.
+interface WatchHost {
+  watch?: {
+    _watchers: Record<string, Watcher | undefined>;
+    enable(pm2_env: WatchedEnv): void;
+    disable(pm2_env: WatchedEnv): boolean;
+    disableAll(): void;
+  };
+  restartProcessName(name: string, cb: (err: unknown) => void): void;
+}
+
+const DEFAULT_IGNORED = /[\/\\]\.|node_modules/;
+
+const attachWatcher = (God: WatchHost) => {
+  const watchers: Record<string, Watcher | undefined> = {};
+
+  const enable = (pm2_env: WatchedEnv): void => {
+    disable(pm2_env);
 
     log('Initial watch ', pm2_env.watch);
 
-    let watch = pm2_env.watch;
+    const asked = pm2_env.watch;
+    const target =
+      typeof asked === 'boolean' || (Array.isArray(asked) && asked.length === 0)
+        ? pm2_env.pm_cwd
+        : asked;
 
-    if (typeof watch == 'boolean' || (Array.isArray(watch) && watch.length === 0))
-      watch = pm2_env.pm_cwd;
+    log('Watching %s', target);
 
-    log('Watching %s', watch);
+    const options: WatchOptions = Object.assign(
+      {
+        ignored: pm2_env.ignore_watch || DEFAULT_IGNORED,
+        persistent: true,
+        ignoreInitial: true,
+        cwd: pm2_env.pm_cwd,
+      },
+      pm2_env.watch_options ?? {},
+    );
 
-    let watch_options = {
-      ignored: pm2_env.ignore_watch || /[\/\\]\.|node_modules/,
-      persistent: true,
-      ignoreInitial: true,
-      cwd: pm2_env.pm_cwd,
-    };
+    log('Watch opts', options);
 
-    if (pm2_env.watch_options) {
-      watch_options = Object.assign(watch_options, pm2_env.watch_options);
-    }
-
-    log('Watch opts', watch_options);
-
-    const watcher = chokidar.watch(watch, watch_options);
-
+    const watcher = chokidar.watch(target, options);
     console.log('[Watch] Start watching', pm2_env.name);
 
-    watcher.on('all', function (event, path) {
-      const self = this;
+    // One restart at a time per app: a save that touches several files arrives as several
+    // events, and without this each of them would ask for its own restart.
+    let restarting = false;
 
-      if (self.restarting === true) {
+    watcher.on('all', ((event: string, changed: string) => {
+      if (restarting) {
         log('Already restarting, skipping');
-        return false;
+        return;
       }
+      restarting = true;
 
-      self.restarting = true;
+      console.log('Change detected on path %s for app %s - restarting', changed, pm2_env.name);
 
-      console.log('Change detected on path %s for app %s - restarting', path, pm2_env.name);
-
-      setTimeout(function () {
-        God.restartProcessName(pm2_env.name, function (err, list) {
-          self.restarting = false;
-
+      setTimeout(() => {
+        God.restartProcessName(pm2_env.name, (err) => {
+          restarting = false;
           if (err) {
             log('Error while restarting', err);
-            return false;
+            return;
           }
-
-          return log('Process restarted');
+          log('Process restarted');
         });
       }, pm2_env.watch_delay || 0);
+    }) as (...args: never[]) => void);
 
-      return false;
-    });
-
-    watcher.on('error', function (e) {
+    watcher.on('error', ((e: Error) => {
       console.error(e.stack || e);
+    }) as (...args: never[]) => void);
+
+    watchers[pm2_env.pm_id] = watcher;
+  };
+
+  const disable = (pm2_env: WatchedEnv): boolean => {
+    const watcher = watchers[pm2_env.pm_id];
+    if (!watcher) return false;
+
+    console.log('[Watch] Stop watching', pm2_env.name);
+    watcher.close();
+    delete watchers[pm2_env.pm_id];
+    return true;
+  };
+
+  // `_watchers` is keyed by pm_id, so this walked it with splice — an Array method — and threw
+  // TypeError on the first entry. Nothing calls this today, which is why that has stood.
+  const disableAll = (): void => {
+    console.log('[Watch] PM2 is being killed. Watch is disabled to avoid conflicts');
+    Object.keys(watchers).forEach((id) => {
+      watchers[id]?.close();
+      delete watchers[id];
     });
+  };
 
-    God.watch._watchers[pm2_env.pm_id] = watcher;
-
-    //return God.watch._watchers[pm2_env.name];
-  }),
-    /**
-     * Description
-     * @method close
-     * @param {} id
-     * @return
-     */
-    (God.watch.disableAll = function () {
-      const watchers = God.watch._watchers;
-
-      console.log('[Watch] PM2 is being killed. Watch is disabled to avoid conflicts');
-      for (const i in watchers) {
-        watchers[i].close && watchers[i].close();
-        watchers.splice(i, 1);
-      }
-    }),
-    (God.watch.disable = function (pm2_env) {
-      const watcher = God.watch._watchers[pm2_env.pm_id];
-      if (watcher) {
-        console.log('[Watch] Stop watching', pm2_env.name);
-        watcher.close();
-        delete God.watch._watchers[pm2_env.pm_id];
-        return true;
-      } else {
-        return false;
-      }
-    }));
+  God.watch = { _watchers: watchers, enable, disable, disableAll };
 };
+
+export = attachWatcher;

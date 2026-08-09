@@ -971,30 +971,7 @@
       "count": 1
     }
   },
-  "lib/VersionCheck.ts": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 3
-    },
-    "id-length": {
-      "count": 1
-    },
-    "no-empty": {
-      "count": 1
-    },
-    "sonarjs/no-ignored-exceptions": {
-      "count": 2
-    }
-  },
   "lib/Watcher.ts": {
-    "@typescript-eslint/no-this-alias": {
-      "count": 1
-    },
-    "@typescript-eslint/no-unused-expressions": {
-      "count": 2
-    },
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    },
     "id-length": {
       "count": 1
     },

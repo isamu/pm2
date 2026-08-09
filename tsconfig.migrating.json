@@ -29,6 +29,8 @@
     "lib/tools/passwd.ts",
     "lib/tools/sexec.ts",
     "lib/tools/which.ts",
-    "lib/TreeKill.ts"
+    "lib/TreeKill.ts",
+    "lib/VersionCheck.ts",
+    "lib/Watcher.ts"
   ]
 }
