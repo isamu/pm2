@@ -34,9 +34,27 @@
  * unchanged.
  */
 
-const os = require('os');
-const fs = require('fs');
-const { execFile } = require('child_process');
+import os from 'node:os';
+import fs from 'node:fs';
+import { execFile } from 'node:child_process';
+
+interface Counters {
+  [key: string]: number;
+}
+type CounterMap = Record<string, Counters>;
+
+interface MemorySample {
+  total: number;
+  available: number;
+  active: number;
+  usagePct: number;
+}
+
+interface FsSample {
+  mount: string;
+  usePct: number;
+  sizeGb: number;
+}
 
 const PLATFORM = process.platform;
 const IS_LINUX = PLATFORM === 'linux';
@@ -47,17 +65,17 @@ const IFACE_RE = /^[A-Za-z0-9._-]+$/;
 
 const EXEC_OPTS = { timeout: 2000, maxBuffer: 1024 * 1024, windowsHide: true };
 
-function execFileP(bin, args): Promise<string | null> {
+function execFileP(bin: string, args: string[]): Promise<string | null> {
   return new Promise((resolve) => {
     try {
-      execFile(bin, args, EXEC_OPTS, (err, stdout) => resolve(err ? null : stdout.toString()));
+      execFile(bin, args, EXEC_OPTS, (err, stdout) => resolve(err ? null : String(stdout)));
     } catch (e) {
       resolve(null);
     }
   });
 }
 
-function metric(value, unit) {
+function metric(value: number, unit: string) {
   return { value: value, type: 'metric', unit: unit, historic: true };
 }
 
@@ -67,7 +85,12 @@ function metric(value, unit) {
  */
 function create() {
   // Previous sample, for rate/percent deltas between collect() calls.
-  const prev = { ts: 0, cpu: null, net: {}, disk: null };
+  const prev: {
+    ts: number;
+    cpu: { idle: number; total: number } | null;
+    net: CounterMap;
+    disk: Counters | null;
+  } = { ts: 0, cpu: null, net: {}, disk: null };
 
   /**
    * Aggregate CPU busy % between two os.cpus() snapshots.
@@ -76,7 +99,7 @@ function create() {
     const cpus = os.cpus() || [];
     let idle = 0;
     let total = 0;
-    cpus.forEach(function (c) {
+    cpus.forEach(function (c: os.CpuInfo) {
       const t = c.times;
       idle += t.idle;
       total += t.user + t.nice + t.sys + t.idle + t.irq;
@@ -95,7 +118,7 @@ function create() {
   /**
    * RAM. Returns { total, available, active } in bytes + usagePct.
    */
-  async function ram() {
+  async function ram(): Promise<MemorySample> {
     const total = os.totalmem();
     const free = os.freemem();
     let active = total - free;
@@ -104,7 +127,7 @@ function create() {
     if (IS_LINUX) {
       try {
         const mi = fs.readFileSync('/proc/meminfo', 'utf8');
-        const get = function (k) {
+        const get = function (k: string) {
           const m = mi.match(new RegExp('^' + k + ':\\s+(\\d+)', 'm'));
           return m ? parseInt(m[1], 10) * 1024 : null;
         };
@@ -136,10 +159,10 @@ function create() {
   /**
    * Per-interface cumulative counters: { rx, tx, rxErr, txErr, rxDrop, txDrop }.
    */
-  function readLinuxNet(name) {
+  function readLinuxNet(name: string): Counters | null {
     const base = '/sys/class/net/' + name + '/statistics/';
     try {
-      const rd = function (f) {
+      const rd = function (f: string) {
         return parseInt(fs.readFileSync(base + f, 'utf8').trim(), 10) || 0;
       };
       return {
@@ -155,7 +178,7 @@ function create() {
     }
   }
 
-  async function readDarwinNet(name) {
+  async function readDarwinNet(name: string): Promise<Counters | null> {
     // netstat -bdnI <iface> : <iface> is argv, validated by IFACE_RE.
     const out = await execFileP('netstat', ['-bdnI', name]);
     if (!out) return null;
@@ -163,7 +186,7 @@ function create() {
     if (lines.length < 2 || lines[1].trim() === '') return null;
     const s = lines[1].replace(/ +/g, ' ').trim().split(' ');
     const o = s.length > 11 ? 1 : 0;
-    const n = function (i) {
+    const n = function (i: number) {
       return parseInt(s[o + i], 10) || 0;
     };
     // Column layout mirrors systeminformation's proven netstat parser.
@@ -181,7 +204,7 @@ function create() {
     const names = Object.keys(os.networkInterfaces()).filter(function (n) {
       return IFACE_RE.test(n);
     });
-    const out = {};
+    const out: CounterMap = {};
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
       const c = IS_LINUX ? readLinuxNet(name) : IS_DARWIN ? await readDarwinNet(name) : null;
@@ -198,7 +221,7 @@ function create() {
       let read = 0;
       let write = 0;
       const devs = fs.readdirSync('/sys/block');
-      devs.forEach(function (d) {
+      devs.forEach(function (d: string) {
         if (/^(loop|ram|dm-|fd)/.test(d)) return;
         try {
           const st = fs
@@ -249,12 +272,12 @@ function create() {
   /**
    * Per-filesystem usage. Returns [{ mount, usePct, sizeGb }].
    */
-  async function fsUsage() {
+  async function fsUsage(): Promise<FsSample[]> {
     if (!IS_LINUX && !IS_DARWIN) return [];
     const out = await execFileP('df', ['-kP']);
     if (!out) return [];
     const lines = out.split('\n');
-    const res = [];
+    const res: FsSample[] = [];
     for (let i = 1; i < lines.length; i++) {
       const p = lines[i].replace(/ +/g, ' ').trim().split(' ');
       if (p.length < 6) continue;
@@ -278,9 +301,16 @@ function create() {
    * Turn collected samples into the axm_monitor-shaped map, applying
    * deltas against the previous sample. Pure given inputs + `prev`.
    */
-  function buildSnapshot(cpu, mem, netCur, disk, fss, now) {
+  function buildSnapshot(
+    cpu: number | null,
+    mem: MemorySample | null,
+    netCur: CounterMap,
+    disk: Counters | null,
+    fss: FsSample[] | null,
+    now: number,
+  ) {
     const dt = prev.ts > 0 ? (now - prev.ts) / 1000 : 0;
-    const m = {};
+    const m: Record<string, unknown> = {};
 
     if (cpu !== null && cpu !== undefined) m['CPU Usage'] = metric(parseFloat(cpu.toFixed(1)), '%');
     // Always present so the (historically unguarded) renderer never throws;
@@ -346,7 +376,7 @@ function create() {
    * @param {Function} [cb] optional cb(axm_monitor) — also returned via Promise.
    * @returns {Promise<Object>}
    */
-  function collect(cb) {
+  function collect(cb?: (metrics: Record<string, unknown>) => void) {
     return Promise.all([
       Promise.resolve()
         .then(cpuUsage)

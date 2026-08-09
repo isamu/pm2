@@ -1,35 +1,68 @@
 'use strict';
 
-const cst = require('../../../../constants.js');
+import http from 'node:http';
+import fs from 'node:fs';
+import { execFile } from 'node:child_process';
+import { createRequire } from 'node:module';
+import cst from '../../../../constants.js';
+import { codeOf } from '../../../tools/errors.js';
 
-const AuthStrategy = require('@pm2/js-api/src/auth_strategies/strategy');
-const http = require('http');
-const fs = require('fs');
-const { execFile } = require('child_process');
-const tryEach = require('async/tryEach');
+// Neither ships types. Each is asked for one thing, written out here.
+const requireFrom = createRequire(__filename);
+const AuthStrategy: new () => object = requireFrom('@pm2/js-api/src/auth_strategies/strategy');
+const tryEach: (
+  tasks: ((next: TryNext) => void)[],
+  done: (err: unknown, result?: Tokens) => void,
+) => void = requireFrom('async/tryEach');
 
-module.exports = class WebStrategy extends AuthStrategy {
+type TryNext = (err: unknown, result?: Tokens) => void;
+
+interface Tokens {
+  access_token?: string;
+  refresh_token?: string;
+  expire_at?: string | number;
+}
+
+interface KmClient {
+  auth: {
+    retrieveToken(opts: { client_id: unknown; refresh_token: unknown }): Promise<{ data: Tokens }>;
+    revoke(): Promise<unknown>;
+  };
+}
+
+type TokenCallback = (err: unknown, tokens?: Tokens) => void;
+type OpenCallback = (err: Error | null) => void;
+
+class WebStrategy extends AuthStrategy {
+  declare authenticated: boolean;
+  declare callback: TokenCallback;
+  declare km: KmClient;
+  declare client_id: unknown;
+  declare oauth_endpoint: string;
+  declare oauth_query: string;
+
   // the client will try to call this but we handle this part ourselves
-  retrieveTokens(km, cb) {
+  retrieveTokens(km: KmClient, cb: TokenCallback) {
     this.authenticated = false;
     this.callback = cb;
     this.km = km;
   }
 
   // so the cli know if we need to tell user to login/register
-  isAuthenticated() {
-    return new Promise((resolve, reject) => {
+  isAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
       if (this.authenticated) return resolve(true);
 
       const tokensPath = cst.PM2_IO_ACCESS_TOKEN;
-      fs.readFile(tokensPath, (err, tokens) => {
-        if (err && err.code === 'ENOENT') return resolve(false);
+      fs.readFile(tokensPath, 'utf8', (err, contents) => {
+        if (err && codeOf(err) === 'ENOENT') return resolve(false);
         if (err) return reject(err);
 
         // verify that the token is valid
+        let tokens: Tokens;
         try {
-          tokens = JSON.parse(tokens || '{}');
-        } catch (err) {
+          tokens = JSON.parse(contents || '{}');
+        } catch {
           fs.unlinkSync(tokensPath);
           return resolve(false);
         }
@@ -41,11 +74,11 @@ module.exports = class WebStrategy extends AuthStrategy {
   }
 
   // called when we are sure the user asked to be logged in
-  _retrieveTokens(optionalCallback) {
+  _retrieveTokens(optionalCallback?: TokenCallback) {
     const km = this.km;
     const cb = this.callback;
 
-    const verifyToken = (refresh) => {
+    const verifyToken = (refresh: unknown) => {
       return km.auth.retrieveToken({
         client_id: this.client_id,
         refresh_token: refresh,
@@ -54,7 +87,7 @@ module.exports = class WebStrategy extends AuthStrategy {
     tryEach(
       [
         // try to find the token via the environment
-        (next) => {
+        (next: TryNext) => {
           if (!process.env.PM2_IO_TOKEN) {
             return next(new Error('No token in env'));
           }
@@ -65,12 +98,12 @@ module.exports = class WebStrategy extends AuthStrategy {
             .catch(next);
         },
         // try to find it in the file system
-        (next) => {
-          fs.readFile(cst.PM2_IO_ACCESS_TOKEN, (err, tokens) => {
+        (next: TryNext) => {
+          fs.readFile(cst.PM2_IO_ACCESS_TOKEN, 'utf8', (err, contents) => {
             if (err) return next(err);
             // verify that the token is valid
-            tokens = JSON.parse(tokens || '{}');
-            if (new Date(tokens.expire_at) > new Date(new Date().toISOString())) {
+            const tokens: Tokens = JSON.parse(contents || '{}');
+            if (new Date(tokens.expire_at ?? 0) > new Date(new Date().toISOString())) {
               return next(null, tokens);
             }
 
@@ -82,8 +115,8 @@ module.exports = class WebStrategy extends AuthStrategy {
           });
         },
         // otherwise make the whole flow
-        (next) => {
-          return this.loginViaWeb((data) => {
+        (next: TryNext) => {
+          return this.loginViaWeb((data: Tokens) => {
             // verify that the token is valid
             verifyToken(data.access_token)
               .then((res) => {
@@ -99,7 +132,7 @@ module.exports = class WebStrategy extends AuthStrategy {
           optionalCallback(err, result);
         }
 
-        if (result.refresh_token) {
+        if (result?.refresh_token) {
           this.authenticated = true;
           const file = cst.PM2_IO_ACCESS_TOKEN;
           fs.writeFile(file, JSON.stringify(result), () => {
@@ -112,7 +145,7 @@ module.exports = class WebStrategy extends AuthStrategy {
     );
   }
 
-  loginViaWeb(cb) {
+  loginViaWeb(cb: (query: Tokens) => void) {
     const redirectURL = `${this.oauth_endpoint}${this.oauth_query}`;
 
     console.log(
@@ -128,7 +161,9 @@ module.exports = class WebStrategy extends AuthStrategy {
       if (shutdown === true) return res.end();
       shutdown = true;
 
-      const query = Object.fromEntries(new URL(req.url, 'http://localhost').searchParams);
+      const query: Tokens = Object.fromEntries(
+        new URL(req.url ?? '/', 'http://localhost').searchParams,
+      );
 
       res.write(`
         <head>
@@ -149,7 +184,7 @@ module.exports = class WebStrategy extends AuthStrategy {
     });
   }
 
-  deleteTokens(km) {
+  deleteTokens(km: KmClient) {
     return new Promise((resolve, reject) => {
       // revoke the refreshToken
       km.auth
@@ -164,14 +199,13 @@ module.exports = class WebStrategy extends AuthStrategy {
     });
   }
 
-  open(target, appName?, callback?) {
-    if (typeof appName === 'function') {
-      callback = appName;
-      appName = null;
-    }
+  open(target: string, appNameOrCallback?: string | OpenCallback, maybeCallback?: OpenCallback) {
+    // Called either as open(target, cb) or open(target, appName, cb).
+    const callback = typeof appNameOrCallback === 'function' ? appNameOrCallback : maybeCallback;
+    const appName = typeof appNameOrCallback === 'string' ? appNameOrCallback : undefined;
 
-    let cmd;
-    let args = [];
+    let cmd: string;
+    let args: string[] = [];
 
     switch (process.platform) {
       case 'darwin': {
@@ -204,4 +238,6 @@ module.exports = class WebStrategy extends AuthStrategy {
 
     return execFile(cmd, args, callback);
   }
-};
+}
+
+export = WebStrategy;
