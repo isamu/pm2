@@ -194,26 +194,23 @@
     }
   },
   "lib/API/Log.ts": {
-    "@typescript-eslint/no-this-alias": {
-      "count": 5
-    },
     "@typescript-eslint/no-unused-expressions": {
       "count": 1
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 9
+      "count": 4
     },
     "id-length": {
       "count": 3
     },
     "max-lines-per-function": {
-      "count": 2
+      "count": 1
     },
     "sonarjs/no-dead-store": {
-      "count": 7
+      "count": 2
     },
     "sonarjs/no-unused-vars": {
-      "count": 8
+      "count": 3
     }
   },
   "lib/API/LogManagement.ts": {
@@ -541,11 +538,8 @@
     }
   },
   "lib/API/pm2-plus/auth-strategies/WebAuth.ts": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
     "id-length": {
-      "count": 7
+      "count": 8
     },
     "max-lines-per-function": {
       "count": 1
