@@ -1,14 +1,19 @@
 'use strict';
 
-const commander = require('commander');
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import cst from '../../constants.js';
+import pkg from '../../package.json';
+import type { Pm2Client, Pm2Module, LogStreamer, CommanderCli } from '../types/pm2-api.js';
 
-const PM2 = require('../..');
-const Log = require('../../lib/API/Log');
-const cst = require('../../constants.js');
-const pkg = require('../../package.json');
-const path = require('path');
+// commander and pm2 itself are reached through require: the first has no types here, and the
+// second is the package this file lives in, loaded by its entry point rather than by path.
+const requireFrom = createRequire(__filename);
+const commander: CommanderCli = requireFrom('commander');
+const PM2: Pm2Module = requireFrom('../..');
+const Log: LogStreamer = requireFrom('../../lib/API/Log');
 
-let pm2;
+let pm2: Pm2Client;
 
 // Do not print banner
 process.env.PM2_DISCRETE_MODE = 'true';
@@ -32,9 +37,9 @@ commander
   .option('-i --instances <number>', 'launch [number] instances with load-balancer')
   .usage('pm2-runtime app.js');
 
-commander.command('*').action(function (cmd) {
+commander.command('*').action(function (cmd: string) {
   pm2 = new PM2.custom({
-    pm2_home: path.join(process.env.HOME, '.pm3'),
+    pm2_home: path.join(process.env.HOME ?? '', '.pm3'),
     secret_key: cst.SECRET_KEY || commander.secret,
     public_key: cst.PUBLIC_KEY || commander.public,
     machine_name: cst.MACHINE_NAME || commander.machineName,
@@ -56,7 +61,7 @@ commander.command('*').action(function (cmd) {
         return process.exit(1);
       }
 
-      const pm_id = obj[0].pm2_env.pm_id;
+      const pm_id = obj?.[0]?.pm2_env.pm_id ?? 'all';
 
       if (commander.instances == undefined) {
         return pm2.attach(pm_id, function () {

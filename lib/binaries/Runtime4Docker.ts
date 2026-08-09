@@ -3,12 +3,23 @@
 /**
  * Specialized PM2 CLI for Containers
  */
-const commander = require('commander');
-const PM2 = require('../..');
-const Log = require('../../lib/API/Log');
-const cst = require('../../constants.js');
-const pkg = require('../../package.json');
-const path = require('path');
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import cst from '../../constants.js';
+import { messageOf } from '../tools/errors.js';
+import pkg from '../../package.json';
+import type {
+  Pm2Client,
+  Pm2Module,
+  LogStreamer,
+  Pm2Process,
+  CommanderCli,
+} from '../types/pm2-api.js';
+
+const requireFrom = createRequire(__filename);
+const commander: CommanderCli = requireFrom('commander');
+const PM2: Pm2Module = requireFrom('../..');
+const Log: LogStreamer = requireFrom('../../lib/API/Log');
 const DEFAULT_FAIL_COUNT = 3;
 
 process.env.PM2_DISCRETE_MODE = 'true';
@@ -64,14 +75,14 @@ commander
   .allowUnknownOption()
   .usage('app.js');
 
-commander.command('*').action(function (cmd) {
+commander.command('*').action(function (cmd: string) {
   Runtime.instanciate(cmd);
 });
 
 commander
   .command('start <app.js|json_file>')
   .description('start an application or json ecosystem file')
-  .action(function (cmd) {
+  .action(function (cmd: string) {
     Runtime.instanciate(cmd);
   });
 
@@ -80,18 +91,25 @@ if (process.argv.length == 2) {
   process.exit(1);
 }
 
-const Runtime = {
+const Runtime: {
+  pm2: Pm2Client | null;
+  instanciate(cmd: string): void;
+  startLogStreaming(): void;
+  startApp(cmd: string, cb: (err: unknown, obj?: unknown) => void): void;
+  exit(code?: number): void;
+  autoExitWorker(fail_count?: number): void;
+} = {
   pm2: null,
-  instanciate: function (cmd) {
+  instanciate: function (cmd: string) {
     this.pm2 = new PM2.custom({
-      pm2_home: process.env.PM2_HOME || path.join(process.env.HOME, '.pm2'),
+      pm2_home: process.env.PM2_HOME || path.join(process.env.HOME ?? '', '.pm2'),
       secret_key: cst.SECRET_KEY || commander.secret,
       public_key: cst.PUBLIC_KEY || commander.public,
       machine_name: cst.MACHINE_NAME || commander.machineName,
       daemon_mode: process.env.PM2_RUNTIME_DEBUG || false,
     });
 
-    this.pm2.connect(function (err, pm2_meta) {
+    this.pm2.connect(function () {
       process.on('SIGINT', function () {
         Runtime.exit();
       });
@@ -103,7 +121,7 @@ const Runtime = {
       Runtime.startLogStreaming();
       Runtime.startApp(cmd, function (err) {
         if (err) {
-          console.error(err.message || err);
+          console.error(messageOf(err));
           return Runtime.exit();
         }
       });
@@ -114,25 +132,25 @@ const Runtime = {
    * Log Streaming Management
    */
   startLogStreaming: function () {
-    if (commander.json === true) Log.jsonStream(this.pm2.Client, 'all');
+    if (commander.json === true) Log.jsonStream(Runtime.pm2?.Client, 'all');
     else if (commander.format === true)
-      Log.formatStream(this.pm2.Client, 'all', false, 'YYYY-MM-DD-HH:mm:ssZZ');
-    else Log.stream(this.pm2.Client, 'all', !commander.formatted, commander.timestamp, true);
+      Log.formatStream(Runtime.pm2?.Client, 'all', false, 'YYYY-MM-DD-HH:mm:ssZZ');
+    else Log.stream(Runtime.pm2?.Client, 'all', !commander.formatted, commander.timestamp, true);
   },
 
   /**
    * Application Startup
    */
-  startApp: function (cmd, cb) {
+  startApp: function (cmd: string, cb: (err: unknown, obj?: unknown) => void) {
     function exec() {
-      this.pm2.start(cmd, commander, function (err, obj) {
+      Runtime.pm2?.start(cmd, commander, function (err, obj) {
         if (err) return cb(err);
         if (obj && obj.length == 0)
           return cb(new Error(`0 application started (no apps to run on ${cmd})`));
 
         if (commander.web) {
           const port = commander.web === true ? cst.WEB_PORT : commander.web;
-          Runtime.pm2.web(port);
+          Runtime.pm2?.web(port);
         }
 
         if (commander.autoExit) {
@@ -142,19 +160,19 @@ const Runtime = {
         }
 
         // For Testing purpose (allow to auto exit CLI)
-        if (process.env.PM2_RUNTIME_DEBUG) Runtime.pm2.disconnect(function () {});
+        if (process.env.PM2_RUNTIME_DEBUG) Runtime.pm2?.disconnect(function () {});
 
         return cb(null, obj);
       });
     }
     // via --delay <seconds> option
-    setTimeout(exec.bind(this), commander.delay * 1000);
+    setTimeout(exec.bind(this), Number(commander.delay ?? 0) * 1000);
   },
 
   /**
    * Exit runtime mgmt
    */
-  exit: function (code?) {
+  exit: function (code?: number) {
     if (!this.pm2) return process.exit(1);
 
     this.pm2.kill(function () {
@@ -166,13 +184,13 @@ const Runtime = {
    * Exit current PM2 instance if 0 app is online
    * function activated via --auto-exit
    */
-  autoExitWorker: function (fail_count?) {
+  autoExitWorker: function (fail_count?: number) {
     const interval = 2000;
 
-    if (typeof fail_count == 'undefined') fail_count = DEFAULT_FAIL_COUNT;
+    const remaining = fail_count ?? DEFAULT_FAIL_COUNT;
 
     const timer = setTimeout(function () {
-      Runtime.pm2.list(function (err, apps) {
+      Runtime.pm2?.list(function (err, apps) {
         if (err) {
           console.error('Could not run pm2 list');
           return Runtime.autoExitWorker();
@@ -180,7 +198,7 @@ const Runtime = {
 
         let appOnline = 0;
 
-        apps.forEach(function (app) {
+        (apps ?? []).forEach(function (app: Pm2Process) {
           if (
             !app.pm2_env.pmx_module &&
             (app.pm2_env.status === cst.ONLINE_STATUS ||
@@ -191,9 +209,9 @@ const Runtime = {
         });
 
         if (appOnline === 0) {
-          console.log('0 application online, retry =', fail_count);
-          if (fail_count <= 0) return Runtime.exit(2);
-          return Runtime.autoExitWorker(--fail_count);
+          console.log('0 application online, retry =', remaining);
+          if (remaining <= 0) return Runtime.exit(2);
+          return Runtime.autoExitWorker(remaining - 1);
         }
 
         Runtime.autoExitWorker();

@@ -4,17 +4,40 @@ process.env.PM2_NO_INTERACTION = 'true';
 // Do not print banner
 process.env.PM2_DISCRETE_MODE = 'true';
 
-const commander = require('commander');
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import os from 'node:os';
+import { exec } from 'node:child_process';
+import chalk from 'ansis';
+import { messageOf } from '../tools/errors.js';
+import cst from '../../constants.js';
+import pkg from '../../package.json';
+import type {
+  Pm2Client,
+  Pm2Module,
+  LogStreamer,
+  Pm2Process,
+  CommanderCli,
+  DevOptions,
+} from '../types/pm2-api.js';
 
-const PM2 = require('../..');
-const Log = require('../API/Log');
-const cst = require('../../constants.js');
-const pkg = require('../../package.json');
-const chalk = require('ansis');
-const path = require('path');
-const fmt = require('../tools/fmt.js');
-const exec = require('child_process').exec;
-const os = require('os');
+interface DevBus {
+  on(event: string, handler: (packet: { event?: string }) => void): void;
+}
+interface DevClient {
+  launchBus(cb: (err: unknown, bus: DevBus) => void): void;
+}
+
+const requireFrom = createRequire(__filename);
+const commander: CommanderCli = requireFrom('commander');
+
+const PM2: Pm2Module = requireFrom('../..');
+const Log: LogStreamer = requireFrom('../API/Log');
+const fmt: {
+  title(text: string): void;
+  field(name: string, value: unknown): void;
+  sep(): void;
+} = requireFrom('../tools/fmt.js');
 
 commander
   .version(pkg.version)
@@ -45,15 +68,15 @@ pm2.connect(function () {
   commander.parse(process.argv);
 });
 
-function postExecCmd(command, cb?) {
+function postExecCmd(command: string, cb?: (err: null) => void) {
   const exec_cmd = exec(command);
 
   if (commander.silentExec !== true) {
-    exec_cmd.stdout.on('data', function (data) {
+    exec_cmd.stdout?.on('data', function (data: Buffer) {
       process.stdout.write(data);
     });
 
-    exec_cmd.stderr.on('data', function (data) {
+    exec_cmd.stderr?.on('data', function (data: Buffer) {
       process.stderr.write(data);
     });
   }
@@ -67,7 +90,7 @@ function postExecCmd(command, cb?) {
   });
 }
 
-function run(cmd, opts) {
+function run(cmd: string, opts: DevOptions) {
   let timestamp = opts.timestamp;
 
   opts.watch = true;
@@ -101,19 +124,19 @@ function run(cmd, opts) {
     fmt.title('PM2 development mode');
     fmt.field(
       'Apps started',
-      procs.map(function (p) {
-        return p.pm2_env.name;
+      (procs ?? []).map(function (proc: Pm2Process) {
+        return proc.pm2_env.name;
       }),
     );
-    fmt.field('Processes started', chalk.bold(procs.length));
+    fmt.field('Processes started', chalk.bold(String(procs?.length ?? 0)));
     fmt.field('Watch and Restart', chalk.green('Enabled'));
     fmt.field('Ignored folder', opts.ignore_watch || 'node_modules');
     if (opts.postExec) fmt.field('Post restart cmd', opts.postExec);
     fmt.sep();
 
     setTimeout(function () {
-      pm2.Client.launchBus(function (err, bus) {
-        bus.on('process:event', function (packet) {
+      (pm2.Client as DevClient).launchBus(function (err: unknown, bus: DevBus) {
+        bus.on('process:event', function (packet: { event?: string }) {
           if (packet.event == 'online') {
             if (opts.postExec) postExecCmd(opts.postExec);
           }
@@ -134,14 +157,14 @@ function run(cmd, opts) {
   });
 }
 
-commander.command('*').action(function (cmd, opts) {
+commander.command('*').action(function (cmd: string, opts: DevOptions) {
   run(cmd, commander);
 });
 
 commander
   .command('start <file|json_file>')
   .description('start target config file/script in development mode')
-  .action(function (cmd, opts) {
+  .action(function (cmd: string, opts: DevOptions) {
     run(cmd, commander);
   });
 
@@ -154,14 +177,14 @@ function exitPM2() {
   } else process.exit(0);
 }
 
-function autoExit(final?) {
+function autoExit(final?: boolean) {
   setTimeout(function () {
     pm2.list(function (err, apps) {
-      if (err) console.error(err.stack || err);
+      if (err) console.error(messageOf(err));
 
       let online_count = 0;
 
-      apps.forEach(function (app) {
+      (apps ?? []).forEach(function (app: Pm2Process) {
         if (app.pm2_env.status == cst.ONLINE_STATUS || app.pm2_env.status == cst.LAUNCHING_STATUS)
           online_count++;
       });
