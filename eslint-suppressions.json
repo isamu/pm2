@@ -949,20 +949,20 @@
     "@typescript-eslint/no-unused-vars": {
       "count": 2
     },
+    "complexity": {
+      "count": 1
+    },
     "id-length": {
       "count": 7
     },
     "no-useless-escape": {
-      "count": 2
-    },
-    "prefer-rest-params": {
-      "count": 5
+      "count": 1
     },
     "sonarjs/cognitive-complexity": {
       "count": 1
     },
     "sonarjs/concise-regex": {
-      "count": 10
+      "count": 5
     },
     "sonarjs/no-nested-functions": {
       "count": 1

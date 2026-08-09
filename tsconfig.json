@@ -33,6 +33,7 @@
     "lib/tools/which.ts",
     "lib/TreeKill.ts",
     "lib/VersionCheck.ts",
+    "lib/Utility.ts",
     "lib/Watcher.ts"
   ],
   "exclude": ["node_modules", "examples", "test/fixtures"],
