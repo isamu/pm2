@@ -19,6 +19,7 @@
     "lib/API/UX/helpers.ts",
     "lib/API/UX/pm2-ls-minimal.ts",
     "lib/completion.ts",
+    "lib/Event.ts",
     "lib/HttpInterface.ts",
     "lib/ProcessContainerFork.ts",
     "lib/ProcessContainerForkBun.ts",

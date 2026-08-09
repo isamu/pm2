@@ -3,23 +3,45 @@
  * Use of this source code is governed by a license that
  * can be found in the LICENSE file.
  */
+import Utility from './Utility.js';
 
-const Utility = require('./Utility.js');
+// A process as the daemon holds it. Structural, so it lines up with what Utility expects
+// without either file having to own the definition.
+interface ProcessDescriptor {
+  pm2_env?: Record<string, unknown>;
+  [key: string]: unknown;
+}
 
-module.exports = function (God) {
-  God.notify = function (action_name, data, manually) {
+// What this module needs of God, rather than the whole namespace.
+interface EventHost {
+  bus: { emit(event: string, packet: unknown): void };
+  clusters_db: Record<string, ProcessDescriptor>;
+  notify?(action_name: string, data: ProcessDescriptor, manually?: boolean): void;
+  notifyByProcessId?(opts: NotifyByIdOptions, cb: (err: Error | null) => void): void;
+}
+
+interface NotifyByIdOptions {
+  id?: string | number;
+  action_name?: string;
+  manually?: boolean;
+}
+
+const attachEvents = (God: EventHost): void => {
+  God.notify = (action_name, data, manually) => {
     God.bus.emit('process:event', {
       event: action_name,
-      manually: typeof manually == 'undefined' ? false : true,
+      // Any value at all means "a person asked for this"; only absence means otherwise.
+      manually: typeof manually !== 'undefined',
       process: Utility.formatCLU(data),
       at: Utility.getDate(),
     });
   };
 
-  God.notifyByProcessId = function (opts, cb) {
+  God.notifyByProcessId = (opts, cb) => {
     if (typeof opts.id === 'undefined') {
       return cb(new Error('process id missing'));
     }
+
     const proc = God.clusters_db[opts.id];
     if (!proc) {
       return cb(new Error('process id doesnt exists'));
@@ -27,14 +49,13 @@ module.exports = function (God) {
 
     God.bus.emit('process:event', {
       event: opts.action_name,
-      manually: typeof opts.manually == 'undefined' ? false : true,
+      manually: typeof opts.manually !== 'undefined',
       process: Utility.formatCLU(proc),
       at: Utility.getDate(),
     });
 
-    process.nextTick(function () {
-      return cb ? cb(null) : false;
-    });
-    return false;
+    process.nextTick(() => cb(null));
   };
 };
+
+export = attachEvents;
