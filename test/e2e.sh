@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# These suites kill and restart the daemon between files. PM2_HOME defaults to ~/.pm2, so
+# without this they do that to whatever pm2 the person running them has going — their actual
+# processes, not the test's. An already-set PM2_HOME is left alone, so CI and anyone who wants
+# to point this at a specific home still can.
+if [ -z "${PM2_HOME:-}" ]; then
+    export PM2_HOME=$(mktemp -d "${TMPDIR:-/tmp}/pm2-test-XXXXXX")
+    trap 'rm -rf "$PM2_HOME"' EXIT
+    echo "[~] Using a throwaway PM2_HOME: $PM2_HOME"
+fi
+
 export PM2_SILENT="true"
 
 SRC=$(cd $(dirname "$0"); pwd)

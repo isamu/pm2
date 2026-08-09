@@ -36,7 +36,15 @@ function sexec(
     typeof optionsOrCallback === 'function' ? optionsOrCallback : (maybeCallback ?? undefined);
   const given = typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
-  if (!command) console.error('[sexec] must specify command');
+  // This used to print and carry on, and exec then threw synchronously on the empty string —
+  // so the one thing the check was there to prevent is what happened, and it arrived as an
+  // exception rather than through the callback every other outcome uses.
+  if (!command) {
+    const reason = '[sexec] must specify command';
+    if (callback) process.nextTick(() => callback(1, '', reason));
+    else console.error(reason);
+    return;
+  }
 
   // Copied rather than merged in place: callers reuse the object they hand in, and writing to it
   // made a second call behave differently from the first for no reason they could see.

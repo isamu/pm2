@@ -65,11 +65,23 @@ describe('sexec', function () {
   // Documented, not endorsed. The empty-command guard only returns if console.error itself
   // throws, so the empty string reaches exec and it rejects it synchronously — the callback
   // never runs. Reachable: Startup.js builds its command with commands.join('&& ').
-  it('should throw synchronously when given no command', function () {
-    assert.throws(function () {
-      sexec('', { silent: true }, function () {
-        assert.fail('the callback should not be reached');
+  it('should report an empty command through the callback rather than throwing', function (done) {
+    assert.doesNotThrow(function () {
+      sexec('', { silent: true }, function (code, stdout, stderr) {
+        assert.notStrictEqual(code, 0, 'an empty command is not a success');
+        assert.strictEqual(stdout, '');
+        assert(stderr.length > 0, 'the reason should reach the caller');
+        done();
       });
-    }, /cannot be empty/);
+    });
+  });
+
+  it('should not spawn anything for an empty command', function (done) {
+    var started = Date.now();
+    sexec('', { silent: true }, function () {
+      // A spawn would cost milliseconds and a process; answering directly costs neither.
+      assert(Date.now() - started < 100);
+      done();
+    });
   });
 });
