@@ -850,10 +850,13 @@
       "count": 1
     },
     "id-length": {
-      "count": 10
+      "count": 9
     },
     "max-lines-per-function": {
-      "count": 2
+      "count": 1
+    },
+    "prefer-const": {
+      "count": 1
     },
     "sonarjs/no-ignored-exceptions": {
       "count": 1
@@ -873,7 +876,7 @@
       "count": 5
     },
     "max-lines-per-function": {
-      "count": 1
+      "count": 2
     },
     "sonarjs/no-dead-store": {
       "count": 2

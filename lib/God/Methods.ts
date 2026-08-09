@@ -10,9 +10,51 @@
  * @author Alexandre Strzelewicz <as@unitech.io>
  * @project PM2
  */
-const p = require('path');
-const treekill = require('../TreeKill');
-const cst = require('../../constants.js');
+import p from 'node:path';
+import treekill from '../TreeKill.js';
+import cst from '../../constants.js';
+import { messageOf, stackOf, codeOf } from '../tools/errors.js';
+
+// A process as the daemon holds it in clusters_db.
+interface ClusterEntry {
+  process: { pid?: number };
+  pm2_env: Record<string, unknown> & { pm_id?: number; name?: string; pm_exec_path?: string };
+  send?(message: string): void;
+}
+
+interface ProcessEnv {
+  pm_id?: number;
+  kill_timeout?: number;
+  kill_retry_time?: number;
+  shutdown_with_message?: boolean;
+  treekill?: boolean;
+  _tree_pids?: number[];
+  created_at?: number;
+  unstable_restarts?: number;
+  prev_restart_delay?: number;
+  [key: string]: unknown;
+}
+
+type Failure = { type?: string; msg: string };
+type DeadCallback = (err: Failure | null, dead?: boolean) => void;
+
+// What this module needs of God, rather than the whole namespace.
+interface MethodsHost {
+  clusters_db: Record<string, ClusterEntry>;
+  next_id: number;
+  // Assigned by this module, so by the time any of them runs they all exist.
+  logAndGenerateError: (err: unknown) => Error;
+  getProcesses: () => Record<string, ClusterEntry>;
+  getFormatedProcess: (id: string | number) => object;
+  getFormatedProcesses: () => object[];
+  findProcessById: (id: string | number) => ClusterEntry | null;
+  findByName: (name: string) => ClusterEntry[];
+  checkProcess: (pid?: number) => boolean;
+  processIsDead: (pid: number, pm2_env: ProcessEnv, cb: DeadCallback, sigkill?: boolean) => void;
+  killProcess: (pid: number, pm2_env: ProcessEnv, cb: DeadCallback) => void;
+  getNewId: () => number;
+  resetState: (pm2_env: ProcessEnv) => void;
+}
 
 /**
  * Description
@@ -20,14 +62,14 @@ const cst = require('../../constants.js');
  * @param {} God
  * @return
  */
-module.exports = function (God) {
+const attachMethods = (God: MethodsHost): void => {
   /**
    * Description
    * @method logAndGenerateError
    * @param {} err
    * @return NewExpression
    */
-  God.logAndGenerateError = function (err) {
+  God.logAndGenerateError = function (err: unknown): Error {
     // Is an Error object
     if (err instanceof Error) {
       console.trace(err);
@@ -35,7 +77,7 @@ module.exports = function (God) {
     }
     // Is a JSON or simple string
     console.error(err);
-    return new Error(err);
+    return new Error(messageOf(err));
   };
 
   /**
@@ -47,7 +89,7 @@ module.exports = function (God) {
     return God.clusters_db;
   };
 
-  God.getFormatedProcess = function getFormatedProcesses(id) {
+  God.getFormatedProcess = function getFormatedProcesses(id: string | number) {
     if (God.clusters_db[id])
       return {
         pid: God.clusters_db[id].process.pid,
@@ -65,7 +107,7 @@ module.exports = function (God) {
    */
   God.getFormatedProcesses = function getFormatedProcesses() {
     const keys = Object.keys(God.clusters_db);
-    const arr = [];
+    const arr: object[] = [];
     const kl = keys.length;
 
     for (let i = 0; i < kl; i++) {
@@ -73,7 +115,7 @@ module.exports = function (God) {
 
       if (!God.clusters_db[key]) continue;
       // Avoid _old type pm_ids
-      if (isNaN(God.clusters_db[key].pm2_env.pm_id)) continue;
+      if (isNaN(Number(God.clusters_db[key].pm2_env.pm_id))) continue;
 
       arr.push({
         pid: God.clusters_db[key].process.pid,
@@ -91,7 +133,7 @@ module.exports = function (God) {
    * @param {} id
    * @return ConditionalExpression
    */
-  God.findProcessById = function findProcessById(id) {
+  God.findProcessById = function findProcessById(id: string | number) {
     return God.clusters_db[id] ? God.clusters_db[id] : null;
   };
 
@@ -101,9 +143,9 @@ module.exports = function (God) {
    * @param {} name
    * @return arr
    */
-  God.findByName = function (name) {
+  God.findByName = function (name: string) {
     const db = God.clusters_db;
-    const arr = [];
+    const arr: ClusterEntry[] = [];
 
     if (name == 'all') {
       for (const key in db) {
@@ -131,7 +173,7 @@ module.exports = function (God) {
    * @param {} pid
    * @return
    */
-  God.checkProcess = function (pid) {
+  God.checkProcess = function (pid?: number) {
     if (!pid) return false;
 
     try {
@@ -150,28 +192,17 @@ module.exports = function (God) {
    * @param {} cb
    * @return Literal
    */
-  God.processIsDead = function (pid, pm2_env, cb, sigkill) {
+  God.processIsDead = function (pid, pm2_env, cb, sigkill?) {
     if (!pid) return cb({ type: 'param:missing', msg: 'no pid passed' });
 
-    let timeout = null;
-    const kill_timeout = pm2_env && pm2_env.kill_timeout ? pm2_env.kill_timeout : cst.KILL_TIMEOUT;
+    let timeout: NodeJS.Timeout | undefined;
+    const kill_timeout = Number(pm2_env?.kill_timeout || cst.KILL_TIMEOUT);
     const treePids = pm2_env._tree_pids || [pid];
 
-    function allDead() {
-      for (let i = 0; i < treePids.length; i++) {
-        if (God.checkProcess(treePids[i]) !== false) return false;
-      }
-      return true;
-    }
-
-    function survivors() {
-      return treePids.filter(function (p) {
-        return God.checkProcess(p) !== false;
-      });
-    }
+    const survivors = () => treePids.filter((one: number) => God.checkProcess(one) !== false);
 
     const timer = setInterval(function () {
-      if (allDead()) {
+      if (survivors().length === 0) {
         console.log('pid=%d msg=process tree killed (%d pids)', pid, treePids.length);
         clearTimeout(timeout);
         clearInterval(timer);
@@ -195,12 +226,12 @@ module.exports = function (God) {
           alive.length,
         );
 
-        alive.forEach(function (p) {
+        alive.forEach(function (p: number) {
           try {
-            process.kill(parseInt(p), 'SIGKILL');
+            process.kill(p, 'SIGKILL');
           } catch (e) {
-            if (e.code !== 'ESRCH')
-              console.error('[SIGKILL] %s pid can not be killed', p, e.stack, e.message);
+            if (codeOf(e) !== 'ESRCH')
+              console.error('[SIGKILL] %s pid can not be killed', p, stackOf(e), messageOf(e));
           }
         });
         return God.processIsDead(pid, pm2_env, cb, true);
@@ -231,7 +262,7 @@ module.exports = function (God) {
           proc.send('shutdown');
         } catch (e) {
           console.error(`[AppKill] Cannot send "shutdown" message to ${pid}`);
-          console.error(e.stack, e.message);
+          console.error(stackOf(e), messageOf(e));
         }
         return God.processIsDead(pid, pm2_env, cb);
       } else {
@@ -241,13 +272,13 @@ module.exports = function (God) {
 
     if (pm2_env.treekill !== true) {
       try {
-        process.kill(parseInt(pid), cst.KILL_SIGNAL);
+        process.kill(pid, cst.KILL_SIGNAL);
       } catch (e) {
-        console.error('[SimpleKill] %s pid can not be killed', pid, e.stack, e.message);
+        console.error('[SimpleKill] %s pid can not be killed', pid, stackOf(e), messageOf(e));
       }
       return God.processIsDead(pid, pm2_env, cb);
     } else {
-      treekill(parseInt(pid), cst.KILL_SIGNAL, function (err, killedPids) {
+      treekill(pid, cst.KILL_SIGNAL, function (err: unknown, killedPids?: number[]) {
         if (Array.isArray(killedPids) && killedPids.length > 0) pm2_env._tree_pids = killedPids;
         return God.processIsDead(pid, pm2_env, cb);
       });
@@ -276,3 +307,5 @@ module.exports = function (God) {
     pm2_env.prev_restart_delay = 0;
   };
 };
+
+export = attachMethods;
