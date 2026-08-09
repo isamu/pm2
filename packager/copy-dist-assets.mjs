@@ -1,4 +1,4 @@
-import { cpSync } from 'node:fs';
+import { cpSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
@@ -35,3 +35,14 @@ ROOTS.forEach((root) => {
 ROOT_FILES.forEach((file) => {
   cpSync(file, join('dist', file));
 });
+
+// package.json is copied so pm2 can read its own version from beside its code, but `main` in it
+// is a path from the package root — inside dist it points at dist/dist/index.js, and node warns
+// about the invalid field every time a runtime binary starts. Rewritten to where the entry
+// actually is relative to this copy.
+{
+  const manifestPath = join('dist', 'package.json');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  manifest.main = 'index.js';
+  writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+}
